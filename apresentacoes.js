@@ -76,6 +76,15 @@ window.APRESENTACOES = [
     descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
+  },  {
+    id: "aula-6t3n8-1788191505836",
+    ano: "6",
+    trimestre: 3,
+    aula: 8,
+    titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    descricao: "",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/6ANO/"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
