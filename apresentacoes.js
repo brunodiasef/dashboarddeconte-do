@@ -32,16 +32,7 @@
    ============================================================ */
 
 window.APRESENTACOES = [
-  {
-    id: "exemplo-001",
-    ano: "6",
-    trimestre: 1,
-    aula: 1,
-    titulo: "Apresentação de exemplo",
-    descricao: "Aula de exemplo do painel. Substitua este registro pelas aulas do seu projeto, seguindo o modelo descrito no topo deste arquivo.",
-    tipo: "arquivo",
-    link: "aulas/exemplo-aula01.html"
-  },   {
+ {
     id: "aula-9t3n3-1788174439224",
     ano: "9",
     trimestre: 3,
