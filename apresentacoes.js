@@ -40,6 +40,15 @@ window.APRESENTACOES = [
     descricao: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
     tipo: "link",
     link: "https://brunodiasef.github.io/9ano/"
+  },   {
+    id: "aula-8t3n3-1788175593417",
+    ano: "8",
+    trimestre: 3,
+    aula: 3,
+    titulo: "Dança de salão e Lutas pelo mundo",
+    descricao: "Dança de salão e Lutas pelo mundo",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/8ano/"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
