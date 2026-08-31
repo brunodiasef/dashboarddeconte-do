@@ -94,6 +94,15 @@ window.APRESENTACOES = [
     descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/6ºano/Conteúdo 6º ano - 3º trimestre.pdf"
+  },   {
+    id: "aula-7t3n2-1788191851575",
+    ano: "7",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/3ºtri/7ºano/Conteúdo 7º ano - 3º trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
