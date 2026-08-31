@@ -66,7 +66,7 @@ window.APRESENTACOES = [
     titulo: "MATERIAL DE APOIO",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
+    link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
