@@ -1,4 +1,3 @@
- <script>
                               /* ============================================================
    ARQUIVO 2 de 2: apresentacoes.js
    Este arquivo fica na RAIZ do repositório, ao lado do index.html.
