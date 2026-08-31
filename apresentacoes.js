@@ -44,9 +44,3 @@ window.APRESENTACOES = [
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
-
-
-              </script>
-                        </body>
-                        </html>
-                    
