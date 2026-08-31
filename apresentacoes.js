@@ -67,6 +67,15 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
+  },  {
+    id: "aula-8t3n2-1788184891015",
+    ano: "8",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aulas/aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
