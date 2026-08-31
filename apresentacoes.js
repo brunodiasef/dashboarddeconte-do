@@ -49,6 +49,15 @@ window.APRESENTACOES = [
     descricao: "Dança de salão e Lutas pelo mundo",
     tipo: "link",
     link: "https://brunodiasef.github.io/8ano/"
+  },   {
+    id: "aula-7t3n1-1788175761978",
+    ano: "7",
+    trimestre: 3,
+    aula: 1,
+    titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    descricao: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/7ano/"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
