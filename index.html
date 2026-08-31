@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/lora">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/karla">
+<style>
+  :root{
+    --fundo:#E8DFD0;
+    --sidebar:#1E1A14;
+    --creme:#F5F0E8;
+    --dourado:#C9A84C;
+    --dourado-escuro:#A98A35;
+    --marrom:#8B5E3C;
+    --marrom-escuro:#6E4A2F;
+    --tinta:#2C2416;
+    --suave:#6B5F4C;
+    --verde:#2D5A3D;
+    --azul:#1E3A5F;
+    --borda:#D8CBB6;
+    --borda-escura:#C4B499;
+    --sombra:0 8px 24px rgba(44,36,22,.10);
+    --sombra-forte:0 16px 40px rgba(44,36,22,.18);
+    --serif:'Lora',Georgia,serif;
+    --sans:'Karla','Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--fundo);color:var(--tinta);min-height:100vh}
+  h1,h2,h3,h4,.serif{font-family:var(--serif)}
+  button{font-family:var(--sans)}
+  svg{display:block}
+
+  /* ================= SIDEBAR FIXA ================= */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:252px;z-index:60;
+    background:var(--sidebar);color:#EFE6D6;
+    display:flex;flex-direction:column;
+    border-right:1px solid rgba(201,168,76,.25);
+  }
+  .sidebar::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px);
+  }
+  .marca-lateral{
+    display:flex;align-items:center;gap:12px;
+    padding:26px 20px 22px;border-bottom:1px solid rgba(201,168,76,.3);
+  }
+  .emblema{
+    width:46px;height:46px;border-radius:50%;flex:none;
+    background:var(--dourado);color:var(--sidebar);
+    font-family:var(--serif);font-weight:700;font-size:17px;
+    display:grid;place-items:center;letter-spacing:.5px;
+    box-shadow:0 0 0 2px var(--sidebar),0 0 0 4px var(--dourado);
+  }
+  .marca-lateral strong{font-family:var(--serif);font-size:15px;letter-spacing:.4px;display:block;line-height:1.2}
+  .marca-lateral span{font-size:10.5px;color:#B9AC93;letter-spacing:.6px;text-transform:uppercase}
+  .menu-lateral{padding:18px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .menu-rotulo{
+    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:#8F8368;
+    padding:0 12px;margin-bottom:8px;
+  }
+  .menu-lateral a{
+    display:flex;align-items:center;gap:11px;text-decoration:none;
+    color:#D8CCB4;font-size:13.5px;font-weight:600;
+    padding:11px 12px;border-radius:9px;transition:.18s;
+    border-left:3px solid transparent;
+  }
+  .menu-lateral a svg{width:16px;height:16px;flex:none;opacity:.85}
+  .menu-lateral a:hover{background:rgba(201,168,76,.12);color:#fff}
+  .menu-lateral a.ativo{background:rgba(201,168,76,.16);color:var(--dourado);border-left-color:var(--dourado)}
+  .acoes-lateral{padding:6px 16px 14px;display:flex;flex-direction:column;gap:10px}
+  .pe-lateral{
+    padding:16px 20px;border-top:1px solid rgba(201,168,76,.3);
+    font-size:10.5px;color:#8F8368;line-height:1.6;letter-spacing:.4px;
+  }
+
+  /* ================= BOTÕES ================= */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:none;cursor:pointer;text-decoration:none;
+    border-radius:999px;font-weight:700;transition:.2s;letter-spacing:.3px;
+  }
+  .btn svg{width:15px;height:15px}
+  .btn-ouro{
+    background:var(--dourado);color:var(--sidebar);
+    padding:12px 20px;font-size:13.5px;
+    box-shadow:0 4px 14px rgba(201,168,76,.4);
+  }
+  .btn-ouro:hover{background:var(--dourado-escuro);transform:translateY(-1px)}
+  .btn-marrom{
+    background:transparent;color:#E8DFD0;border:1.5px solid var(--marrom);
+    padding:10px 18px;font-size:13px;
+  }
+  .btn-marrom:hover{background:var(--marrom);color:#fff}
+  .btn-marrom-solido{
+    background:var(--marrom);color:#F5F0E8;padding:10px 18px;font-size:13px;
+  }
+  .btn-marrom-solido:hover{background:var(--marrom-escuro)}
+
+  /* ================= ÁREA PRINCIPAL ================= */
+  .area-principal{margin-left:252px;display:flex;flex-direction:column;min-height:100vh}
+
+  /* header com progresso */
+  .cabecalho{
+    position:sticky;top:0;z-index:40;
+    background:rgba(232,223,208,.94);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--borda-escura);
+    padding:14px 34px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+  }
+  .botao-menu{
+    display:none;background:none;border:1.5px solid var(--marrom);color:var(--marrom);
+    width:40px;height:40px;border-radius:10px;cursor:pointer;place-items:center;
+  }
+  .cabecalho-titulo{min-width:200px}
+  .cabecalho-titulo .rotulo{
+    font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--marrom);font-weight:700;
+  }
+  .cabecalho-titulo h2{font-size:19px;font-weight:700;color:var(--tinta)}
+  .cabecalho-titulo h2 b{color:var(--verde)}
+  .progresso{margin-left:auto;flex:1;max-width:520px;min-width:260px}
+  .progresso-topo{display:flex;justify-content:space-between;font-size:11px;margin-bottom:7px;letter-spacing:.6px}
+  .progresso-topo .rot{font-weight:700;text-transform:uppercase;color:var(--marrom)}
+  .progresso-topo .val{color:var(--suave);font-weight:600}
+  .progresso-topo .val b{color:var(--azul)}
+  .segmentos{display:flex;gap:8px}
+  .segmento{flex:1}
+  .segmento .trilho{
+    height:8px;border-radius:99px;background:#D9CDB8;overflow:hidden;
+    border:1px solid var(--borda-escura);
+  }
+  .segmento .trilho i{display:block;height:100%;width:0;border-radius:99px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+  .segmento .leg{font-size:10px;margin-top:4px;color:var(--suave);text-align:center;letter-spacing:.8px;text-transform:uppercase;font-weight:700}
+  .segmento.concluido .trilho i{background:var(--verde)}
+  .segmento.atual .trilho i{background:var(--dourado)}
+  .segmento.atual .leg{color:var(--dourado-escuro)}
+  .segmento.futuro .leg{opacity:.55}
+
+  /* ================= CONTEÚDO ================= */
+  .conteudo{padding:36px 34px 60px;max-width:1160px;width:100%;margin:0 auto}
+  .migalha{
+    font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--azul);
+    display:flex;align-items:center;gap:10px;
+  }
+  .migalha::after{content:"";height:1px;width:60px;background:var(--dourado)}
+  .conteudo h1{
+    font-size:clamp(30px,4vw,44px);font-weight:700;color:var(--tinta);
+    margin:10px 0 4px;letter-spacing:.3px;
+  }
+  .sub-titulo{font-family:var(--serif);font-style:italic;color:var(--marrom);font-size:15.5px;margin-bottom:14px}
+  .descricao{font-size:14.5px;color:var(--suave);line-height:1.7;max-width:680px;margin-bottom:28px}
+
+  /* filtros */
+  .filtros{
+    background:var(--creme);border:1px solid var(--borda);border-radius:14px;
+    box-shadow:var(--sombra);padding:18px 20px;margin-bottom:24px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .filtro-grupo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .filtro-rotulo{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;
+    color:var(--marrom);min-width:100px;display:flex;align-items:center;gap:8px;
+  }
+  .filtro-rotulo::before{content:"";width:14px;height:2px;background:var(--dourado)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{
+    border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);
+    padding:7px 16px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s;
+  }
+  .chip:hover{border-color:var(--marrom);color:var(--marrom);transform:translateY(-1px)}
+  .chip.ativo{background:var(--dourado);border-color:var(--dourado);color:var(--sidebar);box-shadow:0 3px 10px rgba(201,168,76,.35)}
+  .chip.num{min-width:38px;padding:7px 0;text-align:center}
+
+  .linha-contagem{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .linha-contagem p{font-size:13px;color:var(--suave)}
+  .linha-contagem p b{color:var(--verde);font-size:15px}
+
+  /* grade de cards */
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px}
+  .cartao{
+    background:var(--creme);border:1px solid var(--borda);border-radius:14px;overflow:hidden;
+    box-shadow:var(--sombra);display:flex;flex-direction:column;position:relative;
+    transition:transform .22s,box-shadow .22s;animation:surgir .45s ease both;
+  }
+  @keyframes surgir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .cartao:hover{transform:translateY(-5px);box-shadow:var(--sombra-forte)}
+  .capa{height:132px;position:relative;overflow:hidden;background:#D9CDB8}
+  .capa img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:sepia(.12)}
+  .cartao:hover .capa img{transform:scale(1.05)}
+  .capa::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(30,26,20,.45))}
+  .capa-ano{
+    position:absolute;left:12px;bottom:10px;z-index:2;
+    font-family:var(--serif);font-weight:700;font-size:12px;letter-spacing:.6px;
+    color:#F5F0E8;background:var(--azul);padding:4px 12px;border-radius:999px;
+  }
+  .capa-ano.a7,.capa-ano.a9{background:var(--verde)}
+  .capa-ano.a8{background:var(--marrom)}
+  .botao-excluir{
+    position:absolute;top:10px;right:10px;z-index:3;
+    width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(30,26,20,.55);color:#F5F0E8;display:grid;place-items:center;transition:.2s;
+  }
+  .botao-excluir svg{width:14px;height:14px}
+  .botao-excluir:hover{background:var(--marrom-escuro)}
+  .cartao-corpo{padding:16px 17px 17px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .cartao-meta{
+    display:flex;gap:10px;font-size:10.5px;font-weight:800;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--marrom);
+  }
+  .cartao-meta .tri{color:var(--verde)}
+  .cartao h3{font-size:17px;line-height:1.35;font-weight:700}
+  .cartao p{font-size:12.5px;color:var(--suave);line-height:1.6;flex:1}
+  .cartao-rodape{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+  .tipo-aula{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--azul);display:inline-flex;align-items:center;gap:6px}
+  .tipo-aula svg{width:13px;height:13px}
+  .btn-abrir{padding:9px 16px;font-size:12px}
+
+  /* vazio */
+  .vazio{
+    display:none;text-align:center;padding:56px 24px;
+    background:var(--creme);border:2px dashed var(--borda-escura);border-radius:14px;
+  }
+  .vazio svg{width:44px;height:44px;margin:0 auto 14px;color:var(--marrom)}
+  .vazio h3{font-size:19px;margin-bottom:6px}
+  .vazio p{font-size:13.5px;color:var(--suave);max-width:400px;margin:0 auto 20px;line-height:1.6}
+
+  /* guia */
+  .guia-titulo{
+    font-size:21px;margin:38px 0 16px;display:flex;align-items:center;gap:14px;
+  }
+  .guia-titulo::after{content:"";flex:1;height:1px;background:var(--borda-escura)}
+  .guia{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .guia-item{
+    background:var(--creme);border:1px solid var(--borda);border-radius:14px;
+    padding:20px;box-shadow:var(--sombra);position:relative;overflow:hidden;transition:.2s;
+  }
+  .guia-item:hover{transform:translateY(-3px);box-shadow:var(--sombra-forte)}
+  .guia-item::before{
+    content:attr(data-numeral);position:absolute;right:10px;top:2px;
+    font-family:var(--serif);font-size:56px;font-weight:700;color:rgba(201,168,76,.22);
+  }
+  .guia-item .num{
+    width:30px;height:30px;border-radius:50%;background:var(--verde);color:#F5F0E8;
+    font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:13px;margin-bottom:12px;
+  }
+  .guia-item h3{font-size:16px;margin-bottom:5px}
+  .guia-item p{font-size:12.5px;color:var(--suave);line-height:1.6}
+
+  .aviso{
+    margin-top:26px;background:var(--creme);border:1px solid var(--borda);
+    border-left:4px solid var(--dourado);border-radius:10px;
+    padding:15px 18px;font-size:13px;color:var(--suave);line-height:1.65;
+  }
+  .aviso b{color:var(--tinta)}
+
+  .rodape{
+    margin-top:auto;border-top:1px solid var(--borda-escura);
+    padding:24px 34px;text-align:center;font-size:12px;color:var(--suave);line-height:1.8;
+  }
+  .rodape b{font-family:var(--serif);color:var(--tinta);font-size:13px}
+
+  /* ================= MODAIS ================= */
+  .modal-fundo{
+    position:fixed;inset:0;background:rgba(30,26,20,.6);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+  }
+  .modal-fundo.aberto{display:flex;animation:fundo .22s}
+  @keyframes fundo{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:var(--creme);border:1px solid var(--borda);border-radius:16px;
+    max-width:620px;width:100%;max-height:88vh;overflow:auto;
+    box-shadow:0 30px 70px rgba(0,0,0,.4);animation:subir .28s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes subir{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+  .modal-topo{
+    background:var(--sidebar);color:#EFE6D6;padding:18px 24px;display:flex;
+    justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2;
+    border-bottom:2px solid var(--dourado);
+  }
+  .modal-topo h2{font-size:18px;letter-spacing:.4px}
+  .fechar{
+    background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--dourado);
+    width:32px;height:32px;border-radius:9px;cursor:pointer;display:grid;place-items:center;transition:.2s;
+  }
+  .fechar svg{width:14px;height:14px}
+  .fechar:hover{background:var(--dourado);color:var(--sidebar);transform:rotate(90deg)}
+  .modal-corpo{padding:26px}
+
+  .campo{margin-bottom:16px}
+  .campo label{display:block;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:7px;color:var(--marrom)}
+  .campo label .obrig{color:#A33B2E}
+  .campo input[type=text],.campo textarea,.campo select{
+    width:100%;padding:11px 14px;border:1.5px solid var(--borda-escura);border-radius:10px;
+    font:inherit;font-size:13.5px;background:#FBF8F1;outline:none;transition:.2s;color:var(--tinta);
+  }
+  .campo input:focus,.campo textarea:focus,.campo select:focus{
+    border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18);background:#fff;
+  }
+  .campo textarea{resize:vertical;min-height:70px}
+  .campo-duplo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .abas{display:flex;gap:8px;margin-bottom:14px}
+  .aba{
+    flex:1;border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);
+    padding:11px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .aba svg{width:14px;height:14px}
+  .aba.ativa{background:rgba(45,90,61,.1);border-color:var(--verde);color:var(--verde)}
+  .area-arquivo{
+    border:2px dashed var(--borda-escura);border-radius:12px;background:#FBF8F1;
+    padding:28px 16px;text-align:center;cursor:pointer;transition:.2s;
+  }
+  .area-arquivo:hover,.area-arquivo.arrastando{border-color:var(--dourado);background:rgba(201,168,76,.08)}
+  .area-arquivo svg{width:32px;height:32px;margin:0 auto 10px;color:var(--marrom)}
+  .area-arquivo strong{font-size:13.5px;color:var(--tinta);display:block;font-family:var(--serif)}
+  .area-arquivo span{font-size:11.5px;color:var(--suave)}
+  .arquivo-escolhido{
+    display:none;margin-top:10px;background:rgba(45,90,61,.1);border:1px solid rgba(45,90,61,.35);
+    border-radius:9px;padding:9px 13px;font-size:12.5px;color:var(--verde);font-weight:700;
+    align-items:center;gap:8px;
+  }
+  .arquivo-escolhido svg{width:14px;height:14px;flex:none}
+  .arquivo-escolhido.visivel{display:flex}
+  .erro-form{
+    display:none;background:rgba(163,59,46,.08);border:1px solid rgba(163,59,46,.4);color:#A33B2E;
+    border-radius:9px;padding:10px 13px;font-size:12.5px;font-weight:700;margin-bottom:14px;
+  }
+  .erro-form.visivel{display:block}
+  .botao-salvar{width:100%;margin-top:6px}
+  .dica-form{font-size:11.5px;color:var(--suave);margin-top:12px;line-height:1.6;text-align:center}
+
+  .instrucao{display:flex;gap:14px;margin-bottom:18px}
+  .instrucao-n{
+    width:28px;height:28px;border-radius:50%;background:var(--dourado);color:var(--sidebar);
+    font-family:var(--serif);font-weight:700;display:grid;place-items:center;flex:none;font-size:13px;
+  }
+  .instrucao h4{font-size:14.5px;margin-bottom:3px}
+  .instrucao p{font-size:12.8px;color:var(--suave);line-height:1.6}
+  .instrucao b{color:var(--verde)}
+
+  .toast{
+    position:fixed;bottom:26px;left:50%;transform:translate(-50%,90px);
+    background:var(--sidebar);color:#F5F0E8;padding:12px 24px;border-radius:999px;
+    font-size:13px;font-weight:700;letter-spacing:.3px;
+    border:1px solid var(--dourado);box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .toast.visivel{transform:translate(-50%,0)}
+  .toast.sucesso{border-color:var(--verde)}
+  .toast.erro{border-color:#A33B2E}
+
+  .overlay{
+    position:fixed;inset:0;background:rgba(30,26,20,.5);z-index:55;display:none;
+  }
+  .overlay.visivel{display:block}
+
+  @media(max-width:960px){
+    .sidebar{transform:translateX(-100%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+    .sidebar.aberta{transform:none}
+    .area-principal{margin-left:0}
+    .botao-menu{display:grid}
+    .cabecalho{padding:14px 18px}
+    .conteudo{padding:26px 18px 50px}
+    .progresso{margin-left:0;max-width:none}
+    .campo-duplo{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlaySidebar"></div>
+
+<!-- ============ SIDEBAR FIXA ============ -->
+<aside class="sidebar" id="sidebar">
+  <div class="marca-lateral">
+    <div class="emblema">EF</div>
+    <div>
+      <strong>Ed. Física</strong>
+      <span>E.E.E.F.M. Ilda Ferreira</span>
+    </div>
+  </div>
+
+  <nav class="menu-lateral" id="menuLateral">
+    <div class="menu-rotulo">Navegação</div>
+    <a href="#inicio" class="ativo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Visão geral
+    </a>
+    <a href="#conteudos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>
+      Central de aulas
+    </a>
+    <a href="#guia">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
+      Organização do painel
+    </a>
+  </nav>
+
+  <div class="acoes-lateral">
+    <button class="btn btn-ouro" id="botaoNovaAulaLateral">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+      Nova aula
+    </button>
+    <button class="btn btn-marrom" id="botaoComoCadastrar">Como cadastrar</button>
+  </div>
+
+  <div class="pe-lateral">
+    E.E.E.F.M. Ilda Ferreira<br>da Fonseca Martins<br>Ensino Fundamental II
+  </div>
+</aside>
+
+<!-- ============ ÁREA PRINCIPAL ============ -->
+<div class="area-principal">
+
+  <header class="cabecalho">
+    <button class="botao-menu" id="botaoMenu" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="cabecalho-titulo">
+      <div class="rotulo">Painel escolar</div>
+      <h2><b id="contadorGeral">0</b> <span id="contadorPalavra">apresentações cadastradas</span></h2>
+    </div>
+    <div class="progresso">
+      <div class="progresso-topo">
+        <span class="rot">Progresso do trimestre</span>
+        <span class="val" id="rotuloProgresso">—</span>
+      </div>
+      <div class="segmentos" id="segmentos">
+        <div class="segmento" data-tri="1"><div class="trilho"><i></i></div><div class="leg">1º Trim.</div></div>
+        <div class="segmento" data-tri="2"><div class="trilho"><i></i></div><div class="leg">2º Trim.</div></div>
+        <div class="segmento" data-tri="3"><div class="trilho"><i></i></div><div class="leg">3º Trim.</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="conteudo" id="inicio">
+    <div class="migalha">Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
+    <h1>Educação Física</h1>
+    <div class="sub-titulo">Central de apresentações interativas do 6º ao 9º ano</div>
+    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Escolha a turma, o período e abra a aula desejada.</p>
+
+    <div class="filtros">
+      <div class="filtro-grupo" id="anos">
+        <span class="filtro-rotulo">Escolha o ano</span>
+        <div class="chips" id="chipsAno">
+          <button class="chip ativo" data-ano="todos">Todos</button>
+          <button class="chip" data-ano="6">6º ano</button>
+          <button class="chip" data-ano="7">7º ano</button>
+          <button class="chip" data-ano="8">8º ano</button>
+          <button class="chip" data-ano="9">9º ano</button>
+        </div>
+      </div>
+      <div class="filtro-grupo" id="trimestres">
+        <span class="filtro-rotulo">Nº da aula</span>
+        <div class="chips" id="chipsNumero"></div>
+      </div>
+    </div>
+
+    <div class="linha-contagem" id="conteudos">
+      <p>Exibindo <b id="contadorVisivel">0</b> apresentação(ões) com os filtros atuais.</p>
+      <button class="btn btn-ouro" id="botaoNovaAulaConteudo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 20h16"/></svg>
+        Anexar apresentação
+      </button>
+    </div>
+
+    <div class="grade" id="gradeAulas"></div>
+
+    <div class="vazio" id="estadoVazio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <h3>Nenhuma apresentação aqui</h3>
+      <p>Não há aulas para os filtros selecionados. Anexe sua primeira apresentação para começar a organizar o painel.</p>
+      <button class="btn btn-ouro" id="botaoVazioAnexar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+        Anexar apresentação
+      </button>
+    </div>
+
+    <h2 class="guia-titulo serif" id="guia">Organização do painel</h2>
+    <div class="guia">
+      <div class="guia-item" data-numeral="I">
+        <div class="num">1</div>
+        <h3>Escolha o ano</h3>
+        <p>O acesso aos conteúdos começa pela turma.</p>
+      </div>
+      <div class="guia-item" data-numeral="II">
+        <div class="num">2</div>
+        <h3>Trimestres</h3>
+        <p>Separação do conteúdo por período letivo.</p>
+      </div>
+      <div class="guia-item" data-numeral="III">
+        <div class="num">3</div>
+        <h3>Apresentações interativas</h3>
+        <p>Selecione filtros para localizar uma aula.</p>
+      </div>
+    </div>
+
+    <div class="aviso">
+      Dashboard preparado para receber novos conteúdos HTML. Os links ficam centralizados no painel: clique em <b>Nova aula</b>, preencha os dados e envie o arquivo HTML da apresentação ou informe um link. Tudo é salvo automaticamente neste navegador.
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <b>Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</b><br>
+    Painel escolar de apresentações interativas — 6º, 7º, 8º e 9º ano • 1º, 2º e 3º trimestre
+  </footer>
+</div>
+
+<!-- ============ MODAL NOVA AULA ============ -->
+<div class="modal-fundo" id="modalNovaFundo">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-topo">
+      <h2 class="serif">Anexar nova apresentação</h2>
+      <button class="fechar" data-fechar="modalNovaFundo" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <div class="erro-form" id="erroForm"></div>
+
+      <div class="campo">
+        <label>Título da aula <span class="obrig">*</span></label>
+        <input type="text" id="campoTitulo" placeholder="Ex.: Fundamentos do handebol" maxlength="90">
+      </div>
+
+      <div class="campo-duplo">
+        <div class="campo">
+          <label>Ano <span class="obrig">*</span></label>
+          <select id="campoAno">
+            <option value="6">6º ano</option>
+            <option value="7">7º ano</option>
+            <option value="8">8º ano</option>
+            <option value="9">9º ano</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Trimestre <span class="obrig">*</span></label>
+          <select id="campoTrimestre">
+            <option value="1">1º trimestre</option>
+            <option value="2">2º trimestre</option>
+            <option value="3">3º trimestre</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Nº da aula <span class="obrig">*</span></label>
+          <select id="campoNumero"></select>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Descrição (opcional)</label>
+        <textarea id="campoDescricao" placeholder="Breve descrição do conteúdo da aula..." maxlength="220"></textarea>
+      </div>
+
+      <div class="campo">
+        <label>Como deseja anexar? <span class="obrig">*</span></label>
+        <div class="abas">
+          <button class="aba ativa" id="abaArquivo" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 20h16"/></svg>
+            Enviar arquivo HTML
+          </button>
+          <button class="aba" id="abaLink" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/></svg>
+            Informar um link
+          </button>
+        </div>
+
+        <div id="painelArquivo">
+          <div class="area-arquivo" id="areaArquivo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            <strong>Clique para escolher o arquivo HTML da aula</strong>
+            <span>ou arraste e solte o arquivo nesta área</span>
+          </div>
+          <input type="file" id="entradaArquivo" accept=".html,.htm,text/html" hidden>
+          <div class="arquivo-escolhido" id="arquivoEscolhido">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+            <span id="nomeArquivo"></span>
+          </div>
+        </div>
+
+        <div id="painelLink" style="display:none">
+          <input type="text" id="campoLink" placeholder="https://exemplo.com.br/minha-aula.html">
+        </div>
+      </div>
+
+      <button class="btn btn-ouro botao-salvar" id="botaoSalvarAula">Salvar e anexar ao painel</button>
+      <p class="dica-form">As aulas ficam salvas neste navegador e aparecem automaticamente nos filtros do painel.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL COMO CADASTRAR ============ -->
+<div class="modal-fundo" id="modalComoFundo">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-topo">
+      <h2 class="serif">Como cadastrar</h2>
+      <button class="fechar" data-fechar="modalComoFundo" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <div class="instrucao">
+        <div class="instrucao-n">1</div>
+        <div><h4>Clique em Nova aula</h4><p>O botão dourado fica na lateral esquerda do painel e também na área de conteúdos.</p></div>
+      </div>
+      <div class="instrucao">
+        <div class="instrucao-n">2</div>
+        <div><h4>Preencha os dados da aula</h4><p>Informe o título, o ano (6º ao 9º), o trimestre (1º ao 3º) e o número da aula.</p></div>
+      </div>
+      <div class="instrucao">
+        <div class="instrucao-n">3</div>
+        <div><h4>Anexe a apresentação</h4><p>Use <b>Enviar arquivo HTML</b> para subir o arquivo da aula direto do computador, ou <b>Informar um link</b> se ela estiver hospedada online.</p></div>
+      </div>
+      <div class="instrucao">
+        <div class="instrucao-n">4</div>
+        <div><h4>Salve e acompanhe o painel</h4><p>A aula entra nos filtros na hora e o progresso do trimestre no topo é atualizado automaticamente.</p></div>
+      </div>
+      <div class="instrucao">
+        <div class="instrucao-n">5</div>
+        <div><h4>Para remover uma aula</h4><p>Passe o mouse sobre o cartão e clique no botão de lixeira no canto da imagem de capa. Não é preciso editar código.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Concluído</div>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO DO PAINEL
+   TRIMESTRE_ATUAL: ajuste aqui o trimestre letivo em andamento (1, 2 ou 3)
+   ===================================================================== */
+const TRIMESTRE_ATUAL = 1;
+const META_AULAS_POR_TRIMESTRE = 12;
+
+/* Imagens de capa por ano */
+const CAPAS = {
+  "6": "https://image.qwenlm.ai/public_source/891cdeac-469c-4d7c-91d0-67e192e4e558/14dfb1b2d-60dc-42aa-b7e1-b7a5dfc6430b.png",
+  "7": "https://image.qwenlm.ai/public_source/891cdeac-469c-4d7c-91d0-67e192e4e558/18b0f13d3-22bf-45f6-92d0-97dbd1a6ee09.png",
+  "8": "https://image.qwenlm.ai/public_source/891cdeac-469c-4d7c-91d0-67e192e4e558/194c39c88-94ef-4a21-9b33-402c486ac923.png",
+  "9": "https://image.qwenlm.ai/public_source/891cdeac-469c-4d7c-91d0-67e192e4e558/1eb4901ea-c53c-4624-aeaf-c5b0b2cd3380.png"
+};
+
+const ICONES = {
+  lixeira: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg>',
+  seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+  arquivo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
+  link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/></svg>'
+};
+
+/* Conteúdo inicial de exemplo (pode ser excluído pelo botão de lixeira) */
+const AULAS_INICIAIS = [
+  {
+    id: "exemplo-001",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "Apresentação de exemplo",
+    descricao: "Aula de exemplo do painel. Exclua este cartão no botão de lixeira e anexe suas próprias apresentações no botão Nova aula.",
+    tipo: "link",
+    link: "#",
+    conteudo: ""
+  }
+];
+
+const CHAVE_ARMAZENAMENTO = "apresentacoes_ilda_edfisica_v2";
+
+let apresentacoes = carregarApresentacoes();
+let arquivoTemporario = null;
+let modoAnexo = "arquivo";
+const estado = { ano: "todos", numero: "todos" };
+
+const elGrade       = document.getElementById("gradeAulas");
+const elVazio       = document.getElementById("estadoVazio");
+const elContGeral   = document.getElementById("contadorGeral");
+const elContPalavra = document.getElementById("contadorPalavra");
+const elContVisivel = document.getElementById("contadorVisivel");
+const elChipsNumero = document.getElementById("chipsNumero");
+const elCampoNumero = document.getElementById("campoNumero");
+const elToast       = document.getElementById("toast");
+const elModalNova   = document.getElementById("modalNovaFundo");
+const elModalComo   = document.getElementById("modalComoFundo");
+const elErroForm    = document.getElementById("erroForm");
+const elAreaArquivo = document.getElementById("areaArquivo");
+const elEntradaArq  = document.getElementById("entradaArquivo");
+const elArquivoInfo = document.getElementById("arquivoEscolhido");
+const elNomeArquivo = document.getElementById("nomeArquivo");
+const elSidebar     = document.getElementById("sidebar");
+const elOverlay     = document.getElementById("overlaySidebar");
+
+function carregarApresentacoes(){
+  try{
+    const salvo = localStorage.getItem(CHAVE_ARMAZENAMENTO);
+    if (salvo) return JSON.parse(salvo);
+  }catch(erro){}
+  return AULAS_INICIAIS.slice();
+}
+function persistir(){
+  try{
+    localStorage.setItem(CHAVE_ARMAZENAMENTO, JSON.stringify(apresentacoes));
+    return true;
+  }catch(erro){
+    mostrarToast("Arquivo muito grande para salvar. Tente usar a opção de link.", "erro");
+    return false;
+  }
+}
+
+/* chips e select de número (1 a 12) */
+(function montarNumeros(){
+  let html = '<button class="chip num ativo" data-num="todos">Todas</button>';
+  let opcoes = "";
+  for (let n = 1; n <= 12; n++) {
+    html += '<button class="chip num" data-num="' + n + '">' + n + '</button>';
+    opcoes += '<option value="' + n + '">Aula ' + n + '</option>';
+  }
+  elChipsNumero.innerHTML = html;
+  elCampoNumero.innerHTML = opcoes;
+})();
+
+function atualizarContadores(){
+  const total = apresentacoes.length;
+  elContGeral.textContent = total;
+  elContPalavra.textContent = total === 1 ? "apresentação cadastrada" : "apresentações cadastradas";
+}
+
+/* progresso do trimestre no header */
+function atualizarProgresso(){
+  const segmentos = document.querySelectorAll("#segmentos .segmento");
+  const aulasNoAtual = apresentacoes.filter(function(a){ return a.trimestre === TRIMESTRE_ATUAL; }).length;
+  segmentos.forEach(function(seg){
+    const tri = parseInt(seg.dataset.tri, 10);
+    const trilho = seg.querySelector("i");
+    seg.classList.remove("concluido", "atual", "futuro");
+    if (tri < TRIMESTRE_ATUAL) {
+      seg.classList.add("concluido");
+      trilho.style.width = "100%";
+    } else if (tri === TRIMESTRE_ATUAL) {
+      seg.classList.add("atual");
+      const pct = Math.min(100, Math.round((aulasNoAtual / META_AULAS_POR_TRIMESTRE) * 100));
+      trilho.style.width = Math.max(6, pct) + "%";
+    } else {
+      seg.classList.add("futuro");
+      trilho.style.width = "0%";
+    }
+  });
+  document.getElementById("rotuloProgresso").innerHTML =
+    "<b>" + TRIMESTRE_ATUAL + "º trimestre</b> — " + aulasNoAtual + " de " + META_AULAS_POR_TRIMESTRE + " aulas";
+}
+
+function filtrarAulas(){
+  return apresentacoes.filter(function(item){
+    const anoOk = estado.ano === "todos" || String(item.ano) === estado.ano;
+    const numOk = estado.numero === "todos" || String(item.aula) === estado.numero;
+    return anoOk && numOk;
+  });
+}
+
+function escaparHtml(texto){
+  const div = document.createElement("div");
+  div.textContent = texto == null ? "" : String(texto);
+  return div.innerHTML;
+}
+
+function renderizar(){
+  const lista = filtrarAulas();
+  elContVisivel.textContent = lista.length;
+
+  if (lista.length === 0) {
+    elGrade.innerHTML = "";
+    elGrade.style.display = "none";
+    elVazio.style.display = "block";
+    return;
+  }
+  elVazio.style.display = "none";
+  elGrade.style.display = "grid";
+
+  elGrade.innerHTML = lista.map(function(item, indice){
+    const numeroFormatado = String(item.aula).padStart(2, "0");
+    const capa = CAPAS[String(item.ano)] || CAPAS["6"];
+    const tipoRotulo = item.tipo === "arquivo" ? "Arquivo" : "Link";
+    const tipoIcone  = item.tipo === "arquivo" ? ICONES.arquivo : ICONES.link;
+    return '<article class="cartao" style="animation-delay:' + (indice * 0.06) + 's" data-id="' + item.id + '">' +
+      '<div class="capa">' +
+        '<img src="' + capa + '" alt="Capa da aula do ' + item.ano + 'º ano" loading="lazy">' +
+        '<span class="capa-ano a' + item.ano + '">' + item.ano + 'º ano</span>' +
+        '<button class="botao-excluir" data-excluir="' + item.id + '" title="Excluir esta aula">' + ICONES.lixeira + '</button>' +
+      '</div>' +
+      '<div class="cartao-corpo">' +
+        '<div class="cartao-meta"><span class="tri">' + item.trimestre + 'º trimestre</span><span>Aula ' + numeroFormatado + '</span></div>' +
+        '<h3>' + escaparHtml(item.titulo) + '</h3>' +
+        '<p>' + escaparHtml(item.descricao || "") + '</p>' +
+        '<div class="cartao-rodape">' +
+          '<span class="tipo-aula">' + tipoIcone + tipoRotulo + '</span>' +
+          '<a class="btn btn-ouro btn-abrir" href="#" data-abrir="' + item.id + '">Abrir ' + ICONES.seta + '</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }).join("");
+
+  atualizarProgresso();
+}
+
+function abrirApresentacao(id){
+  const item = apresentacoes.find(function(a){ return a.id === id; });
+  if (!item) return;
+  if (item.tipo === "arquivo" && item.conteudo) {
+    const bolha = new Blob([item.conteudo], { type: "text/html;charset=utf-8" });
+    window.open(URL.createObjectURL(bolha), "_blank");
+  } else if (item.link && item.link !== "#") {
+    window.open(item.link, "_blank");
+  } else {
+    mostrarToast("Esta aula ainda não possui arquivo ou link.", "erro");
+  }
+}
+
+elGrade.addEventListener("click", function(ev){
+  const botaoExcluir = ev.target.closest("[data-excluir]");
+  if (botaoExcluir) { ev.stopPropagation(); excluirAula(botaoExcluir.dataset.excluir); return; }
+  const botaoAbrir = ev.target.closest("[data-abrir]");
+  if (botaoAbrir) { ev.preventDefault(); ev.stopPropagation(); abrirApresentacao(botaoAbrir.dataset.abrir); return; }
+  const cartao = ev.target.closest(".cartao");
+  if (cartao) abrirApresentacao(cartao.dataset.id);
+});
+
+function excluirAula(id){
+  const item = apresentacoes.find(function(a){ return a.id === id; });
+  if (!item) return;
+  if (!confirm('Excluir a apresentação "' + item.titulo + '"?')) return;
+  apresentacoes = apresentacoes.filter(function(a){ return a.id !== id; });
+  persistir();
+  atualizarContadores();
+  renderizar();
+  mostrarToast("Apresentação removida.", "");
+}
+
+/* filtros */
+document.getElementById("chipsAno").addEventListener("click", function(ev){
+  const botao = ev.target.closest("[data-ano]");
+  if (!botao) return;
+  this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
+  botao.classList.add("ativo");
+  estado.ano = botao.dataset.ano;
+  renderizar();
+});
+elChipsNumero.addEventListener("click", function(ev){
+  const botao = ev.target.closest("[data-num]");
+  if (!botao) return;
+  this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
+  botao.classList.add("ativo");
+  estado.numero = botao.dataset.num;
+  renderizar();
+});
+
+/* sidebar mobile */
+document.getElementById("botaoMenu").addEventListener("click", function(){
+  elSidebar.classList.add("aberta");
+  elOverlay.classList.add("visivel");
+});
+elOverlay.addEventListener("click", function(){
+  elSidebar.classList.remove("aberta");
+  elOverlay.classList.remove("visivel");
+});
+document.getElementById("menuLateral").addEventListener("click", function(ev){
+  const link = ev.target.closest("a");
+  if (!link) return;
+  this.querySelectorAll("a").forEach(function(a){ a.classList.remove("ativo"); });
+  link.classList.add("ativo");
+  elSidebar.classList.remove("aberta");
+  elOverlay.classList.remove("visivel");
+});
+
+/* modais */
+function abrirModal(el){ el.classList.add("aberto"); }
+function fecharModal(el){ el.classList.remove("aberto"); }
+document.getElementById("botaoNovaAulaLateral").addEventListener("click", function(){ abrirModal(elModalNova); });
+document.getElementById("botaoNovaAulaConteudo").addEventListener("click", function(){ abrirModal(elModalNova); });
+document.getElementById("botaoVazioAnexar").addEventListener("click", function(){ abrirModal(elModalNova); });
+document.getElementById("botaoComoCadastrar").addEventListener("click", function(){ abrirModal(elModalComo); });
+document.querySelectorAll(".fechar").forEach(function(botao){
+  botao.addEventListener("click", function(){ fecharModal(document.getElementById(this.dataset.fechar)); });
+});
+[elModalNova, elModalComo].forEach(function(modal){
+  modal.addEventListener("click", function(ev){ if (ev.target === modal) fecharModal(modal); });
+});
+document.addEventListener("keydown", function(ev){
+  if (ev.key === "Escape") { fecharModal(elModalNova); fecharModal(elModalComo); }
+});
+
+/* abas arquivo / link */
+document.getElementById("abaArquivo").addEventListener("click", function(){
+  modoAnexo = "arquivo";
+  this.classList.add("ativa");
+  document.getElementById("abaLink").classList.remove("ativa");
+  document.getElementById("painelArquivo").style.display = "block";
+  document.getElementById("painelLink").style.display = "none";
+});
+document.getElementById("abaLink").addEventListener("click", function(){
+  modoAnexo = "link";
+  this.classList.add("ativa");
+  document.getElementById("abaArquivo").classList.remove("ativa");
+  document.getElementById("painelArquivo").style.display = "none";
+  document.getElementById("painelLink").style.display = "block";
+});
+
+/* arquivo */
+elAreaArquivo.addEventListener("click", function(){ elEntradaArq.click(); });
+elAreaArquivo.addEventListener("dragover", function(ev){ ev.preventDefault(); this.classList.add("arrastando"); });
+elAreaArquivo.addEventListener("dragleave", function(){ this.classList.remove("arrastando"); });
+elAreaArquivo.addEventListener("drop", function(ev){
+  ev.preventDefault();
+  this.classList.remove("arrastando");
+  if (ev.dataTransfer.files.length) processarArquivo(ev.dataTransfer.files[0]);
+});
+elEntradaArq.addEventListener("change", function(){ if (this.files.length) processarArquivo(this.files[0]); });
+
+function processarArquivo(arquivo){
+  const nome = arquivo.name.toLowerCase();
+  if (!nome.endsWith(".html") && !nome.endsWith(".htm")) {
+    mostrarToast("Envie um arquivo com extensão .html", "erro");
+    return;
+  }
+  const leitor = new FileReader();
+  leitor.onload = function(){
+    arquivoTemporario = { nome: arquivo.name, conteudo: leitor.result };
+    elNomeArquivo.textContent = arquivo.name + " (" + Math.max(1, Math.round(arquivo.size / 1024)) + " KB)";
+    elArquivoInfo.classList.add("visivel");
+  };
+  leitor.readAsText(arquivo, "utf-8");
+}
+
+/* salvar */
+document.getElementById("botaoSalvarAula").addEventListener("click", function(){
+  elErroForm.classList.remove("visivel");
+  const titulo = document.getElementById("campoTitulo").value.trim();
+  const ano = document.getElementById("campoAno").value;
+  const trimestre = parseInt(document.getElementById("campoTrimestre").value, 10);
+  const numero = parseInt(document.getElementById("campoNumero").value, 10);
+  const descricao = document.getElementById("campoDescricao").value.trim();
+  const link = document.getElementById("campoLink").value.trim();
+
+  function erro(msg){ elErroForm.textContent = msg; elErroForm.classList.add("visivel"); }
+
+  if (!titulo) { erro("Preencha o título da aula."); return; }
+  if (modoAnexo === "arquivo" && !arquivoTemporario) { erro("Escolha o arquivo HTML da apresentação ou use a aba de link."); return; }
+  if (modoAnexo === "link" && !link) { erro("Informe o link da apresentação ou use a aba de arquivo."); return; }
+
+  apresentacoes.push({
+    id: "aula-" + Date.now(),
+    ano: ano,
+    trimestre: trimestre,
+    aula: numero,
+    titulo: titulo,
+    descricao: descricao,
+    tipo: modoAnexo,
+    link: modoAnexo === "link" ? link : "",
+    conteudo: modoAnexo === "arquivo" ? arquivoTemporario.conteudo : ""
+  });
+
+  if (!persistir()) { apresentacoes.pop(); return; }
+
+  atualizarContadores();
+  renderizar();
+  fecharModal(elModalNova);
+  limparFormulario();
+  mostrarToast("Aula anexada com sucesso.", "sucesso");
+});
+
+function limparFormulario(){
+  document.getElementById("campoTitulo").value = "";
+  document.getElementById("campoDescricao").value = "";
+  document.getElementById("campoLink").value = "";
+  elEntradaArq.value = "";
+  arquivoTemporario = null;
+  elArquivoInfo.classList.remove("visivel");
+  elErroForm.classList.remove("visivel");
+}
+
+/* toast */
+let temporizadorToast = null;
+function mostrarToast(mensagem, tipo){
+  elToast.textContent = mensagem;
+  elToast.className = "toast visivel" + (tipo ? " " + tipo : "");
+  clearTimeout(temporizadorToast);
+  temporizadorToast = setTimeout(function(){ elToast.classList.remove("visivel"); }, 2600);
+}
+
+/* inicialização */
+atualizarContadores();
+renderizar();
+</script>
+</body>
+</html>
