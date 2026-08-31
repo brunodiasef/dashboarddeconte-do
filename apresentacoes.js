@@ -58,15 +58,15 @@ window.APRESENTACOES = [
     descricao: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
     tipo: "link",
     link: "https://brunodiasef.github.io/7ano/"
-  },   {
-    id: "aula-9t3n2-1788179654959",
+  },     {
+    id: "aula-9t3n2-1788180316503",
     ano: "9",
     trimestre: 3,
     aula: 2,
     titulo: "MATERIAL DE APOIO",
-    descricao: "CONTEÚDO E LISTA DE EXERCÍCIOS",
+    descricao: "",
     tipo: "arquivo",
-    link: "/conteúdo/3º Tri/9º ano/CONTEÚDO 9º ANO - 3º TRIMESTRE.html"
+    link: "aulas/conteúdo/3º Tri/9º ano/CONTEÚDO 9º ANO - 3º TRIMESTRE.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
