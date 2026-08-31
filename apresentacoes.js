@@ -47,8 +47,7 @@ window.APRESENTACOES = [
     trimestre: 3,
     aula: 3,
     titulo: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
-    descricao: "Esportes de Campo e Taco
-Práticas de Aventura na Natureza",
+    descricao: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
     tipo: "link",
     link: "https://brunodiasef.github.io/9ano/"
   }
