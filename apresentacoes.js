@@ -75,7 +75,7 @@ window.APRESENTACOES = [
     titulo: "MATERIAL DE APOIO",
     descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
     tipo: "arquivo",
-    link: "aulas/aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
+    link: "aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
