@@ -1,28 +1,11 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                
-              </style>
-                        </head>
-                        <body>
-                            <!-- ============================================================
-     ARQUIVO 1 de 2: index.html  (o dashboard)
-     Estrutura do repositório no GitHub:
-       📁 meu-repositorio/
-       ├── index.html          ← este arquivo
-       ├── apresentacoes.js    ← cadastro das aulas (arquivo 2)
-       └── aulas/              ← pasta com os HTML de cada aula
-     Como o cadastro fica em um arquivo do próprio repositório,
-     qualquer alteração feita no GitHub aparece em todos os
-     dispositivos ao mesmo tempo.
+<!-- ============================================================
+     SIM! Este arquivo já inclui as duas melhorias:
+     1) Cards EDITÁVEIS: botão de lápis em cada cartão abre o
+        formulário preenchido para editar ou remover a aula.
+     2) FILTRO POR TRIMESTRE: novo grupo de chips (Todos, 1º, 2º, 3º)
+        ao lado dos filtros de ano e número da aula.
+     Substitua TODO o conteúdo do index.html no repositório por
+     este arquivo e faça o commit.
      ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -70,10 +53,7 @@
     content:"";position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px);
   }
-  .marca-lateral{
-    display:flex;align-items:center;gap:12px;
-    padding:26px 20px 22px;border-bottom:1px solid rgba(201,168,76,.3);
-  }
+  .marca-lateral{display:flex;align-items:center;gap:12px;padding:26px 20px 22px;border-bottom:1px solid rgba(201,168,76,.3)}
   .emblema{
     width:46px;height:46px;border-radius:50%;flex:none;
     background:var(--dourado);color:var(--sidebar);
@@ -84,10 +64,7 @@
   .marca-lateral strong{font-family:var(--serif);font-size:15px;letter-spacing:.4px;display:block;line-height:1.2}
   .marca-lateral span{font-size:10.5px;color:#B9AC93;letter-spacing:.6px;text-transform:uppercase}
   .menu-lateral{padding:18px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
-  .menu-rotulo{
-    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:#8F8368;
-    padding:0 12px;margin-bottom:8px;
-  }
+  .menu-rotulo{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:#8F8368;padding:0 12px;margin-bottom:8px}
   .menu-lateral a{
     display:flex;align-items:center;gap:11px;text-decoration:none;
     color:#D8CCB4;font-size:13.5px;font-weight:600;
@@ -98,10 +75,7 @@
   .menu-lateral a:hover{background:rgba(201,168,76,.12);color:#fff}
   .menu-lateral a.ativo{background:rgba(201,168,76,.16);color:var(--dourado);border-left-color:var(--dourado)}
   .acoes-lateral{padding:6px 16px 14px;display:flex;flex-direction:column;gap:10px}
-  .pe-lateral{
-    padding:16px 20px;border-top:1px solid rgba(201,168,76,.3);
-    font-size:10.5px;color:#8F8368;line-height:1.6;letter-spacing:.4px;
-  }
+  .pe-lateral{padding:16px 20px;border-top:1px solid rgba(201,168,76,.3);font-size:10.5px;color:#8F8368;line-height:1.6;letter-spacing:.4px}
 
   /* ===== BOTÕES ===== */
   .btn{
@@ -110,16 +84,9 @@
     border-radius:999px;font-weight:700;transition:.2s;letter-spacing:.3px;
   }
   .btn svg{width:15px;height:15px}
-  .btn-ouro{
-    background:var(--dourado);color:var(--sidebar);
-    padding:12px 20px;font-size:13.5px;
-    box-shadow:0 4px 14px rgba(201,168,76,.4);
-  }
+  .btn-ouro{background:var(--dourado);color:var(--sidebar);padding:12px 20px;font-size:13.5px;box-shadow:0 4px 14px rgba(201,168,76,.4)}
   .btn-ouro:hover{background:var(--dourado-escuro);transform:translateY(-1px)}
-  .btn-marrom{
-    background:transparent;color:#E8DFD0;border:1.5px solid var(--marrom);
-    padding:10px 18px;font-size:13px;
-  }
+  .btn-marrom{background:transparent;color:#E8DFD0;border:1.5px solid var(--marrom);padding:10px 18px;font-size:13px}
   .btn-marrom:hover{background:var(--marrom);color:#fff}
 
   /* ===== ÁREA PRINCIPAL ===== */
@@ -130,10 +97,7 @@
     border-bottom:1px solid var(--borda-escura);
     padding:14px 34px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;
   }
-  .botao-menu{
-    display:none;background:none;border:1.5px solid var(--marrom);color:var(--marrom);
-    width:40px;height:40px;border-radius:10px;cursor:pointer;place-items:center;
-  }
+  .botao-menu{display:none;background:none;border:1.5px solid var(--marrom);color:var(--marrom);width:40px;height:40px;border-radius:10px;cursor:pointer;place-items:center}
   .cabecalho-titulo{min-width:200px}
   .cabecalho-titulo .rotulo{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--marrom);font-weight:700}
   .cabecalho-titulo h2{font-size:19px;font-weight:700;color:var(--tinta)}
@@ -155,10 +119,7 @@
 
   /* ===== CONTEÚDO ===== */
   .conteudo{padding:36px 34px 60px;max-width:1160px;width:100%;margin:0 auto}
-  .migalha{
-    font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--azul);
-    display:flex;align-items:center;gap:10px;
-  }
+  .migalha{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:10px}
   .migalha::after{content:"";height:1px;width:60px;background:var(--dourado)}
   .conteudo h1{font-size:clamp(30px,4vw,44px);font-weight:700;color:var(--tinta);margin:10px 0 4px;letter-spacing:.3px}
   .sub-titulo{font-family:var(--serif);font-style:italic;color:var(--marrom);font-size:15.5px;margin-bottom:14px}
@@ -170,16 +131,10 @@
     display:flex;flex-direction:column;gap:14px;
   }
   .filtro-grupo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .filtro-rotulo{
-    font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;
-    color:var(--marrom);min-width:100px;display:flex;align-items:center;gap:8px;
-  }
+  .filtro-rotulo{font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;color:var(--marrom);min-width:100px;display:flex;align-items:center;gap:8px}
   .filtro-rotulo::before{content:"";width:14px;height:2px;background:var(--dourado)}
   .chips{display:flex;gap:7px;flex-wrap:wrap}
-  .chip{
-    border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);
-    padding:7px 16px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s;
-  }
+  .chip{border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);padding:7px 16px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s}
   .chip:hover{border-color:var(--marrom);color:var(--marrom);transform:translateY(-1px)}
   .chip.ativo{background:var(--dourado);border-color:var(--dourado);color:var(--sidebar);box-shadow:0 3px 10px rgba(201,168,76,.35)}
   .chip.num{min-width:38px;padding:7px 0;text-align:center}
@@ -188,7 +143,7 @@
   .linha-contagem p{font-size:13px;color:var(--suave)}
   .linha-contagem p b{color:var(--verde);font-size:15px}
 
-  /* ===== CARDS SEM IMAGEM ===== */
+  /* ===== CARDS ===== */
   .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px}
   .cartao{
     background:var(--creme);border:1px solid var(--borda);border-radius:14px;
@@ -196,17 +151,11 @@
     padding:20px 19px 18px;gap:9px;overflow:hidden;
     transition:transform .22s,box-shadow .22s;animation:surgir .45s ease both;
   }
-  .cartao::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:4px;
-    background:var(--dourado);opacity:.9;
-  }
+  .cartao::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--dourado);opacity:.9}
   .cartao:hover{transform:translateY(-5px);box-shadow:var(--sombra-forte)}
   @keyframes surgir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   .cartao-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .etiqueta{
-    font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
-    padding:5px 12px;border-radius:999px;color:#F5F0E8;
-  }
+  .etiqueta{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:999px;color:#F5F0E8}
   .et-6{background:var(--azul)}
   .et-7{background:var(--verde)}
   .et-8{background:var(--marrom)}
@@ -217,12 +166,17 @@
   .cartao-rodape{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:12px;border-top:1px dashed var(--borda-escura)}
   .tipo-aula{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--azul);display:inline-flex;align-items:center;gap:6px}
   .tipo-aula svg{width:13px;height:13px}
+  .acoes-cartao{display:flex;gap:7px;align-items:center}
   .btn-abrir{padding:9px 16px;font-size:12px}
-
-  .vazio{
-    display:none;text-align:center;padding:56px 24px;
-    background:var(--creme);border:2px dashed var(--borda-escura);border-radius:14px;
+  .btn-editar{
+    width:34px;height:34px;border-radius:50%;cursor:pointer;
+    background:transparent;border:1.5px solid var(--marrom);color:var(--marrom);
+    display:grid;place-items:center;transition:.2s;
   }
+  .btn-editar svg{width:14px;height:14px}
+  .btn-editar:hover{background:var(--marrom);color:#F5F0E8}
+
+  .vazio{display:none;text-align:center;padding:56px 24px;background:var(--creme);border:2px dashed var(--borda-escura);border-radius:14px}
   .vazio svg{width:44px;height:44px;margin:0 auto 14px;color:var(--marrom)}
   .vazio h3{font-size:19px;margin-bottom:6px}
   .vazio p{font-size:13.5px;color:var(--suave);max-width:420px;margin:0 auto 20px;line-height:1.6}
@@ -230,59 +184,29 @@
   .guia-titulo{font-size:21px;margin:38px 0 16px;display:flex;align-items:center;gap:14px}
   .guia-titulo::after{content:"";flex:1;height:1px;background:var(--borda-escura)}
   .guia{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .guia-item{
-    background:var(--creme);border:1px solid var(--borda);border-radius:14px;
-    padding:20px;box-shadow:var(--sombra);position:relative;overflow:hidden;transition:.2s;
-  }
+  .guia-item{background:var(--creme);border:1px solid var(--borda);border-radius:14px;padding:20px;box-shadow:var(--sombra);position:relative;overflow:hidden;transition:.2s}
   .guia-item:hover{transform:translateY(-3px);box-shadow:var(--sombra-forte)}
-  .guia-item::before{
-    content:attr(data-numeral);position:absolute;right:10px;top:2px;
-    font-family:var(--serif);font-size:56px;font-weight:700;color:rgba(201,168,76,.22);
-  }
-  .guia-item .num{
-    width:30px;height:30px;border-radius:50%;background:var(--verde);color:#F5F0E8;
-    font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:13px;margin-bottom:12px;
-  }
+  .guia-item::before{content:attr(data-numeral);position:absolute;right:10px;top:2px;font-family:var(--serif);font-size:56px;font-weight:700;color:rgba(201,168,76,.22)}
+  .guia-item .num{width:30px;height:30px;border-radius:50%;background:var(--verde);color:#F5F0E8;font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:13px;margin-bottom:12px}
   .guia-item h3{font-size:16px;margin-bottom:5px}
   .guia-item p{font-size:12.5px;color:var(--suave);line-height:1.6}
 
-  .aviso{
-    margin-top:26px;background:var(--creme);border:1px solid var(--borda);
-    border-left:4px solid var(--dourado);border-radius:10px;
-    padding:15px 18px;font-size:13px;color:var(--suave);line-height:1.65;
-  }
+  .aviso{margin-top:26px;background:var(--creme);border:1px solid var(--borda);border-left:4px solid var(--dourado);border-radius:10px;padding:15px 18px;font-size:13px;color:var(--suave);line-height:1.65}
   .aviso b{color:var(--tinta)}
   .aviso code{background:#EFE7D6;padding:1px 7px;border-radius:5px;font-size:11.5px;font-weight:700;color:var(--marrom-escuro)}
 
-  .rodape{
-    margin-top:auto;border-top:1px solid var(--borda-escura);
-    padding:24px 34px;text-align:center;font-size:12px;color:var(--suave);line-height:1.8;
-  }
+  .rodape{margin-top:auto;border-top:1px solid var(--borda-escura);padding:24px 34px;text-align:center;font-size:12px;color:var(--suave);line-height:1.8}
   .rodape b{font-family:var(--serif);color:var(--tinta);font-size:13px}
 
   /* ===== MODAIS ===== */
-  .modal-fundo{
-    position:fixed;inset:0;background:rgba(30,26,20,.6);backdrop-filter:blur(3px);
-    display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
-  }
+  .modal-fundo{position:fixed;inset:0;background:rgba(30,26,20,.6);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
   .modal-fundo.aberto{display:flex;animation:fundo .22s}
   @keyframes fundo{from{opacity:0}to{opacity:1}}
-  .modal{
-    background:var(--creme);border:1px solid var(--borda);border-radius:16px;
-    max-width:620px;width:100%;max-height:88vh;overflow:auto;
-    box-shadow:0 30px 70px rgba(0,0,0,.4);animation:subir .28s cubic-bezier(.2,.8,.2,1);
-  }
+  .modal{background:var(--creme);border:1px solid var(--borda);border-radius:16px;max-width:640px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 30px 70px rgba(0,0,0,.4);animation:subir .28s cubic-bezier(.2,.8,.2,1)}
   @keyframes subir{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
-  .modal-topo{
-    background:var(--sidebar);color:#EFE6D6;padding:18px 24px;display:flex;
-    justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2;
-    border-bottom:2px solid var(--dourado);
-  }
+  .modal-topo{background:var(--sidebar);color:#EFE6D6;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2;border-bottom:2px solid var(--dourado)}
   .modal-topo h2{font-size:18px;letter-spacing:.4px}
-  .fechar{
-    background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--dourado);
-    width:32px;height:32px;border-radius:9px;cursor:pointer;display:grid;place-items:center;transition:.2s;
-  }
+  .fechar{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--dourado);width:32px;height:32px;border-radius:9px;cursor:pointer;display:grid;place-items:center;transition:.2s}
   .fechar svg{width:14px;height:14px}
   .fechar:hover{background:var(--dourado);color:var(--sidebar);transform:rotate(90deg)}
   .modal-corpo{padding:26px}
@@ -294,53 +218,37 @@
     width:100%;padding:11px 14px;border:1.5px solid var(--borda-escura);border-radius:10px;
     font:inherit;font-size:13.5px;background:#FBF8F1;outline:none;transition:.2s;color:var(--tinta);
   }
-  .campo input:focus,.campo textarea:focus,.campo select:focus{
-    border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18);background:#fff;
-  }
+  .campo input:focus,.campo textarea:focus,.campo select:focus{border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18);background:#fff}
   .campo textarea{resize:vertical;min-height:70px}
   .campo-duplo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
   .abas{display:flex;gap:8px;margin-bottom:14px}
-  .aba{
-    flex:1;border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);
-    padding:11px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s;
-    display:flex;align-items:center;justify-content:center;gap:8px;
-  }
+  .aba{flex:1;border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);padding:11px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s;display:flex;align-items:center;justify-content:center;gap:8px}
   .aba svg{width:14px;height:14px}
   .aba.ativa{background:rgba(45,90,61,.1);border-color:var(--verde);color:var(--verde)}
-  .erro-form{
-    display:none;background:rgba(163,59,46,.08);border:1px solid rgba(163,59,46,.4);color:#A33B2E;
-    border-radius:9px;padding:10px 13px;font-size:12.5px;font-weight:700;margin-bottom:14px;
-  }
+  .erro-form{display:none;background:rgba(163,59,46,.08);border:1px solid rgba(163,59,46,.4);color:#A33B2E;border-radius:9px;padding:10px 13px;font-size:12.5px;font-weight:700;margin-bottom:14px}
   .erro-form.visivel{display:block}
   .codigo-gerado{
     background:var(--sidebar);color:#D8E8DC;border-radius:11px;padding:15px;
-    font-family:ui-monospace,'Cascadia Code',Consolas,monospace;font-size:11.5px;line-height:1.65;
-    overflow-x:auto;white-space:pre;margin:6px 0 12px;border:1px solid rgba(201,168,76,.4);
+    font-family:ui-monospace,'Cascadia Code',Consolas,monospace;font-size:11.5px;line-height:1.6;
+    overflow:auto;white-space:pre;margin:6px 0 12px;border:1px solid rgba(201,168,76,.4);
+    max-height:260px;
   }
-  .passos-github{
-    background:#FBF8F1;border:1px dashed var(--borda-escura);border-radius:10px;
-    padding:13px 15px;font-size:12.3px;color:var(--suave);line-height:1.7;margin-bottom:12px;
-  }
+  .passos-github{background:#FBF8F1;border:1px dashed var(--borda-escura);border-radius:10px;padding:13px 15px;font-size:12.3px;color:var(--suave);line-height:1.7;margin-bottom:12px}
   .passos-github b{color:var(--tinta)}
   .botao-salvar{width:100%;margin-top:6px}
+  .linha-botoes{display:flex;gap:10px;margin-top:6px}
+  .linha-botoes .btn{flex:1}
+  .btn-perigo{background:transparent;border:1.5px solid #A33B2E;color:#A33B2E;padding:12px;font-size:13px}
+  .btn-perigo:hover{background:#A33B2E;color:#fff}
   .dica-form{font-size:11.5px;color:var(--suave);margin-top:12px;line-height:1.6;text-align:center}
 
   .instrucao{display:flex;gap:14px;margin-bottom:18px}
-  .instrucao-n{
-    width:28px;height:28px;border-radius:50%;background:var(--dourado);color:var(--sidebar);
-    font-family:var(--serif);font-weight:700;display:grid;place-items:center;flex:none;font-size:13px;
-  }
+  .instrucao-n{width:28px;height:28px;border-radius:50%;background:var(--dourado);color:var(--sidebar);font-family:var(--serif);font-weight:700;display:grid;place-items:center;flex:none;font-size:13px}
   .instrucao h4{font-size:14.5px;margin-bottom:3px}
   .instrucao p{font-size:12.8px;color:var(--suave);line-height:1.6}
   .instrucao b{color:var(--verde)}
 
-  .toast{
-    position:fixed;bottom:26px;left:50%;transform:translate(-50%,90px);
-    background:var(--sidebar);color:#F5F0E8;padding:12px 24px;border-radius:999px;
-    font-size:13px;font-weight:700;letter-spacing:.3px;
-    border:1px solid var(--dourado);box-shadow:0 12px 30px rgba(0,0,0,.35);
-    transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:200;
-  }
+  .toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,90px);background:var(--sidebar);color:#F5F0E8;padding:12px 24px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.3px;border:1px solid var(--dourado);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:200}
   .toast.visivel{transform:translate(-50%,0)}
   .toast.sucesso{border-color:var(--verde)}
   .toast.erro{border-color:#A33B2E}
@@ -364,7 +272,7 @@
 
 <div class="overlay" id="overlaySidebar"></div>
 
-<!-- ===== SIDEBAR FIXA ===== -->
+<!-- ===== SIDEBAR ===== -->
 <aside class="sidebar" id="sidebar">
   <div class="marca-lateral">
     <div class="emblema">EF</div>
@@ -427,10 +335,10 @@
     <div class="migalha">Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
     <h1>Educação Física</h1>
     <div class="sub-titulo">Central de apresentações interativas do 6º ao 9º ano</div>
-    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Escolha a turma, o período e abra a aula desejada.</p>
+    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Filtre por turma, trimestre e número da aula, abra a aula desejada ou use o botão de lápis no cartão para editar e remover aulas lançadas.</p>
 
     <div class="filtros">
-      <div class="filtro-grupo" id="anos">
+      <div class="filtro-grupo">
         <span class="filtro-rotulo">Escolha o ano</span>
         <div class="chips" id="chipsAno">
           <button class="chip ativo" data-ano="todos">Todos</button>
@@ -440,7 +348,16 @@
           <button class="chip" data-ano="9">9º ano</button>
         </div>
       </div>
-      <div class="filtro-grupo" id="trimestres">
+      <div class="filtro-grupo">
+        <span class="filtro-rotulo">Trimestre</span>
+        <div class="chips" id="chipsTri">
+          <button class="chip ativo" data-tri="todos">Todos</button>
+          <button class="chip" data-tri="1">1º tri</button>
+          <button class="chip" data-tri="2">2º tri</button>
+          <button class="chip" data-tri="3">3º tri</button>
+        </div>
+      </div>
+      <div class="filtro-grupo">
         <span class="filtro-rotulo">Nº da aula</span>
         <div class="chips" id="chipsNumero"></div>
       </div>
@@ -486,7 +403,7 @@
     </div>
 
     <div class="aviso">
-      Dashboard preparado para receber novos conteúdos HTML. Os links ficam centralizados no arquivo <code>apresentacoes.js</code>, que fica no mesmo repositório do GitHub: qualquer aula cadastrada ali aparece no painel em <b>todos os dispositivos</b>. Use o botão <b>Nova aula</b> para gerar o código pronto do cadastro.
+      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis do cartão, ajuste os dados e substitua o arquivo no GitHub pelo código gerado.
     </div>
   </main>
 
@@ -496,11 +413,11 @@
   </footer>
 </div>
 
-<!-- ===== MODAL NOVA AULA (gera código para o repositório) ===== -->
+<!-- ===== MODAL NOVA AULA / EDITAR AULA ===== -->
 <div class="modal-fundo" id="modalNovaFundo">
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-topo">
-      <h2 class="serif">Nova aula — gerar cadastro</h2>
+      <h2 class="serif" id="tituloModal">Nova aula — gerar cadastro</h2>
       <button class="fechar" data-fechar="modalNovaFundo" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
@@ -547,7 +464,7 @@
         <div class="abas">
           <button class="aba ativa" id="abaArquivo" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-            Na pasta aulas/ do repositório
+            Arquivo no repositório
           </button>
           <button class="aba" id="abaLink" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/></svg>
@@ -564,24 +481,27 @@
 
       <div id="resultadoGerado" style="display:none">
         <div class="campo">
-          <label>Código gerado — copie e cole no apresentacoes.js</label>
+          <label id="rotuloResultado">Conteúdo atualizado do apresentacoes.js</label>
           <div class="codigo-gerado" id="codigoGerado"></div>
         </div>
         <div class="passos-github">
-          <b>Como publicar para todos os dispositivos:</b><br>
-          1. Envie o arquivo HTML da aula para a pasta <b>aulas/</b> do repositório.<br>
-          2. No GitHub, abra o arquivo <b>apresentacoes.js</b> e clique no lápis (editar).<br>
-          3. Cole o código acima dentro da lista, antes do <b>];</b> (separe por vírgula se já houver outra aula).<br>
-          4. Clique em <b>Commit changes</b>. Pronto: a aula aparece no painel em qualquer dispositivo.
+          <b>Como publicar a alteração:</b><br>
+          1. Copie o conteúdo completo acima.<br>
+          2. No GitHub, abra o arquivo <b>apresentacoes.js</b> e clique no lápis.<br>
+          3. Selecione tudo (<b>Ctrl + A</b>), cole o conteúdo copiado e confirme.<br>
+          4. Clique em <b>Commit changes</b>. O painel atualiza em todos os dispositivos.
         </div>
         <button class="btn btn-ouro botao-salvar" id="botaoCopiarCodigo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copiar código do cadastro
+          Copiar arquivo completo
         </button>
       </div>
 
-      <button class="btn btn-ouro botao-salvar" id="botaoGerarCodigo">Gerar código do cadastro</button>
-      <p class="dica-form">O cadastro é feito no arquivo apresentacoes.js do repositório, por isso a aula fica visível em todos os dispositivos.</p>
+      <div class="linha-botoes">
+        <button class="btn btn-ouro" id="botaoGerarCodigo">Gerar código atualizado</button>
+        <button class="btn btn-perigo" id="botaoRemoverAula" style="display:none">Remover esta aula</button>
+      </div>
+      <p class="dica-form">O painel gera o arquivo apresentacoes.js completo e atualizado; basta substituir o conteúdo no GitHub e fazer o commit.</p>
     </div>
   </div>
 </div>
@@ -590,7 +510,7 @@
 <div class="modal-fundo" id="modalComoFundo">
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-topo">
-      <h2 class="serif">Como cadastrar</h2>
+      <h2 class="serif">Como cadastrar e editar</h2>
       <button class="fechar" data-fechar="modalComoFundo" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
@@ -598,23 +518,23 @@
     <div class="modal-corpo">
       <div class="instrucao">
         <div class="instrucao-n">1</div>
-        <div><h4>Envie o arquivo da aula para o repositório</h4><p>No GitHub, abra o repositório do projeto e envie o arquivo HTML da aula para a pasta <b>aulas/</b> (botão Add file → Upload files).</p></div>
+        <div><h4>Cadastrar aula nova</h4><p>Clique em <b>Nova aula</b>, preencha os dados, escolha arquivo no repositório ou link externo e clique em <b>Gerar código atualizado</b>.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">2</div>
-        <div><h4>Clique em Nova aula no painel</h4><p>Preencha título, ano, trimestre, número da aula, descrição e o nome do arquivo enviado.</p></div>
+        <div><h4>Editar aula lançada</h4><p>No cartão da aula, clique no botão de <b>lápis</b>. O formulário abre preenchido: ajuste o que quiser e gere o código novamente.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">3</div>
-        <div><h4>Copie o código gerado</h4><p>O painel monta o registro pronto da aula. Clique em <b>Copiar código do cadastro</b>.</p></div>
+        <div><h4>Remover aula</h4><p>No mesmo formulário de edição, clique em <b>Remover esta aula</b>. O painel gera o arquivo sem aquele registro.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">4</div>
-        <div><h4>Cole no arquivo apresentacoes.js</h4><p>No GitHub, abra <b>apresentacoes.js</b>, clique no lápis para editar e cole o código dentro da lista, antes do <b>];</b>. Se já houver outras aulas, separe cada uma por vírgula.</p></div>
+        <div><h4>Publicar</h4><p>Copie o conteúdo gerado, abra <b>apresentacoes.js</b> no GitHub, clique no lápis, selecione tudo (<b>Ctrl + A</b>), cole e faça o <b>Commit changes</b>.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">5</div>
-        <div><h4>Faça o commit</h4><p>Clique em <b>Commit changes</b>. A aula passa a aparecer no painel em <b>qualquer dispositivo</b>, pois os dados ficam no próprio repositório.</p></div>
+        <div><h4>Filtros do painel</h4><p>Use os chips de <b>ano</b>, <b>trimestre</b> e <b>número da aula</b> para localizar qualquer conteúdo em segundos.</p></div>
       </div>
     </div>
   </div>
@@ -622,28 +542,25 @@
 
 <div class="toast" id="toast">Concluído</div>
 
-<!-- dados do repositório (arquivo apresentacoes.js) -->
 <script src="apresentacoes.js"></script>
 
 <script>
-/* =====================================================================
-   CONFIGURAÇÃO DO PAINEL
-   TRIMESTRE_ATUAL: ajuste o trimestre letivo em andamento (1, 2 ou 3)
-   ===================================================================== */
+/* ===== CONFIGURAÇÃO ===== */
 const TRIMESTRE_ATUAL = 3;
 const META_AULAS_POR_TRIMESTRE = 12;
 
 const ICONES = {
   seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+  lapis: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>',
   arquivo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
   link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/></svg>'
 };
 
-/* lista vem do arquivo apresentacoes.js do repositório */
-const apresentacoes = Array.isArray(window.APRESENTACOES) ? window.APRESENTACOES : null;
+const apresentacoes = Array.isArray(window.APRESENTACOES) ? window.APRESENTACOES : [];
 
 let modoAnexo = "arquivo";
-const estado = { ano: "todos", numero: "todos" };
+let idEmEdicao = null;
+const estado = { ano: "todos", tri: "todos", numero: "todos" };
 
 const elGrade       = document.getElementById("gradeAulas");
 const elVazio       = document.getElementById("estadoVazio");
@@ -659,8 +576,12 @@ const elModalComo   = document.getElementById("modalComoFundo");
 const elErroForm    = document.getElementById("erroForm");
 const elSidebar     = document.getElementById("sidebar");
 const elOverlay     = document.getElementById("overlaySidebar");
+const elTituloModal = document.getElementById("tituloModal");
+const elResultado   = document.getElementById("resultadoGerado");
+const elCodigoGerado= document.getElementById("codigoGerado");
+const elBotaoRemover= document.getElementById("botaoRemoverAula");
 
-/* chips e select de número (1 a 12) */
+/* chips de número (1 a 12) e select */
 (function montarNumeros(){
   let html = '<button class="chip num ativo" data-num="todos">Todas</button>';
   let opcoes = "";
@@ -673,42 +594,37 @@ const elOverlay     = document.getElementById("overlaySidebar");
 })();
 
 function atualizarContadores(){
-  const total = apresentacoes ? apresentacoes.length : 0;
+  const total = apresentacoes.length;
   elContGeral.textContent = total;
   elContPalavra.textContent = total === 1 ? "apresentação cadastrada" : "apresentações cadastradas";
 }
 
 function atualizarProgresso(){
   const segmentos = document.querySelectorAll("#segmentos .segmento");
-  const aulasNoAtual = apresentacoes
-    ? apresentacoes.filter(function(a){ return a.trimestre === TRIMESTRE_ATUAL; }).length
-    : 0;
+  const aulasNoAtual = apresentacoes.filter(function(a){ return a.trimestre === TRIMESTRE_ATUAL; }).length;
   segmentos.forEach(function(seg){
     const tri = parseInt(seg.dataset.tri, 10);
     const trilho = seg.querySelector("i");
     seg.classList.remove("concluido", "atual", "futuro");
-    if (tri < TRIMESTRE_ATUAL) {
-      seg.classList.add("concluido");
-      trilho.style.width = "100%";
-    } else if (tri === TRIMESTRE_ATUAL) {
+    if (tri < TRIMESTRE_ATUAL) { seg.classList.add("concluido"); trilho.style.width = "100%"; }
+    else if (tri === TRIMESTRE_ATUAL) {
       seg.classList.add("atual");
       const pct = Math.min(100, Math.round((aulasNoAtual / META_AULAS_POR_TRIMESTRE) * 100));
       trilho.style.width = Math.max(6, pct) + "%";
-    } else {
-      seg.classList.add("futuro");
-      trilho.style.width = "0%";
     }
+    else { seg.classList.add("futuro"); trilho.style.width = "0%"; }
   });
   document.getElementById("rotuloProgresso").innerHTML =
     "<b>" + TRIMESTRE_ATUAL + "º trimestre</b> — " + aulasNoAtual + " de " + META_AULAS_POR_TRIMESTRE + " aulas";
 }
 
+/* ===== FILTROS (ano + trimestre + número) ===== */
 function filtrarAulas(){
-  if (!apresentacoes) return [];
   return apresentacoes.filter(function(item){
     const anoOk = estado.ano === "todos" || String(item.ano) === estado.ano;
+    const triOk = estado.tri === "todos" || String(item.trimestre) === estado.tri;
     const numOk = estado.numero === "todos" || String(item.aula) === estado.numero;
-    return anoOk && numOk;
+    return anoOk && triOk && numOk;
   });
 }
 
@@ -719,16 +635,6 @@ function escaparHtml(texto){
 }
 
 function renderizar(){
-  if (!apresentacoes) {
-    elGrade.style.display = "none";
-    elVazio.style.display = "block";
-    elMensagemVazio.textContent =
-      "O arquivo apresentacoes.js não foi encontrado. Crie esse arquivo na mesma pasta do index.html, seguindo o modelo descrito no botão Como cadastrar.";
-    document.getElementById("botaoVazioAnexar").style.display = "none";
-    atualizarProgresso();
-    return;
-  }
-
   const lista = filtrarAulas();
   elContVisivel.textContent = lista.length;
 
@@ -736,8 +642,9 @@ function renderizar(){
     elGrade.innerHTML = "";
     elGrade.style.display = "none";
     elVazio.style.display = "block";
-    elMensagemVazio.textContent =
-      "Não há aulas para os filtros selecionados. Ajuste os filtros ou cadastre novas aulas no arquivo apresentacoes.js do repositório.";
+    elMensagemVazio.textContent = apresentacoes.length === 0
+      ? "Nenhuma aula cadastrada ainda. Clique em Nova aula para gerar o primeiro cadastro."
+      : "Não há aulas para os filtros selecionados. Ajuste ano, trimestre ou número da aula.";
     return;
   }
   elVazio.style.display = "none";
@@ -747,7 +654,8 @@ function renderizar(){
     const numeroFormatado = String(item.aula).padStart(2, "0");
     const tipoRotulo = item.tipo === "link" ? "Link" : "Repositório";
     const tipoIcone  = item.tipo === "link" ? ICONES.link : ICONES.arquivo;
-    return '<article class="cartao" style="animation-delay:' + (indice * 0.06) + 's" data-id="' + escaparHtml(item.id || item.link) + '">' +
+    const chave = escaparHtml(item.id || item.link);
+    return '<article class="cartao" style="animation-delay:' + (indice * 0.06) + 's" data-id="' + chave + '">' +
       '<div class="cartao-meta">' +
         '<span class="etiqueta et-' + item.ano + '">' + item.ano + 'º ano</span>' +
         '<span class="meta-tri">' + item.trimestre + 'º tri • Aula ' + numeroFormatado + '</span>' +
@@ -756,7 +664,10 @@ function renderizar(){
       '<p>' + escaparHtml(item.descricao || "") + '</p>' +
       '<div class="cartao-rodape">' +
         '<span class="tipo-aula">' + tipoIcone + tipoRotulo + '</span>' +
-        '<a class="btn btn-ouro btn-abrir" href="#" data-abrir="' + escaparHtml(item.id || item.link) + '">Abrir ' + ICONES.seta + '</a>' +
+        '<span class="acoes-cartao">' +
+          '<button class="btn-editar" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>' +
+          '<a class="btn btn-ouro btn-abrir" href="#" data-abrir="' + chave + '">Abrir ' + ICONES.seta + '</a>' +
+        '</span>' +
       '</div>' +
     '</article>';
   }).join("");
@@ -767,62 +678,52 @@ function renderizar(){
 function abrirApresentacao(id){
   const item = apresentacoes.find(function(a){ return String(a.id || a.link) === String(id); });
   if (!item) return;
-  if (item.link && item.link !== "#") {
-    window.open(item.link, "_blank");
-  } else {
-    mostrarToast("Esta aula ainda não possui arquivo ou link.", "erro");
-  }
+  if (item.link && item.link !== "#") window.open(item.link, "_blank");
+  else mostrarToast("Esta aula ainda não possui arquivo ou link.", "erro");
 }
 
 elGrade.addEventListener("click", function(ev){
+  const botaoEditar = ev.target.closest("[data-editar]");
+  if (botaoEditar) { ev.preventDefault(); ev.stopPropagation(); abrirModalEditar(botaoEditar.dataset.editar); return; }
   const botaoAbrir = ev.target.closest("[data-abrir]");
   if (botaoAbrir) { ev.preventDefault(); abrirApresentacao(botaoAbrir.dataset.abrir); return; }
   const cartao = ev.target.closest(".cartao");
   if (cartao) abrirApresentacao(cartao.dataset.id);
 });
 
-/* filtros */
-document.getElementById("chipsAno").addEventListener("click", function(ev){
-  const botao = ev.target.closest("[data-ano]");
-  if (!botao) return;
-  this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
-  botao.classList.add("ativo");
-  estado.ano = botao.dataset.ano;
-  renderizar();
-});
-elChipsNumero.addEventListener("click", function(ev){
-  const botao = ev.target.closest("[data-num]");
-  if (!botao) return;
-  this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
-  botao.classList.add("ativo");
-  estado.numero = botao.dataset.num;
-  renderizar();
-});
+/* handlers dos três filtros */
+function ligarChips(idContainer, atributo, chaveEstado){
+  document.getElementById(idContainer).addEventListener("click", function(ev){
+    const botao = ev.target.closest("[" + atributo + "]");
+    if (!botao) return;
+    this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
+    botao.classList.add("ativo");
+    estado[chaveEstado] = botao.getAttribute(atributo);
+    renderizar();
+  });
+}
+ligarChips("chipsAno", "data-ano", "ano");
+ligarChips("chipsTri", "data-tri", "tri");
+ligarChips("chipsNumero", "data-num", "numero");
 
 /* sidebar mobile */
 document.getElementById("botaoMenu").addEventListener("click", function(){
-  elSidebar.classList.add("aberta");
-  elOverlay.classList.add("visivel");
+  elSidebar.classList.add("aberta"); elOverlay.classList.add("visivel");
 });
 elOverlay.addEventListener("click", function(){
-  elSidebar.classList.remove("aberta");
-  elOverlay.classList.remove("visivel");
+  elSidebar.classList.remove("aberta"); elOverlay.classList.remove("visivel");
 });
 document.getElementById("menuLateral").addEventListener("click", function(ev){
   const link = ev.target.closest("a");
   if (!link) return;
   this.querySelectorAll("a").forEach(function(a){ a.classList.remove("ativo"); });
   link.classList.add("ativo");
-  elSidebar.classList.remove("aberta");
-  elOverlay.classList.remove("visivel");
+  elSidebar.classList.remove("aberta"); elOverlay.classList.remove("visivel");
 });
 
 /* modais */
 function abrirModal(el){ el.classList.add("aberto"); }
 function fecharModal(el){ el.classList.remove("aberto"); }
-document.getElementById("botaoNovaAulaLateral").addEventListener("click", function(){ abrirModal(elModalNova); });
-document.getElementById("botaoNovaAulaConteudo").addEventListener("click", function(){ abrirModal(elModalNova); });
-document.getElementById("botaoVazioAnexar").addEventListener("click", function(){ abrirModal(elModalNova); });
 document.getElementById("botaoComoCadastrar").addEventListener("click", function(){ abrirModal(elModalComo); });
 document.querySelectorAll(".fechar").forEach(function(botao){
   botao.addEventListener("click", function(){ fecharModal(document.getElementById(this.dataset.fechar)); });
@@ -834,23 +735,63 @@ document.addEventListener("keydown", function(ev){
   if (ev.key === "Escape") { fecharModal(elModalNova); fecharModal(elModalComo); }
 });
 
-/* abas arquivo / link */
-document.getElementById("abaArquivo").addEventListener("click", function(){
-  modoAnexo = "arquivo";
-  this.classList.add("ativa");
-  document.getElementById("abaLink").classList.remove("ativa");
-  document.getElementById("painelArquivo").style.display = "block";
-  document.getElementById("painelLink").style.display = "none";
-});
-document.getElementById("abaLink").addEventListener("click", function(){
-  modoAnexo = "link";
-  this.classList.add("ativa");
-  document.getElementById("abaArquivo").classList.remove("ativa");
-  document.getElementById("painelArquivo").style.display = "none";
-  document.getElementById("painelLink").style.display = "block";
-});
+/* ===== formulário nova / editar ===== */
+function setAba(modo){
+  modoAnexo = modo;
+  document.getElementById("abaArquivo").classList.toggle("ativa", modo === "arquivo");
+  document.getElementById("abaLink").classList.toggle("ativa", modo === "link");
+  document.getElementById("painelArquivo").style.display = modo === "arquivo" ? "block" : "none";
+  document.getElementById("painelLink").style.display = modo === "link" ? "block" : "none";
+}
+document.getElementById("abaArquivo").addEventListener("click", function(){ setAba("arquivo"); });
+document.getElementById("abaLink").addEventListener("click", function(){ setAba("link"); });
 
-/* gerar código do cadastro */
+function limparFormulario(){
+  document.getElementById("campoTitulo").value = "";
+  document.getElementById("campoDescricao").value = "";
+  document.getElementById("campoLink").value = "";
+  document.getElementById("campoNomeArquivo").value = "";
+  elErroForm.classList.remove("visivel");
+  elResultado.style.display = "none";
+  elCodigoGerado.textContent = "";
+}
+
+function abrirModalNova(){
+  idEmEdicao = null;
+  limparFormulario();
+  setAba("arquivo");
+  elTituloModal.textContent = "Nova aula — gerar cadastro";
+  elBotaoRemover.style.display = "none";
+  abrirModal(elModalNova);
+}
+
+function abrirModalEditar(id){
+  const item = apresentacoes.find(function(a){ return String(a.id || a.link) === String(id); });
+  if (!item) return;
+  limparFormulario();
+  idEmEdicao = String(item.id || item.link);
+  document.getElementById("campoTitulo").value = item.titulo || "";
+  document.getElementById("campoDescricao").value = item.descricao || "";
+  document.getElementById("campoAno").value = String(item.ano);
+  document.getElementById("campoTrimestre").value = String(item.trimestre);
+  elCampoNumero.value = String(item.aula);
+  if (item.tipo === "link") {
+    setAba("link");
+    document.getElementById("campoLink").value = item.link || "";
+  } else {
+    setAba("arquivo");
+    document.getElementById("campoNomeArquivo").value = item.link || "";
+  }
+  elTituloModal.textContent = "Editar aula — " + (item.titulo || "");
+  elBotaoRemover.style.display = "inline-flex";
+  abrirModal(elModalNova);
+}
+
+document.getElementById("botaoNovaAulaLateral").addEventListener("click", abrirModalNova);
+document.getElementById("botaoNovaAulaConteudo").addEventListener("click", abrirModalNova);
+document.getElementById("botaoVazioAnexar").addEventListener("click", abrirModalNova);
+
+/* ===== geração do arquivo completo ===== */
 function escaparParaCodigo(texto){
   return String(texto == null ? "" : texto)
     .replace(/\\/g, "\\\\")
@@ -859,8 +800,31 @@ function escaparParaCodigo(texto){
     .replace(/\n/g, "\\n");
 }
 
-document.getElementById("botaoGerarCodigo").addEventListener("click", function(){
-  elErroForm.classList.remove("visivel");
+function serializarEntrada(item){
+  return '  {\n' +
+    '    id: "' + escaparParaCodigo(item.id) + '",\n' +
+    '    ano: "' + escaparParaCodigo(item.ano) + '",\n' +
+    '    trimestre: ' + item.trimestre + ',\n' +
+    '    aula: ' + item.aula + ',\n' +
+    '    titulo: "' + escaparParaCodigo(item.titulo) + '",\n' +
+    '    descricao: "' + escaparParaCodigo(item.descricao || "") + '",\n' +
+    '    tipo: "' + (item.tipo === "link" ? "link" : "arquivo") + '",\n' +
+    '    link: "' + escaparParaCodigo(item.link) + '"\n' +
+    '  }';
+}
+
+function gerarConteudoArquivo(lista){
+  return '/* ============================================================\n' +
+    '   apresentacoes.js — atualizado pelo painel\n' +
+    '   Substitua TODO o conteúdo do arquivo apresentacoes.js no\n' +
+    '   repositório por este código e faça o commit.\n' +
+    '   ============================================================ */\n\n' +
+    'window.APRESENTACOES = [\n' +
+    lista.map(serializarEntrada).join(',\n') +
+    '\n  /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */\n];\n';
+}
+
+function lerFormulario(){
   const titulo = document.getElementById("campoTitulo").value.trim();
   const ano = document.getElementById("campoAno").value;
   const trimestre = parseInt(document.getElementById("campoTrimestre").value, 10);
@@ -869,44 +833,66 @@ document.getElementById("botaoGerarCodigo").addEventListener("click", function()
   const nomeArquivo = document.getElementById("campoNomeArquivo").value.trim();
   const linkExterno = document.getElementById("campoLink").value.trim();
 
-  function erro(msg){ elErroForm.textContent = msg; elErroForm.classList.add("visivel"); }
+  function erro(msg){ elErroForm.textContent = msg; elErroForm.classList.add("visivel"); return null; }
 
-  if (!titulo) { erro("Preencha o título da aula."); return; }
+  if (!titulo) return erro("Preencha o título da aula.");
   let linkFinal;
   if (modoAnexo === "arquivo") {
-    if (!nomeArquivo) { erro("Informe o nome do arquivo enviado para a pasta aulas/."); return; }
+    if (!nomeArquivo) return erro("Informe o caminho do arquivo no repositório.");
     linkFinal = nomeArquivo.replace(/^\/+/, "");
   } else {
-    if (!linkExterno) { erro("Informe o link externo da apresentação."); return; }
+    if (!linkExterno) return erro("Informe o link externo da apresentação.");
     linkFinal = linkExterno;
   }
+  return {
+    id: idEmEdicao || ("aula-" + ano + "t" + trimestre + "n" + numero + "-" + Date.now()),
+    ano: ano,
+    trimestre: trimestre,
+    aula: numero,
+    titulo: titulo,
+    descricao: descricao,
+    tipo: modoAnexo,
+    link: linkFinal
+  };
+}
 
-  const idUnico = "aula-" + ano + "t" + trimestre + "n" + numero + "-" + Date.now();
-  const codigo =
-    '  {\n' +
-    '    id: "' + idUnico + '",\n' +
-    '    ano: "' + ano + '",\n' +
-    '    trimestre: ' + trimestre + ',\n' +
-    '    aula: ' + numero + ',\n' +
-    '    titulo: "' + escaparParaCodigo(titulo) + '",\n' +
-    '    descricao: "' + escaparParaCodigo(descricao) + '",\n' +
-    '    tipo: "' + (modoAnexo === "arquivo" ? "arquivo" : "link") + '",\n' +
-    '    link: "' + escaparParaCodigo(linkFinal) + '"\n' +
-    '  }';
+function mostrarResultado(conteudo){
+  elCodigoGerado.textContent = conteudo;
+  elResultado.style.display = "block";
+  elResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
 
-  document.getElementById("codigoGerado").textContent = codigo;
-  document.getElementById("resultadoGerado").style.display = "block";
-  document.getElementById("resultadoGerado").scrollIntoView({ behavior: "smooth", block: "nearest" });
+document.getElementById("botaoGerarCodigo").addEventListener("click", function(){
+  elErroForm.classList.remove("visivel");
+  const entrada = lerFormulario();
+  if (!entrada) return;
+
+  let listaNova;
+  if (idEmEdicao) {
+    listaNova = apresentacoes.map(function(a){
+      return String(a.id || a.link) === idEmEdicao ? entrada : a;
+    });
+  } else {
+    listaNova = apresentacoes.concat([entrada]);
+  }
+  mostrarResultado(gerarConteudoArquivo(listaNova));
+});
+
+elBotaoRemover.addEventListener("click", function(){
+  if (!idEmEdicao) return;
+  const item = apresentacoes.find(function(a){ return String(a.id || a.link) === idEmEdicao; });
+  if (!confirm('Remover a aula "' + (item ? item.titulo : "") + '" do painel?')) return;
+  const listaNova = apresentacoes.filter(function(a){ return String(a.id || a.link) !== idEmEdicao; });
+  mostrarResultado(gerarConteudoArquivo(listaNova));
+  mostrarToast("Código sem esta aula gerado. Copie e substitua no GitHub.", "sucesso");
 });
 
 document.getElementById("botaoCopiarCodigo").addEventListener("click", function(){
-  const texto = document.getElementById("codigoGerado").textContent;
-  function avisar(){ mostrarToast("Código copiado. Cole no apresentacoes.js do repositório.", "sucesso"); }
+  const texto = elCodigoGerado.textContent;
+  function avisar(){ mostrarToast("Arquivo copiado. Substitua o apresentacoes.js no GitHub.", "sucesso"); }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(texto).then(avisar).catch(function(){ copiarFallback(texto); avisar(); });
-  } else {
-    copiarFallback(texto); avisar();
-  }
+  } else { copiarFallback(texto); avisar(); }
 });
 function copiarFallback(texto){
   const area = document.createElement("textarea");
@@ -933,57 +919,3 @@ renderizar();
 </script>
 </body>
 </html>
-
-
-              <script>
-                              /* ============================================================
-   ARQUIVO 2 de 2: apresentacoes.js
-   Este arquivo fica na RAIZ do repositório, ao lado do index.html.
-   Ele é a fonte de dados do painel: toda aula cadastrada aqui
-   aparece no dashboard em QUALQUER dispositivo.
-
-   ESTRUTURA DO REPOSITÓRIO:
-     index.html          → o dashboard
-     apresentacoes.js    → este arquivo (cadastro das aulas)
-     aulas/              → pasta com o arquivo HTML de cada aula
-
-   COMO CADASTRAR UMA NOVA AULA:
-   1. Envie o arquivo HTML da aula para a pasta "aulas/" no GitHub.
-   2. Edite este arquivo no GitHub (ícone do lápis).
-   3. Copie o modelo abaixo, preencha os campos e cole dentro da
-      lista, antes do "];". Se já houver outra aula, coloque uma
-      vírgula depois do "}" da aula anterior.
-   4. Clique em "Commit changes". Pronto.
-
-   MODELO:
-   {
-     id: "aula-6t1n1",
-     ano: "6",                          // "6", "7", "8" ou "9"
-     trimestre: 1,                      // 1, 2 ou 3
-     aula: 1,                           // número da aula (1 a 12)
-     titulo: "Título da aula",
-     descricao: "Breve descrição do conteúdo.",
-     tipo: "arquivo",                   // "arquivo" (pasta aulas/) ou "link"
-     link: "aulas/nome-do-arquivo.html"
-   }
-   ============================================================ */
-
-window.APRESENTACOES = [
-  {
-    id: "exemplo-001",
-    ano: "6",
-    trimestre: 1,
-    aula: 1,
-    titulo: "Apresentação de exemplo",
-    descricao: "Aula de exemplo do painel. Substitua este registro pelas aulas do seu projeto, seguindo o modelo descrito no topo deste arquivo.",
-    tipo: "arquivo",
-    link: "aulas/exemplo-aula01.html"
-  }
-  /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
-];
-
-
-              </script>
-                        </body>
-                        </html>
-                    
