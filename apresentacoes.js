@@ -85,6 +85,15 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "link",
     link: "https://brunodiasef.github.io/6ANO/"
+  },  {
+    id: "aula-6t3n2-1788191590738",
+    ano: "6",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/6ºano/Conteúdo 6º ano - 3º trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
