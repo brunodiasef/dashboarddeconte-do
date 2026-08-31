@@ -64,7 +64,7 @@ window.APRESENTACOES = [
     trimestre: 3,
     aula: 2,
     titulo: "MATERIAL DE APOIO",
-    descricao: "",
+    descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
   },  {
@@ -91,7 +91,7 @@ window.APRESENTACOES = [
     trimestre: 3,
     aula: 2,
     titulo: "MATERIAL DE APOIO",
-    descricao: "",
+    descricao: "Material com conte[udo e lista de exerc[icios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/6ºano/Conteúdo 6º ano - 3º trimestre.pdf"
   }
