@@ -852,7 +852,11 @@ document.getElementById("abaLink").addEventListener("click", function(){
 
 /* gerar código do cadastro */
 function escaparParaCodigo(texto){
-  return String(texto == null ? "" : texto).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  return String(texto == null ? "" : texto)
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\r/g, "")
+    .replace(/\n/g, "\\n");
 }
 
 document.getElementById("botaoGerarCodigo").addEventListener("click", function(){
