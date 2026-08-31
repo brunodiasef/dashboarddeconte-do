@@ -41,6 +41,16 @@ window.APRESENTACOES = [
     descricao: "Aula de exemplo do painel. Substitua este registro pelas aulas do seu projeto, seguindo o modelo descrito no topo deste arquivo.",
     tipo: "arquivo",
     link: "aulas/exemplo-aula01.html"
+  },   {
+    id: "aula-9t3n3-1788174439224",
+    ano: "9",
+    trimestre: 3,
+    aula: 3,
+    titulo: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
+    descricao: "Esportes de Campo e Taco
+Práticas de Aventura na Natureza",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/9ano/"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
