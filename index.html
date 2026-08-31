@@ -555,7 +555,7 @@
           </button>
         </div>
         <div id="painelArquivo">
-          <input type="text" id="campoNomeArquivo" placeholder="Nome do arquivo. Ex.: 6ano-trim1-aula01.html">
+          <input type="text" id="campoNomeArquivo" placeholder="Caminho no repositório. Ex.: aula/3ºtri/8ºano/arquivo.pdf">
         </div>
         <div id="painelLink" style="display:none">
           <input type="text" id="campoLink" placeholder="https://exemplo.com.br/minha-aula.html">
@@ -875,7 +875,6 @@ document.getElementById("botaoGerarCodigo").addEventListener("click", function()
   let linkFinal;
   if (modoAnexo === "arquivo") {
     if (!nomeArquivo) { erro("Informe o nome do arquivo enviado para a pasta aulas/."); return; }
-    if (!/\.html?$/i.test(nomeArquivo)) { erro("O nome do arquivo deve terminar em .html"); return; }
     linkFinal = nomeArquivo.replace(/^\/+/, "");
   } else {
     if (!linkExterno) { erro("Informe o link externo da apresentação."); return; }
