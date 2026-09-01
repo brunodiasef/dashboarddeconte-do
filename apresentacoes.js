@@ -114,6 +114,16 @@ window.APRESENTACOES = [
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/2ºtri/9ºano/apostila.docx"
+  },
+  {
+    id: "aula-7t2n8-1788236108462",
+    ano: "7",
+    trimestre: 2,
+    aula: 8,
+    titulo: "Esportes Técnico-Combinatórios+Lutas do Brasil",
+    descricao: "",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/7-ano_2-tri/"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
