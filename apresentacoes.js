@@ -126,14 +126,14 @@ window.APRESENTACOES = [
     link: "https://brunodiasef.github.io/7-ano_2-tri/"
   },
   {
-    id: "aula-6t2n8-1788258612838",
+    id: "aula-6t1n1-1788258697071",
     ano: "6",
-    trimestre: 2,
-    aula: 8,
-    titulo: "Esportes de Precisão + Lutas do Brasil",
-    descricao: "",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MATERIAL DE APOIO-Esportes de Precisão + Lutas do Brasil",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
-    link: "aula/2ºtri/6ºano/2tri.html"
+    link: "aula/2ºtri/6ºano/APOSTILA.docx"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
