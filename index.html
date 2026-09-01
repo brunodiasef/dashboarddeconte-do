@@ -1,9 +1,8 @@
 <!-- ============================================================
-     index.html — versão com ORDENAÇÃO POR ANO
-     Os cards agora aparecem agrupados e ordenados:
-     9º ano primeiro, depois 8º, 7º e 6º.
-     Dentro do mesmo ano, a ordem é por trimestre e número da aula.
-     A ordem escrita no apresentacoes.js não importa mais.
+     index.html — filtros "Escolha o ano" e "Trimestre" agora em
+     MINI MENUS SUSPENSOS (dropdowns compactos), no lugar dos chips.
+     Mantém: cards editáveis (botão de lápis), progresso do
+     trimestre e gerador de código do apresentacoes.js.
      Substitua TODO o conteúdo do index.html no repositório.
      ============================================================ -->
 <!DOCTYPE html>
@@ -124,18 +123,29 @@
   .sub-titulo{font-family:var(--serif);font-style:italic;color:var(--marrom);font-size:15.5px;margin-bottom:14px}
   .descricao{font-size:14.5px;color:var(--suave);line-height:1.7;max-width:680px;margin-bottom:28px}
 
+  /* ===== FILTROS EM MENUS SUSPENSOS ===== */
   .filtros{
     background:var(--creme);border:1px solid var(--borda);border-radius:14px;
-    box-shadow:var(--sombra);padding:18px 20px;margin-bottom:24px;
-    display:flex;flex-direction:column;gap:14px;
+    box-shadow:var(--sombra);padding:16px 20px;margin-bottom:24px;
+    display:flex;gap:28px;flex-wrap:wrap;align-items:center;
   }
-  .filtro-grupo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .filtro-rotulo{font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;color:var(--marrom);min-width:100px;display:flex;align-items:center;gap:8px}
+  .filtro-grupo{display:flex;align-items:center;gap:12px}
+  .filtro-rotulo{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;
+    color:var(--marrom);display:flex;align-items:center;gap:8px;white-space:nowrap;
+  }
   .filtro-rotulo::before{content:"";width:14px;height:2px;background:var(--dourado)}
-  .chips{display:flex;gap:7px;flex-wrap:wrap}
-  .chip{border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--suave);padding:7px 16px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.18s}
-  .chip:hover{border-color:var(--marrom);color:var(--marrom);transform:translateY(-1px)}
-  .chip.ativo{background:var(--dourado);border-color:var(--dourado);color:var(--sidebar);box-shadow:0 3px 10px rgba(201,168,76,.35)}
+  .suspenso{
+    appearance:none;-webkit-appearance:none;-moz-appearance:none;
+    border:1.5px solid var(--borda-escura);background:#FBF8F1;color:var(--tinta);
+    border-radius:999px;padding:8px 36px 8px 16px;
+    font:inherit;font-size:13px;font-weight:700;cursor:pointer;outline:none;transition:.18s;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B5E3C' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;background-position:right 13px center;background-size:12px;
+    min-width:150px;
+  }
+  .suspenso:hover{border-color:var(--marrom);transform:translateY(-1px)}
+  .suspenso:focus{border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18)}
 
   .linha-contagem{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
   .linha-contagem p{font-size:13px;color:var(--suave)}
@@ -253,6 +263,9 @@
     .conteudo{padding:26px 18px 50px}
     .progresso{margin-left:0;max-width:none}
     .campo-duplo{grid-template-columns:1fr}
+    .filtros{gap:14px}
+    .filtro-grupo{width:100%;justify-content:space-between}
+    .suspenso{flex:1}
   }
 </style>
 </head>
@@ -319,27 +332,28 @@
     <div class="migalha">Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
     <h1>Educação Física</h1>
     <div class="sub-titulo">Central de apresentações interativas do 6º ao 9º ano</div>
-    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Os conteúdos são exibidos na ordem: 9º ano, 8º ano, 7º ano e 6º ano. Filtre por turma e trimestre, abra a aula desejada ou use o botão de lápis no cartão para editar e remover aulas lançadas.</p>
+    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Filtre por turma e trimestre nos menus suspensos, abra a aula desejada ou use o botão de lápis no cartão para editar e remover aulas lançadas.</p>
 
+    <!-- filtros em mini menus suspensos -->
     <div class="filtros">
       <div class="filtro-grupo">
         <span class="filtro-rotulo">Escolha o ano</span>
-        <div class="chips" id="chipsAno">
-          <button class="chip ativo" data-ano="todos">Todos</button>
-          <button class="chip" data-ano="6">6º ano</button>
-          <button class="chip" data-ano="7">7º ano</button>
-          <button class="chip" data-ano="8">8º ano</button>
-          <button class="chip" data-ano="9">9º ano</button>
-        </div>
+        <select class="suspenso" id="filtroAno" aria-label="Escolha o ano">
+          <option value="todos">Todos</option>
+          <option value="6">6º ano</option>
+          <option value="7">7º ano</option>
+          <option value="8">8º ano</option>
+          <option value="9">9º ano</option>
+        </select>
       </div>
       <div class="filtro-grupo">
         <span class="filtro-rotulo">Trimestre</span>
-        <div class="chips" id="chipsTri">
-          <button class="chip ativo" data-tri="todos">Todos</button>
-          <button class="chip" data-tri="1">1º tri</button>
-          <button class="chip" data-tri="2">2º tri</button>
-          <button class="chip" data-tri="3">3º tri</button>
-        </div>
+        <select class="suspenso" id="filtroTri" aria-label="Trimestre">
+          <option value="todos">Todos</option>
+          <option value="1">1º trimestre</option>
+          <option value="2">2º trimestre</option>
+          <option value="3">3º trimestre</option>
+        </select>
       </div>
     </div>
 
@@ -364,7 +378,7 @@
     </div>
 
     <div class="aviso">
-      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. O painel organiza sozinho a ordem de exibição: <b>9º, 8º, 7º e 6º ano</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis do cartão e substitua o arquivo no GitHub pelo código gerado.
+      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis do cartão, ajuste os dados e substitua o arquivo no GitHub pelo código gerado.
     </div>
   </main>
 
@@ -495,7 +509,7 @@
       </div>
       <div class="instrucao">
         <div class="instrucao-n">5</div>
-        <div><h4>Ordem de exibição</h4><p>O painel mostra primeiro o <b>9º ano</b>, depois <b>8º</b>, <b>7º</b> e <b>6º</b>; dentro do mesmo ano, por trimestre e número da aula. Não é preciso ordenar nada no arquivo.</p></div>
+        <div><h4>Filtros do painel</h4><p>Use os menus suspensos de <b>ano</b> e <b>trimestre</b> para localizar qualquer conteúdo em segundos.</p></div>
       </div>
     </div>
   </div>
@@ -575,25 +589,13 @@ function atualizarProgresso(){
     "<b>" + TRIMESTRE_ATUAL + "º trimestre</b> — " + aulasNoAtual + " de " + META_AULAS_POR_TRIMESTRE + " aulas";
 }
 
-/* ===== FILTROS (ano + trimestre) ===== */
+/* ===== FILTROS (menus suspensos de ano e trimestre) ===== */
 function filtrarAulas(){
-  const lista = apresentacoes.filter(function(item){
+  return apresentacoes.filter(function(item){
     const anoOk = estado.ano === "todos" || String(item.ano) === estado.ano;
     const triOk = estado.tri === "todos" || String(item.trimestre) === estado.tri;
     return anoOk && triOk;
   });
-
-  /* ORDENAÇÃO: 9º ano primeiro, depois 8º, 7º e 6º.
-     Dentro do mesmo ano: trimestre e número da aula em ordem crescente. */
-  lista.sort(function(a, b){
-    const diferencaAno = parseInt(b.ano, 10) - parseInt(a.ano, 10);
-    if (diferencaAno !== 0) return diferencaAno;
-    const diferencaTri = (parseInt(a.trimestre, 10) || 0) - (parseInt(b.trimestre, 10) || 0);
-    if (diferencaTri !== 0) return diferencaTri;
-    return (parseInt(a.aula, 10) || 0) - (parseInt(b.aula, 10) || 0);
-  });
-
-  return lista;
 }
 
 function escaparHtml(texto){
@@ -659,19 +661,15 @@ elGrade.addEventListener("click", function(ev){
   if (cartao) abrirApresentacao(cartao.dataset.id);
 });
 
-/* handlers dos filtros de ano e trimestre */
-function ligarChips(idContainer, atributo, chaveEstado){
-  document.getElementById(idContainer).addEventListener("click", function(ev){
-    const botao = ev.target.closest("[" + atributo + "]");
-    if (!botao) return;
-    this.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("ativo"); });
-    botao.classList.add("ativo");
-    estado[chaveEstado] = botao.getAttribute(atributo);
-    renderizar();
-  });
-}
-ligarChips("chipsAno", "data-ano", "ano");
-ligarChips("chipsTri", "data-tri", "tri");
+/* mudança nos menus suspensos */
+document.getElementById("filtroAno").addEventListener("change", function(){
+  estado.ano = this.value;
+  renderizar();
+});
+document.getElementById("filtroTri").addEventListener("change", function(){
+  estado.tri = this.value;
+  renderizar();
+});
 
 /* sidebar mobile */
 document.getElementById("botaoMenu").addEventListener("click", function(){
