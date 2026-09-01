@@ -40,7 +40,7 @@ window.APRESENTACOES = [
     ano: "9",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO",
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
@@ -50,7 +50,7 @@ window.APRESENTACOES = [
     ano: "8",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO",
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
@@ -70,7 +70,7 @@ window.APRESENTACOES = [
     ano: "6",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO",
+    titulo: "MATERIAL DE APOIO - 3ºTRIMESTRE",
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/6ºano/Conteúdo 6º ano - 3º trimestre.pdf"
@@ -80,7 +80,7 @@ window.APRESENTACOES = [
     ano: "7",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO",
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/3ºtri/7ºano/Conteúdo 7º ano - 3º trimestre.pdf"
@@ -110,7 +110,7 @@ window.APRESENTACOES = [
     ano: "9",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO",
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
     descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
     tipo: "arquivo",
     link: "aula/2ºtri/9ºano/apostila.docx"
