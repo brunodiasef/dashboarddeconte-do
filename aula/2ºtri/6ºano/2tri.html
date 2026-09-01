@@ -62,7 +62,7 @@ img{display:block;max-width:100%}
 .modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2rem;margin-bottom:2.2rem}
 .module-card{background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px var(--shadow);transition:transform .3s,box-shadow .3s;cursor:pointer;text-align:left;border:none;padding:0}
 .module-card:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(44,24,16,.22)}
-.module-card img{width:100%;height:230px;object-fit:cover}
+.module-card img{width:100%;height:230px;object-fit:cover;background:var(--bg-light)}
 .module-content{padding:1.5rem}
 .module-number{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.4rem;font-weight:700}
 .module-title{font-size:1.5rem;color:var(--brown-dark);margin-bottom:.5rem}
@@ -92,7 +92,7 @@ img{display:block;max-width:100%}
 /* ===== BIG CARDS ===== */
 .big-card{background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 8px 25px var(--shadow);transition:all .3s;margin-bottom:1.6rem;display:grid;grid-template-columns:300px 1fr}
 .big-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(44,24,16,.2)}
-.big-card img{width:100%;height:100%;min-height:230px;object-fit:cover}
+.big-card img{width:100%;height:100%;min-height:230px;object-fit:cover;background:var(--bg-light)}
 .big-body{padding:1.7rem}
 .big-name{font-size:1.5rem;color:var(--brown-dark);margin-bottom:.2rem}
 .big-origin{font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dark);font-weight:700;margin-bottom:.7rem}
@@ -148,13 +148,15 @@ img{display:block;max-width:100%}
 /* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;background:rgba(44,24,16,.8);display:none;align-items:center;justify-content:center;z-index:2000;padding:1.5rem}
 .modal-overlay.show{display:flex;animation:fadeIn .3s ease}
-.modal-content{background:var(--white);border-radius:15px;max-width:640px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:slideUp .3s ease}
+.modal-content{background:var(--white);border-radius:15px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .3s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 .modal-close{position:absolute;top:.8rem;right:.8rem;background:var(--white);border:none;font-size:1.2rem;cursor:pointer;color:var(--text-light);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 2px 8px var(--shadow);z-index:2}
 .modal-close:hover{background:var(--bg-cream);color:var(--brown-dark)}
-.modal-img{width:100%;height:260px;object-fit:cover;border-radius:15px 15px 0 0}
+.modal-img{width:100%;height:260px;object-fit:cover;border-radius:15px 15px 0 0;background:var(--bg-light)}
+.modal-video{width:100%;height:440px;max-height:62vh;object-fit:contain;background:#1a1410;border-radius:15px 15px 0 0;display:block}
 .modal-body{padding:1.7rem}
 .modal-title{font-size:1.6rem;color:var(--brown-dark);margin-bottom:.7rem}
+.video-tag{display:inline-block;background:var(--brown-dark);color:var(--gold);font-size:.66rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:.3rem .8rem;border-radius:12px;margin-bottom:.7rem}
 /* ===== NAV ===== */
 .nav-buttons{display:flex;justify-content:space-between;gap:1rem;margin-top:2.2rem;padding-top:1.5rem;border-top:2px solid var(--bg-cream);flex-wrap:wrap}
 .nav-btn{background:var(--white);border:2px solid var(--gold);color:var(--brown-dark);padding:.85rem 1.6rem;border-radius:25px;cursor:pointer;font-weight:700;transition:all .3s;font-size:.9rem}
@@ -192,6 +194,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
   .question-text{font-size:1rem}
   .t-row{grid-template-columns:1fr}
   .t-cell:first-child{border-right:none;border-bottom:1px solid var(--bg-cream)}
+  .modal-video{height:380px}
 }
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg-cream)}
@@ -238,7 +241,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
           <p class="welcome-intro">Neste trimestre vamos conhecer modalidades esportivas em que o objetivo é acertar um alvo com exatidão e controle, além de explorar as lutas que fazem parte da cultura e da história do Brasil, com seus valores de respeito, disciplina e superação.</p>
           <div class="modules-grid">
             <button class="module-card" onclick="goToLesson(1)">
-              <img src="https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b75faba2-1cf4-4be0-8559-c49e3fd1bed6.png" alt="Pintura realista de um arqueiro mirando com arco e flecha">
+              <img id="pic-w1" alt="Arqueiro mirando com arco e flecha">
               <div class="module-content">
                 <div class="module-number">Módulo 1</div>
                 <h3 class="module-title">Esportes de Precisão</h3>
@@ -246,7 +249,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
               </div>
             </button>
             <button class="module-card" onclick="goToLesson(5)">
-              <img src="https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/17202606a-ae65-45e5-9901-ee2e4183c8a6.png" alt="Pintura realista de roda de capoeira com berimbau">
+              <img id="pic-w2" alt="Roda de capoeira com berimbau">
               <div class="module-content">
                 <div class="module-number">Módulo 2</div>
                 <h3 class="module-title">Lutas do Brasil</h3>
@@ -266,7 +269,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
             <h2 class="cover-title">Esportes de Precisão</h2>
             <div class="cover-sub">Precisão • Controle • Concentração</div>
           </div>
-          <img class="cover-img" src="https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b75faba2-1cf4-4be0-8559-c49e3fd1bed6.png" alt="Arqueiro mirando no alvo, pintura realista">
+          <img id="pic-c1" class="cover-img" alt="Arqueiro mirando no alvo">
         </div>
         <div class="section-header">
           <span class="badge">Aula 1</span>
@@ -358,7 +361,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
             <h2 class="cover-title">Lutas do Brasil</h2>
             <div class="cover-sub">Cultura • Tradição • Respeito</div>
           </div>
-          <img class="cover-img" src="https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/17202606a-ae65-45e5-9901-ee2e4183c8a6.png" alt="Roda de capoeira, pintura realista">
+          <img id="pic-c2" class="cover-img" alt="Roda de capoeira">
         </div>
         <div class="section-header">
           <span class="badge">Aula 5</span>
@@ -498,7 +501,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-content" role="dialog" aria-modal="true">
     <button class="modal-close" onclick="closeModal()" aria-label="Fechar">✕</button>
-    <img class="modal-img" id="modalImg" src="" alt="">
+    <div id="modalMedia"></div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
@@ -510,8 +513,14 @@ textarea:focus{outline:none;border-color:var(--gold)}
 </div>
 
 <script>
-/* ================= IMAGENS ================= */
-var IMG = {
+/* =====================================================================
+   SISTEMA DE IMAGENS LOCAIS COM FALLBACK AUTOMÁTICO
+   - O arquivo procura primeiro a imagem LOCAL na mesma pasta:
+       arqueiro, capoeira, arco, bocha, boliche, golfe, tiro, sinuca,
+       dardos, jiu, judo   (extensões aceitas: .png .jpg .jpeg .webp)
+   - Se NÃO existir, usa automaticamente a ilustração ONLINE (não quebra).
+   ===================================================================== */
+var ONLINE = {
   arqueiro:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b75faba2-1cf4-4be0-8559-c49e3fd1bed6.png",
   capoeira:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/17202606a-ae65-45e5-9901-ee2e4183c8a6.png",
   arco:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/13a826fe8-40d1-4923-8706-430389bd074f.png",
@@ -524,16 +533,47 @@ var IMG = {
   jiu:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1cee5153b-af4f-4ae9-89fa-a1faeb7ae94b.png",
   judo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b29fa921-fd2d-4b4b-9efa-03283c7956f0.png"
 };
+var EXT = ["png","jpg","jpeg","webp"];
+
+function srcList(key){
+  var list = [];
+  for(var e=0;e<EXT.length;e++){ list.push(key+"."+EXT[e]); }
+  list.push(ONLINE[key]);
+  return list;
+}
+function imgFallback(img){
+  var list = (img.getAttribute("data-srcs")||"").split("|");
+  var i = parseInt(img.getAttribute("data-idx")||"0",10)+1;
+  if(i < list.length){ img.setAttribute("data-idx",i); img.src=list[i]; }
+  else { img.onerror=null; }
+}
+function picTag(key,alt,cls,lazy){
+  var list = srcList(key);
+  return '<img class="'+cls+'" alt="'+alt+'" src="'+list[0]+'" data-srcs="'+list.join('|')+'" data-idx="0" onerror="imgFallback(this)"'+(lazy?' loading="lazy"':'')+'>';
+}
+function applyPic(el,key){
+  if(!el) return;
+  var list = srcList(key);
+  el.setAttribute("data-srcs",list.join("|"));
+  el.setAttribute("data-idx","0");
+  el.setAttribute("onerror","imgFallback(this)");
+  el.src = list[0];
+}
+function videoFallback(v){
+  var tmp = document.createElement("div");
+  tmp.innerHTML = picTag("capoeira","Capoeira ilustração","modal-img",false);
+  v.parentNode.replaceChild(tmp.firstChild,v);
+}
 
 /* ================= DADOS ================= */
 var SPORTS = [
-  {key:"arco",nome:"Arco e Flecha",origem:"Esporte Olímpico",img:IMG.arco,alt:"Alvo de arco e flecha com flechas no centro",feats:["Cada competidor tem um número definido de flechas por rodada","O alvo possui anéis com pontuação de 1 a 10 pontos","Vence quem somar mais pontos ao final das rodadas"],regras:["Cada competidor tem um número definido de flechas por rodada.","O alvo possui anéis com pontuação que varia conforme a proximidade do centro (de 1 a 10 pontos).","Vence quem somar mais pontos ao final das rodadas."]},
-  {key:"bocha",nome:"Bocha",origem:"Precisão e estratégia",img:IMG.bocha,alt:"Bolas de bocha próximas do bolim branco",feats:["Lançar as bolas o mais perto possível do bolim","Pode ser jogada individualmente ou em equipes","Exige controle de força e percepção espacial"],regras:["O objetivo é deixar as bolas o mais próximo possível da bola-alvo (bolim).","Pontua quem deixar mais bolas próximas do bolim.","Exige controle de força e leitura do terreno."]},
-  {key:"boliche",nome:"Boliche",origem:"Pista e pinos",img:IMG.boliche,alt:"Bola de boliche diante de dez pinos",feats:["O objetivo é derrubar os 10 pinos ao final da pista","Strike: todos os pinos caem na primeira tentativa","Spare: todos os pinos caem na segunda tentativa"],regras:["O objetivo é derrubar os 10 pinos ao final da pista.","O strike acontece quando todos os pinos caem na primeira tentativa.","O spare ocorre quando derruba todos na segunda tentativa."]},
-  {key:"golfe",nome:"Golfe",origem:"Campo e tacadas",img:IMG.golfe,alt:"Golfista executando tacada em campo",feats:["Colocar a bola no buraco com o menor número de tacadas","Cada buraco tem um par (número ideal de tacadas)","Existem penalidades por bolas fora dos limites"],regras:["O jogador deve colocar a bola no buraco com o menor número de tacadas possível.","Cada buraco tem um par, que indica o número ideal de tacadas.","Existem penalidades por bolas fora dos limites."]},
-  {key:"tiro",nome:"Tiro Esportivo",origem:"Esporte Olímpico",img:IMG.tiro,alt:"Atirador esportivo mirando em alvo",feats:["Disparos de precisão contra alvos pontuados","Exige postura, respiração e controle emocional","Quanto mais perto do centro, maior a pontuação"],regras:["O atleta realiza disparos contra um alvo com anéis de pontuação.","Vence quem somar mais pontos com os disparos.","É obrigatório o uso de equipamentos de proteção e supervisão."]},
-  {key:"sinuca",nome:"Sinuca / Bilhar",origem:"Taco e bolas",img:IMG.sinuca,alt:"Mesa de bilhar com bolas e taco",feats:["Usar o taco para conduzir a bola branca até as demais","Exige cálculo de ângulos e controle de força","Muito praticada como lazer e competição"],regras:["O jogador usa o taco para mover a bola branca e encaçapar as demais.","Cada bola tem uma pontuação conforme a modalidade.","Erros e faltas dão vantagem ao adversário."]},
-  {key:"dardos",nome:"Dardos",origem:"Alvo setorizado",img:IMG.dardos,alt:"Três dardos acertando o alvo",feats:["O alvo tem setores que variam de pontuação","O jogo clássico é reduzir de 501 pontos a zero","É necessário fechar exatamente com zero"],regras:["O alvo tem setores que variam de pontuação.","O jogo clássico é reduzir de 501 pontos a zero.","É necessário fechar exatamente com zero."]}
+  {key:"arco",nome:"Arco e Flecha",origem:"Esporte Olímpico",alt:"Alvo de arco e flecha com flechas no centro",feats:["Cada competidor tem um número definido de flechas por rodada","O alvo possui anéis com pontuação de 1 a 10 pontos","Vence quem somar mais pontos ao final das rodadas"],regras:["Cada competidor tem um número definido de flechas por rodada.","O alvo possui anéis com pontuação que varia conforme a proximidade do centro (de 1 a 10 pontos).","Vence quem somar mais pontos ao final das rodadas."]},
+  {key:"bocha",nome:"Bocha",origem:"Precisão e estratégia",alt:"Bolas de bocha próximas do bolim branco",feats:["Lançar as bolas o mais perto possível do bolim","Pode ser jogada individualmente ou em equipes","Exige controle de força e percepção espacial"],regras:["O objetivo é deixar as bolas o mais próximo possível da bola-alvo (bolim).","Pontua quem deixar mais bolas próximas do bolim.","Exige controle de força e leitura do terreno."]},
+  {key:"boliche",nome:"Boliche",origem:"Pista e pinos",alt:"Bola de boliche diante de dez pinos",feats:["O objetivo é derrubar os 10 pinos ao final da pista","Strike: todos os pinos caem na primeira tentativa","Spare: todos os pinos caem na segunda tentativa"],regras:["O objetivo é derrubar os 10 pinos ao final da pista.","O strike acontece quando todos os pinos caem na primeira tentativa.","O spare ocorre quando derruba todos na segunda tentativa."]},
+  {key:"golfe",nome:"Golfe",origem:"Campo e tacadas",alt:"Golfista executando tacada em campo",feats:["Colocar a bola no buraco com o menor número de tacadas","Cada buraco tem um par (número ideal de tacadas)","Existem penalidades por bolas fora dos limites"],regras:["O jogador deve colocar a bola no buraco com o menor número de tacadas possível.","Cada buraco tem um par, que indica o número ideal de tacadas.","Existem penalidades por bolas fora dos limites."]},
+  {key:"tiro",nome:"Tiro Esportivo",origem:"Esporte Olímpico",alt:"Atirador esportivo mirando em alvo",feats:["Disparos de precisão contra alvos pontuados","Exige postura, respiração e controle emocional","Quanto mais perto do centro, maior a pontuação"],regras:["O atleta realiza disparos contra um alvo com anéis de pontuação.","Vence quem somar mais pontos com os disparos.","É obrigatório o uso de equipamentos de proteção e supervisão."]},
+  {key:"sinuca",nome:"Sinuca / Bilhar",origem:"Taco e bolas",alt:"Mesa de bilhar com bolas e taco",feats:["Usar o taco para conduzir a bola branca até as demais","Exige cálculo de ângulos e controle de força","Muito praticada como lazer e competição"],regras:["O jogador usa o taco para mover a bola branca e encaçapar as demais.","Cada bola tem uma pontuação conforme a modalidade.","Erros e faltas dão vantagem ao adversário."]},
+  {key:"dardos",nome:"Dardos",origem:"Alvo setorizado",alt:"Três dardos acertando o alvo",feats:["O alvo tem setores que variam de pontuação","O jogo clássico é reduzir de 501 pontos a zero","É necessário fechar exatamente com zero"],regras:["O alvo tem setores que variam de pontuação.","O jogo clássico é reduzir de 501 pontos a zero.","É necessário fechar exatamente com zero."]}
 ];
 
 var FUNDAMENTOS = [
@@ -545,9 +585,9 @@ var FUNDAMENTOS = [
 ];
 
 var LUTAS = [
-  {key:"capoeira",nome:"Capoeira",origem:"Brasil (influência africana)",img:IMG.capoeira,alt:"Capoeiristas jogando em roda com berimbau",feats:["Arte marcial que combina dança, acrobacias e música","Criada no Brasil com influência africana","Praticada em roda, ao som do berimbau"],det:"A capoeira é uma expressão cultural brasileira que mistura luta, dança, música e acrobacia. Nasceu como forma de resistência dos africanos e hoje é patrimônio cultural do Brasil."},
-  {key:"jiu",nome:"Jiu-Jitsu",origem:"Japão / Brasil",img:IMG.jiu,alt:"Praticantes de jiu-jitsu em técnica de chão",feats:["Originário do Japão, foi aprimorado no Brasil","Conhecido por suas técnicas de chão","Usa imobilizações e finalizações"],det:"O jiu-jitsu é originário do Japão, mas foi aprimorado no Brasil, onde ganhou fama mundial por suas eficientes técnicas de chão."},
-  {key:"judo",nome:"Judô",origem:"Japão",img:IMG.judo,alt:"Judocas executando projeção no tatame",feats:["Arte marcial milenar de origem japonesa","Utiliza projeções e imobilizações","Enfatiza o respeito e a disciplina"],det:"O judô é uma arte marcial milenar de origem japonesa. Utiliza projeções e imobilizações e enfatiza o respeito e a disciplina. É esporte olímpico."}
+  {key:"capoeira",nome:"Capoeira",origem:"Brasil (influência africana)",alt:"Capoeiristas jogando em roda com berimbau",video:"capoeira.mp4",feats:["Arte marcial que combina dança, acrobacias e música","Criada no Brasil com influência africana","Praticada em roda, ao som do berimbau"],det:"A capoeira é uma expressão cultural brasileira que mistura luta, dança, música e acrobacia. Nasceu como forma de resistência dos africanos e hoje é patrimônio cultural do Brasil. Assista ao vídeo e observe a ginga, os golpes e a movimentação do capoeirista."},
+  {key:"jiu",nome:"Jiu-Jitsu",origem:"Japão / Brasil",alt:"Praticantes de jiu-jitsu em técnica de chão",feats:["Originário do Japão, foi aprimorado no Brasil","Conhecido por suas técnicas de chão","Usa imobilizações e finalizações"],det:"O jiu-jitsu é originário do Japão, mas foi aprimorado no Brasil, onde ganhou fama mundial por suas eficientes técnicas de chão."},
+  {key:"judo",nome:"Judô",origem:"Japão",alt:"Judocas executando projeção no tatame",feats:["Arte marcial milenar de origem japonesa","Utiliza projeções e imobilizações","Enfatiza o respeito e a disciplina"],det:"O judô é uma arte marcial milenar de origem japonesa. Utiliza projeções e imobilizações e enfatiza o respeito e a disciplina. É esporte olímpico."}
 ];
 
 var BENEFICIOS = [
@@ -647,7 +687,7 @@ function renderSports(){
   var h="";
   for(var i=0;i<SPORTS.length;i++){
     var s=SPORTS[i];
-    h+='<div class="big-card"><img src="'+s.img+'" alt="'+s.alt+'" loading="lazy">'
+    h+='<div class="big-card">'+picTag(s.key,s.alt,"",true)
       +'<div class="big-body"><h3 class="big-name">'+s.nome+'</h3><div class="big-origin">'+s.origem+'</div>'
       +'<ul class="feat-list">';
     for(var f=0;f<s.feats.length;f++){h+="<li>"+s.feats[f]+"</li>";}
@@ -660,7 +700,7 @@ function renderFights(){
   var h="";
   for(var i=0;i<LUTAS.length;i++){
     var l=LUTAS[i];
-    h+='<div class="big-card"><img src="'+l.img+'" alt="'+l.alt+'" loading="lazy">'
+    h+='<div class="big-card">'+picTag(l.key,l.alt,"",true)
       +'<div class="big-body"><h3 class="big-name">'+l.nome+'</h3><div class="big-origin">Origem: '+l.origem+'</div>'
       +'<ul class="feat-list">';
     for(var f=0;f<l.feats.length;f++){h+="<li>"+l.feats[f]+"</li>";}
@@ -701,33 +741,42 @@ function renderBenefits(){
 }
 
 /* ================= MODAL ================= */
-function openModal(img,alt,bodyHtml){
-  document.getElementById("modalImg").src=img;
-  document.getElementById("modalImg").alt=alt;
+function openModal(mediaHtml,bodyHtml){
+  document.getElementById("modalMedia").innerHTML=mediaHtml;
   document.getElementById("modalBody").innerHTML=bodyHtml;
   document.getElementById("modalOverlay").classList.add("show");
   document.body.style.overflow="hidden";
 }
 function closeModal(){
   document.getElementById("modalOverlay").classList.remove("show");
+  document.getElementById("modalMedia").innerHTML="";
   document.body.style.overflow="";
 }
 function openSport(i){
   var s=SPORTS[i];
+  var media=picTag(s.key,s.alt,"modal-img",false);
   var b='<h2 class="modal-title">'+s.nome+'</h2><div class="big-origin">'+s.origem+'</div><p class="card-text" style="margin:.6rem 0"><strong>Regras básicas:</strong></p><ul class="feat-list">';
   for(var r=0;r<s.regras.length;r++){b+="<li>"+s.regras[r]+"</li>";}
   b+="</ul>";
-  openModal(s.img,s.alt,b);
+  openModal(media,b);
 }
 function openSportByKey(key){
   for(var i=0;i<SPORTS.length;i++){if(SPORTS[i].key===key){openSport(i);return;}}
 }
 function openFight(i){
   var l=LUTAS[i];
-  var b='<h2 class="modal-title">'+l.nome+'</h2><div class="big-origin">Origem: '+l.origem+'</div><p class="card-text" style="margin:.8rem 0">'+l.det+'</p><ul class="feat-list">';
+  var media;
+  if(l.video){
+    media='<video class="modal-video" src="'+l.video+'" controls autoplay muted loop playsinline preload="metadata" onerror="videoFallback(this)"></video>';
+  }else{
+    media=picTag(l.key,l.alt,"modal-img",false);
+  }
+  var b='<h2 class="modal-title">'+l.nome+'</h2>'
+    +(l.video?'<span class="video-tag">Vídeo • '+l.nome+' em movimento</span>':'')
+    +'<div class="big-origin">Origem: '+l.origem+'</div><p class="card-text" style="margin:.8rem 0">'+l.det+'</p><ul class="feat-list">';
   for(var f=0;f<l.feats.length;f++){b+="<li>"+l.feats[f]+"</li>";}
   b+="</ul>";
-  openModal(l.img,l.alt,b);
+  openModal(media,b);
 }
 document.getElementById("modalOverlay").addEventListener("click",function(e){
   if(e.target===this){closeModal();}
@@ -855,6 +904,10 @@ document.addEventListener("keydown",function(e){
 });
 
 /* ================= INICIALIZAÇÃO ================= */
+applyPic(document.getElementById("pic-w1"),"arqueiro");
+applyPic(document.getElementById("pic-w2"),"capoeira");
+applyPic(document.getElementById("pic-c1"),"arqueiro");
+applyPic(document.getElementById("pic-c2"),"capoeira");
 renderSports();
 renderFights();
 renderFund();
