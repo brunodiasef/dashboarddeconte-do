@@ -144,6 +144,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/8ºano/apostila.docx"
+  },
+  {
+    id: "aula-7t2n2-1788258999882",
+    ano: "7",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO -",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/7ºano/APOSTILA.docx"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
