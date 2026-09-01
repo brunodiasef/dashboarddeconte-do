@@ -140,7 +140,7 @@ window.APRESENTACOES = [
     ano: "8",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO-",
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/8ºano/apostila.docx"
@@ -150,7 +150,7 @@ window.APRESENTACOES = [
     ano: "7",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO -",
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/7ºano/APOSTILA.docx"
