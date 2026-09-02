@@ -1,8 +1,11 @@
 <!-- ============================================================
-     index.html — filtros "Escolha o ano" e "Trimestre" agora são
-     MENUS SUSPENSOS (select), no lugar dos chips.
-     Mantém: ordenação 9º → 8º → 7º → 6º, cards editáveis (lápis),
-     progresso do trimestre e gerador do apresentacoes.js.
+     index.html — versão com CARDS POR ANO e SUBCARDS POR TRIMESTRE
+     Parte inicial do painel agora mostra:
+       [9º ano] [8º ano] [7º ano] [6º ano]  (nesta ordem)
+     e dentro de cada card de ano, 3 subcards:
+       [1º TRI] [2º TRI] [3º TRI]
+     com a lista de aulas de cada período (Abrir + editar).
+     Os menus suspensos continuam funcionando como filtro.
      Substitua TODO o conteúdo do index.html no repositório.
      ============================================================ -->
 <!DOCTYPE html>
@@ -86,6 +89,8 @@
   .btn-ouro:hover{background:var(--dourado-escuro);transform:translateY(-1px)}
   .btn-marrom{background:transparent;color:#E8DFD0;border:1.5px solid var(--marrom);padding:10px 18px;font-size:13px}
   .btn-marrom:hover{background:var(--marrom);color:#fff}
+  .btn-mini{padding:7px 13px;font-size:11px}
+  .btn-mini svg{width:12px;height:12px}
 
   /* ===== ÁREA PRINCIPAL ===== */
   .area-principal{margin-left:252px;display:flex;flex-direction:column;min-height:100vh}
@@ -121,19 +126,16 @@
   .migalha::after{content:"";height:1px;width:60px;background:var(--dourado)}
   .conteudo h1{font-size:clamp(30px,4vw,44px);font-weight:700;color:var(--tinta);margin:10px 0 4px;letter-spacing:.3px}
   .sub-titulo{font-family:var(--serif);font-style:italic;color:var(--marrom);font-size:15.5px;margin-bottom:14px}
-  .descricao{font-size:14.5px;color:var(--suave);line-height:1.7;max-width:680px;margin-bottom:28px}
+  .descricao{font-size:14.5px;color:var(--suave);line-height:1.7;max-width:700px;margin-bottom:28px}
 
-  /* ===== FILTROS EM MENU SUSPENSO ===== */
+  /* ===== FILTROS SUSPENSOS ===== */
   .filtros{
     background:var(--creme);border:1px solid var(--borda);border-radius:14px;
     box-shadow:var(--sombra);padding:18px 20px;margin-bottom:24px;
     display:flex;gap:22px;flex-wrap:wrap;align-items:flex-end;
   }
   .filtro-grupo{display:flex;flex-direction:column;gap:8px;min-width:210px;flex:1;max-width:300px}
-  .filtro-rotulo{
-    font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;
-    color:var(--marrom);display:flex;align-items:center;gap:8px;
-  }
+  .filtro-rotulo{font-size:10.5px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;color:var(--marrom);display:flex;align-items:center;gap:8px}
   .filtro-rotulo::before{content:"";width:14px;height:2px;background:var(--dourado)}
   .select-filtro{
     appearance:none;-webkit-appearance:none;-moz-appearance:none;
@@ -147,49 +149,72 @@
   .select-filtro:hover{border-color:var(--marrom)}
   .select-filtro:focus{border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18)}
 
-  .linha-contagem{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .linha-contagem{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
   .linha-contagem p{font-size:13px;color:var(--suave)}
   .linha-contagem p b{color:var(--verde);font-size:15px}
 
-  /* ===== CARDS ===== */
-  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px}
-  .cartao{
-    background:var(--creme);border:1px solid var(--borda);border-radius:14px;
-    box-shadow:var(--sombra);display:flex;flex-direction:column;position:relative;
-    padding:20px 19px 18px;gap:9px;overflow:hidden;
-    transition:transform .22s,box-shadow .22s;animation:surgir .45s ease both;
+  /* ===== CARDS POR ANO ===== */
+  .cartao-ano{
+    background:var(--creme);border:1px solid var(--borda);border-radius:16px;
+    box-shadow:var(--sombra);overflow:hidden;margin-bottom:26px;
+    animation:surgir .45s ease both;
   }
-  .cartao::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--dourado);opacity:.9}
-  .cartao:hover{transform:translateY(-5px);box-shadow:var(--sombra-forte)}
   @keyframes surgir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .cartao-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .etiqueta{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:999px;color:#F5F0E8}
-  .et-6{background:var(--azul)}
-  .et-7{background:var(--verde)}
-  .et-8{background:var(--marrom)}
-  .et-9{background:var(--dourado);color:var(--sidebar)}
-  .meta-tri{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--verde);margin-left:auto}
-  .cartao h3{font-size:17.5px;line-height:1.35;font-weight:700;margin-top:3px}
-  .cartao p{font-size:12.5px;color:var(--suave);line-height:1.6;flex:1}
-  .cartao-rodape{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:12px;border-top:1px dashed var(--borda-escura)}
-  .tipo-aula{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--azul);display:inline-flex;align-items:center;gap:6px}
-  .tipo-aula svg{width:13px;height:13px}
-  .acoes-cartao{display:flex;gap:7px;align-items:center}
-  .btn-abrir{padding:9px 16px;font-size:12px}
-  .btn-editar{
-    width:34px;height:34px;border-radius:50%;cursor:pointer;
-    background:transparent;border:1.5px solid var(--marrom);color:var(--marrom);
+  .ano-cab{
+    display:flex;align-items:center;gap:12px;padding:18px 22px;
+    border-bottom:1px solid var(--borda);
+    background:linear-gradient(180deg,#FBF8F1,var(--creme));
+  }
+  .ano-selo{width:15px;height:15px;border-radius:5px;flex:none;box-shadow:0 0 0 3px rgba(44,36,22,.06)}
+  .selo-9{background:var(--dourado)}
+  .selo-8{background:var(--marrom)}
+  .selo-7{background:var(--verde)}
+  .selo-6{background:var(--azul)}
+  .ano-cab h2{font-size:22px;font-weight:700}
+  .ano-qtd{
+    margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--suave);background:#EFE7D6;padding:6px 13px;border-radius:999px;
+  }
+  .tri-grade{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:16px;padding:18px 22px 22px;
+  }
+  .cartao-tri{
+    background:#FBF8F1;border:1px solid var(--borda);border-radius:12px;
+    padding:14px;display:flex;flex-direction:column;gap:11px;
+  }
+  .cartao-tri header{
+    display:flex;align-items:center;justify-content:space-between;
+    border-bottom:1px dashed var(--borda-escura);padding-bottom:9px;
+  }
+  .cartao-tri h3{font-size:14.5px;color:var(--verde);letter-spacing:.4px}
+  .tri-qtd{font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--suave)}
+  .lista-aulas{display:flex;flex-direction:column;gap:8px}
+  .item-aula{
+    background:var(--creme);border:1px solid var(--borda);border-radius:10px;
+    padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    transition:.18s;
+  }
+  .item-aula:hover{border-color:var(--dourado);box-shadow:0 4px 12px rgba(44,36,22,.08)}
+  .item-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .item-num{font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--marrom)}
+  .item-info strong{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+  .item-acoes{display:flex;gap:6px;align-items:center;flex:none}
+  .btn-editar-mini{
+    width:30px;height:30px;border-radius:50%;cursor:pointer;
+    border:1.5px solid var(--marrom);background:transparent;color:var(--marrom);
     display:grid;place-items:center;transition:.2s;
   }
-  .btn-editar svg{width:14px;height:14px}
-  .btn-editar:hover{background:var(--marrom);color:#F5F0E8}
+  .btn-editar-mini svg{width:12px;height:12px}
+  .btn-editar-mini:hover{background:var(--marrom);color:#F5F0E8}
+  .sem-aulas{font-size:12px;color:var(--suave);font-style:italic;padding:4px 2px}
 
   .vazio{display:none;text-align:center;padding:56px 24px;background:var(--creme);border:2px dashed var(--borda-escura);border-radius:14px}
   .vazio svg{width:44px;height:44px;margin:0 auto 14px;color:var(--marrom)}
   .vazio h3{font-size:19px;margin-bottom:6px}
   .vazio p{font-size:13.5px;color:var(--suave);max-width:420px;margin:0 auto 20px;line-height:1.6}
 
-  .aviso{margin-top:26px;background:var(--creme);border:1px solid var(--borda);border-left:4px solid var(--dourado);border-radius:10px;padding:15px 18px;font-size:13px;color:var(--suave);line-height:1.65}
+  .aviso{margin-top:8px;background:var(--creme);border:1px solid var(--borda);border-left:4px solid var(--dourado);border-radius:10px;padding:15px 18px;font-size:13px;color:var(--suave);line-height:1.65}
   .aviso b{color:var(--tinta)}
   .aviso code{background:#EFE7D6;padding:1px 7px;border-radius:5px;font-size:11.5px;font-weight:700;color:var(--marrom-escuro)}
 
@@ -330,9 +355,9 @@
     <div class="migalha">Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
     <h1>Educação Física</h1>
     <div class="sub-titulo">Central de apresentações interativas do 6º ao 9º ano</div>
-    <p class="descricao">Central de apresentações interativas para o 6º, 7º, 8º e 9º ano, organizada por trimestre. Os conteúdos são exibidos na ordem: 9º ano, 8º ano, 7º ano e 6º ano. Use os menus suspensos para filtrar por turma e trimestre, abra a aula desejada ou use o botão de lápis no cartão para editar e remover aulas lançadas.</p>
+    <p class="descricao">Conteúdos organizados em cards por ano — 9º, 8º, 7º e 6º — com subcards por trimestre. Abra a aula desejada ou use o botão de lápis para editar e remover aulas lançadas. Os menus suspensos filtram o que é exibido.</p>
 
-    <!-- FILTROS EM MENU SUSPENSO -->
+    <!-- FILTROS SUSPENSOS -->
     <div class="filtros">
       <div class="filtro-grupo">
         <label class="filtro-rotulo" for="selectAno">Escolha o ano</label>
@@ -356,14 +381,15 @@
     </div>
 
     <div class="linha-contagem" id="conteudos">
-      <p>Exibindo <b id="contadorVisivel">0</b> apresentação(ões) com os filtros atuais.</p>
+      <p>Exibindo <b id="contadorVisivel">0</b> apresentação(ões) nos cards abaixo.</p>
       <button class="btn btn-ouro" id="botaoNovaAulaConteudo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
         Nova aula
       </button>
     </div>
 
-    <div class="grade" id="gradeAulas"></div>
+    <!-- CARDS POR ANO COM SUBCARDS POR TRIMESTRE -->
+    <div id="gradeAnos"></div>
 
     <div class="vazio" id="estadoVazio">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -376,7 +402,7 @@
     </div>
 
     <div class="aviso">
-      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. O painel organiza sozinho a ordem de exibição: <b>9º, 8º, 7º e 6º ano</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis do cartão e substitua o arquivo no GitHub pelo código gerado.
+      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis dela e substitua o arquivo no GitHub pelo código gerado.
     </div>
   </main>
 
@@ -495,7 +521,7 @@
       </div>
       <div class="instrucao">
         <div class="instrucao-n">2</div>
-        <div><h4>Editar aula lançada</h4><p>No cartão da aula, clique no botão de <b>lápis</b>. O formulário abre preenchido: ajuste o que quiser e gere o código novamente.</p></div>
+        <div><h4>Editar aula lançada</h4><p>No subcard do trimestre, clique no botão de <b>lápis</b> da aula. O formulário abre preenchido: ajuste o que quiser e gere o código novamente.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">3</div>
@@ -507,7 +533,7 @@
       </div>
       <div class="instrucao">
         <div class="instrucao-n">5</div>
-        <div><h4>Filtros e ordem</h4><p>Use os menus suspensos de <b>ano</b> e <b>trimestre</b> para localizar conteúdos. A exibição padrão é 9º, 8º, 7º e 6º ano.</p></div>
+        <div><h4>Organização da tela</h4><p>O painel mostra um card por ano (9º, 8º, 7º e 6º) com subcards de <b>1º, 2º e 3º trimestre</b>; cada aula aparece dentro do seu período.</p></div>
       </div>
     </div>
   </div>
@@ -521,6 +547,8 @@
 /* ===== CONFIGURAÇÃO ===== */
 const TRIMESTRE_ATUAL = 3;
 const META_AULAS_POR_TRIMESTRE = 12;
+const ORDEM_ANOS = [9, 8, 7, 6];
+const ORDEM_TRIS = [1, 2, 3];
 
 const ICONES = {
   seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg>',
@@ -535,7 +563,7 @@ let modoAnexo = "arquivo";
 let idEmEdicao = null;
 const estado = { ano: "todos", tri: "todos" };
 
-const elGrade       = document.getElementById("gradeAulas");
+const elGradeAnos   = document.getElementById("gradeAnos");
 const elVazio       = document.getElementById("estadoVazio");
 const elMensagemVazio = document.getElementById("mensagemVazio");
 const elContGeral   = document.getElementById("contadorGeral");
@@ -589,35 +617,17 @@ function atualizarProgresso(){
     "<b>" + TRIMESTRE_ATUAL + "º trimestre</b> — " + aulasNoAtual + " de " + META_AULAS_POR_TRIMESTRE + " aulas";
 }
 
-/* ===== FILTROS (menus suspensos de ano e trimestre) ===== */
+/* ===== FILTROS ===== */
 function filtrarAulas(){
-  const lista = apresentacoes.filter(function(item){
+  return apresentacoes.filter(function(item){
     const anoOk = estado.ano === "todos" || String(item.ano) === estado.ano;
     const triOk = estado.tri === "todos" || String(item.trimestre) === estado.tri;
     return anoOk && triOk;
   });
-
-  /* ORDENAÇÃO: 9º ano primeiro, depois 8º, 7º e 6º.
-     Dentro do mesmo ano: trimestre e número da aula crescentes. */
-  lista.sort(function(a, b){
-    const diferencaAno = parseInt(b.ano, 10) - parseInt(a.ano, 10);
-    if (diferencaAno !== 0) return diferencaAno;
-    const diferencaTri = (parseInt(a.trimestre, 10) || 0) - (parseInt(b.trimestre, 10) || 0);
-    if (diferencaTri !== 0) return diferencaTri;
-    return (parseInt(a.aula, 10) || 0) - (parseInt(b.aula, 10) || 0);
-  });
-
-  return lista;
 }
 
-elSelectAno.addEventListener("change", function(){
-  estado.ano = this.value;
-  renderizar();
-});
-elSelectTri.addEventListener("change", function(){
-  estado.tri = this.value;
-  renderizar();
-});
+elSelectAno.addEventListener("change", function(){ estado.ano = this.value; renderizar(); });
+elSelectTri.addEventListener("change", function(){ estado.tri = this.value; renderizar(); });
 
 function escaparHtml(texto){
   const div = document.createElement("div");
@@ -625,13 +635,14 @@ function escaparHtml(texto){
   return div.innerHTML;
 }
 
+/* ===== RENDERIZAÇÃO: CARDS POR ANO + SUBCARDS POR TRIMESTRE ===== */
 function renderizar(){
   const lista = filtrarAulas();
   elContVisivel.textContent = lista.length;
 
   if (lista.length === 0) {
-    elGrade.innerHTML = "";
-    elGrade.style.display = "none";
+    elGradeAnos.innerHTML = "";
+    elGradeAnos.style.display = "none";
     elVazio.style.display = "block";
     elMensagemVazio.textContent = apresentacoes.length === 0
       ? "Nenhuma aula cadastrada ainda. Clique em Nova aula para gerar o primeiro cadastro."
@@ -639,30 +650,58 @@ function renderizar(){
     return;
   }
   elVazio.style.display = "none";
-  elGrade.style.display = "grid";
+  elGradeAnos.style.display = "block";
 
-  elGrade.innerHTML = lista.map(function(item, indice){
-    const numeroFormatado = String(item.aula).padStart(2, "0");
-    const tipoRotulo = item.tipo === "link" ? "Link" : "Repositório";
-    const tipoIcone  = item.tipo === "link" ? ICONES.link : ICONES.arquivo;
-    const chave = escaparHtml(item.id || item.link);
-    return '<article class="cartao" style="animation-delay:' + (indice * 0.06) + 's" data-id="' + chave + '">' +
-      '<div class="cartao-meta">' +
-        '<span class="etiqueta et-' + item.ano + '">' + item.ano + 'º ano</span>' +
-        '<span class="meta-tri">' + item.trimestre + 'º tri • Aula ' + numeroFormatado + '</span>' +
-      '</div>' +
-      '<h3>' + escaparHtml(item.titulo) + '</h3>' +
-      '<p>' + escaparHtml(item.descricao || "") + '</p>' +
-      '<div class="cartao-rodape">' +
-        '<span class="tipo-aula">' + tipoIcone + tipoRotulo + '</span>' +
-        '<span class="acoes-cartao">' +
-          '<button class="btn-editar" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>' +
-          '<a class="btn btn-ouro btn-abrir" href="#" data-abrir="' + chave + '">Abrir ' + ICONES.seta + '</a>' +
-        '</span>' +
-      '</div>' +
-    '</article>';
-  }).join("");
+  const anosExibidos = estado.ano === "todos" ? ORDEM_ANOS : [parseInt(estado.ano, 10)];
+  const trisExibidos = estado.tri === "todos" ? ORDEM_TRIS : [parseInt(estado.tri, 10)];
 
+  let html = "";
+  anosExibidos.forEach(function(ano, indiceAno){
+    const aulasDoAno = lista.filter(function(i){ return String(i.ano) === String(ano); });
+
+    let subcards = "";
+    trisExibidos.forEach(function(tri){
+      const aulasDoTri = aulasDoAno
+        .filter(function(i){ return parseInt(i.trimestre, 10) === tri; })
+        .sort(function(a, b){ return (parseInt(a.aula, 10) || 0) - (parseInt(b.aula, 10) || 0); });
+
+      let itens = "";
+      if (aulasDoTri.length === 0) {
+        itens = '<div class="sem-aulas">Nenhuma aula neste trimestre.</div>';
+      } else {
+        itens = aulasDoTri.map(function(item){
+          const chave = escaparHtml(item.id || item.link);
+          const numeroFormatado = String(item.aula).padStart(2, "0");
+          return '<div class="item-aula">' +
+            '<div class="item-info">' +
+              '<span class="item-num">Aula ' + numeroFormatado + '</span>' +
+              '<strong>' + escaparHtml(item.titulo) + '</strong>' +
+            '</div>' +
+            '<span class="item-acoes">' +
+              '<button class="btn-editar-mini" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>' +
+              '<a class="btn btn-ouro btn-mini" href="#" data-abrir="' + chave + '">Abrir ' + ICONES.seta + '</a>' +
+            '</span>' +
+          '</div>';
+        }).join("");
+      }
+
+      subcards += '<div class="cartao-tri">' +
+        '<header><h3>' + tri + 'º trimestre</h3><span class="tri-qtd">' + aulasDoTri.length + ' aula(s)</span></header>' +
+        '<div class="lista-aulas">' + itens + '</div>' +
+      '</div>';
+    });
+
+    html += '<section class="cartao-ano" style="animation-delay:' + (indiceAno * 0.08) + 's">' +
+      '<div class="ano-cab">' +
+        '<span class="ano-selo selo-' + ano + '"></span>' +
+        '<h2>' + ano + 'º ano</h2>' +
+        '<span class="ano-qtd">' + aulasDoAno.length + ' aula(s)</span>' +
+      '</div>' +
+      '<div class="tri-grade">' + subcards + '</div>' +
+    '</section>';
+  });
+
+  elGradeAnos.innerHTML = html;
   atualizarProgresso();
 }
 
@@ -673,13 +712,11 @@ function abrirApresentacao(id){
   else mostrarToast("Esta aula ainda não possui arquivo ou link.", "erro");
 }
 
-elGrade.addEventListener("click", function(ev){
+elGradeAnos.addEventListener("click", function(ev){
   const botaoEditar = ev.target.closest("[data-editar]");
   if (botaoEditar) { ev.preventDefault(); ev.stopPropagation(); abrirModalEditar(botaoEditar.dataset.editar); return; }
   const botaoAbrir = ev.target.closest("[data-abrir]");
   if (botaoAbrir) { ev.preventDefault(); abrirApresentacao(botaoAbrir.dataset.abrir); return; }
-  const cartao = ev.target.closest(".cartao");
-  if (cartao) abrirApresentacao(cartao.dataset.id);
 });
 
 /* sidebar mobile */
