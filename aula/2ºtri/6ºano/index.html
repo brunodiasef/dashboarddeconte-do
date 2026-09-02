@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula Adaptada • Ginástica • 6º Ano</title>
+<link href="https://cdn.jsdelivr.net/fontsource/css/lato@latest/latin-400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/css/lato@latest/latin-700.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF6EE; --card:#FFFFFF; --dark:#2C1810; --text:#33271F;
+  --gold:#C9A961; --gold-dark:#A8862C; --ok-bg:#E8F5E9; --ok:#1B5E20;
+  --try-bg:#FFF8E1; --try:#8D6E00; --shadow:rgba(44,24,16,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:1.3rem;line-height:1.6}
+h1,h2{font-weight:700;color:var(--dark);line-height:1.25}
+img{display:block;max-width:100%;border-radius:14px}
+button{font-family:'Lato',Arial,sans-serif;cursor:pointer}
+:focus-visible{outline:4px solid var(--gold-dark);outline-offset:3px;border-radius:10px}
+/* TOPO */
+.top{position:sticky;top:0;background:var(--card);box-shadow:0 2px 10px var(--shadow);z-index:50;padding:.9rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.top-school{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dark);font-weight:700;width:100%;text-align:center}
+.top-title{font-size:1.25rem;font-weight:700;color:var(--dark)}
+/* ROTINA VISUAL */
+.routine{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;justify-content:center}
+.step{display:flex;align-items:center;gap:.45rem;padding:.35rem .8rem;border-radius:30px;background:var(--bg);border:2px solid transparent;font-weight:700;color:#7a6a5c;font-size:1rem}
+.step .n{width:34px;height:34px;border-radius:50%;background:#e5d9c6;color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:700}
+.step.on{border-color:var(--gold);background:#FFF3D6;color:var(--dark)}
+.step.on .n{background:var(--gold)}
+.step.done .n{background:var(--ok);color:#fff}
+/* CONTEÚDO */
+main{max-width:860px;margin:0 auto;padding:1.6rem 1.2rem 9rem}
+.screen{display:none;animation:fade .35s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.center{text-align:center}
+h1{font-size:2.4rem;margin:1rem 0}
+h2{font-size:1.9rem;margin:.8rem 0 1.2rem;text-align:center}
+.simple{font-size:1.4rem;text-align:center;max-width:640px;margin:0 auto 1.4rem}
+.big-img{width:100%;max-height:420px;object-fit:cover;margin:0 auto 1.2rem;box-shadow:0 6px 20px var(--shadow)}
+.img-label{font-size:1.05rem;font-weight:700;color:var(--gold-dark);text-align:center;margin-top:.4rem;text-transform:uppercase;letter-spacing:1px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0}
+.duo img{width:100%;height:240px;object-fit:cover}
+/* BOTÕES GRANDES */
+.big-btn{display:block;width:100%;max-width:480px;margin:1.4rem auto;background:var(--gold);color:var(--dark);border:none;border-radius:18px;padding:1.2rem;font-size:1.5rem;font-weight:700;letter-spacing:1px;box-shadow:0 5px 15px rgba(201,169,97,.5);transition:transform .2s}
+.big-btn:hover{transform:translateY(-3px)}
+/* ATIVIDADE: 2 ALTERNATIVAS */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.4rem 0}
+.choice{background:var(--card);border:4px solid #e7dcc8;border-radius:18px;padding:.8rem;text-align:center;transition:all .2s;box-shadow:0 4px 14px var(--shadow)}
+.choice:hover{border-color:var(--gold);transform:translateY(-3px)}
+.choice img{width:100%;height:220px;object-fit:cover;margin-bottom:.6rem}
+.choice span{font-size:1.2rem;font-weight:700;color:var(--dark)}
+.choice.ok{border-color:var(--ok);background:var(--ok-bg)}
+.fb{display:none;margin:1rem auto;max-width:480px;text-align:center;font-size:1.5rem;font-weight:700;border-radius:16px;padding:1rem}
+.fb.show{display:block;animation:fade .3s ease}
+.fb.ok{background:var(--ok-bg);color:var(--ok);border:3px solid var(--ok)}
+.fb.try{background:var(--try-bg);color:var(--try);border:3px solid var(--try)}
+/* FINAL */
+.star{width:120px;height:120px;margin:1rem auto;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(201,169,97,.55)}
+.star svg{width:64px;height:64px;fill:var(--dark)}
+/* BARRA INFERIOR FIXA */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);box-shadow:0 -3px 12px var(--shadow);display:flex;gap:1rem;justify-content:center;padding:1rem;z-index:60}
+.nav-btn{flex:1;max-width:300px;border:none;border-radius:16px;padding:1.1rem;font-size:1.4rem;font-weight:700;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+.back{background:#efe6d6;color:var(--dark)}
+.next{background:var(--dark);color:#fff}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),#8a6a2c);color:#fff;border-radius:14px;font-weight:700;font-size:1.3rem;text-align:center;padding:1rem;width:100%}
+@media(max-width:640px){
+  body{font-size:1.15rem}
+  h1{font-size:2rem}
+  h2{font-size:1.6rem}
+  .duo,.choices{grid-template-columns:1fr}
+  .duo img,.choice img{height:200px}
+  main{padding-bottom:10rem}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-school">E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
+  <div class="top-title">AULA ADAPTADA • GINÁSTICA</div>
+  <div class="routine" id="routine" aria-label="Rotina da aula">
+    <div class="step" id="st1"><span class="n">1</span> VER</div>
+    <div class="step" id="st2"><span class="n">2</span> APRENDER</div>
+    <div class="step" id="st3"><span class="n">3</span> RESPONDER</div>
+    <div class="step" id="st4"><span class="n">4</span> TERMINAR</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- TELA 0: INÍCIO -->
+  <section class="screen on" id="s0">
+    <div id="imgHome"></div>
+    <h1 class="center">GINÁSTICA</h1>
+    <p class="simple">O corpo se movimenta.<br>Vamos ver. Vamos aprender.</p>
+    <button class="big-btn" onclick="go(1)">COMEÇAR ▶</button>
+  </section>
+
+  <!-- TELA 1: ROTINA -->
+  <section class="screen" id="s1">
+    <h2>HOJE NÓS VAMOS:</h2>
+    <div class="duo">
+      <div><div id="imgRot1"></div><p class="img-label">VER</p></div>
+      <div><div id="imgRot2"></div><p class="img-label">APRENDER</p></div>
+    </div>
+    <div class="duo">
+      <div><div id="imgRot3"></div><p class="img-label">RESPONDER</p></div>
+      <div><div id="imgRot4"></div><p class="img-label">TERMINAR</p></div>
+    </div>
+    <p class="simple">Primeiro VER. Depois APRENDER.<br>Depois RESPONDER. No fim, TERMINAR.</p>
+  </section>
+
+  <!-- TELA 2: VER -->
+  <section class="screen" id="s2">
+    <h2>O CORPO SE MOVIMENTA</h2>
+    <div id="imgVer"></div>
+    <p class="simple">A ginástica tem movimento.<br>Tem força. Tem equilíbrio.</p>
+  </section>
+
+  <!-- TELA 3: APRENDER 1 -->
+  <section class="screen" id="s3">
+    <h2>GINÁSTICA COM COMPETIÇÃO</h2>
+    <p class="simple">Tem competição.<br>Está nos Jogos Olímpicos.</p>
+    <div class="duo">
+      <div><div id="imgA1"></div><p class="img-label">Artística</p></div>
+      <div><div id="imgA2"></div><p class="img-label">Rítmica</p></div>
+    </div>
+  </section>
+
+  <!-- TELA 4: APRENDER 2 -->
+  <section class="screen" id="s4">
+    <h2>GINÁSTICA SEM COMPETIÇÃO</h2>
+    <p class="simple">Não tem competição.<br>É para a saúde. Todos podem fazer.</p>
+    <div id="imgB1"></div>
+    <p class="img-label">Exercício para a saúde</p>
+  </section>
+
+  <!-- TELA 5: RESPONDER 1 -->
+  <section class="screen" id="s5">
+    <h2>QUAL TEM COMPETIÇÃO?</h2>
+    <div class="choices">
+      <button class="choice" onclick="resp(this,true,'fb1')"><div id="imgC1"></div><span>Jogos Olímpicos</span></button>
+      <button class="choice" onclick="resp(this,false,'fb1')"><div id="imgC2"></div><span>Exercício no parque</span></button>
+    </div>
+    <div class="fb" id="fb1"></div>
+  </section>
+
+  <!-- TELA 6: RESPONDER 2 -->
+  <section class="screen" id="s6">
+    <h2>QUAL É PARA A SAÚDE?</h2>
+    <p class="simple">Sem competição.</p>
+    <div class="choices">
+      <button class="choice" onclick="resp(this,false,'fb2')"><div id="imgD1"></div><span>Competição</span></button>
+      <button class="choice" onclick="resp(this,true,'fb2')"><div id="imgD2"></div><span>Exercício para a saúde</span></button>
+    </div>
+    <div class="fb" id="fb2"></div>
+  </section>
+
+  <!-- TELA 7: RESPONDER 3 -->
+  <section class="screen" id="s7">
+    <h2>TOQUE NA GINASTA COM FITA</h2>
+    <div class="choices">
+      <button class="choice" onclick="resp(this,true,'fb3')"><div id="imgE1"></div><span>Rítmica</span></button>
+      <button class="choice" onclick="resp(this,false,'fb3')"><div id="imgE2"></div><span>Corrida</span></button>
+    </div>
+    <div class="fb" id="fb3"></div>
+  </section>
+
+  <!-- TELA 8: TERMINAR -->
+  <section class="screen" id="s8">
+    <div class="star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
+    <h1 class="center">MUITO BEM!</h1>
+    <p class="simple">Você terminou a aula.<br>Você conseguiu!</p>
+    <button class="big-btn" onclick="go(0)">COMEÇAR DE NOVO ↺</button>
+  </section>
+
+</main>
+
+<nav class="bar" aria-label="Navegação da aula">
+  <button class="nav-btn back" id="btnBack" onclick="go(cur-1)">◀ VOLTAR</button>
+  <button class="nav-btn next" id="btnNext" onclick="go(cur+1)">PRÓXIMO ▶</button>
+</nav>
+
+<script>
+/* ===== IMAGENS: pasta local → online (renovada) → bloco com nome ===== */
+var ONLINE={
+  artistica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1be2287f9-2878-4cca-afb3-614d2618c87d.png",
+  ritmica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/185b23af0-23f7-45be-8e1b-bdabf78a658d.png",
+  laboral:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1c0db032b-f250-48b3-80a8-40472d3c77b3.png",
+  acrobatica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1ff0883aa-9826-4b2b-bf5a-727e2f741bf8.png",
+  trampolim:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/165ec3709-2707-4d5d-9983-ddf9da106bfa.png",
+  atletismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b7b05c86-6cd1-4bc2-b49d-61534611aa93.png"
+};
+var EXT=["png","jpg","jpeg","webp"];
+function lista(key){var l=[];for(var e=0;e<EXT.length;e++){l.push(key+"."+EXT[e]);}l.push(ONLINE[key]);return l;}
+
+/* Avança a cadeia de fallback; no fim, bloco com o nome (nunca em branco) */
+function passo(el){
+  var l=(el.getAttribute("data-srcs")||"").split("|");
+  var i=parseInt(el.getAttribute("data-idx")||"0",10)+1;
+  if(i>=l.length){
+    var d=document.createElement("div");
+    d.className="ph";
+    d.style.height=(el.getAttribute("data-altura")||"220")+"px";
+    d.textContent=el.getAttribute("data-label")||"Ginástica";
+    if(el.parentNode){el.parentNode.replaceChild(d,el);}
+    return;
+  }
+  el.setAttribute("data-idx",String(i));
+  el.src=l[i];
+}
+
+/* CORREÇÃO: agora o src É definido (antes a imagem nascia sem endereço) */
+function pic(elId,key,label,cls,altura){
+  var el=document.getElementById(elId);
+  if(!el)return;
+  var l=lista(key);
+  var img=document.createElement("img");
+  img.alt=label;
+  img.setAttribute("data-label",label);
+  img.setAttribute("data-srcs",l.join("|"));
+  img.setAttribute("data-idx","0");
+  img.setAttribute("data-altura",altura||"220");
+  img.setAttribute("onerror","passo(this)");
+  if(cls){img.className=cls;}
+  img.src=l[0];           /* ← linha que faltava */
+  el.appendChild(img);
+}
+
+/* ===== NAVEGAÇÃO (sempre igual, previsível) ===== */
+var cur=0, TOTAL=8;
+var STEPS={0:0,1:0,2:1,3:2,4:2,5:3,6:3,7:3,8:4};
+function go(n){
+  if(n<0||n>TOTAL)return;
+  var secs=document.querySelectorAll(".screen");
+  for(var i=0;i<secs.length;i++){secs[i].classList.remove("on");}
+  document.getElementById("s"+n).classList.add("on");
+  cur=n;
+  document.getElementById("btnBack").disabled=(n===0);
+  document.getElementById("btnNext").disabled=(n===TOTAL);
+  var st=STEPS[n];
+  for(var k=1;k<=4;k++){
+    var el=document.getElementById("st"+k);
+    el.className="step"+(k<st?" done":(k===st?" on":""));
+  }
+  window.scrollTo(0,0);
+}
+
+/* ===== ATIVIDADE: feedback visual, sem áudio ===== */
+function resp(btn,ok,fbId){
+  var fb=document.getElementById(fbId);
+  var box=btn.parentNode;
+  var btns=box.querySelectorAll(".choice");
+  if(ok){
+    btn.classList.add("ok");
+    for(var i=0;i<btns.length;i++){btns[i].disabled=true;}
+    fb.textContent="✓ MUITO BEM!";
+    fb.className="fb ok show";
+  }else{
+    fb.textContent="TENTE DE NOVO";
+    fb.className="fb try show";
+  }
+}
+
+/* ===== MONTAR IMAGENS DAS TELAS ===== */
+pic("imgHome","artistica","Ginasta na trave de equilíbrio","big-img","380");
+pic("imgVer","acrobatica","Ginastas fazendo acrobacia em equipe","big-img","380");
+pic("imgA1","artistica","Ginástica artística na trave","","240");
+pic("imgA2","ritmica","Ginástica rítmica com fita","","240");
+pic("imgB1","laboral","Pessoas fazendo exercício para a saúde","big-img","380");
+pic("imgC1","artistica","Ginasta em competição","","220");
+pic("imgC2","laboral","Pessoas fazendo exercício no parque","","220");
+pic("imgD1","artistica","Ginasta em competição","","220");
+pic("imgD2","laboral","Pessoas fazendo exercício para a saúde","","220");
+pic("imgE1","ritmica","Ginasta com fita","","220");
+pic("imgE2","atletismo","Pessoa correndo","","220");
+pic("imgRot1","artistica","Ver","","240");
+pic("imgRot2","acrobatica","Aprender","","240");
+pic("imgRot3","trampolim","Responder","","240");
+pic("imgRot4","laboral","Terminar","","240");
+go(0);
+</script>
+</body>
+</html>
