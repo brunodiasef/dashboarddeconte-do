@@ -154,6 +154,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/7ºano/APOSTILA.docx"
+  },
+  {
+    id: "aula-6t1n8-1788316744080",
+    ano: "6",
+    trimestre: 1,
+    aula: 8,
+    titulo: "Ginástica + Esportes de Marca",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/6ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
