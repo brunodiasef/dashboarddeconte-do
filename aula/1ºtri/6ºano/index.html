@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educação Física • 6º Ano • 1º Trimestre</title>
+<link href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-700.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/css/lato@latest/latin-400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/css/lato@latest/latin-700.css" rel="stylesheet">
+<style>
+:root{
+  --bg-cream:#F5F0E6; --bg-light:#FAF7F0; --brown-dark:#2C1810; --brown-medium:#5D4037;
+  --gold:#C9A961; --gold-light:#D4AF37; --gold-dark:#B8941F; --text-dark:#3E2723;
+  --text-light:#5D4E47; --white:#FFFFFF; --shadow:rgba(44,24,16,.15);
+  --success:#2E7D32; --success-bg:#E8F5E9; --error:#C62828; --error-bg:#FFEBEE;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',Arial,sans-serif;background:var(--bg-cream);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:700}
+button{font-family:'Lato',Arial,sans-serif}
+img{display:block;max-width:100%}
+.app{display:flex;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;width:280px;height:100vh;background:linear-gradient(180deg,var(--brown-dark),var(--brown-medium));color:var(--bg-cream);padding:1.6rem 1.2rem;z-index:1000;overflow-y:auto;transition:transform .3s ease;box-shadow:4px 0 15px var(--shadow)}
+.sidebar-header{text-align:center;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:2px solid var(--gold)}
+.school-name{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.sidebar-title{font-size:1.4rem;color:var(--bg-cream);margin-bottom:.2rem}
+.sidebar-subtitle{font-size:.8rem;color:var(--gold);letter-spacing:1px}
+.timeline-title{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;text-align:center}
+.t-group{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);font-weight:700;margin:1rem 0 .5rem;padding-bottom:.35rem;border-bottom:1px solid rgba(201,169,97,.35);text-align:left}
+.t-item{display:flex;align-items:center;margin-bottom:.45rem;cursor:pointer;padding:.55rem .6rem;border-radius:8px;transition:all .3s ease;border-left:3px solid transparent}
+.t-item:hover{background:rgba(201,169,97,.12);transform:translateX(4px)}
+.t-item.active{background:rgba(201,169,97,.22);border-left-color:var(--gold)}
+.t-num{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--brown-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;margin-right:.7rem;flex-shrink:0}
+.t-item.done .t-num{background:var(--bg-cream)}
+.t-item.active .t-num{background:var(--gold-light);box-shadow:0 0 10px rgba(201,169,97,.6)}
+.t-txt{font-size:.8rem;line-height:1.3}
+.progress-container{margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(201,169,97,.3)}
+.progress-label{font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:flex;justify-content:space-between}
+.progress-bar{height:8px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:4px;transition:width .6s ease;width:0%}
+.main{margin-left:280px;flex:1;min-height:100vh}
+.top-header{background:var(--white);padding:1rem 2.5rem;box-shadow:0 2px 10px var(--shadow);position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.header-left{display:flex;align-items:center;gap:1rem;min-width:0}
+.menu-toggle{display:none;background:none;border:none;font-size:1.4rem;color:var(--brown-dark);cursor:pointer;line-height:1}
+.current-lesson{font-size:1.1rem;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.points-display{display:flex;align-items:center;gap:.5rem;background:var(--bg-cream);padding:.4rem 1rem;border-radius:20px;border:2px solid var(--gold);flex-shrink:0}
+.points-icon{color:var(--gold-dark);font-size:1rem}
+.points-value{font-weight:700;color:var(--brown-dark)}
+.content{padding:2.5rem;max-width:1150px;margin:0 auto}
+.lesson{display:none;animation:fadeIn .5s ease}
+.lesson.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.welcome{text-align:center;padding:2rem 1rem}
+.badge{display:inline-block;background:var(--gold);color:var(--brown-dark);padding:.45rem 1.4rem;border-radius:20px;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;font-weight:700}
+.welcome h1{font-size:2.5rem;color:var(--brown-dark);margin-bottom:.8rem;line-height:1.2}
+.welcome h2{font-size:1.3rem;color:var(--text-light);margin-bottom:1.5rem;font-weight:400}
+.welcome-intro{max-width:780px;margin:0 auto 2.2rem;font-size:1.05rem;color:var(--text-light);line-height:1.8}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2rem;margin-bottom:2.2rem}
+.module-card{background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px var(--shadow);transition:transform .3s,box-shadow .3s;cursor:pointer;text-align:left;border:none;padding:0}
+.module-card:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(44,24,16,.22)}
+.module-card img,.module-card video{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--bg-light);display:block}
+.module-content{padding:1.5rem}
+.module-number{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.4rem;font-weight:700}
+.module-title{font-size:1.5rem;color:var(--brown-dark);margin-bottom:.5rem}
+.module-desc{color:var(--text-light);font-size:.9rem}
+.btn-gold{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--brown-dark);padding:.9rem 2.6rem;border-radius:30px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer;font-size:.95rem;box-shadow:0 4px 15px rgba(201,169,97,.4)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,169,97,.6)}
+.btn-dark{background:linear-gradient(135deg,var(--brown-medium),var(--brown-dark));color:var(--white);box-shadow:0 4px 15px rgba(44,24,16,.3)}
+.ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold-light),var(--brown-medium));color:#fff;font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;text-align:center;padding:1rem}
+.module-card .ph{width:100%;aspect-ratio:1/1}
+.module-cover .ph{width:100%;height:100%;min-height:220px}
+.big-card .ph{width:100%;height:100%;min-height:230px}
+.modal-content .ph{width:100%;height:260px;border-radius:15px 15px 0 0}
+.module-cover{background:linear-gradient(135deg,var(--brown-dark),var(--brown-medium));color:var(--white);border-radius:15px;margin-bottom:2.5rem;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:280px}
+.cover-text{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.cover-num{font-size:.85rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.cover-title{font-size:2.3rem;margin-bottom:.8rem;line-height:1.15}
+.cover-sub{font-size:.95rem;color:var(--gold);letter-spacing:2px}
+.cover-img{width:100%;height:100%;object-fit:cover}
+.section-header{text-align:center;margin-bottom:2rem}
+.section-title{font-size:2rem;color:var(--brown-dark);margin-bottom:.7rem}
+.section-subtitle{font-size:1.05rem;color:var(--text-light);max-width:680px;margin:0 auto}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem;margin:1.6rem 0}
+.info-card{background:var(--white);border-radius:12px;padding:1.5rem;box-shadow:0 5px 20px var(--shadow);transition:all .3s;cursor:pointer;border:2px solid transparent}
+.info-card:hover{transform:translateY(-5px);border-color:var(--gold)}
+.card-kicker{font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dark);font-weight:700;margin-bottom:.5rem}
+.card-title{font-size:1.15rem;color:var(--brown-dark);margin-bottom:.4rem}
+.card-text{color:var(--text-light);font-size:.92rem}
+.card-expansion{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.info-card.expanded .card-expansion{max-height:260px;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--bg-cream)}
+.big-card{background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 8px 25px var(--shadow);transition:all .3s;margin-bottom:1.6rem;display:grid;grid-template-columns:300px 1fr}
+.big-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(44,24,16,.2)}
+.big-card img{width:100%;height:100%;min-height:230px;object-fit:cover;background:var(--bg-light)}
+.big-body{padding:1.7rem}
+.big-name{font-size:1.5rem;color:var(--brown-dark);margin-bottom:.2rem}
+.big-origin{font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dark);font-weight:700;margin-bottom:.7rem}
+.feat-list{list-style:none;margin:.5rem 0}
+.feat-list li{padding:.28rem 0 .28rem 1.3rem;position:relative;color:var(--text-light);font-size:.92rem}
+.feat-list li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:.55rem;top:50%;transform:translateY(-50%)}
+.btn-explore{background:var(--gold);color:var(--brown-dark);border:none;padding:.65rem 1.4rem;border-radius:25px;cursor:pointer;font-weight:700;transition:all .3s;margin-top:.5rem;font-size:.82rem;letter-spacing:1px;text-transform:uppercase}
+.btn-explore:hover{background:var(--gold-light);transform:scale(1.05)}
+.c-table{width:100%;background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 5px 20px var(--shadow);margin:1.6rem 0}
+.t-row{display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid var(--bg-cream);cursor:pointer;transition:background .3s}
+.t-row:last-child{border-bottom:none}
+.t-row:hover{background:var(--bg-light)}
+.t-row.head{background:var(--brown-dark);color:var(--white);font-weight:700;cursor:default}
+.t-cell{padding:.95rem 1.2rem;font-size:.92rem}
+.t-cell:first-child{font-weight:700;color:var(--brown-dark);border-right:2px solid var(--bg-cream)}
+.t-row.head .t-cell{color:var(--white)}
+.quiz-box{background:var(--white);border-radius:15px;padding:2.2rem;box-shadow:0 10px 30px var(--shadow);max-width:820px;margin:0 auto}
+.quiz-progress{display:flex;justify-content:center;gap:.45rem;margin:1rem 0 1.6rem;flex-wrap:wrap}
+.q-dot{width:12px;height:12px;border-radius:50%;background:var(--bg-cream);transition:all .3s}
+.q-dot.active{background:var(--gold);transform:scale(1.25)}
+.q-dot.ok{background:var(--success)}
+.q-dot.no{background:var(--error)}
+.question-text{font-size:1.15rem;color:var(--text-dark);margin-bottom:1.5rem;text-align:center;line-height:1.5}
+.options{display:grid;gap:.9rem}
+.opt-btn{background:var(--bg-cream);border:2px solid transparent;padding:1rem 1.2rem;border-radius:10px;cursor:pointer;text-align:left;font-size:.96rem;transition:all .3s}
+.opt-btn:hover:not(:disabled){border-color:var(--gold);background:var(--white);transform:translateX(5px)}
+.opt-btn.ok{background:var(--success-bg);border-color:var(--success);color:var(--success)}
+.opt-btn.no{background:var(--error-bg);border-color:var(--error);color:var(--error)}
+.opt-btn:disabled{cursor:not-allowed;opacity:.75}
+.feedback{margin-top:1.2rem;padding:1rem;border-radius:8px;text-align:center;font-weight:700;display:none;font-size:.95rem}
+.feedback.show{display:block;animation:fadeIn .3s ease}
+.feedback.ok{background:var(--success-bg);color:var(--success)}
+.feedback.no{background:var(--error-bg);color:var(--error)}
+.next-btn{margin-top:1.2rem;background:var(--brown-dark);color:var(--white);border:none;padding:.9rem 2rem;border-radius:25px;cursor:pointer;font-weight:700;display:none;width:100%;transition:all .3s}
+.next-btn.show{display:block}
+.next-btn:hover{background:var(--brown-medium)}
+.results{text-align:center;padding:1.5rem 0}
+.results-trophy{width:110px;height:110px;margin:0 auto 1rem;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(201,169,97,.5)}
+.results-trophy svg{width:56px;height:56px;fill:var(--brown-dark)}
+.results h2{font-size:2rem;color:var(--brown-dark);margin-bottom:.5rem}
+.results-score{font-size:2.5rem;color:var(--gold-dark);margin:1rem 0;font-weight:700;font-family:'Playfair Display',serif}
+.results-msg{font-size:1.05rem;color:var(--text-light);margin-bottom:1.5rem;max-width:560px;margin-left:auto;margin-right:auto}
+.activity-box{background:var(--white);border-radius:15px;padding:1.8rem;box-shadow:0 5px 20px var(--shadow);margin:1.6rem 0}
+.activity-inner{background:var(--bg-cream);padding:1.6rem;border-radius:10px;text-align:center}
+.activity-text{font-size:1.05rem;color:var(--text-dark);margin-bottom:1.3rem;font-style:italic}
+.act-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.9rem}
+.act-btn{background:var(--white);border:2px solid var(--gold);color:var(--brown-dark);padding:.9rem;border-radius:8px;cursor:pointer;font-weight:700;transition:all .3s;font-size:.92rem}
+.act-btn:hover:not(:disabled){background:var(--gold);transform:translateY(-3px)}
+.act-btn:disabled{opacity:.6;cursor:not-allowed}
+.modal-overlay{position:fixed;inset:0;background:rgba(44,24,16,.8);display:none;align-items:center;justify-content:center;z-index:2000;padding:1.5rem}
+.modal-overlay.show{display:flex;animation:fadeIn .3s ease}
+.modal-content{background:var(--white);border-radius:15px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .3s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:.8rem;right:.8rem;background:var(--white);border:none;font-size:1.2rem;cursor:pointer;color:var(--text-light);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 2px 8px var(--shadow);z-index:2}
+.modal-close:hover{background:var(--bg-cream);color:var(--brown-dark)}
+.modal-img{width:100%;height:260px;object-fit:cover;border-radius:15px 15px 0 0;background:var(--bg-light)}
+.modal-body{padding:1.7rem}
+.modal-title{font-size:1.6rem;color:var(--brown-dark);margin-bottom:.7rem}
+.nav-buttons{display:flex;justify-content:space-between;gap:1rem;margin-top:2.2rem;padding-top:1.5rem;border-top:2px solid var(--bg-cream);flex-wrap:wrap}
+.nav-btn{background:var(--white);border:2px solid var(--gold);color:var(--brown-dark);padding:.85rem 1.6rem;border-radius:25px;cursor:pointer;font-weight:700;transition:all .3s;font-size:.9rem}
+.nav-btn:hover:not(:disabled){background:var(--gold);transform:translateY(-2px)}
+.nav-btn:disabled{opacity:.45;cursor:not-allowed}
+.achievement{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--white);padding:1.2rem 1.5rem;border-radius:12px;box-shadow:0 10px 30px var(--shadow);display:none;align-items:center;gap:1rem;z-index:1500;border-left:4px solid var(--gold);max-width:320px}
+.achievement.show{display:flex;animation:slideRight .5s ease}
+@keyframes slideRight{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:translateX(0)}}
+.ach-medal{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ach-medal svg{width:28px;height:28px;fill:var(--brown-dark)}
+.achievement h4{color:var(--brown-dark);margin-bottom:.15rem;font-size:1rem}
+.achievement p{color:var(--text-light);font-size:.85rem}
+.ta-label{display:block;font-weight:700;color:var(--brown-dark);margin:1.1rem 0 .5rem;font-size:.96rem}
+textarea{width:100%;min-height:90px;padding:.9rem;border:2px solid var(--bg-cream);border-radius:8px;font-family:'Lato',sans-serif;font-size:.95rem;resize:vertical;transition:border-color .3s;background:var(--white)}
+textarea:focus{outline:none;border-color:var(--gold)}
+.h-center{text-align:center;color:var(--brown-dark);margin-bottom:1rem}
+@media(max-width:968px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-toggle{display:block}
+  .content{padding:1.5rem 1rem}
+  .top-header{padding:.9rem 1.1rem}
+  .welcome h1{font-size:1.9rem}
+  .section-title{font-size:1.55rem}
+  .cover-title{font-size:1.6rem}
+  .module-cover{grid-template-columns:1fr;min-height:0}
+  .cover-img{height:200px;order:-1}
+  .big-card{grid-template-columns:1fr}
+  .big-card img{height:200px;min-height:0}
+  .quiz-box{padding:1.3rem}
+  .question-text{font-size:1rem}
+  .t-row{grid-template-columns:1fr}
+  .t-cell:first-child{border-right:none;border-bottom:1px solid var(--bg-cream)}
+}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg-cream)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+:focus-visible{outline:3px solid var(--gold-dark);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Menu de navegação">
+    <div class="sidebar-header">
+      <div class="school-name">E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
+      <h2 class="sidebar-title">Educação Física</h2>
+      <div class="sidebar-subtitle">6º ANO • 1º TRIMESTRE</div>
+    </div>
+    <div class="timeline-title">Cronograma de Aulas</div>
+    <div id="timelineItems"></div>
+    <div class="progress-container">
+      <div class="progress-label"><span>Progresso</span><span id="progressPercent">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+        <h1 class="current-lesson" id="currentLesson">Bem-vindo</h1>
+      </div>
+      <div class="points-display" title="Seus pontos">
+        <span class="points-icon">★</span>
+        <span class="points-value" id="pointsValue">0</span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- BOAS-VINDAS -->
+      <section class="lesson active" id="lesson-0">
+        <div class="welcome">
+          <span class="badge">1º Trimestre</span>
+          <h1>Educação Física • 6º Ano</h1>
+          <h2>Ginástica + Esportes de Marca</h2>
+          <p class="welcome-intro">Neste trimestre vamos conhecer os tipos de ginástica, as alterações do corpo durante a atividade física e os esportes de marca — aqueles em que o objetivo é superar tempos, distâncias, alturas e pesos.</p>
+          <div class="modules-grid">
+            <button class="module-card" onclick="goToLesson(1)">
+              <video muted loop autoplay playsinline preload="metadata"
+                src="modulo1.mp4" data-srcs="modulo1.mp4|IMG:artistica" data-idx="0"
+                data-label="Tipos de Ginástica" onerror="stepMedia(this)"
+                aria-label="Módulo 1 - Tipos de Ginástica"></video>
+              <div class="module-content">
+                <div class="module-number">Módulo 1</div>
+                <h3 class="module-title">Tipos de Ginástica</h3>
+                <p class="module-desc">Ginástica competitiva e não competitiva, modalidades olímpicas e o corpo em movimento.</p>
+              </div>
+            </button>
+            <button class="module-card" onclick="goToLesson(5)">
+              <video muted loop autoplay playsinline preload="metadata"
+                src="modulo2.mp4" data-srcs="modulo2.mp4|IMG:atletismo" data-idx="0"
+                data-label="Esportes de Marca" onerror="stepMedia(this)"
+                aria-label="Módulo 2 - Esportes de Marca"></video>
+              <div class="module-content">
+                <div class="module-number">Módulo 2</div>
+                <h3 class="module-title">Esportes de Marca</h3>
+                <p class="module-desc">Atletismo, natação, ciclismo, halterofilismo e mais: superando tempos, distâncias e alturas.</p>
+              </div>
+            </button>
+          </div>
+          <button class="btn-gold" onclick="goToLesson(1)">Começar Aula</button>
+        </div>
+      </section>
+
+      <!-- AULA 1 -->
+      <section class="lesson" id="lesson-1">
+        <div class="module-cover">
+          <div class="cover-text">
+            <div class="cover-num">Módulo 1</div>
+            <h2 class="cover-title">Tipos de Ginástica</h2>
+            <div class="cover-sub">Coordenação • Força • Flexibilidade • Equilíbrio</div>
+          </div>
+          <img id="pic-c1" class="cover-img" alt="Ginasta artística na trave de equilíbrio" data-label="Tipos de Ginástica">
+        </div>
+        <div class="section-header">
+          <span class="badge">Aula 1</span>
+          <h2 class="section-title">O que é Ginástica?</h2>
+          <p class="section-subtitle">A ginástica é uma prática corporal que envolve coordenação motora, força, flexibilidade e equilíbrio. Ela pode ser realizada como esporte competitivo, atividade recreativa ou forma de condicionamento físico.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 1</div><h3 class="card-title">Ginástica Competitiva</h3><p class="card-text">Modalidades esportivas com alto nível de treinamento.</p><div class="card-expansion"><p class="card-text">São regulamentadas por FEDERAÇÕES e fazem parte de grandes eventos esportivos, como os JOGOS OLÍMPICOS.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 2</div><h3 class="card-title">Ginástica Não Competitiva</h3><p class="card-text">Praticada para saúde, bem-estar e condicionamento.</p><div class="card-expansion"><p class="card-text">Inclui ginástica natural, laboral, funcional, calistênica e postural — sem objetivo de competição.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 1</div><h3 class="card-title">Coordenação motora</h3><p class="card-text">Controle preciso dos movimentos do corpo.</p><div class="card-expansion"><p class="card-text">Essencial em todas as modalidades de ginástica.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 2</div><h3 class="card-title">Força</h3><p class="card-text">Capacidade de vencer resistências.</p><div class="card-expansion"><p class="card-text">Necessária nas argolas, no solo e nos saltos.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 3</div><h3 class="card-title">Flexibilidade</h3><p class="card-text">Amplitude dos movimentos articulares.</p><div class="card-expansion"><p class="card-text">Marca registrada da ginástica rítmica e artística.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 4</div><h3 class="card-title">Equilíbrio</h3><p class="card-text">Estabilidade do corpo em movimento ou parado.</p><div class="card-expansion"><p class="card-text">Fundamental na trave e nas pirâmides acrobáticas.</p></div></div>
+        </div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(0)" disabled>← Início</button>
+          <button class="nav-btn" onclick="goToLesson(2)">Próxima: Modalidades →</button>
+        </div>
+      </section>
+
+      <!-- AULA 2 -->
+      <section class="lesson" id="lesson-2">
+        <div class="section-header">
+          <span class="badge">Aula 2</span>
+          <h2 class="section-title">Ginástica Competitiva e Não Competitiva</h2>
+          <p class="section-subtitle">Conheça as modalidades. Clique em EXPLORAR para ver o foco e a exigência física de cada uma.</p>
+        </div>
+        <h3 class="h-center">Ginástica competitiva (Jogos Olímpicos)</h3>
+        <div id="gymGrid"></div>
+        <h3 class="h-center" style="margin-top:1.5rem">Ginástica não competitiva</h3>
+        <div id="gymNcGrid"></div>
+        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: foco principal</h3>
+        <div class="c-table" id="gymTable"></div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(1)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(3)">Próxima: O Corpo em Movimento →</button>
+        </div>
+      </section>
+
+      <!-- AULA 3 -->
+      <section class="lesson" id="lesson-3">
+        <div class="section-header">
+          <span class="badge">Aula 3</span>
+          <h2 class="section-title">Alterações Fisiológicas na Atividade Física</h2>
+          <p class="section-subtitle">Durante o exercício, o corpo passa por diversas alterações para realizar a atividade com mais eficiência. Clique nos cards para ampliar.</p>
+        </div>
+        <div class="big-card" id="fisioCard"></div>
+        <div class="cards-grid" id="fisioGrid"></div>
+        <p style="text-align:center;color:var(--text-light);max-width:720px;margin:0 auto">Essas alterações são essenciais para <strong>melhorar o desempenho físico</strong> e <strong>proteger o corpo</strong> durante o exercício.</p>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(2)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(4)">Próxima: Atividade →</button>
+        </div>
+      </section>
+
+      <!-- AULA 4 -->
+      <section class="lesson" id="lesson-4">
+        <div class="section-header">
+          <span class="badge">Aula 4</span>
+          <h2 class="section-title">Revisão e Atividade — Ginástica</h2>
+          <p class="section-subtitle">Complete o foco de cada modalidade e responda às reflexões.</p>
+        </div>
+        <div class="activity-box" id="activityBox">
+          <h3 class="h-center">COMPLETE O FOCO</h3>
+          <div class="activity-inner">
+            <p class="activity-text" id="activityQuestion"></p>
+            <div class="act-options" id="activityOptions"></div>
+            <div class="feedback" id="activityFeedback"></div>
+          </div>
+          <div style="text-align:center"><button class="btn-explore" id="nextActivityBtn" style="display:none" onclick="nextActivity()">Próxima pergunta →</button></div>
+        </div>
+        <div class="activity-box">
+          <h3 class="h-center">QUESTÕES DE REFLEXÃO</h3>
+          <label class="ta-label" for="ta1">1. Cite dois exemplos de ginástica competitiva.</label>
+          <textarea id="ta1" placeholder="Escreva aqui sua resposta..."></textarea>
+          <label class="ta-label" for="ta2">2. Cite dois exemplos de ginástica não competitiva.</label>
+          <textarea id="ta2" placeholder="Escreva aqui sua resposta..."></textarea>
+          <label class="ta-label" for="ta3">3. Quais são as principais alterações fisiológicas que ocorrem no corpo durante a atividade física?</label>
+          <textarea id="ta3" placeholder="Escreva aqui sua resposta..."></textarea>
+          <label class="ta-label" for="ta4">4. Qual é a função da sudorese (suor) durante o exercício físico?</label>
+          <textarea id="ta4" placeholder="Escreva aqui sua resposta..."></textarea>
+        </div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(3)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(5)">Próximo Módulo: Esportes de Marca →</button>
+        </div>
+      </section>
+
+      <!-- AULA 5 -->
+      <section class="lesson" id="lesson-5">
+        <div class="module-cover">
+          <div class="cover-text">
+            <div class="cover-num">Módulo 2</div>
+            <h2 class="cover-title">Esportes de Marca</h2>
+            <div class="cover-sub">Tempo • Distância • Altura • Peso</div>
+          </div>
+          <img id="pic-c2" class="cover-img" alt="Velocista largando no bloco de partida" data-label="Esportes de Marca">
+        </div>
+        <div class="section-header">
+          <span class="badge">Aula 5</span>
+          <h2 class="section-title">O que são Esportes de Marca?</h2>
+          <p class="section-subtitle">São os esportes onde o principal objetivo é superar uma marca individual, como tempo, distância ou altura.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Característica 1</div><h3 class="card-title">Objetivo</h3><p class="card-text">Superar marcas: tempo, distância ou altura.</p><div class="card-expansion"><p class="card-text">O atleta compete contra limites mensuráveis — e contra o próprio desempenho.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Característica 2</div><h3 class="card-title">Critérios de vitória</h3><p class="card-text">Melhores tempos, maiores distâncias, alturas superadas.</p><div class="card-expansion"><p class="card-text">Vence quem corre mais rápido, salta mais longe ou mais alto, levanta mais peso.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Característica 3</div><h3 class="card-title">Instrumentos</h3><p class="card-text">Cronômetros, réguas e sensores.</p><div class="card-expansion"><p class="card-text">Equipamentos de medição tornam os resultados precisos e comparáveis.</p></div></div>
+        </div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(4)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(6)">Próxima: Exemplos →</button>
+        </div>
+      </section>
+
+      <!-- AULA 6 -->
+      <section class="lesson" id="lesson-6">
+        <div class="section-header">
+          <span class="badge">Aula 6</span>
+          <h2 class="section-title">Exemplos de Esportes de Marca</h2>
+          <p class="section-subtitle">Clique em EXPLORAR para ver como cada marca é medida.</p>
+        </div>
+        <div id="marcaGrid"></div>
+        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: marca medida</h3>
+        <div class="c-table" id="marcaTable"></div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(5)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(7)">Próxima: Atividade →</button>
+        </div>
+      </section>
+
+      <!-- AULA 7 -->
+      <section class="lesson" id="lesson-7">
+        <div class="section-header">
+          <span class="badge">Aula 7</span>
+          <h2 class="section-title">Atividade e Reflexão — Esportes de Marca</h2>
+          <p class="section-subtitle">Descubra o esporte pela marca e consolide o aprendizado.</p>
+        </div>
+        <div class="activity-box" id="activityBox2">
+          <h3 class="h-center">DESCUBRA O ESPORTE</h3>
+          <div class="activity-inner">
+            <p class="activity-text" id="activityQuestion2"></p>
+            <div class="act-options" id="activityOptions2"></div>
+            <div class="feedback" id="activityFeedback2"></div>
+          </div>
+          <div style="text-align:center"><button class="btn-explore" id="nextActivityBtn2" style="display:none" onclick="nextActivity2()">Próxima pergunta →</button></div>
+        </div>
+        <div class="activity-box">
+          <h3 class="h-center">QUESTÕES DE REFLEXÃO</h3>
+          <label class="ta-label" for="ta5">1. Qual é o objetivo dos esportes de marca?</label>
+          <textarea id="ta5" placeholder="Escreva aqui sua resposta..."></textarea>
+          <label class="ta-label" for="ta6">2. Cite dois instrumentos usados nos esportes de marca para torná-los mais precisos.</label>
+          <textarea id="ta6" placeholder="Escreva aqui sua resposta..."></textarea>
+          <label class="ta-label" for="ta7">3. Cite três exemplos de esportes de marca indicando como cada um é medido.</label>
+          <textarea id="ta7" placeholder="Escreva aqui sua resposta..."></textarea>
+        </div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(6)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(8)">Próxima: Quiz Final →</button>
+        </div>
+      </section>
+
+      <!-- AULA 8 -->
+      <section class="lesson" id="lesson-8">
+        <div class="section-header">
+          <span class="badge">Aula 8</span>
+          <h2 class="section-title">Quiz Final do Trimestre</h2>
+          <p class="section-subtitle">10 questões sobre ginástica, alterações fisiológicas e esportes de marca. Boa sorte!</p>
+        </div>
+        <div class="quiz-box">
+          <div id="quizContent">
+            <div class="quiz-progress" id="quizProgress"></div>
+            <div class="question-text" id="questionText"></div>
+            <div class="options" id="optionsGrid"></div>
+            <div class="feedback" id="quizFeedback"></div>
+            <button class="next-btn" id="nextQuestionBtn" onclick="nextQuestion()">Próxima Pergunta →</button>
+          </div>
+          <div id="quizResults" style="display:none">
+            <div class="results">
+              <div class="results-trophy"><svg viewBox="0 0 24 24"><path d="M5 3h14v2h3v4c0 2.2-1.8 4-4 4h-.5A7 7 0 0 1 13 16.9V19h4v2H7v-2h4v-2.1A7 7 0 0 1 6.5 13H6c-2.2 0-4-1.8-4-4V5h3V3zm0 4H4v2c0 1.1.9 2 2 2V7zm15 0h-1v4c1.1 0 2-.9 2-2V7z"/></svg></div>
+              <h2>Resultado Final</h2>
+              <div class="results-score" id="finalScore">0/10</div>
+              <p class="results-msg" id="resultsMessage"></p>
+              <button class="btn-gold" onclick="restartQuiz()">Tentar Novamente</button>
+              <button class="btn-gold btn-dark" onclick="goToLesson(9)" style="margin-left:.6rem">Ver Revisão →</button>
+            </div>
+          </div>
+        </div>
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(7)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(9)">Revisão Final →</button>
+        </div>
+      </section>
+
+      <!-- REVISÃO -->
+      <section class="lesson" id="lesson-9">
+        <div class="section-header">
+          <span class="badge">Revisão</span>
+          <h2 class="section-title">Revisão do Trimestre</h2>
+          <p class="section-subtitle">Os conceitos principais dos dois módulos em um só lugar.</p>
+        </div>
+        <div class="module-cover" style="display:block">
+          <div style="padding:2rem">
+            <h3 style="font-size:1.6rem;margin-bottom:1rem;color:var(--gold)">Módulo 1 — Tipos de Ginástica</h3>
+            <div class="cards-grid" style="margin:0">
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Competitiva: artística, rítmica, trampolim, aeróbica e acrobática</p></div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Não competitiva: natural, laboral, funcional, calistênica e postural</p></div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Competitivas são regulamentadas por federações e estão nos Jogos Olímpicos</p></div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Alterações fisiológicas: FC, fluxo sanguíneo, FR, temperatura, suor e vasodilatação</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="module-cover" style="display:block;background:linear-gradient(135deg,var(--brown-medium),var(--brown-dark))">
+          <div style="padding:2rem">
+            <h3 style="font-size:1.6rem;margin-bottom:1rem;color:var(--gold)">Módulo 2 — Esportes de Marca</h3>
+            <div class="cards-grid" style="margin:0">
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Objetivo: superar marcas de tempo, distância ou altura</p></div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Instrumentos: cronômetros, réguas e sensores</p></div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Atletismo, natação, ciclismo, halterofilismo, saltos, maratona e remo</p></div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem">
+          <button class="btn-gold" onclick="finishCourse()">Finalizar Trimestre</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeModal()" aria-label="Fechar">✕</button>
+    <div id="modalMedia"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- CONQUISTA -->
+<div class="achievement" id="achievement">
+  <div class="ach-medal"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
+  <div><h4>MESTRE DO MOVIMENTO</h4><p>PARABÉNS! VOCÊ CONCLUIU O 1º TRIMESTRE.</p></div>
+</div>
+
+<script>
+/* =====================================================================
+   SISTEMA DE MÍDIA À PROVA DE FALHAS (1º TRIMESTRE)
+   Ordem: VÍDEO local → IMAGEM da pasta → ILUSTRAÇÃO online → bloco c/ título
+   Vídeos: modulo1.mp4, modulo2.mp4
+   Imagens: artistica, ritmica, trampolim, acrobatica, aerobica, laboral,
+   fisiologia, atletismo, natacao, ciclismo, halterofilismo, salto, maratona, remo
+   ===================================================================== */
+var ONLINE = {
+  artistica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10368c875-160a-4855-814f-0111151ea1b4.png",
+  ritmica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1822d644b-113e-41c7-9c8b-2d3839d1a111.png",
+  trampolim:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10d6a383c-7725-4cc7-9c2b-716c7869b7a6.png",
+  acrobatica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10844801f-7bf8-4b37-a417-b2e2e894cb8d.png",
+  aerobica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/19d1a3cf2-a3e2-4278-92b0-9d84171e4a75.png",
+  laboral:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/13d544b43-5757-4b62-b1ff-571986d8329f.png",
+  fisiologia:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18d4b4181-b050-459a-a57f-b2ea87126a32.png",
+  atletismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1576768ee-28bd-4673-a203-487265a90682.png",
+  natacao:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/192748f3d-e4f4-4281-88e8-cf35eb2c2715.png",
+  ciclismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/158e9e4d7-0ef2-4b95-a3d2-937bd67d2ebe.png",
+  halterofilismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/16944b705-6107-45ef-a289-4475864a1463.png",
+  salto:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18285e32b-13bd-46e7-8287-421012e49c88.png",
+  maratona:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18a08ee9d-a7fc-40a4-82b8-2778f706c265.png",
+  remo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/138c6d91d-3a4b-45c3-9d1e-7f4a44a496ed.png"
+};
+var EXT=["png","jpg","jpeg","webp"];
+function srcList(key){
+  var list=[];
+  for(var e=0;e<EXT.length;e++){list.push(key+"."+EXT[e]);}
+  list.push(ONLINE[key]);
+  return list;
+}
+function lastResort(el){
+  var d=document.createElement("div");
+  d.className=((el.className||"")+" ph").trim();
+  d.setAttribute("role","img");
+  d.textContent=el.getAttribute("data-label")||el.alt||"Educação Física";
+  if(el.parentNode){el.parentNode.replaceChild(d,el);}
+}
+function stepMedia(el){
+  var list=(el.getAttribute("data-srcs")||"").split("|");
+  var i=parseInt(el.getAttribute("data-idx")||"0",10)+1;
+  if(i>=list.length){lastResort(el);return;}
+  var next=list[i];
+  el.setAttribute("data-idx",String(i));
+  if(next.indexOf("IMG:")===0){
+    var img=document.createElement("img");
+    img.alt=el.alt||el.getAttribute("aria-label")||"";
+    img.className=el.className||"";
+    img.setAttribute("data-label",el.getAttribute("data-label")||img.alt);
+    if(el.parentNode){el.parentNode.replaceChild(img,el);}
+    applyPic(img,next.substring(4));
+  }else{
+    el.src=next;
+    if(el.tagName==="VIDEO"){armVideo(el);}
+  }
+}
+function applyPic(el,key){
+  if(!el)return;
+  var list=srcList(key);
+  el.setAttribute("data-srcs",list.join("|"));
+  el.setAttribute("data-idx","0");
+  el.setAttribute("onerror","stepMedia(this)");
+  if(!el.getAttribute("data-label")){el.setAttribute("data-label",el.alt||key);}
+  el.src=list[0];
+}
+function picTag(key,alt,cls,lazy){
+  var list=srcList(key);
+  return '<img class="'+cls+'" alt="'+alt+'" data-label="'+alt+'" src="'+list[0]+'" data-srcs="'+list.join('|')+'" data-idx="0" onerror="stepMedia(this)"'+(lazy?' loading="lazy"':'')+'>';
+}
+function armVideo(v){
+  setTimeout(function(){
+    if(v&&v.parentNode&&v.readyState<2){stepMedia(v);}
+  },3000);
+}
+
+/* ================= DADOS ================= */
+var GYMS=[
+  {key:"artistica",nome:"Ginástica Artística",foco:"Força e técnica",exig:"Flexibilidade, potência",desc:"Aparelhos como solo, trave, barras e salto."},
+  {key:"ritmica",nome:"Ginástica Rítmica",foco:"Beleza e harmonia",exig:"Ritmo, coordenação",desc:"Utiliza fita, arco, bola, corda e maças."},
+  {key:"trampolim",nome:"Ginástica de Trampolim",foco:"Altura e precisão",exig:"Controle aéreo",desc:"Saltos e acrobacias executadas no trampolim."},
+  {key:"acrobatica",nome:"Ginástica Acrobática",foco:"Trabalho em equipe",exig:"Equilíbrio, coordenação",desc:"Pirâmides e equilíbrios em duplas ou grupos."},
+  {key:"aerobica",nome:"Ginástica Aeróbica",foco:"Resistência e coreografia",exig:"Condicionamento físico",desc:"Sequências intensas e contínuas de movimentos."}
+];
+var GYMS_NC=[
+  {t:"Ginástica Natural",d:"Movimentos naturais do corpo, como correr, saltar e rolar."},
+  {t:"Ginástica Laboral",d:"Praticada no ambiente de trabalho para prevenir lesões e melhorar a saúde."},
+  {t:"Ginástica Funcional",d:"Exercícios que melhoram as capacidades usadas no dia a dia."},
+  {t:"Ginástica Calistênica",d:"Exercícios com o peso do próprio corpo."},
+  {t:"Ginástica Postural",d:"Focada em corrigir e melhorar a postura."}
+];
+var FISIO=[
+  {t:"Aumento da frequência cardíaca (FC)",d:"O coração bate mais rápido para bombear sangue e fornecer mais oxigênio e nutrientes aos músculos."},
+  {t:"Redistribuição do fluxo sanguíneo",d:"O sangue é direcionado prioritariamente para os músculos ativos e menos para órgãos como o trato digestivo."},
+  {t:"Aumento da frequência respiratória (FR)",d:"A respiração fica mais rápida para captar mais oxigênio e eliminar dióxido de carbono."},
+  {t:"Aumento da temperatura muscular",d:"A produção de energia gera calor, aumentando a temperatura nos músculos."},
+  {t:"Aumento da sudorese (suor)",d:"Ativado para dissipar calor e manter a temperatura corporal estável."},
+  {t:"Vasodilatação cutânea (pele)",d:"Aumento do fluxo sanguíneo na pele para facilitar a perda de calor."}
+];
+var MARCAS=[
+  {key:"atletismo",nome:"Atletismo",marca:"Tempo (corridas), distância (saltos e arremessos)"},
+  {key:"natacao",nome:"Natação",marca:"Tempo"},
+  {key:"ciclismo",nome:"Ciclismo",marca:"Tempo"},
+  {key:"halterofilismo",nome:"Halterofilismo",marca:"Peso levantado"},
+  {key:"salto",nome:"Saltos (altura/vara)",marca:"Altura alcançada"},
+  {key:"maratona",nome:"Maratona",marca:"Tempo"},
+  {key:"remo",nome:"Remo",marca:"Tempo"}
+];
+var ATIVIDADE1=[
+  {txt:"Ginástica Artística — qual é o foco principal?",resp:"forca",opts:[["forca","Força e técnica"],["beleza","Beleza e harmonia"],["altura","Altura e precisão"],["equipe","Trabalho em equipe"]]},
+  {txt:"Ginástica Rítmica — qual é o foco principal?",resp:"beleza",opts:[["resist","Resistência e coreografia"],["beleza","Beleza e harmonia"],["forca","Força e técnica"],["altura","Altura e precisão"]]},
+  {txt:"Ginástica de Trampolim — qual é o foco principal?",resp:"altura",opts:[["altura","Altura e precisão"],["equipe","Trabalho em equipe"],["beleza","Beleza e harmonia"],["resist","Resistência e coreografia"]]},
+  {txt:"Ginástica Acrobática — qual é o foco principal?",resp:"equipe",opts:[["forca","Força e técnica"],["altura","Altura e precisão"],["equipe","Trabalho em equipe"],["beleza","Beleza e harmonia"]]},
+  {txt:"Ginástica Aeróbica — qual é o foco principal?",resp:"resist",opts:[["beleza","Beleza e harmonia"],["resist","Resistência e coreografia"],["altura","Altura e precisão"],["forca","Força e técnica"]]}
+];
+var ATIVIDADE2=[
+  {txt:"Marca medida: tempo na água.",resp:"natacao",opts:[["natacao","Natação"],["ciclismo","Ciclismo"],["remo","Remo"],["atletismo","Atletismo"]]},
+  {txt:"Marca medida: peso levantado.",resp:"halterofilismo",opts:[["salto","Saltos"],["halterofilismo","Halterofilismo"],["maratona","Maratona"],["remo","Remo"]]},
+  {txt:"Marca medida: altura alcançada.",resp:"salto",opts:[["salto","Saltos (altura/vara)"],["natacao","Natação"],["ciclismo","Ciclismo"],["halterofilismo","Halterofilismo"]]},
+  {txt:"Marca medida: tempo, com pedaladas.",resp:"ciclismo",opts:[["remo","Remo"],["maratona","Maratona"],["ciclismo","Ciclismo"],["natacao","Natação"]]},
+  {txt:"Prova longa de corrida nas ruas, medida por tempo.",resp:"maratona",opts:[["maratona","Maratona"],["salto","Saltos"],["remo","Remo"],["halterofilismo","Halterofilismo"]]}
+];
+var QUIZ=[
+  {q:"Quais são os dois tipos de ginástica apresentados?",o:["Competitiva e não competitiva","Olímpica e escolar","Individual e em equipe","Aeróbica e aquática"],c:0,e:"A ginástica se divide em competitiva e não competitiva."},
+  {q:"Qual das opções é uma ginástica COMPETITIVA?",o:["Laboral","Postural","Rítmica","Funcional"],c:2,e:"A ginástica rítmica é competitiva e faz parte dos Jogos Olímpicos."},
+  {q:"Qual das opções é uma ginástica NÃO COMPETITIVA?",o:["Artística","Laboral","Trampolim","Aeróbica"],c:1,e:"A ginástica laboral é não competitiva, praticada no ambiente de trabalho."},
+  {q:"As ginásticas competitivas são regulamentadas por:",o:["Instituições","Federações","Clubes","Associações"],c:1,e:"Elas são regulamentadas por federações e fazem parte dos Jogos Olímpicos."},
+  {q:"O foco principal da ginástica rítmica é:",o:["Força e técnica","Beleza e harmonia","Altura e precisão","Trabalho em equipe"],c:1,e:"A rítmica tem como foco a beleza e a harmonia, com ritmo e coordenação."},
+  {q:"A ginástica acrobática tem como foco principal:",o:["Trabalho em equipe","Tempo de corrida","Peso levantado","Velocidade"],c:0,e:"A acrobática exige trabalho em equipe, equilíbrio e coordenação."},
+  {q:"Qual é o objetivo dos esportes de marca?",o:["Acertar um alvo com exatidão","Superar marcas de tempo, distância ou altura","Derrubar o adversário","Realizar coreografias"],c:1,e:"Nos esportes de marca, o objetivo é superar uma marca individual: tempo, distância ou altura."},
+  {q:"Quais instrumentos são usados para medir as marcas nesses esportes?",o:["Bolas e redes","Cronômetros, réguas e sensores","Raquetes e tacos","Apitos e cartões"],c:1,e:"Cronômetros, réguas e sensores tornam as medidas precisas."},
+  {q:"No halterofilismo, a marca medida é:",o:["Tempo","Altura","Peso levantado","Distância"],c:2,e:"No halterofilismo, vence quem levanta mais peso."},
+  {q:"Durante o exercício, o aumento da sudorese (suor) serve para:",o:["Dissipar calor e manter a temperatura corporal","Aumentar o cansaço","Reduzir o oxigênio","Diminuir a frequência cardíaca"],c:0,e:"O suor é ativado para dissipar calor e manter a temperatura corporal estável."}
+];
+var LESSONS=[
+  {id:0,t:"Bem-vindo"},
+  {id:1,t:"Introdução à Ginástica"},
+  {id:2,t:"Tipos de Ginástica"},
+  {id:3,t:"Alterações Fisiológicas"},
+  {id:4,t:"Revisão e Atividade"},
+  {id:5,t:"Esportes de Marca: Conceito"},
+  {id:6,t:"Exemplos de Esportes de Marca"},
+  {id:7,t:"Atividade e Reflexão"},
+  {id:8,t:"Quiz Final"},
+  {id:9,t:"Revisão do Trimestre"}
+];
+
+/* ================= ESTADO ================= */
+var currentLesson=0, points=0, done={}, quizIdx=0, quizScore=0;
+var actIdx=0, answered=false, actIdx2=0, answered2=false;
+
+/* ================= NAVEGAÇÃO ================= */
+function goToLesson(id){
+  var secs=document.querySelectorAll(".lesson");
+  for(var i=0;i<secs.length;i++){secs[i].classList.remove("active");}
+  var t=document.getElementById("lesson-"+id);
+  if(t){t.classList.add("active");}
+  currentLesson=id;
+  document.getElementById("currentLesson").textContent=(id===0?"Início":(id===9?"Revisão":"Aula "+id))+" — "+LESSONS[id].t;
+  if(id>0){done[id]=true;}
+  renderTimeline();updateProgress();
+  document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo(0,0);
+  if(id===4){initActivity();}
+  if(id===7){initActivity2();}
+  if(id===8){initQuiz();}
+}
+function renderTimeline(){
+  var html='<div class="t-group">Módulo 1 — Tipos de Ginástica</div>';
+  for(var i=1;i<=8;i++){
+    if(i===5){html+='<div class="t-group">Módulo 2 — Esportes de Marca</div>';}
+    var cls="t-item"+(currentLesson===i?" active":"")+(done[i]?" done":"");
+    html+='<div class="'+cls+'" role="button" tabindex="0" onclick="goToLesson('+i+')" onkeydown="if(event.key===\'Enter\')goToLesson('+i+')">'
+      +'<div class="t-num">'+(done[i]?"✓":i)+'</div>'
+      +'<div class="t-txt">'+LESSONS[i].t+'</div></div>';
+  }
+  document.getElementById("timelineItems").innerHTML=html;
+}
+function updateProgress(){
+  var n=0;for(var k in done){n++;}
+  var pct=Math.round((n/9)*100);
+  document.getElementById("progressFill").style.width=pct+"%";
+  document.getElementById("progressPercent").textContent=pct+"%";
+  document.getElementById("pointsValue").textContent=points;
+}
+function toggleCard(el){el.classList.toggle("expanded");}
+function addPoints(v){points+=v;updateProgress();}
+
+/* ================= RENDERIZAÇÃO ================= */
+function renderGyms(){
+  var h="";
+  for(var i=0;i<GYMS.length;i++){
+    var g=GYMS[i];
+    h+='<div class="big-card">'+picTag(g.key,g.nome,"",true)
+      +'<div class="big-body"><h3 class="big-name">'+g.nome+'</h3><div class="big-origin">Ginástica competitiva</div>'
+      +'<ul class="feat-list"><li><strong>Foco principal:</strong> '+g.foco+'</li><li><strong>Exigência física:</strong> '+g.exig+'</li><li>'+g.desc+'</li></ul>'
+      +'<button class="btn-explore" onclick="openGym('+i+')">Explorar</button></div></div>';
+  }
+  document.getElementById("gymGrid").innerHTML=h;
+  var n='<div class="big-card">'+picTag("laboral","Pessoas alongando-se ao ar livre","",true)
+    +'<div class="big-body"><h3 class="big-name">Ginástica Não Competitiva</h3><div class="big-origin">Saúde e bem-estar</div><ul class="feat-list">';
+  for(var j=0;j<GYMS_NC.length;j++){n+="<li><strong>"+GYMS_NC[j].t+":</strong> "+GYMS_NC[j].d+"</li>";}
+  n+='</ul></div></div>';
+  document.getElementById("gymNcGrid").innerHTML=n;
+  var t='<div class="t-row head"><div class="t-cell">Modalidade</div><div class="t-cell">Foco principal • Exigência física</div></div>';
+  for(var k=0;k<GYMS.length;k++){
+    (function(g){
+      t+='<div class="t-row" onclick="openGymByKey(\''+g.key+'\')"><div class="t-cell">'+g.nome+'</div><div class="t-cell">'+g.foco+' • '+g.exig+'</div></div>';
+    })(GYMS[k]);
+  }
+  document.getElementById("gymTable").innerHTML=t;
+}
+function renderFisio(){
+  document.getElementById("fisioCard").innerHTML=picTag("fisiologia","Corredor em movimento, corpo em atividade","",false)
+    +'<div class="big-body"><h3 class="big-name">O Corpo em Movimento</h3><div class="big-origin">Alterações fisiológicas</div>'
+    +'<p class="card-text">Durante a atividade física, o corpo humano passa por diversas alterações para realizar a atividade com mais eficiência.</p>'
+    +'<ul class="feat-list"><li>Mais oxigênio para os músculos</li><li>Mais calor produzido e dissipado</li><li>Proteção e melhor desempenho</li></ul></div>';
+  var h="";
+  for(var i=0;i<FISIO.length;i++){
+    h+='<div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Alteração '+(i+1)+'</div><h3 class="card-title">'+FISIO[i].t+'</h3><p class="card-text">'+FISIO[i].d+'</p><div class="card-expansion"><p class="card-text">Essa alteração melhora o desempenho e protege o corpo durante o exercício.</p></div></div>';
+  }
+  document.getElementById("fisioGrid").innerHTML=h;
+}
+function renderMarcas(){
+  var h="";
+  for(var i=0;i<MARCAS.length;i++){
+    var m=MARCAS[i];
+    h+='<div class="big-card">'+picTag(m.key,m.nome,"",true)
+      +'<div class="big-body"><h3 class="big-name">'+m.nome+'</h3><div class="big-origin">Esporte de marca</div>'
+      +'<ul class="feat-list"><li><strong>Marca medida:</strong> '+m.marca+'</li></ul>'
+      +'<button class="btn-explore" onclick="openMarca('+i+')">Explorar</button></div></div>';
+  }
+  document.getElementById("marcaGrid").innerHTML=h;
+  var t='<div class="t-row head"><div class="t-cell">Esporte</div><div class="t-cell">Marca medida</div></div>';
+  for(var k=0;k<MARCAS.length;k++){
+    (function(m){
+      t+='<div class="t-row" onclick="openMarcaByKey(\''+m.key+'\')"><div class="t-cell">'+m.nome+'</div><div class="t-cell">'+m.marca+'</div></div>';
+    })(MARCAS[k]);
+  }
+  document.getElementById("marcaTable").innerHTML=t;
+}
+
+/* ================= MODAL ================= */
+function openModal(mediaHtml,bodyHtml){
+  document.getElementById("modalMedia").innerHTML=mediaHtml;
+  document.getElementById("modalBody").innerHTML=bodyHtml;
+  document.getElementById("modalOverlay").classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeModal(){
+  document.getElementById("modalOverlay").classList.remove("show");
+  document.getElementById("modalMedia").innerHTML="";
+  document.body.style.overflow="";
+}
+function openGym(i){
+  var g=GYMS[i];
+  var b='<h2 class="modal-title">'+g.nome+'</h2><div class="big-origin">Ginástica competitiva</div><ul class="feat-list"><li><strong>Foco principal:</strong> '+g.foco+'</li><li><strong>Exigência física:</strong> '+g.exig+'</li><li>'+g.desc+'</li><li>Regulamentada por federações e presente nos Jogos Olímpicos.</li></ul>';
+  openModal(picTag(g.key,g.nome,"modal-img",false),b);
+}
+function openGymByKey(key){
+  for(var i=0;i<GYMS.length;i++){if(GYMS[i].key===key){openGym(i);return;}}
+}
+function openMarca(i){
+  var m=MARCAS[i];
+  var b='<h2 class="modal-title">'+m.nome+'</h2><div class="big-origin">Esporte de marca</div><ul class="feat-list"><li><strong>Marca medida:</strong> '+m.marca+'</li><li>Vitória: melhores tempos, maiores distâncias ou alturas superadas.</li><li>Medido com cronômetros, réguas e sensores.</li></ul>';
+  openModal(picTag(m.key,m.nome,"modal-img",false),b);
+}
+function openMarcaByKey(key){
+  for(var i=0;i<MARCAS.length;i++){if(MARCAS[i].key===key){openMarca(i);return;}}
+}
+document.getElementById("modalOverlay").addEventListener("click",function(e){
+  if(e.target===this){closeModal();}
+});
+
+/* ================= ATIVIDADE 1 ================= */
+function initActivity(){actIdx=0;loadActivity();}
+function loadActivity(){
+  answered=false;
+  var a=ATIVIDADE1[actIdx];
+  document.getElementById("activityQuestion").textContent='"'+a.txt+'"';
+  var h="";
+  for(var i=0;i<a.opts.length;i++){
+    h+='<button class="act-btn" onclick="checkActivity(\''+a.opts[i][0]+'\')">'+a.opts[i][1]+'</button>';
+  }
+  document.getElementById("activityOptions").innerHTML=h;
+  document.getElementById("activityFeedback").className="feedback";
+  document.getElementById("nextActivityBtn").style.display="none";
+}
+function checkActivity(key){
+  if(answered)return;
+  var a=ATIVIDADE1[actIdx];
+  var fb=document.getElementById("activityFeedback");
+  var btns=document.querySelectorAll("#activityOptions .act-btn");
+  for(var i=0;i<btns.length;i++){btns[i].disabled=true;}
+  if(key===a.resp){fb.textContent="✓ CORRETO! Muito bem.";fb.className="feedback ok show";addPoints(10);}
+  else{fb.textContent="✗ TENTE NOVAMENTE na próxima pergunta.";fb.className="feedback no show";}
+  answered=true;
+  document.getElementById("nextActivityBtn").style.display="inline-block";
+}
+function nextActivity(){
+  actIdx++;
+  if(actIdx<ATIVIDADE1.length){loadActivity();}
+  else{document.getElementById("activityBox").innerHTML='<h3 class="h-center">Atividade Concluída!</h3><p style="text-align:center;color:var(--text-light);margin-top:.8rem">Você completou o desafio Complete o Foco.</p>';}
+}
+
+/* ================= ATIVIDADE 2 ================= */
+function initActivity2(){actIdx2=0;loadActivity2();}
+function loadActivity2(){
+  answered2=false;
+  var a=ATIVIDADE2[actIdx2];
+  document.getElementById("activityQuestion2").textContent='"'+a.txt+'"';
+  var h="";
+  for(var i=0;i<a.opts.length;i++){
+    h+='<button class="act-btn" onclick="checkActivity2(\''+a.opts[i][0]+'\')">'+a.opts[i][1]+'</button>';
+  }
+  document.getElementById("activityOptions2").innerHTML=h;
+  document.getElementById("activityFeedback2").className="feedback";
+  document.getElementById("nextActivityBtn2").style.display="none";
+}
+function checkActivity2(key){
+  if(answered2)return;
+  var a=ATIVIDADE2[actIdx2];
+  var fb=document.getElementById("activityFeedback2");
+  var btns=document.querySelectorAll("#activityOptions2 .act-btn");
+  for(var i=0;i<btns.length;i++){btns[i].disabled=true;}
+  if(key===a.resp){fb.textContent="✓ CORRETO! Muito bem.";fb.className="feedback ok show";addPoints(10);}
+  else{fb.textContent="✗ TENTE NOVAMENTE na próxima pergunta.";fb.className="feedback no show";}
+  answered2=true;
+  document.getElementById("nextActivityBtn2").style.display="inline-block";
+}
+function nextActivity2(){
+  actIdx2++;
+  if(actIdx2<ATIVIDADE2.length){loadActivity2();}
+  else{document.getElementById("activityBox2").innerHTML='<h3 class="h-center">Atividade Concluída!</h3><p style="text-align:center;color:var(--text-light);margin-top:.8rem">Você completou o desafio Descubra o Esporte.</p>';}
+}
+
+/* ================= QUIZ ================= */
+function initQuiz(){
+  quizIdx=0;quizScore=0;
+  document.getElementById("quizContent").style.display="block";
+  document.getElementById("quizResults").style.display="none";
+  loadQuiz();
+}
+function loadQuiz(){
+  var q=QUIZ[quizIdx];
+  var dots="";
+  for(var i=0;i<QUIZ.length;i++){dots+='<div class="q-dot'+(i===quizIdx?" active":"")+'" id="qd'+i+'"></div>';}
+  document.getElementById("quizProgress").innerHTML=dots;
+  document.getElementById("questionText").textContent=(quizIdx+1)+". "+q.q;
+  var h="";
+  for(var j=0;j<q.o.length;j++){
+    h+='<button class="opt-btn" onclick="checkAnswer('+j+')">'+String.fromCharCode(65+j)+') '+q.o[j]+'</button>';
+  }
+  document.getElementById("optionsGrid").innerHTML=h;
+  document.getElementById("quizFeedback").className="feedback";
+  document.getElementById("nextQuestionBtn").classList.remove("show");
+}
+function checkAnswer(sel){
+  var q=QUIZ[quizIdx];
+  var btns=document.querySelectorAll(".opt-btn");
+  for(var i=0;i<btns.length;i++){
+    btns[i].disabled=true;
+    if(i===q.c){btns[i].classList.add("ok");}
+    else if(i===sel){btns[i].classList.add("no");}
+  }
+  var fb=document.getElementById("quizFeedback");
+  var dot=document.getElementById("qd"+quizIdx);
+  if(sel===q.c){
+    fb.innerHTML="<strong>✓ CORRETO!</strong> "+q.e;
+    fb.className="feedback ok show";
+    if(dot)dot.className="q-dot ok";
+    quizScore++;addPoints(15);
+  }else{
+    fb.innerHTML="<strong>✗ INCORRETO.</strong> "+q.e;
+    fb.className="feedback no show";
+    if(dot)dot.className="q-dot no";
+  }
+  document.getElementById("nextQuestionBtn").classList.add("show");
+  document.getElementById("nextQuestionBtn").textContent=(quizIdx===QUIZ.length-1)?"Ver Resultado Final →":"Próxima Pergunta →";
+}
+function nextQuestion(){
+  quizIdx++;
+  if(quizIdx<QUIZ.length){loadQuiz();}
+  else{showResults();}
+}
+function showResults(){
+  document.getElementById("quizContent").style.display="none";
+  document.getElementById("quizResults").style.display="block";
+  var pct=Math.round((quizScore/QUIZ.length)*100);
+  document.getElementById("finalScore").textContent=quizScore+"/"+QUIZ.length+" • "+pct+"%";
+  var msg;
+  if(pct>=90){msg="Excelente! Você dominou o conteúdo do 1º trimestre. Parabéns!";addPoints(50);}
+  else if(pct>=70){msg="Muito bom! Você compreendeu bem a ginástica e os esportes de marca.";addPoints(30);}
+  else if(pct>=50){msg="Bom esforço! Revise as aulas e tente melhorar sua pontuação.";addPoints(15);}
+  else{msg="Continue estudando! Revise o conteúdo e tente novamente.";}
+  document.getElementById("resultsMessage").textContent=msg;
+  updateProgress();
+}
+function restartQuiz(){initQuiz();}
+
+/* ================= FINAL ================= */
+function finishCourse(){
+  done[9]=true;
+  renderTimeline();updateProgress();
+  var ach=document.getElementById("achievement");
+  ach.classList.add("show");
+  setTimeout(function(){ach.classList.remove("show");},6000);
+}
+
+/* ================= EVENTOS ================= */
+document.getElementById("menuToggle").addEventListener("click",function(){
+  document.getElementById("sidebar").classList.toggle("open");
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){closeModal();document.getElementById("sidebar").classList.remove("open");}
+});
+
+/* ================= INICIALIZAÇÃO ================= */
+applyPic(document.getElementById("pic-c1"),"artistica");
+applyPic(document.getElementById("pic-c2"),"atletismo");
+var vids=document.querySelectorAll("video[data-srcs]");
+for(var vi=0;vi<vids.length;vi++){armVideo(vids[vi]);}
+renderGyms();
+renderFisio();
+renderMarcas();
+renderTimeline();
+updateProgress();
+</script>
+</body>
+</html>
