@@ -63,7 +63,7 @@ window.APRESENTACOES = [
     titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
     descricao: "",
     tipo: "link",
-    link: "https://brunodiasef.github.io/6ANO/"
+    link: "aula/3ºtri/6ºano/index.html"
   },
   {
     id: "aula-6t3n2-1788191590738",
