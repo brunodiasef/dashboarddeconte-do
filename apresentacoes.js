@@ -174,6 +174,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/6ºano/APOSTILA.docx"
+  },
+  {
+    id: "aula-6t1n1-1788457633112",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "ESPORTES DE INVASÃO + LUTAS PELO MUNDO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
