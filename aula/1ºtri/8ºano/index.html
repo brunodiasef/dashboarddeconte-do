@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educação Física • 8º Ano • 1º Trimestre | E.E.E.F.M. Ilda Ferreira da Fonseca Martins</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-900-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-700-normal.css">
+<style>
+:root{
+  --cream:#f3e9d2; --cream2:#eadfc2; --paper:#fbf5e6; --card:#fffdf6;
+  --ink:#2b2015; --ink-soft:#6b5638;
+  --brown900:#1d140c; --brown800:#2a1c10; --brown700:#3a2a1a;
+  --gold:#c1922f; --gold2:#a87c1f; --goldsoft:#e6c877;
+  --green:#3f7d4e; --red:#a8402f;
+  --radius:16px; --shadow:0 10px 26px rgba(43,32,21,.14);
+  --serif:'Playfair Display',Georgia,serif; --sans:'Source Sans 3','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans); background:var(--cream); color:var(--ink); min-height:100vh;
+  background-image:repeating-linear-gradient(45deg, rgba(193,146,47,.04) 0 2px, transparent 2px 14px);}
+img{max-width:100%; display:block}
+video{max-width:100%; display:block}
+button{font-family:var(--sans)}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:6px}
+.skip-link{position:absolute; left:-999px; top:0; background:var(--brown800); color:var(--goldsoft); padding:10px 16px; z-index:200; border-radius:0 0 10px 0}
+.skip-link:focus{left:0}
+.eyebrow{display:block; text-transform:uppercase; letter-spacing:.22em; font-size:.68rem; font-weight:700; color:var(--gold2)}
+.eyebrow.light{color:var(--goldsoft)}
+/* ============ SIDEBAR ============ */
+#sidebar{position:fixed; inset:0 auto 0 0; width:292px; background:linear-gradient(180deg,var(--brown900),var(--brown800)); color:#e9dcbd; z-index:90; display:flex; flex-direction:column; transform:translateX(0); transition:transform .35s ease; box-shadow:6px 0 24px rgba(0,0,0,.25)}
+.side-head{display:flex; gap:12px; align-items:center; padding:22px 18px 16px; border-bottom:1px solid rgba(230,200,119,.25)}
+.logo{width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); display:grid; place-items:center; font-family:var(--serif); font-weight:900; font-size:1.25rem; flex:none}
+.side-head strong{display:block; font-size:.72rem; letter-spacing:.06em; line-height:1.35}
+.side-head .eyebrow{margin-top:4px}
+.side-nav{padding:14px 12px; overflow-y:auto; flex:1}
+.side-nav button{display:flex; width:100%; gap:10px; align-items:center; background:none; border:none; color:#d9c9a4; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:.82rem; letter-spacing:.05em; text-align:left; transition:.2s; margin-bottom:2px}
+.side-nav button:hover{background:rgba(230,200,119,.12); color:var(--goldsoft)}
+.side-nav button.active{background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--brown900); font-weight:700}
+.side-nav .num{width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(230,200,119,.5); display:grid; place-items:center; font-size:.7rem; flex:none}
+.side-nav button.active .num{border-color:var(--brown900)}
+.side-nav button.done .num{background:var(--goldsoft); color:var(--brown900); border-color:var(--goldsoft)}
+.side-label{font-size:.58rem; letter-spacing:.2em; color:#a5906a; text-transform:uppercase; padding:12px 12px 4px; font-weight:800}
+.side-stats{padding:14px 18px; border-top:1px solid rgba(230,200,119,.25); display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; text-align:center}
+.side-stats div{background:rgba(230,200,119,.08); border-radius:10px; padding:8px 4px}
+.side-stats strong{display:block; font-family:var(--serif); font-size:1.05rem; color:var(--goldsoft)}
+.side-stats span{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:#c9b78d}
+.side-foot{padding:10px; text-align:center; font-size:.6rem; letter-spacing:.2em; color:#a5906a; text-transform:uppercase}
+#overlay{position:fixed; inset:0; background:rgba(20,12,6,.5); z-index:80; opacity:0; pointer-events:none; transition:.3s}
+#overlay.show{opacity:1; pointer-events:auto}
+/* ============ LAYOUT / HEADER ============ */
+.layout{margin-left:292px}
+header{position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; padding:10px 20px; background:rgba(243,233,210,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--cream2)}
+.menu-btn{display:none; background:var(--brown800); color:var(--goldsoft); border:none; width:42px; height:42px; border-radius:12px; font-size:1.2rem; cursor:pointer}
+.hud-lesson{flex:1; min-width:0}
+.hud-lesson strong{display:block; font-family:var(--serif); font-size:1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.hud-progress{display:flex; align-items:center; gap:10px; min-width:150px}
+.hud-bar{flex:1; height:8px; background:var(--cream2); border-radius:99px; overflow:hidden; min-width:70px}
+.hud-bar i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--goldsoft),var(--gold)); border-radius:99px; transition:width .6s ease}
+.hud-progress span{font-size:.72rem; font-weight:700; color:var(--gold2)}
+.points-badge{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); font-weight:800; padding:8px 14px; border-radius:999px; font-size:.8rem; box-shadow:0 4px 12px rgba(168,124,31,.35); white-space:nowrap}
+/* ============ TIMELINE ============ */
+.timeline-wrap{padding:10px 20px 0; max-width:1120px; margin:0 auto}
+.timeline{display:flex; overflow-x:auto; padding:12px 4px 16px; gap:2px; scrollbar-width:thin}
+.tl-item{position:relative; min-width:84px; display:flex; flex-direction:column; align-items:center; gap:7px; background:none; border:none; cursor:pointer; padding:2px}
+.tl-item:not(:last-child)::after{content:''; position:absolute; top:22px; left:calc(50% + 26px); width:calc(100% - 52px); height:2px; background:#d3bd8d; z-index:0}
+.tl-dot{width:44px; height:44px; border-radius:50%; background:var(--card); border:2px solid #d3bd8d; display:grid; place-items:center; font-weight:800; color:var(--ink-soft); position:relative; z-index:1; transition:.25s; font-size:.9rem}
+.tl-item:hover .tl-dot{transform:translateY(-3px); border-color:var(--gold)}
+.tl-item.current .tl-dot{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); border-color:var(--gold2); color:var(--brown900); transform:scale(1.1); box-shadow:0 8px 16px rgba(168,124,31,.4)}
+.tl-item.done .tl-dot{background:var(--brown800); border-color:var(--brown800); color:var(--goldsoft)}
+.tl-label{font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); text-align:center; max-width:92px}
+.tl-div{flex:none; align-self:flex-start; margin:12px 8px 0 4px; font-size:.55rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold2); font-weight:800; background:var(--cream2); border-radius:999px; padding:5px 9px; border:1px dashed var(--gold)}
+/* ============ MAIN / SCREENS ============ */
+main{max-width:1120px; margin:0 auto; padding:18px 20px 60px}
+.screen{display:none}
+.screen.active{display:block; animation:screenIn .5s ease}
+@keyframes screenIn{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
+.reveal{opacity:0; transform:translateY(18px); transition:.6s ease}
+.reveal.in{opacity:1; transform:none}
+.hero{text-align:center; padding:44px 10px 30px}
+.hero h1{font-family:var(--serif); font-weight:900; font-size:clamp(1.7rem,4.5vw,3rem); letter-spacing:.03em; margin:10px 0 4px}
+.hero .sub{font-family:var(--serif); font-size:clamp(1rem,2.6vw,1.5rem); color:var(--gold2); font-weight:700; letter-spacing:.14em}
+.hero .tag{margin-top:14px; display:inline-block; background:var(--brown800); color:var(--goldsoft); padding:10px 20px; border-radius:999px; letter-spacing:.18em; font-size:.72rem; font-weight:700}
+.hero .lead-q{max-width:640px; margin:20px auto 26px; font-size:1.02rem; color:var(--ink-soft); font-style:italic}
+.home-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; margin-top:10px}
+.home-card{border:none; background:var(--card); border-radius:20px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer; text-align:left; transition:.3s; padding:0}
+.home-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(43,32,21,.22)}
+.hc-media{width:100%; height:220px; background:var(--cream2)}
+.hc-media img,.hc-media video{width:100%; height:100%; object-fit:cover}
+.home-card .hc-body{padding:18px 20px 20px}
+.home-card h3{font-family:var(--serif); font-size:1.35rem; margin:4px 0 6px}
+.home-card p{color:var(--ink-soft); font-size:.88rem}
+.module-cover{position:relative; border-radius:22px; overflow:hidden; color:#fff; padding:52px 30px; margin-bottom:26px; background-size:cover; background-position:center; box-shadow:var(--shadow)}
+.module-cover::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(29,20,12,.82), rgba(29,20,12,.45))}
+.module-cover>*{position:relative}
+.module-cover h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:.04em; margin:8px 0 8px; color:#fdf6e3}
+.module-cover p{color:var(--goldsoft); letter-spacing:.2em; text-transform:uppercase; font-size:.75rem; font-weight:700}
+.sec-title{font-family:var(--serif); font-size:clamp(1.2rem,3vw,1.7rem); margin:26px 0 6px; letter-spacing:.02em}
+.sec-sub{color:var(--ink-soft); margin-bottom:18px; max-width:720px}
+.lead{background:var(--paper); border-left:5px solid var(--gold); border-radius:12px; padding:16px 20px; font-size:1rem; color:var(--ink-soft); box-shadow:var(--shadow); margin:14px 0 22px; font-style:italic}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); border:1px solid #e7d9b8; transition:.25s; cursor:pointer; text-align:left}
+.card:hover{transform:translateY(-4px); border-color:var(--gold)}
+.card .ico{width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); display:grid; place-items:center; font-size:22px; margin-bottom:12px}
+.card h4{font-family:var(--serif); letter-spacing:.05em; margin-bottom:6px; font-size:.98rem}
+.card p{color:var(--ink-soft); font-size:.88rem; line-height:1.5}
+.card .more{max-height:0; overflow:hidden; transition:max-height .4s ease, margin-top .4s; color:var(--ink-soft); font-size:.86rem}
+.card.open .more{max-height:220px; margin-top:8px}
+.card .hint{display:inline-block; margin-top:10px; font-size:.62rem; letter-spacing:.16em; color:var(--gold2); font-weight:700; text-transform:uppercase}
+/* big cards with media */
+.big-card{background:var(--card); border-radius:20px; overflow:hidden; box-shadow:var(--shadow); border:1px solid #e7d9b8; display:flex; flex-direction:column; transition:.3s}
+.big-card:hover{transform:translateY(-5px)}
+.bc-media-top{height:170px; background:var(--cream2)}
+.bc-media-top img,.bc-media-top video{width:100%; height:100%; object-fit:cover}
+.big-card .bc-top{padding:16px 20px 0; display:flex; align-items:center; gap:12px}
+.big-card .ico{width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); display:grid; place-items:center; font-size:24px; flex:none}
+.big-card h4{font-family:var(--serif); font-size:1.15rem}
+.big-card .orig{font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold2); font-weight:700}
+.big-card .bc-body{padding:12px 20px 6px; flex:1}
+.big-card p{color:var(--ink-soft); font-size:.9rem; line-height:1.55}
+.big-card .btn{margin:10px 20px 20px; align-self:flex-start}
+.bc-more{max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 20px}
+.big-card.open .bc-more{max-height:260px; padding:0 20px 6px}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
+.chip{background:var(--cream2); border-radius:999px; padding:7px 14px; font-size:.76rem; font-weight:700; color:var(--brown700); display:inline-flex; align-items:center}
+.grids2{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:999px; border:2px solid transparent; font-weight:800; letter-spacing:.14em; font-size:.74rem; cursor:pointer; transition:.25s; text-transform:uppercase; background:none}
+.btn-gold{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); box-shadow:0 6px 16px rgba(168,124,31,.35)}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(168,124,31,.45)}
+.btn-ghost{border-color:var(--brown700); color:var(--brown700)}
+.btn-ghost:hover{background:var(--brown700); color:var(--goldsoft)}
+.btn-small{padding:9px 16px; font-size:.66rem}
+.btn.is-done{background:var(--green); color:#fff; box-shadow:none; cursor:default}
+.nav-btns{display:flex; justify-content:space-between; align-items:center; gap:12px; margin:34px 0 10px; flex-wrap:wrap}
+/* quiz */
+.quiz-box{background:var(--paper); border-radius:20px; padding:24px; box-shadow:var(--shadow); border:1px solid #e7d9b8}
+.quiz-top{display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px; flex-wrap:wrap}
+.quiz-count{font-size:.68rem; letter-spacing:.16em; color:var(--ink-soft); font-weight:700}
+.quiz-q{font-family:var(--serif); font-size:1.12rem; margin-bottom:16px; line-height:1.45}
+.quiz-opts{display:grid; gap:10px}
+.quiz-opt{background:var(--card); border:2px solid #e0d0a8; border-radius:12px; padding:13px 16px; text-align:left; cursor:pointer; font-size:.92rem; font-weight:600; color:var(--ink); transition:.2s}
+.quiz-opt:hover:not(:disabled){border-color:var(--gold); transform:translateX(4px)}
+.quiz-opt.correct{background:#e5f2e7; border-color:var(--green); color:var(--green)}
+.quiz-opt.wrong{background:#f7e4e0; border-color:var(--red); color:var(--red); animation:shake .35s}
+.quiz-opt:disabled{cursor:default; opacity:.9}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.quiz-feedback{margin-top:14px; padding:12px 16px; border-radius:12px; font-weight:700; letter-spacing:.06em; font-size:.85rem}
+.quiz-feedback p{font-weight:400; letter-spacing:0; margin-top:6px; color:var(--ink-soft); font-size:.86rem}
+.quiz-feedback.ok{background:#e5f2e7; color:var(--green)}
+.quiz-feedback.err{background:#f7e4e0; color:var(--red)}
+.quiz-actions{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
+.quiz-result{text-align:center; padding:16px 6px}
+.score-big{font-family:var(--serif); font-size:3rem; font-weight:900; color:var(--gold2); margin:8px 0 0}
+.score-pct{font-size:1.1rem; font-weight:800; color:var(--ink-soft); margin-bottom:10px}
+/* vs comparison */
+.vs{display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:stretch; margin:18px 0}
+.vs-card{background:var(--card); border-radius:18px; padding:22px; box-shadow:var(--shadow); border-top:6px solid var(--gold)}
+.vs-card h4{font-family:var(--serif); font-size:1.3rem; margin-bottom:4px}
+.vs-card .orig{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold2); font-weight:700}
+.vs-card ul{list-style:none; margin-top:12px}
+.vs-card li{padding:8px 0; border-bottom:1px dashed #e0d0a8; font-size:.9rem; color:var(--ink-soft)}
+.vs-card li:last-child{border:none}
+.vs-badge{align-self:center; font-family:var(--serif); font-weight:900; font-size:1.5rem; color:var(--gold2)}
+/* essays */
+.essay-card{background:var(--paper); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow); border:1px solid #e7d9b8; margin-bottom:16px}
+.essay-card h4{font-family:var(--serif); font-size:1rem; margin:8px 0 12px}
+.essay-card textarea{width:100%; border:2px solid #e0d0a8; border-radius:12px; background:var(--card); padding:12px 14px; font-family:var(--sans); font-size:.92rem; color:var(--ink); resize:vertical; min-height:96px}
+.essay-card textarea:focus{outline:none; border-color:var(--gold)}
+.essay-card .btn{margin-top:10px; margin-right:8px}
+.ans-box{margin-top:12px; padding:12px 14px; border-radius:12px; background:#e5f2e7; color:var(--green); font-size:.86rem; display:none}
+.ans-box.show{display:block}
+/* midia list */
+.midia-item{background:var(--card); border-radius:12px; padding:12px 16px; box-shadow:var(--shadow); display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; border:1px solid #e7d9b8}
+.midia-item code{background:var(--brown800); color:var(--goldsoft); padding:6px 10px; border-radius:8px; font-size:.78rem; white-space:nowrap}
+.midia-item .uso{flex:1; min-width:220px; font-size:.85rem; color:var(--ink-soft)}
+.midia-item .mst{font-weight:800; font-size:.7rem; letter-spacing:.08em; color:var(--ink-soft); text-transform:uppercase}
+.midia-note{background:var(--paper); border-left:5px solid var(--gold); border-radius:12px; padding:14px 18px; font-size:.92rem; color:var(--ink-soft); box-shadow:var(--shadow); margin:14px 0 20px}
+/* review / achievements / end */
+.rev-cols{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.rev-card{background:var(--card); border-radius:18px; padding:24px; box-shadow:var(--shadow); border-top:6px solid var(--gold)}
+.rev-card h4{font-family:var(--serif); font-size:1.25rem; margin-bottom:12px}
+.rev-card ul{list-style:none}
+.rev-card li{padding:9px 0 9px 26px; border-bottom:1px dashed #e0d0a8; color:var(--ink-soft); font-size:.9rem; position:relative}
+.rev-card li::before{content:'★'; position:absolute; left:2px; color:var(--gold)}
+.ach-card{background:var(--card); border-radius:16px; padding:18px; box-shadow:var(--shadow); text-align:center; border:1px solid #e7d9b8; transition:.3s}
+.ach-card .a-ico{font-size:2rem}
+.ach-card h4{font-family:var(--serif); font-size:.92rem; margin:8px 0 4px; letter-spacing:.06em}
+.ach-card p{font-size:.78rem; color:var(--ink-soft)}
+.ach-card.locked{opacity:.45; filter:grayscale(1)}
+.end-hero{text-align:center; padding:30px 10px}
+.end-hero .trophy{font-size:4rem}
+.end-hero h2{font-family:var(--serif); font-size:clamp(1.5rem,4vw,2.4rem); margin:12px 0}
+.check-list{max-width:560px; margin:18px auto; text-align:left}
+.check-list li{list-style:none; background:var(--card); margin-bottom:8px; padding:12px 16px; border-radius:12px; box-shadow:var(--shadow); display:flex; gap:10px; align-items:center; font-size:.9rem}
+.check-list li .st{margin-left:auto; font-weight:800}
+.check-list li.ok .st{color:var(--green)} .check-list li.no .st{color:var(--red)}
+#confettiBox{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:60}
+#confettiBox i{position:absolute; top:-20px; width:10px; height:14px; background:var(--gold); animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{padding:26px 20px 40px; text-align:center; color:var(--ink-soft); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase}
+/* toasts */
+#toastBox{position:fixed; right:16px; bottom:16px; z-index:150; display:flex; flex-direction:column}
+.toast{background:var(--brown800); color:var(--goldsoft); padding:12px 18px; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,.3); opacity:0; transform:translateY(14px); transition:.3s; margin-top:8px; font-size:.82rem; letter-spacing:.05em; font-weight:700; max-width:320px}
+.toast.in{opacity:1; transform:none}
+/* responsive */
+@media (max-width:980px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  .layout{margin-left:0}
+  .menu-btn{display:block}
+  .hud-lesson strong{font-size:.85rem}
+  .vs{grid-template-columns:1fr}
+  .vs-badge{justify-self:center}
+}
+@media (max-width:560px){
+  main{padding:14px 14px 50px}
+  header{padding:10px 12px; gap:10px}
+  .points-badge{padding:6px 10px; font-size:.7rem}
+  .hero{padding-top:26px}
+  .quiz-box{padding:18px 14px}
+  .hud-progress{min-width:90px}
+  .hud-lesson strong{font-size:.78rem}
+  .hc-media{height:180px}
+  .bc-media-top{height:150px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important; scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<!-- ============================================================
+  PASTA "midia" — NOMES DOS ARQUIVOS DE FOTO OU VÍDEO
+  Crie uma pasta chamada  midia  ao lado deste index.html e coloque
+  os arquivos com um destes nomes (a extensão pode ser):
+  FOTO: .jpg  .jpeg  .png  .webp   |   VÍDEO: .mp4
+  Se existirem os dois, a FOTO tem prioridade. Se não existir nenhum,
+  a apresentação usa a ilustração padrão automaticamente.
+
+  01. midia/capa-invasao      -> Card principal Módulo 1 (Início)
+  02. midia/capa-lutas        -> Card principal Módulo 2 (Início)
+  03. midia/futsal            -> Card da modalidade Futsal
+  04. midia/basquete          -> Card da modalidade Basquete
+  05. midia/rugbi             -> Card da modalidade Rúgbi
+  06. midia/futebol-americano -> Card da modalidade Futebol Americano
+  07. midia/handebol          -> Card da modalidade Handebol
+  08. midia/hoquei            -> Card da modalidade Hóquei no Gelo
+  09. midia/judo              -> Card da modalidade Judô
+  10. midia/boxe              -> Card da modalidade Boxe
+  11. midia/capoeira          -> Card da modalidade Capoeira
+  12. midia/muay-thai         -> Card da modalidade Muay Thai
+  13. midia/taekwondo         -> Card da modalidade Taekwondo
+  14. midia/wrestling         -> Card da modalidade Wrestling
+============================================================= -->
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<div id="overlay"></div>
+<aside id="sidebar" aria-label="Menu principal">
+  <div class="side-head">
+    <div class="logo" aria-hidden="true">EF</div>
+    <div><strong>E.E.E.F.M. ILDA FERREIRA DA FONSECA MARTINS</strong><span class="eyebrow light">Educação Física</span></div>
+  </div>
+  <nav class="side-nav" id="sideNav" aria-label="Navegação das aulas"></nav>
+  <div class="side-stats">
+    <div><strong id="stPoints">0</strong><span>Pontos</span></div>
+    <div><strong id="stLessons">0/8</strong><span>Aulas</span></div>
+    <div><strong id="stAch">0/7</strong><span>Conquistas</span></div>
+  </div>
+  <div class="side-foot">8º Ano • 1º Trimestre</div>
+</aside>
+<div class="layout">
+  <header>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <div class="hud-lesson"><span class="eyebrow" id="hudKicker">INÍCIO</span><strong id="hudTitle">Plataforma do 1º Trimestre</strong></div>
+    <div class="hud-progress" aria-label="Progresso do trimestre"><div class="hud-bar"><i id="hudBar"></i></div><span id="hudPct">0%</span></div>
+    <div class="points-badge" aria-label="Pontos">⭐ <span id="hudPoints">0</span></div>
+  </header>
+  <div class="timeline-wrap"><div class="timeline" id="timeline" aria-label="Cronograma de aulas"></div></div>
+  <main id="main">
+
+    <section class="screen active" data-screen="home">
+      <div class="hero">
+        <span class="eyebrow">E.E.E.F.M. Ilda Ferreira da Fonseca Martins</span>
+        <h1>EDUCAÇÃO FÍSICA • 8º ANO</h1>
+        <p class="sub">1º TRIMESTRE</p>
+        <p class="tag">ESPORTES DE INVASÃO + LUTAS PELO MUNDO</p>
+        <p class="lead-q">"Neste trimestre vamos conhecer esportes de invasão que envolvem estratégia, cooperação e trabalho em equipe, além das lutas pelo mundo com disciplina, respeito e cultura."</p>
+        <button class="btn btn-gold" id="startBtn" type="button">COMEÇAR AULA ➜</button>
+      </div>
+      <div class="home-cards">
+        <button class="home-card reveal" type="button" data-go="a1">
+          <div class="hc-media" data-media="capa-invasao" data-alt="Ilustração de esportes de invasão com jogadores disputando a bola"></div>
+          <div class="hc-body"><span class="eyebrow">Módulo 1</span><h3>ESPORTES DE INVASÃO</h3><p>Estratégia • Cooperação • Trabalho em equipe</p></div>
+        </button>
+        <button class="home-card reveal" type="button" data-go="a5">
+          <div class="hc-media" data-media="capa-lutas" data-alt="Ilustração de lutas pelo mundo: capoeira, judô e boxe"></div>
+          <div class="hc-body"><span class="eyebrow">Módulo 2</span><h3>LUTAS PELO MUNDO</h3><p>Cultura • Disciplina • Respeito • Estratégia</p></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a1">
+      <div class="module-cover" style="background-image:url('https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1e4515cd6-94cc-4072-a265-137664306bc7.png')">
+        <span class="eyebrow light">Módulo 1</span><h2>ESPORTES DE INVASÃO</h2><p>Estratégia • Cooperação • Trabalho em equipe</p>
+      </div>
+      <h3 class="sec-title">AULA 1 • O QUE SÃO?</h3>
+      <p class="lead">"Esportes de invasão são uma categoria de atividades esportivas em que duas equipes competem para invadir o território adversário e marcar pontos. Esses esportes exigem estratégia, coordenação, habilidades físicas e trabalho em equipe."</p>
+      <div class="grid" id="charGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="home">⬅ INÍCIO</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="1">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a2">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a2">
+      <span class="eyebrow">Módulo 1 • Esportes de Invasão</span>
+      <h3 class="sec-title">AULA 2 • PRINCÍPIOS TÁTICOS</h3>
+      <p class="sec-sub">Clique em cada card para revelar a explicação.</p>
+      <div class="grid" id="prinGrid"></div>
+      <h3 class="sec-title">BENEFÍCIOS</h3>
+      <div class="grid" id="benInvGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a1">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="2">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a3">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a3">
+      <span class="eyebrow">Módulo 1 • Esportes de Invasão</span>
+      <h3 class="sec-title">AULA 3 • EXEMPLOS DE ESPORTES DE INVASÃO</h3>
+      <p class="sec-sub">Os cards aceitam FOTO ou VÍDEO da pasta <strong>midia</strong>. Clique em EXPLORAR para ver os detalhes de cada modalidade.</p>
+      <div class="grids2" id="invGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a2">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="3">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a4">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a4">
+      <span class="eyebrow">Módulo 1 • Esportes de Invasão</span>
+      <h3 class="sec-title">AULA 4 • ATIVIDADE: INVASÃO</h3>
+      <p class="sec-sub">Questões da apostila com feedback na hora. Você pode tentar novamente!</p>
+      <div class="quiz-box" id="quiz4Box"></div>
+      <h3 class="sec-title">QUESTÕES DISCURSIVAS</h3>
+      <div id="essayInvBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a3">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="4">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a5">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a5">
+      <div class="module-cover" style="background-image:url('https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f2e1a9ac-cb01-4310-9d33-f3de3e25e1ad.png')">
+        <span class="eyebrow light">Módulo 2</span><h2>LUTAS PELO MUNDO</h2><p>Cultura • Disciplina • Respeito • Estratégia</p>
+      </div>
+      <h3 class="sec-title">AULA 5 • PRINCIPAIS MODALIDADES E SUAS ORIGENS</h3>
+      <p class="sec-sub">Os cards aceitam FOTO ou VÍDEO da pasta <strong>midia</strong>. Clique em CONHECER para ver os detalhes de cada luta.</p>
+      <div class="grids2" id="fightGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a4">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="5">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a6">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a6">
+      <span class="eyebrow">Módulo 2 • Lutas pelo Mundo</span>
+      <h3 class="sec-title">AULA 6 • BENEFÍCIOS FÍSICOS</h3>
+      <p class="sec-sub">Clique nos cards para ver cada benefício.</p>
+      <div class="grid" id="physGrid"></div>
+      <h3 class="sec-title">BENEFÍCIOS MENTAIS</h3>
+      <div class="grid" id="mindGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a5">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="6">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a7">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a7">
+      <span class="eyebrow">Módulo 2 • Lutas pelo Mundo</span>
+      <h3 class="sec-title">AULA 7 • ATIVIDADE: ADIVINHE A LUTA</h3>
+      <p class="sec-sub">Leia a característica e descubra qual luta está sendo descrita.</p>
+      <div class="quiz-box" id="quiz7Box"></div>
+      <h3 class="sec-title">COMPARAÇÃO CULTURAL</h3>
+      <div class="vs">
+        <div class="vs-card reveal"><h4>CAPOEIRA</h4><span class="orig">Brasil</span>
+          <ul><li>Mistura dança + luta</li><li>Acompanhada de música</li><li>Expressão cultural brasileira</li><li>Movimentos acrobáticos</li><li>Nasceu entre os escravizados africanos</li></ul>
+        </div>
+        <div class="vs-badge" aria-hidden="true">×</div>
+        <div class="vs-card reveal"><h4>JUDÔ</h4><span class="orig">Japão</span>
+          <ul><li>Força + técnica</li><li>Disciplina</li><li>Respeito</li><li>Equilíbrio entre corpo e mente</li><li>Arte marcial japonesa</li></ul>
+        </div>
+      </div>
+      <h3 class="sec-title">QUESTÕES DISCURSIVAS</h3>
+      <div id="essayLutBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a6">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="7">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a8">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a8">
+      <span class="eyebrow">Revisão Final</span>
+      <h3 class="sec-title">AULA 8 • QUIZ FINAL DO TRIMESTRE</h3>
+      <p class="sec-sub">10 questões sobre esportes de invasão e lutas pelo mundo. Boa sorte!</p>
+      <div class="quiz-box" id="finalQuizBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a7">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="8">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="rev">REVISÃO ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="rev">
+      <h3 class="sec-title">REVISÃO DO TRIMESTRE</h3>
+      <div class="rev-cols">
+        <div class="rev-card reveal"><span class="eyebrow">Módulo 1</span><h4>ESPORTES DE INVASÃO</h4>
+          <ul>
+            <li>Duas equipes competem para invadir o território adversário e marcar pontos.</li>
+            <li>Características: dois times, pontos no campo do adversário, cooperação e regras específicas.</li>
+            <li>Princípios táticos: Ataque, Defesa e Transição.</li>
+            <li>Benefícios: desenvolvimento motor, socialização e aprendizado de regras e disciplina.</li>
+            <li>Exemplos: Futsal, Basquete, Rúgbi, Futebol Americano, Handebol e Hóquei no gelo.</li>
+            <li>Vôlei NÃO é esporte de invasão (é de rede/parede).</li>
+          </ul>
+        </div>
+        <div class="rev-card reveal"><span class="eyebrow">Módulo 2</span><h4>LUTAS PELO MUNDO</h4>
+          <ul>
+            <li>Judô (Japão): equilíbrio entre força e técnica, disciplina e respeito.</li>
+            <li>Boxe (Grécia e Inglaterra): força, estratégia e resistência.</li>
+            <li>Capoeira (Brasil): mistura de dança e luta, música e acrobacia.</li>
+            <li>Muay Thai (Tailândia): punhos, cotovelos, joelhos e pés.</li>
+            <li>Taekwondo (Coreia): golpes de perna rápidos e poderosos.</li>
+            <li>Wrestling (várias regiões): luta livre, variante greco-romana.</li>
+            <li>Benefícios físicos: força, coordenação, flexibilidade, agilidade e controle do peso.</li>
+            <li>Benefícios mentais: menos estresse, foco, autoconfiança, disciplina e controle emocional.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a8">⬅ AULA 8</button>
+        <button class="btn btn-gold" type="button" data-go="midia">PASTA MÍDIA 📁</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="midia">
+      <h3 class="sec-title">PASTA MÍDIA 📁</h3>
+      <p class="midia-note">Crie uma pasta chamada <strong>midia</strong> na mesma pasta deste arquivo index.html. Coloque as fotos ou vídeos com os nomes abaixo. Extensões aceitas: <strong>.jpg</strong>, <strong>.jpeg</strong>, <strong>.png</strong>, <strong>.webp</strong> (foto) ou <strong>.mp4</strong> (vídeo). Se existirem os dois, a foto tem prioridade. Se não existir nenhum arquivo, a apresentação usa a ilustração padrão.</p>
+      <div id="midiaList"></div>
+      <div class="quiz-actions"><button type="button" class="btn btn-gold" id="checkMediaBtn">CONFERIR ARQUIVOS ✔</button></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="rev">⬅ REVISÃO</button>
+        <button class="btn btn-gold" type="button" data-go="ach">CONQUISTAS ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="ach">
+      <h3 class="sec-title">CONQUISTAS</h3>
+      <p class="sec-sub">Complete as etapas do trimestre para desbloquear todas as conquistas.</p>
+      <div class="grid" id="achGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="midia">⬅ PASTA MÍDIA</button>
+        <button class="btn btn-gold" type="button" data-go="end">CONCLUSÃO ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="end">
+      <div id="endBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="ach">⬅ CONQUISTAS</button>
+        <button class="btn btn-gold" type="button" data-go="home">VOLTAR AO INÍCIO 🏠</button>
+      </div>
+    </section>
+
+  </main>
+  <footer>E.E.E.F.M. Ilda Ferreira da Fonseca Martins • Educação Física • 8º Ano • 1º Trimestre</footer>
+</div>
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Detalhes">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+<div id="toastBox" aria-live="polite"></div>
+<div id="confettiBox" aria-hidden="true"></div>
+<script>
+'use strict';
+/* ---------- mídia local (pasta midia) + ilustrações padrão ---------- */
+var FB = {
+  'capa-invasao':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1e4515cd6-94cc-4072-a265-137664306bc7.png',
+  'capa-lutas':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f2e1a9ac-cb01-4310-9d33-f3de3e25e1ad.png',
+  'futsal':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/111523a58-d500-44fa-8b1e-374e5437095b.png',
+  'basquete':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1b3bb6f0f-d825-47e9-99b0-09d155d2fde1.png',
+  'rugbi':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1165a4547-e21b-4c49-9d86-aaf8234dc13b.png',
+  'futebol-americano':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/11d97fe83-0f3e-40a3-b5ef-afdc7a2bd83c.png',
+  'handebol':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/18f621c10-1176-4e81-9b24-c667b7ac740c.png',
+  'hoquei':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1bf561b0c-9cd2-4cc5-b359-32e2194c270b.png',
+  'judo':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f14e779e-9aca-4302-8a3d-0cc97d41451b.png',
+  'boxe':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/12935fa02-9bfd-4b1a-9d1f-6176098d1c8b.png',
+  'capoeira':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/19517a5f3-4850-40ce-aed9-475bf63d91bf.png',
+  'muay-thai':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/13fe802ae-773d-4dea-89a1-2feb7e6034a4.png',
+  'taekwondo':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/158a54c63-6b9a-4e14-9253-81b0824e0470.png',
+  'wrestling':'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/11fe2fd79-a69e-4caa-b1bb-3e43d8169b08.png'
+};
+var MEDIA_LIST = [
+  {key:'capa-invasao', uso:'Página inicial — card principal do Módulo 1 (Esportes de Invasão)'},
+  {key:'capa-lutas', uso:'Página inicial — card principal do Módulo 2 (Lutas pelo Mundo)'},
+  {key:'futsal', uso:'Card da modalidade — Futsal (Aula 3)'},
+  {key:'basquete', uso:'Card da modalidade — Basquete (Aula 3)'},
+  {key:'rugbi', uso:'Card da modalidade — Rúgbi (Aula 3)'},
+  {key:'futebol-americano', uso:'Card da modalidade — Futebol Americano (Aula 3)'},
+  {key:'handebol', uso:'Card da modalidade — Handebol (Aula 3)'},
+  {key:'hoquei', uso:'Card da modalidade — Hóquei no Gelo (Aula 3)'},
+  {key:'judo', uso:'Card da modalidade — Judô (Aula 5)'},
+  {key:'boxe', uso:'Card da modalidade — Boxe (Aula 5)'},
+  {key:'capoeira', uso:'Card da modalidade — Capoeira (Aula 5)'},
+  {key:'muay-thai', uso:'Card da modalidade — Muay Thai (Aula 5)'},
+  {key:'taekwondo', uso:'Card da modalidade — Taekwondo (Aula 5)'},
+  {key:'wrestling', uso:'Card da modalidade — Wrestling (Aula 5)'}
+];
+/* ---------- dados ---------- */
+var LESSONS = [
+  {id:'a1', n:1, title:'O que são Esportes de Invasão?', short:'Conceito', mod:1},
+  {id:'a2', n:2, title:'Princípios Táticos e Benefícios', short:'Princípios', mod:1},
+  {id:'a3', n:3, title:'Exemplos de Invasão', short:'Exemplos', mod:1},
+  {id:'a4', n:4, title:'Atividade – Invasão', short:'Atividade 1', mod:1},
+  {id:'a5', n:5, title:'Lutas pelo Mundo', short:'Lutas', mod:2},
+  {id:'a6', n:6, title:'Benefícios das Lutas', short:'Benefícios', mod:2},
+  {id:'a7', n:7, title:'Atividade – Lutas', short:'Atividade 2', mod:2},
+  {id:'a8', n:8, title:'Quiz Final', short:'Quiz Final', mod:2}
+];
+var CHARS = [
+  {i:'👥', t:'DOIS TIMES', d:'Presença de duas equipes que disputam a partida.'},
+  {i:'🎯', t:'PONTOS NO CAMPO ADVERSÁRIO', d:'Objetivo de marcar pontos no território do adversário.'},
+  {i:'🤝', t:'COOPERAÇÃO', d:'Necessidade de cooperação entre os jogadores.'},
+  {i:'📜', t:'REGRAS ESPECÍFICAS', d:'Cada modalidade possui suas próprias regras.'}
+];
+var PRINS = [
+  {i:'⚔️', t:'ATAQUE', d:'Manter a posse da bola e finalizar para marcar pontos.'},
+  {i:'🛡️', t:'DEFESA', d:'Proteger o território e evitar que o adversário pontue.'},
+  {i:'🔄', t:'TRANSIÇÃO', d:'Mudança rápida entre ataque e defesa.'}
+];
+var BENS_INV = [
+  {i:'🏃', t:'DESENVOLVIMENTO MOTOR', d:'Melhora coordenação, velocidade e habilidades físicas.'},
+  {i:'🤝', t:'SOCIALIZAÇÃO', d:'Trabalho em equipe e resolução de conflitos.'},
+  {i:'📜', t:'REGRAS E DISCIPLINA', d:'Aprendizado sobre regras e disciplina.'}
+];
+var INV = [
+  {id:'futsal', nome:'FUTSAL', icon:'⚽', desc:'Versão do futebol jogada em quadra, com equipes de 5 jogadores e muita velocidade.', chips:['Quadra','5 jogadores','Velocidade']},
+  {id:'basquete', nome:'BASQUETE', icon:'🏀', desc:'Duas equipes tentam marcar pontos cestando a bola e defendendo a própria cesta.', chips:['Cestas','Ataque e defesa','Equipe']},
+  {id:'rugbi', nome:'RÚGBI', icon:'🏉', desc:'Esporte de contato em que a equipe avança no território adversário com a bola oval para pontuar.', chips:['Bola oval','Contato','Território']},
+  {id:'futebol-americano', nome:'FUTEBOL AMERICANO', icon:'🏈', desc:'As equipes avançam jardas no campo adversário para marcar touchdowns.', chips:['Jardas','Touchdown','Estratégia']},
+  {id:'handebol', nome:'HANDEBOL', icon:'🤾', desc:'Jogadores conduzem e passam a bola com as mãos para marcar gols no gol adversário.', chips:['Mãos','Gols','Quadra']},
+  {id:'hoquei', nome:'HÓQUEI NO GELO', icon:'🏒', desc:'As equipes invadem o gelo adversário para acertar o disco (puck) no gol.', chips:['Gelo','Disco','Velocidade']}
+];
+var FIGHTS = [
+  {id:'judo', nome:'JUDÔ', icon:'🥋', pais:'Japão', desc:'Arte marcial que enfatiza o equilíbrio entre força e técnica. Ensina valores como disciplina e respeito.', chips:['Força e técnica','Disciplina','Respeito']},
+  {id:'boxe', nome:'BOXE', icon:'🥊', pais:'Grécia e Inglaterra', desc:'Tem raízes na Grécia Antiga e foi modernizado na Inglaterra. Combina força, estratégia e resistência física.', chips:['Força','Estratégia','Resistência']},
+  {id:'capoeira', nome:'CAPOEIRA', icon:'🤸', pais:'Brasil', desc:'Mistura de dança e luta, é uma expressão cultural única do Brasil, nascida entre os escravizados africanos. Acompanhada de música e movimentos acrobáticos.', chips:['Dança + luta','Música','Acrobacias']},
+  {id:'muay-thai', nome:'MUAY THAI', icon:'🦵', pais:'Tailândia', desc:'Originada na Tailândia, utiliza punhos, cotovelos, joelhos e pés.', chips:['Punhos','Cotovelos','Joelhos e pés']},
+  {id:'taekwondo', nome:'TAEKWONDO', icon:'⚡', pais:'Coreia', desc:'Conhecido por seus golpes de perna rápidos e poderosos.', chips:['Golpes de perna','Rapidez','Potência']},
+  {id:'wrestling', nome:'WRESTLING', icon:'🤼', pais:'Várias regiões', desc:'Conhecida como luta livre, é praticada em diversas culturas e tem variantes históricas como a luta greco-romana.', chips:['Luta livre','Greco-romana','Culturas']}
+];
+var PHYS = [
+  {i:'💪', t:'FORÇA E RESISTÊNCIA', d:'Socos, chutes e movimentações fortalecem músculos e aumentam a resistência cardiovascular.'},
+  {i:'🤹', t:'COORDENAÇÃO MOTORA', d:'Movimentos rápidos e precisos aprimoram a coordenação e o equilíbrio.'},
+  {i:'🧘', t:'FLEXIBILIDADE E AGILIDADE', d:'Alongamento e agilidade para um corpo mais flexível e com reflexos rápidos.'},
+  {i:'⚖️', t:'CONTROLE DO PESO', d:'O treinamento intensivo queima calorias e mantém um peso saudável.'}
+];
+var MIND = [
+  {i:'😌', t:'REDUÇÃO DO ESTRESSE', d:'Libera endorfina, o hormônio da felicidade, promovendo relaxamento e bem-estar.'},
+  {i:'🎯', t:'CONCENTRAÇÃO E FOCO', d:'A atenção nos combates treina a mente para estar mais presente e focada.'},
+  {i:'🦁', t:'AUTOCONFIANÇA', d:'Aprender a se defender proporciona maior segurança pessoal.'},
+  {i:'🧭', t:'DISCIPLINA E CONTROLE EMOCIONAL', d:'Exige concentração e autocontrole, ajudando a lidar com emoções e pressão.'}
+];
+var QUIZ4 = [
+  {q:'Qual o conceito de esporte de invasão?', opts:['Duas equipes competem para invadir o território adversário e marcar pontos.','O resultado é determinado pela melhor marca (tempo, distância, altura ou peso).','Elementos técnicos e estéticos com sequências de movimentos coordenados.','Acertar um alvo ou chegar o mais próximo possível dele.'], a:0, x:'É exatamente o conceito apresentado na apostila.'},
+  {q:'Marque a alternativa que contém uma característica geral dos esportes de invasão:', opts:['É sempre disputado na grama.','São esportes individuais.','A equipe vencedora termina a prova no menor tempo.','Objetivo de marcar pontos no campo do adversário.'], a:3, x:'Marcar pontos no território adversário é a característica central.'},
+  {q:'Qual alternativa NÃO é um princípio tático dos esportes de invasão?', opts:['DEFESA','ATAQUE','PRECISÃO','TRANSIÇÃO'], a:2, x:'Os princípios táticos são: Ataque, Defesa e Transição.'},
+  {q:'Qual opção NÃO é um exemplo de esporte de invasão?', opts:['FUTEBOL','VÔLEI','HANDEBOL','BASQUETE'], a:1, x:'O vôlei é um esporte de rede, não de invasão.'}
+];
+var QUIZ7 = [
+  {q:'Qual arte marcial, originada na Coreia, é conhecida por seus golpes de perna rápidos e poderosos?', opts:['Judô','Muay Thai','Taekwondo','Capoeira'], a:2, x:'O taekwondo é famoso pelos golpes de perna.'},
+  {q:'Qual modalidade mistura dança e luta, sendo uma expressão cultural única do Brasil?', opts:['Wrestling','Capoeira','Boxe','Taekwondo'], a:1, x:'A capoeira nasceu no Brasil, entre os escravizados africanos.'},
+  {q:'Sobre os benefícios físicos das artes marciais, qual NÃO é mencionado no texto?', opts:['Aumento da flexibilidade e agilidade','Melhora da resistência emocional','Controle do peso corporal','Melhora da força e resistência'], a:1, x:'Resistência emocional não é um benefício físico listado.'},
+  {q:'Originado no Japão, enfatiza o equilíbrio entre força e técnica:', opts:['Judô','Boxe','Wrestling','Taekwondo'], a:0, x:'O judô ensina ainda disciplina e respeito.'},
+  {q:'Utiliza punhos, cotovelos, joelhos e pés. Origem: Tailândia.', opts:['Muay Thai','Judô','Capoeira','Boxe'], a:0, x:'É o muay thai, a arte marcial tailandesa.'}
+];
+var FINAL_QUIZ = [
+  {q:'O que são esportes de invasão?', opts:['Duas equipes competem para invadir o território adversário e marcar pontos.','Atletas competem individualmente pelo melhor tempo.','O objetivo é acertar um alvo fixo com precisão.','São danças realizadas em duplas.'], a:0, x:'Conceito da apostila.'},
+  {q:'Qual alternativa é uma característica geral dos esportes de invasão?', opts:['Sempre disputados na grama','Objetivo de marcar pontos no campo do adversário','São esportes individuais','Não possuem regras'], a:1, x:'Marcar pontos no território adversário.'},
+  {q:'Qual destes NÃO é um princípio tático dos esportes de invasão?', opts:['Ataque','Defesa','Transição','Precisão'], a:3, x:'Os princípios são Ataque, Defesa e Transição.'},
+  {q:'Qual destes NÃO é um esporte de invasão?', opts:['Handebol','Rúgbi','Vôlei','Futsal'], a:2, x:'O vôlei é um esporte de rede.'},
+  {q:'VERDADEIRO OU FALSO: Na defesa, o objetivo é proteger o território e evitar que o adversário pontue.', opts:['Verdadeiro','Falso'], a:0, x:'Princípio tático da defesa.'},
+  {q:'VERDADEIRO OU FALSO: Handebol e futsal são exemplos de esportes de invasão.', opts:['Verdadeiro','Falso'], a:0, x:'Ambos estão na lista de exemplos da apostila.'},
+  {q:'Qual arte marcial, originada na Coreia, é conhecida por seus golpes de perna rápidos e poderosos?', opts:['Judô','Taekwondo','Boxe','Capoeira'], a:1, x:'Taekwondo.'},
+  {q:'Qual modalidade mistura dança e luta, sendo uma expressão cultural única do Brasil?', opts:['Boxe','Wrestling','Capoeira','Muay Thai'], a:2, x:'Capoeira.'},
+  {q:'Qual luta utiliza punhos, cotovelos, joelhos e pés?', opts:['Muay Thai','Judô','Taekwondo','Wrestling'], a:0, x:'Muay Thai, da Tailândia.'},
+  {q:'VERDADEIRO OU FALSO: A prática de lutas ajuda a reduzir o estresse porque libera endorfina.', opts:['Verdadeiro','Falso'], a:0, x:'A endorfina é o hormônio da felicidade.'}
+];
+var ESSAYS_INV = [
+  {id:'i1', q:'Qual o conceito de esporte de invasão?', ans:'Resposta esperada: São atividades esportivas em que duas equipes competem para invadir o território adversário e marcar pontos.'},
+  {id:'i2', q:'Cite três exemplos de esportes de invasão.', ans:'Resposta esperada: Futsal, basquete, rúgbi, futebol americano, handebol ou hóquei no gelo (quaisquer três).'}
+];
+var ESSAYS_LUT = [
+  {id:'m1', q:'Explique como a luta pode contribuir para o desenvolvimento emocional e psicológico do praticante.', ans:'Resposta esperada: Reduz estresse e ansiedade (endorfina), aumenta a autoconfiança, desenvolve disciplina e controle emocional.'},
+  {id:'m2', q:'Compare as características culturais da capoeira e do judô, destacando como cada modalidade reflete os valores do seu país de origem.', ans:'Resposta esperada: A capoeira (Brasil) mistura dança, música e resistência cultural dos escravizados africanos; o judô (Japão) enfatiza disciplina, respeito e equilíbrio entre força e técnica.'},
+  {id:'m3', q:'Escolha uma das modalidades de luta e elabore um breve comentário (mínimo de 3 linhas).', ans:'Resposta pessoal. Exemplo: O boxe desenvolve força, estratégia e resistência física; surgiu na Grécia Antiga e foi modernizado na Inglaterra.'}
+];
+var ACHIEVEMENTS = [
+  {id:'primeiros', icon:'👟', name:'PRIMEIRO DRIBBLE', desc:'Concluiu a Aula 1.'},
+  {id:'estrategista', icon:'🧠', name:'ESTRATEGISTA', desc:'Explorou os 6 esportes de invasão.'},
+  {id:'guerreiro', icon:'🥋', name:'GUERREIRO MUNDIAL', desc:'Explorou as 6 lutas pelo mundo.'},
+  {id:'tatica', icon:'🎯', name:'TÁTICA AFIAADA', desc:'Acertou tudo na atividade da Aula 4.'},
+  {id:'lutador', icon:'🦁', name:'MENTE DE LUTADOR', desc:'Acertou tudo na atividade da Aula 7.'},
+  {id:'campeao', icon:'🏆', name:'CAMPEÃO DO TRIMESTRE', desc:'Fez 70% ou mais no Quiz Final.'},
+  {id:'dedicado', icon:'📚', name:'ESTUDANTE DEDICADO', desc:'Concluiu as 8 aulas do trimestre.'}
+];
+/* ---------- state ---------- */
+function loadState(){ try{ var d=localStorage.getItem('ef8t1'); return d?JSON.parse(d):null; }catch(e){ return null; } }
+var state = loadState() || {points:0, done:{}, explored:{}, best:{}, essays:{}, ach:{}, screen:'home'};
+function save(){ try{ localStorage.setItem('ef8t1', JSON.stringify(state)); }catch(e){} }
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function doneCount(){ return LESSONS.filter(function(l){ return state.done[l.id]; }).length; }
+/* ---------- toast / points / achievements ---------- */
+function toast(msg, icon){ var t=document.createElement('div'); t.className='toast'; t.innerHTML='<span>'+(icon||'⭐')+'</span> '+msg; $('toastBox').appendChild(t); setTimeout(function(){ t.classList.add('in'); },20); setTimeout(function(){ t.classList.remove('in'); setTimeout(function(){ t.remove(); },350); },2800); }
+function addPoints(n, why){ state.points+=n; toast('+'+n+' pontos — '+why,'⭐'); save(); updateHUD(); }
+function award(id){ if(state.ach[id]) return; state.ach[id]=true; var a=ACHIEVEMENTS.filter(function(x){return x.id===id;})[0]; if(a){ toast('CONQUISTA DESBLOQUEADA: '+a.name, a.icon); } renderAch(); updateHUD(); save(); }
+/* ---------- media loader (pasta midia) ---------- */
+function probeMedia(key, onImg, onVideo, onFail){
+  var exts=['.jpg','.jpeg','.png','.webp']; var i=0;
+  (function nextImg(){
+    if(i>=exts.length){
+      var done=false;
+      var v=document.createElement('video');
+      v.preload='metadata'; v.muted=true;
+      v.addEventListener('loadedmetadata', function(){ if(!done){done=true; onVideo('midia/'+key+'.mp4');} });
+      v.addEventListener('error', function(){ if(!done){done=true; onFail();} });
+      setTimeout(function(){ if(!done){done=true; onFail();} }, 2500);
+      v.src='midia/'+key+'.mp4';
+      return;
+    }
+    var src='midia/'+key+exts[i];
+    var done=false;
+    var im=new Image();
+    im.onload=function(){ if(!done){done=true; onImg(src);} };
+    im.onerror=function(){ if(!done){done=true; i++; nextImg();} };
+    im.src=src;
+  })();
+}
+function loadMedia(el){
+  var key=el.getAttribute('data-media');
+  var alt=el.getAttribute('data-alt')||('Mídia: '+key);
+  var fb=FB[key]||'';
+  probeMedia(key,
+    function(src){ el.innerHTML='<img src="'+src+'" alt="'+esc(alt)+'">'; el.setAttribute('data-found','imagem'); },
+    function(src){ el.innerHTML='<video src="'+src+'" controls playsinline preload="metadata" aria-label="'+esc(alt)+'"></video>'; el.setAttribute('data-found','video'); },
+    function(){ el.innerHTML='<img src="'+fb+'" alt="'+esc(alt)+'">'; el.setAttribute('data-found','padrão'); });
+}
+function initMedia(scope){ (scope||document).querySelectorAll('[data-media]').forEach(function(el){ loadMedia(el); }); }
+function renderMidiaList(){
+  $('midiaList').innerHTML = MEDIA_LIST.map(function(m){ return '<div class="midia-item"><code>midia/'+m.key+'</code><span class="uso">'+m.uso+'</span><span class="mst" id="mst-'+m.key+'">—</span></div>'; }).join('');
+}
+function checkMedia(){
+  MEDIA_LIST.forEach(function(m){
+    var st=$('mst-'+m.key); if(st) st.textContent='VERIFICANDO…';
+    probeMedia(m.key,
+      function(){ if(st) st.textContent='✅ FOTO ENCONTRADA'; },
+      function(){ if(st) st.textContent='🎬 VÍDEO ENCONTRADO'; },
+      function(){ if(st) st.textContent='⚠️ NÃO ENCONTRADO (USA PADRÃO)'; });
+  });
+  toast('Verificação da pasta midia concluída em instantes.','📁');
+}
+/* ---------- navigation ---------- */
+var ORDER = ['home','a1','a2','a3','a4','a5','a6','a7','a8','rev','midia','ach','end'];
+function metaFor(id){
+  if(id==='home') return ['INÍCIO','Plataforma do 1º Trimestre'];
+  if(id==='rev') return ['REVISÃO','Revisão do Trimestre'];
+  if(id==='midia') return ['PASTA MÍDIA','Fotos e vídeos dos cards'];
+  if(id==='ach') return ['CONQUISTAS','Suas conquistas'];
+  if(id==='end') return ['CONCLUSÃO','Fim do trimestre'];
+  var l=LESSONS.filter(function(x){return x.id===id;})[0];
+  return l?['AULA '+l.n+' • MÓDULO '+l.mod, l.title]:['',''];
+}
+function go(id){
+  var scr=document.querySelector('.screen[data-screen="'+id+'"]');
+  if(!scr) return;
+  state.screen=id;
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  scr.classList.add('active');
+  document.querySelectorAll('[data-go]').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')===id); });
+  var m=metaFor(id); $('hudKicker').textContent=m[0]; $('hudTitle').textContent=m[1];
+  if(id==='end') renderEnd();
+  if(id==='ach') renderAch();
+  updateHUD(); reveal(scr); save(); closeSide();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+/* ---------- sidebar / timeline ---------- */
+function buildSide(){
+  var h='<button type="button" data-go="home"><span class="num">🏠</span>INÍCIO</button>';
+  h+='<p class="side-label">Módulo 1 • Invasão</p>';
+  LESSONS.filter(function(l){return l.mod===1;}).forEach(function(l){ h+='<button type="button" data-go="'+l.id+'"><span class="num">'+l.n+'</span>AULA '+l.n+' — '+l.title+'</button>'; });
+  h+='<p class="side-label">Módulo 2 • Lutas</p>';
+  LESSONS.filter(function(l){return l.mod===2;}).forEach(function(l){ h+='<button type="button" data-go="'+l.id+'"><span class="num">'+l.n+'</span>AULA '+l.n+' — '+l.title+'</button>'; });
+  h+='<p class="side-label">Geral</p>';
+  h+='<button type="button" data-go="rev"><span class="num">📚</span>REVISÃO FINAL</button>';
+  h+='<button type="button" data-go="midia"><span class="num">📁</span>PASTA MÍDIA</button>';
+  h+='<button type="button" data-go="ach"><span class="num">🏆</span>CONQUISTAS</button>';
+  h+='<button type="button" data-go="end"><span class="num">🎓</span>CONCLUSÃO</button>';
+  $('sideNav').innerHTML=h;
+}
+function buildTimeline(){
+  var h='<span class="tl-div">Mód. 1</span>';
+  LESSONS.forEach(function(l){
+    if(l.mod===2 && l.n===5) h+='<span class="tl-div">Mód. 2</span>';
+    h+='<button type="button" class="tl-item" id="tl-'+l.id+'" data-go="'+l.id+'" aria-label="Ir para a aula '+l.n+'"><span class="tl-dot">'+l.n+'</span><span class="tl-label">'+l.short+'</span></button>';
+  });
+  $('timeline').innerHTML=h;
+}
+function updateHUD(){
+  $('hudPoints').textContent=state.points;
+  $('stPoints').textContent=state.points;
+  $('stLessons').textContent=doneCount()+'/'+LESSONS.length;
+  $('stAch').textContent=Object.keys(state.ach).length+'/'+ACHIEVEMENTS.length;
+  var pct=Math.round(doneCount()/LESSONS.length*100);
+  $('hudBar').style.width=pct+'%'; $('hudPct').textContent=pct+'%';
+  LESSONS.forEach(function(l){
+    var tl=$('tl-'+l.id); if(!tl) return;
+    tl.classList.toggle('done', !!state.done[l.id]);
+    tl.classList.toggle('current', state.screen===l.id);
+    tl.querySelector('.tl-dot').textContent = state.done[l.id] ? '✓' : l.n;
+  });
+  document.querySelectorAll('.side-nav [data-go]').forEach(function(b){
+    var id=b.getAttribute('data-go');
+    b.classList.toggle('active', state.screen===id);
+    var l=LESSONS.filter(function(x){return x.id===id;})[0];
+    if(l) b.classList.toggle('done', !!state.done[id]);
+  });
+  document.querySelectorAll('.js-complete').forEach(function(b){
+    if(state.done['a'+b.getAttribute('data-lesson')]){ b.classList.add('is-done'); b.textContent='CONCLUÍDA ✓'; }
+  });
+}
+/* ---------- reveal on scroll ---------- */
+var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.1}) : null;
+function reveal(scr){ scr.querySelectorAll('.reveal:not(.in)').forEach(function(el){ if(io) io.observe(el); else el.classList.add('in'); }); }
+/* ---------- renders ---------- */
+function renderExpand(gridId, list, pre){ $(gridId).innerHTML = list.map(function(c,idx){ return '<button type="button" class="card reveal" data-open="'+pre+idx+'"><span class="ico">'+c.i+'</span><h4>'+c.t+'</h4><div class="more"><p>'+c.d+'</p></div><span class="hint">Clique para ver</span></button>'; }).join(''); }
+function renderBig(gridId, list, attr){ $(gridId).innerHTML = list.map(function(p){ return '<div class="big-card reveal"><div class="bc-media-top" data-media="'+p.id+'" data-alt="Mídia da modalidade '+p.nome+'"></div><div class="bc-top"><span class="ico">'+p.icon+'</span><div><h4>'+p.nome+'</h4><span class="orig">'+(p.pais||'Esporte de invasão')+'</span></div></div><div class="bc-body"><p>'+p.desc+'</p></div><div class="bc-more"><div class="chips">'+p.chips.map(function(c){ return '<span class="chip">'+c+'</span>'; }).join('')+'</div></div><button type="button" class="btn btn-gold btn-small" '+attr+'="'+p.id+'" aria-expanded="false">EXPLORAR 🔍</button></div>'; }).join(''); }
+function renderEssays(boxId, list){ $(boxId).innerHTML = list.map(function(e){ return '<div class="essay-card reveal"><span class="eyebrow">Questão da apostila</span><h4>'+e.q+'</h4><textarea id="ess-'+e.id+'" rows="3" placeholder="Escreva sua resposta aqui...">'+esc(state.essays[e.id]||'')+'</textarea><div><button type="button" class="btn btn-small btn-gold" data-ess="'+e.id+'">SALVAR RESPOSTA</button><button type="button" class="btn btn-small btn-ghost" data-ans="'+e.id+'">VER RESPOSTA ESPERADA 👁</button></div><div class="ans-box" id="ans-'+e.id+'">'+e.ans+'</div></div>'; }).join(''); }
+function renderAch(){ $('achGrid').innerHTML = ACHIEVEMENTS.map(function(a){ var ok=!!state.ach[a.id]; return '<div class="ach-card reveal '+(ok?'':'locked')+'"><div class="a-ico">'+a.icon+'</div><h4>'+a.name+'</h4><p>'+a.desc+'</p><p class="hint">'+(ok?'✔ DESBLOQUEADA':'🔒 BLOQUEADA')+'</p></div>'; }).join(''); reveal(document.querySelector('.screen[data-screen="ach"]')); }
+/* ---------- explore ---------- */
+var EX_ALL = INV.concat(FIGHTS);
+function toggleExplore(btn, attr, listKey){
+  var id=btn.getAttribute(attr);
+  var p=EX_ALL.filter(function(x){return x.id===id;})[0]; if(!p) return;
+  var card=btn.closest('.big-card');
+  var open=card.classList.toggle('open');
+  btn.textContent = open ? 'FECHAR ✕' : (listKey==='inv'?'EXPLORAR 🔍':'CONHECER 🔍');
+  btn.setAttribute('aria-expanded', open?'true':'false');
+  if(open){ var first=!state.explored['x_'+id]; state.explored['x_'+id]=true; if(first){ addPoints(10,'explorou '+p.nome); var allInv=INV.every(function(x){ return state.explored['x_'+x.id]; }); var allFig=FIGHTS.every(function(x){ return state.explored['x_'+x.id]; }); if(allInv) award('estrategista'); if(allFig) award('guerreiro'); } save(); }
+}
+/* ---------- quiz engine ---------- */
+function buildQuiz(boxId, qs, opts){
+  var box=$(boxId); var i=0, score=0, perfect=true;
+  function renderQ(){
+    var q=qs[i];
+    box.innerHTML='<div class="quiz-top"><span class="eyebrow">'+opts.title+'</span><span class="quiz-count">QUESTÃO '+(i+1)+' DE '+qs.length+'</span></div><h4 class="quiz-q">'+q.q+'</h4><div class="quiz-opts">'+q.opts.map(function(o,idx){ return '<button type="button" class="quiz-opt" data-idx="'+idx+'">'+o+'</button>'; }).join('')+'</div><div class="quiz-feedback" hidden></div><div class="quiz-actions" hidden><button type="button" class="btn btn-gold quiz-next">'+(i===qs.length-1?'VER RESULTADO 🏁':'PRÓXIMA ➜')+'</button></div>';
+    var fb=box.querySelector('.quiz-feedback'), acts=box.querySelector('.quiz-actions'), solved=false, firstTry=true;
+    box.querySelectorAll('.quiz-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx=parseInt(btn.getAttribute('data-idx'),10);
+        if(idx===q.a){
+          if(solved) return;
+          solved=true; btn.classList.add('correct');
+          if(firstTry){ score++; addPoints(10,'resposta certa'); } else { perfect=false; }
+          fb.hidden=false; fb.className='quiz-feedback ok'; fb.innerHTML='✅ CORRETO!'+(q.x?'<p>'+q.x+'</p>':'');
+          acts.hidden=false;
+          box.querySelectorAll('.quiz-opt').forEach(function(b){ b.disabled=true; });
+        } else {
+          btn.classList.add('wrong'); btn.disabled=true; firstTry=false; perfect=false;
+          fb.hidden=false; fb.className='quiz-feedback err';
+          if(opts.mode==='retry'){ fb.textContent='❌ TENTE NOVAMENTE'; }
+          else { solved=true; fb.innerHTML='❌ INCORRETO.'+(q.x?'<p>'+q.x+'</p>':''); acts.hidden=false; box.querySelectorAll('.quiz-opt').forEach(function(b){ b.disabled=true; }); }
+        }
+      });
+    });
+    box.querySelector('.quiz-next').addEventListener('click', function(){ i++; if(i<qs.length) renderQ(); else finish(); });
+  }
+  function finish(){
+    var pct=Math.round(score/qs.length*100);
+    var msg = pct>=90?'🏆 EXCELENTE! Você domina este conteúdo!' : pct>=70?'🎉 MUITO BEM! Você está indo ótimo!' : pct>=50?'👍 BOM TRABALHO! Revise os pontos que errou.' : '📚 CONTINUE ESTUDANDO! Reveja as aulas e tente novamente.';
+    box.innerHTML='<div class="quiz-result"><span class="eyebrow">Resultado</span><h4 class="quiz-q">'+opts.title+'</h4><p class="score-big">'+score+'/'+qs.length+'</p><p class="score-pct">'+pct+'%</p><p>'+msg+'</p><div class="quiz-actions" style="justify-content:center"><button type="button" class="btn btn-ghost quiz-retake">↺ REFAZER</button>'+(opts.next?'<button type="button" class="btn btn-gold" data-go="'+opts.next+'">'+(opts.nextLabel||'CONTINUAR ➜')+'</button>':'')+'</div></div>';
+    box.querySelector('.quiz-retake').addEventListener('click', function(){ buildQuiz(boxId, qs, opts); });
+    state.best[opts.key]=Math.max(state.best[opts.key]||0, pct); save(); updateHUD();
+    if(opts.onDone) opts.onDone(score, qs.length, perfect, pct);
+  }
+  renderQ();
+}
+/* ---------- lessons ---------- */
+function completeLesson(n){
+  var id='a'+n;
+  if(state.done[id]){ toast('Esta aula já foi concluída!','✅'); return; }
+  state.done[id]=true; addPoints(20,'aula '+n+' concluída');
+  if(n==='1'||n===1) award('primeiros');
+  if(doneCount()===LESSONS.length) award('dedicado');
+  updateHUD(); save();
+}
+function allComplete(){ return doneCount()===LESSONS.length && state.best.ativ1!=null && state.best.ativ2!=null && state.best.final!=null; }
+/* ---------- end screen ---------- */
+function renderEnd(){
+  var items=[
+    {t:'Concluir as 8 aulas', ok:doneCount()===LESSONS.length},
+    {t:'Atividade da Aula 4', ok:state.best.ativ1!=null},
+    {t:'Atividade da Aula 7', ok:state.best.ativ2!=null},
+    {t:'Quiz Final', ok:state.best.final!=null}
+  ];
+  var done=allComplete();
+  var html='<div class="end-hero">'+(done?'<div class="trophy">🏆</div><h2>PARABÉNS! VOCÊ CONCLUIU O 1º TRIMESTRE.</h2><p class="sec-sub">Você completou todas as etapas de Educação Física do 8º ano — Esportes de Invasão e Lutas pelo Mundo. Total de pontos: <strong>'+state.points+'</strong> ⭐</p>':'<div class="trophy">🎓</div><h2>CONCLUSÃO DO TRIMESTRE</h2><p class="sec-sub">Complete todas as etapas para desbloquear a mensagem final.</p>')+'<ul class="check-list">'+items.map(function(it){ return '<li class="'+(it.ok?'ok':'no')+'">'+(it.ok?'✅':'⏳')+' '+it.t+'<span class="st">'+(it.ok?'FEITO':'PENDENTE')+'</span></li>'; }).join('')+'</ul><div class="quiz-actions" style="justify-content:center"><button type="button" class="btn btn-gold" data-go="ach">VER CONQUISTAS 🏆</button></div></div>';
+  $('endBox').innerHTML=html;
+  if(done) confetti();
+}
+function confetti(){
+  var box=$('confettiBox'); box.innerHTML='';
+  var colors=['#c1922f','#e6c877','#3a2a1a','#a87c1f','#fffdf6'];
+  for(var i=0;i<70;i++){ var s=document.createElement('i'); s.style.left=(Math.random()*100)+'%'; s.style.background=colors[i%colors.length]; s.style.animationDuration=(2.4+Math.random()*2.4)+'s'; s.style.animationDelay=(Math.random()*1.4)+'s'; s.style.transform='rotate('+Math.random()*360+'deg)'; box.appendChild(s); }
+  setTimeout(function(){ box.innerHTML=''; }, 6500);
+}
+/* ---------- global click delegation ---------- */
+document.addEventListener('click', function(e){
+  var g=e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+  var c=e.target.closest('.js-complete'); if(c){ completeLesson(c.getAttribute('data-lesson')); return; }
+  var ei=e.target.closest('[data-explore-inv]'); if(ei){ toggleExplore(ei,'data-explore-inv','inv'); return; }
+  var ef=e.target.closest('[data-explore-f]'); if(ef){ toggleExplore(ef,'data-explore-f','fig'); return; }
+  var op=e.target.closest('[data-open]'); if(op){ op.classList.toggle('open'); return; }
+  var es=e.target.closest('[data-ess]'); if(es){ var id=es.getAttribute('data-ess'); var ta=$('ess-'+id); if(ta){ state.essays[id]=ta.value; save(); toast('Resposta salva com sucesso!','📝'); } return; }
+  var an=e.target.closest('[data-ans]'); if(an){ var ab=$('ans-'+an.getAttribute('data-ans')); if(ab) ab.classList.toggle('show'); return; }
+});
+document.addEventListener('keydown', function(e){
+  var tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='textarea'||tag==='input') return;
+  if($('modalOverlay').classList.contains('show')) return;
+  if(e.key==='ArrowRight'){ var ix=ORDER.indexOf(state.screen); if(ix>-1&&ix<ORDER.length-1) go(ORDER[ix+1]); }
+  if(e.key==='ArrowLeft'){ var ix2=ORDER.indexOf(state.screen); if(ix2>0) go(ORDER[ix2-1]); }
+});
+/* ---------- sidebar mobile ---------- */
+function openSide(){ $('sidebar').classList.add('open'); $('overlay').classList.add('show'); }
+function closeSide(){ $('sidebar').classList.remove('open'); $('overlay').classList.remove('show'); }
+$('menuBtn').addEventListener('click', openSide);
+$('overlay').addEventListener('click', closeSide);
+$('checkMediaBtn').addEventListener('click', checkMedia);
+/* ---------- init ---------- */
+$('startBtn').addEventListener('click', function(){
+  var first=LESSONS.filter(function(l){ return !state.done[l.id]; })[0];
+  go(first?first.id:'a1');
+});
+buildSide(); buildTimeline();
+renderExpand('charGrid', CHARS, 'c');
+renderExpand('prinGrid', PRINS, 'p');
+renderExpand('benInvGrid', BENS_INV, 'b');
+renderBig('invGrid', INV, 'data-explore-inv');
+renderBig('fightGrid', FIGHTS, 'data-explore-f');
+renderExpand('physGrid', PHYS, 'f');
+renderExpand('mindGrid', MIND, 'm');
+renderEssays('essayInvBox', ESSAYS_INV);
+renderEssays('essayLutBox', ESSAYS_LUT);
+renderAch(); renderMidiaList();
+buildQuiz('quiz4Box', QUIZ4, {title:'ATIVIDADE: INVASÃO', mode:'retry', key:'ativ1', onDone:function(s,t,p){ if(s===t&&p) award('tatica'); }});
+buildQuiz('quiz7Box', QUIZ7, {title:'ATIVIDADE: LUTAS', mode:'retry', key:'ativ2', onDone:function(s,t,p){ if(s===t&&p) award('lutador'); }});
+buildQuiz('finalQuizBox', FINAL_QUIZ, {title:'QUIZ FINAL', mode:'once', key:'final', next:'rev', nextLabel:'VER REVISÃO ➜', onDone:function(s,t,p,pct){ if(pct>=70) award('campeao'); if(allComplete()) setTimeout(function(){ go('end'); },1400); }});
+updateHUD();
+if(state.screen && state.screen!=='home'){ go(state.screen); } else { go('home'); }
+initMedia(document);
+reveal(document.querySelector('.screen.active'));
+</script>
+</body>
+</html>
