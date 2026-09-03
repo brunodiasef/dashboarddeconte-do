@@ -164,6 +164,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/6ºano/index.html"
+  },
+  {
+    id: "aula-6t1n8-1788452197978",
+    ano: "6",
+    trimestre: 1,
+    aula: 8,
+    titulo: "MATERIAL DE APOIO -",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/6ºano/APOSTILA.docx"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
