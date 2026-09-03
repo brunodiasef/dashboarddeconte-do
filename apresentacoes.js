@@ -177,13 +177,33 @@ window.APRESENTACOES = [
   },
   {
     id: "aula-6t1n1-1788457633112",
-    ano: "8",
+    ano: "6",
     trimestre: 1,
-    aula: 8,
+    aula: 1,
     titulo: "ESPORTES DE INVASÃO + LUTAS PELO MUNDO",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/8ºano/index.html"
+  },
+  {
+    id: "aula-6t1n1-1788463194387",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "ESPORTES DE INVASÃO + LUTAS PELO MUNDO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano"
+  },
+  {
+    id: "aula-7t1n1-1788463461143",
+    ano: "7",
+    trimestre: 1,
+    aula: 1,
+    titulo: "Tipos de Ginástica + Atividade Física × Exercício Físico",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/1tri.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
