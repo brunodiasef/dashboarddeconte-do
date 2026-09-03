@@ -184,6 +184,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/8ºano/index.html"
+  },
+  {
+    id: "aula-6t1n1-1788463194387",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "ESPORTES DE INVASÃO + LUTAS PELO MUNDO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
