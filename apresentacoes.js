@@ -214,6 +214,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/8ºano/apostila.pdf"
+  },
+  {
+    id: "aula-9t3n2-1788827119468",
+    ano: "9",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
