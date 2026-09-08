@@ -284,6 +284,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
+  },
+  {
+    id: "aula-8t1n2-1788876445567",
+    ano: "8",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/apostila.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
