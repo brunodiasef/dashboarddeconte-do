@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educação Física • 8º Ano • 3º Trimestre | E.E.E.F.M. Ilda Ferreira da Fonseca Martins</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/playfair-display@latest/latin-900-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/source-sans-3@latest/latin-700-normal.css">
+<style>
+:root{
+  --cream:#f3e9d2; --cream2:#eadfc2; --paper:#fbf5e6; --card:#fffdf6;
+  --ink:#2b2015; --ink-soft:#6b5638;
+  --brown900:#1d140c; --brown800:#2a1c10; --brown700:#3a2a1a;
+  --gold:#c1922f; --gold2:#a87c1f; --goldsoft:#e6c877;
+  --green:#3f7d4e; --red:#a8402f;
+  --radius:16px; --shadow:0 10px 26px rgba(43,32,21,.14);
+  --serif:'Playfair Display',Georgia,serif; --sans:'Source Sans 3','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans); background:var(--cream); color:var(--ink); min-height:100vh;
+  background-image:repeating-linear-gradient(45deg, rgba(193,146,47,.04) 0 2px, transparent 2px 14px);}
+img{max-width:100%; display:block}
+button{font-family:var(--sans)}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:6px}
+.skip-link{position:absolute; left:-999px; top:0; background:var(--brown800); color:var(--goldsoft); padding:10px 16px; z-index:200; border-radius:0 0 10px 0}
+.skip-link:focus{left:0}
+.eyebrow{display:block; text-transform:uppercase; letter-spacing:.22em; font-size:.68rem; font-weight:700; color:var(--gold2)}
+.eyebrow.light{color:var(--goldsoft)}
+/* ============ SIDEBAR ============ */
+#sidebar{position:fixed; inset:0 auto 0 0; width:292px; background:linear-gradient(180deg,var(--brown900),var(--brown800)); color:#e9dcbd; z-index:90; display:flex; flex-direction:column; transform:translateX(0); transition:transform .35s ease; box-shadow:6px 0 24px rgba(0,0,0,.25)}
+.side-head{display:flex; gap:12px; align-items:center; padding:22px 18px 16px; border-bottom:1px solid rgba(230,200,119,.25)}
+.logo{width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); display:grid; place-items:center; font-family:var(--serif); font-weight:900; font-size:1.25rem; flex:none}
+.side-head strong{display:block; font-size:.72rem; letter-spacing:.06em; line-height:1.35}
+.side-head .eyebrow{margin-top:4px}
+.side-nav{padding:14px 12px; overflow-y:auto; flex:1}
+.side-nav button{display:flex; width:100%; gap:10px; align-items:center; background:none; border:none; color:#d9c9a4; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:.82rem; letter-spacing:.05em; text-align:left; transition:.2s; margin-bottom:2px}
+.side-nav button:hover{background:rgba(230,200,119,.12); color:var(--goldsoft)}
+.side-nav button.active{background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--brown900); font-weight:700}
+.side-nav .num{width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(230,200,119,.5); display:grid; place-items:center; font-size:.7rem; flex:none}
+.side-nav button.active .num{border-color:var(--brown900)}
+.side-nav button.done .num{background:var(--goldsoft); color:var(--brown900); border-color:var(--goldsoft)}
+.side-label{font-size:.58rem; letter-spacing:.2em; color:#a5906a; text-transform:uppercase; padding:12px 12px 4px; font-weight:800}
+.side-stats{padding:14px 18px; border-top:1px solid rgba(230,200,119,.25); display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; text-align:center}
+.side-stats div{background:rgba(230,200,119,.08); border-radius:10px; padding:8px 4px}
+.side-stats strong{display:block; font-family:var(--serif); font-size:1.05rem; color:var(--goldsoft)}
+.side-stats span{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:#c9b78d}
+.side-foot{padding:10px; text-align:center; font-size:.6rem; letter-spacing:.2em; color:#a5906a; text-transform:uppercase}
+#overlay{position:fixed; inset:0; background:rgba(20,12,6,.5); z-index:80; opacity:0; pointer-events:none; transition:.3s}
+#overlay.show{opacity:1; pointer-events:auto}
+/* ============ LAYOUT / HEADER ============ */
+.layout{margin-left:292px}
+header{position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; padding:10px 20px; background:rgba(243,233,210,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--cream2)}
+.menu-btn{display:none; background:var(--brown800); color:var(--goldsoft); border:none; width:42px; height:42px; border-radius:12px; font-size:1.2rem; cursor:pointer}
+.hud-lesson{flex:1; min-width:0}
+.hud-lesson strong{display:block; font-family:var(--serif); font-size:1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.hud-progress{display:flex; align-items:center; gap:10px; min-width:150px}
+.hud-bar{flex:1; height:8px; background:var(--cream2); border-radius:99px; overflow:hidden; min-width:70px}
+.hud-bar i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--goldsoft),var(--gold)); border-radius:99px; transition:width .6s ease}
+.hud-progress span{font-size:.72rem; font-weight:700; color:var(--gold2)}
+.points-badge{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); font-weight:800; padding:8px 14px; border-radius:999px; font-size:.8rem; box-shadow:0 4px 12px rgba(168,124,31,.35); white-space:nowrap}
+/* ============ TIMELINE ============ */
+.timeline-wrap{padding:10px 20px 0; max-width:1120px; margin:0 auto}
+.timeline{display:flex; overflow-x:auto; padding:12px 4px 16px; gap:2px; scrollbar-width:thin}
+.tl-item{position:relative; min-width:78px; display:flex; flex-direction:column; align-items:center; gap:7px; background:none; border:none; cursor:pointer; padding:2px}
+.tl-item:not(:last-child)::after{content:''; position:absolute; top:22px; left:calc(50% + 26px); width:calc(100% - 52px); height:2px; background:#d3bd8d; z-index:0}
+.tl-dot{width:44px; height:44px; border-radius:50%; background:var(--card); border:2px solid #d3bd8d; display:grid; place-items:center; font-weight:800; color:var(--ink-soft); position:relative; z-index:1; transition:.25s; font-size:.9rem}
+.tl-item:hover .tl-dot{transform:translateY(-3px); border-color:var(--gold)}
+.tl-item.current .tl-dot{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); border-color:var(--gold2); color:var(--brown900); transform:scale(1.1); box-shadow:0 8px 16px rgba(168,124,31,.4)}
+.tl-item.done .tl-dot{background:var(--brown800); border-color:var(--brown800); color:var(--goldsoft)}
+.tl-label{font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); text-align:center; max-width:86px}
+.tl-div{flex:none; align-self:flex-start; margin:12px 8px 0 4px; font-size:.55rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold2); font-weight:800; background:var(--cream2); border-radius:999px; padding:5px 9px; border:1px dashed var(--gold)}
+/* ============ MAIN / SCREENS ============ */
+main{max-width:1120px; margin:0 auto; padding:18px 20px 60px}
+.screen{display:none}
+.screen.active{display:block; animation:screenIn .5s ease}
+@keyframes screenIn{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
+.reveal{opacity:0; transform:translateY(18px); transition:.6s ease}
+.reveal.in{opacity:1; transform:none}
+.hero{text-align:center; padding:44px 10px 30px}
+.hero h1{font-family:var(--serif); font-weight:900; font-size:clamp(1.7rem,4.5vw,3rem); letter-spacing:.03em; margin:10px 0 4px}
+.hero .sub{font-family:var(--serif); font-size:clamp(1rem,2.6vw,1.5rem); color:var(--gold2); font-weight:700; letter-spacing:.14em}
+.hero .tag{margin-top:14px; display:inline-block; background:var(--brown800); color:var(--goldsoft); padding:10px 20px; border-radius:999px; letter-spacing:.18em; font-size:.72rem; font-weight:700}
+.hero .lead-q{max-width:640px; margin:20px auto 26px; font-size:1.02rem; color:var(--ink-soft); font-style:italic}
+.home-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; margin-top:10px}
+.home-card{border:none; background:var(--card); border-radius:20px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer; text-align:left; transition:.3s; padding:0}
+.home-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(43,32,21,.22)}
+.home-card img{width:100%; height:220px; object-fit:cover}
+.home-card .hc-body{padding:18px 20px 20px}
+.home-card h3{font-family:var(--serif); font-size:1.35rem; margin:4px 0 6px}
+.home-card p{color:var(--ink-soft); font-size:.88rem}
+.module-cover{position:relative; border-radius:22px; overflow:hidden; color:#fff; padding:52px 30px; margin-bottom:26px; background-size:cover; background-position:center; box-shadow:var(--shadow)}
+.module-cover::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(29,20,12,.82), rgba(29,20,12,.45))}
+.module-cover>*{position:relative}
+.module-cover h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:.04em; margin:8px 0 8px; color:#fdf6e3}
+.module-cover p{color:var(--goldsoft); letter-spacing:.2em; text-transform:uppercase; font-size:.75rem; font-weight:700}
+.sec-title{font-family:var(--serif); font-size:clamp(1.2rem,3vw,1.7rem); margin:26px 0 6px; letter-spacing:.02em}
+.sec-sub{color:var(--ink-soft); margin-bottom:18px; max-width:720px}
+.lead{background:var(--paper); border-left:5px solid var(--gold); border-radius:12px; padding:16px 20px; font-size:1rem; color:var(--ink-soft); box-shadow:var(--shadow); margin:14px 0 22px; font-style:italic}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); border:1px solid #e7d9b8; transition:.25s; cursor:pointer; text-align:left}
+.card:hover{transform:translateY(-4px); border-color:var(--gold)}
+.card .ico{width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); display:grid; place-items:center; font-size:22px; margin-bottom:12px}
+.card h4{font-family:var(--serif); letter-spacing:.05em; margin-bottom:6px; font-size:.98rem}
+.card p{color:var(--ink-soft); font-size:.88rem; line-height:1.5}
+.card .more{max-height:0; overflow:hidden; transition:max-height .4s ease, margin-top .4s; color:var(--ink-soft); font-size:.86rem}
+.card.open .more{max-height:220px; margin-top:8px}
+.card .hint{display:inline-block; margin-top:10px; font-size:.62rem; letter-spacing:.16em; color:var(--gold2); font-weight:700; text-transform:uppercase}
+/* rhythm / fight big cards */
+.big-card{background:var(--card); border-radius:20px; overflow:hidden; box-shadow:var(--shadow); border:1px solid #e7d9b8; display:flex; flex-direction:column; transition:.3s}
+.big-card:hover{transform:translateY(-5px)}
+.big-card .bc-top{padding:20px 20px 0; display:flex; align-items:center; gap:12px}
+.big-card .ico{width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--goldsoft),var(--gold)); display:grid; place-items:center; font-size:24px; flex:none}
+.big-card h4{font-family:var(--serif); font-size:1.15rem}
+.big-card .orig{font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold2); font-weight:700}
+.big-card .bc-body{padding:14px 20px 6px; flex:1}
+.big-card p{color:var(--ink-soft); font-size:.9rem; line-height:1.55}
+.big-card .btn{margin:10px 20px 20px; align-self:flex-start}
+.bc-media{max-height:0; overflow:hidden; transition:max-height .6s ease; padding:0 20px}
+.big-card.open .bc-media{max-height:640px; padding:0 20px 4px}
+.bc-media img{width:100%; height:200px; object-fit:cover; border-radius:14px; margin:6px 0 10px; box-shadow:var(--shadow)}
+.bc-media .viz{margin:10px 0 6px}
+.grids2{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:999px; border:2px solid transparent; font-weight:800; letter-spacing:.14em; font-size:.74rem; cursor:pointer; transition:.25s; text-transform:uppercase; background:none}
+.btn-gold{background:linear-gradient(135deg,var(--goldsoft),var(--gold)); color:var(--brown900); box-shadow:0 6px 16px rgba(168,124,31,.35)}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(168,124,31,.45)}
+.btn-ghost{border-color:var(--brown700); color:var(--brown700)}
+.btn-ghost:hover{background:var(--brown700); color:var(--goldsoft)}
+.btn-small{padding:9px 16px; font-size:.66rem}
+.btn.is-done{background:var(--green); color:#fff; box-shadow:none; cursor:default}
+.nav-btns{display:flex; justify-content:space-between; align-items:center; gap:12px; margin:34px 0 10px; flex-wrap:wrap}
+/* table */
+.table-wrap{overflow-x:auto; border-radius:16px; box-shadow:var(--shadow)}
+.rtable{width:100%; border-collapse:collapse; background:var(--card); min-width:520px}
+.rtable th{background:var(--brown800); color:var(--goldsoft); text-align:left; padding:14px 18px; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase}
+.rtable td{padding:15px 18px; font-size:.9rem; color:var(--ink-soft); border-top:1px solid #eadfc2}
+.rtable td:first-child{font-weight:700; color:var(--ink); font-family:var(--serif)}
+.rtable tbody tr{cursor:pointer; transition:.2s}
+.rtable tbody tr:hover{background:#f6ecd6}
+/* quiz */
+.quiz-box{background:var(--paper); border-radius:20px; padding:24px; box-shadow:var(--shadow); border:1px solid #e7d9b8}
+.quiz-top{display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px; flex-wrap:wrap}
+.quiz-count{font-size:.68rem; letter-spacing:.16em; color:var(--ink-soft); font-weight:700}
+.quiz-q{font-family:var(--serif); font-size:1.12rem; margin-bottom:16px; line-height:1.45}
+.quiz-opts{display:grid; gap:10px}
+.quiz-opt{background:var(--card); border:2px solid #e0d0a8; border-radius:12px; padding:13px 16px; text-align:left; cursor:pointer; font-size:.92rem; font-weight:600; color:var(--ink); transition:.2s}
+.quiz-opt:hover:not(:disabled){border-color:var(--gold); transform:translateX(4px)}
+.quiz-opt.correct{background:#e5f2e7; border-color:var(--green); color:var(--green)}
+.quiz-opt.wrong{background:#f7e4e0; border-color:var(--red); color:var(--red); animation:shake .35s}
+.quiz-opt:disabled{cursor:default; opacity:.9}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.quiz-feedback{margin-top:14px; padding:12px 16px; border-radius:12px; font-weight:700; letter-spacing:.06em; font-size:.85rem}
+.quiz-feedback p{font-weight:400; letter-spacing:0; margin-top:6px; color:var(--ink-soft); font-size:.86rem}
+.quiz-feedback.ok{background:#e5f2e7; color:var(--green)}
+.quiz-feedback.err{background:#f7e4e0; color:var(--red)}
+.quiz-actions{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
+.quiz-result{text-align:center; padding:16px 6px}
+.score-big{font-family:var(--serif); font-size:3rem; font-weight:900; color:var(--gold2); margin:8px 0 0}
+.score-pct{font-size:1.1rem; font-weight:800; color:var(--ink-soft); margin-bottom:10px}
+/* vs comparison */
+.vs{display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:stretch; margin:18px 0}
+.vs-card{background:var(--card); border-radius:18px; padding:22px; box-shadow:var(--shadow); border-top:6px solid var(--gold)}
+.vs-card h4{font-family:var(--serif); font-size:1.3rem; margin-bottom:4px}
+.vs-card .orig{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold2); font-weight:700}
+.vs-card ul{list-style:none; margin-top:12px}
+.vs-card li{padding:8px 0; border-bottom:1px dashed #e0d0a8; font-size:.9rem; color:var(--ink-soft)}
+.vs-card li:last-child{border:none}
+.vs-badge{align-self:center; font-family:var(--serif); font-weight:900; font-size:1.5rem; color:var(--gold2)}
+/* essays */
+.essay-card{background:var(--paper); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow); border:1px solid #e7d9b8; margin-bottom:16px}
+.essay-card h4{font-family:var(--serif); font-size:1rem; margin:8px 0 12px}
+.essay-card textarea{width:100%; border:2px solid #e0d0a8; border-radius:12px; background:var(--card); padding:12px 14px; font-family:var(--sans); font-size:.92rem; color:var(--ink); resize:vertical; min-height:96px}
+.essay-card textarea:focus{outline:none; border-color:var(--gold)}
+.essay-card .btn{margin-top:10px}
+/* modal */
+.modal-overlay{position:fixed; inset:0; background:rgba(20,12,6,.62); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:120; padding:16px}
+.modal-overlay.show{display:flex}
+.modal-card{background:var(--paper); border-radius:20px; max-width:720px; width:100%; max-height:88vh; overflow:auto; position:relative; animation:pop .3s ease}
+@keyframes pop{from{opacity:0; transform:scale(.92)} to{opacity:1; transform:scale(1)}}
+.modal-close{position:absolute; top:12px; right:12px; width:40px; height:40px; border-radius:50%; background:var(--brown800); color:var(--goldsoft); border:none; font-size:1.1rem; cursor:pointer; z-index:2; transition:.2s}
+.modal-close:hover{transform:rotate(90deg)}
+.modal-img{width:100%; height:270px; object-fit:cover}
+.modal-body{padding:22px 26px 28px}
+.modal-body h3{font-family:var(--serif); font-size:1.5rem; margin:2px 0 4px}
+.modal-body .orig{font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold2); font-weight:700}
+.modal-body p{color:var(--ink-soft); margin:12px 0; line-height:1.6}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0}
+.chip{background:var(--cream2); border-radius:999px; padding:7px 14px; font-size:.76rem; font-weight:700; color:var(--brown700)}
+.viz{position:relative; height:130px; background:var(--cream2); border-radius:14px; margin:14px 0 6px; overflow:hidden}
+.viz .p{position:absolute; width:18px; height:18px; border-radius:50%; top:50%; left:50%; margin:-9px}
+.viz .p1{background:var(--brown800)} .viz .p2{background:var(--gold)}
+.viz-cap{font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); font-weight:700}
+.viz-forro .p1{animation:vf1 .7s infinite steps(3)} .viz-forro .p2{animation:vf2 .7s infinite steps(3)}
+@keyframes vf1{0%,100%{transform:translate(-34px,0)}25%{transform:translate(-26px,-10px)}50%{transform:translate(-18px,0)}75%{transform:translate(-26px,10px)}}
+@keyframes vf2{0%,100%{transform:translate(34px,0)}25%{transform:translate(26px,10px)}50%{transform:translate(18px,0)}75%{transform:translate(26px,-10px)}}
+.viz-gafieira .p1{animation:orb 5s linear infinite} .viz-gafieira .p2{animation:orb 5s linear infinite; animation-delay:-2.5s}
+@keyframes orb{from{transform:rotate(0) translateX(34px)} to{transform:rotate(360deg) translateX(34px)}}
+.viz-tango .p1{animation:sw1 3s ease-in-out infinite} .viz-tango .p2{animation:sw2 3s ease-in-out infinite}
+@keyframes sw1{0%,100%{transform:translate(-16px,0)}50%{transform:translate(-10px,-8px)}}
+@keyframes sw2{0%,100%{transform:translate(12px,0)}50%{transform:translate(6px,-8px)}}
+.viz-salsa .p1{animation:orb 1.4s linear infinite} .viz-salsa .p2{animation:orb 1.4s linear infinite reverse}
+.viz-zouk .p1{animation:wv 3.4s ease-in-out infinite} .viz-zouk .p2{animation:wv 3.4s ease-in-out infinite; animation-delay:-1.7s}
+@keyframes wv{0%,100%{transform:translate(-26px,10px)}50%{transform:translate(26px,-10px)}}
+/* review / achievements / end */
+.rev-cols{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.rev-card{background:var(--card); border-radius:18px; padding:24px; box-shadow:var(--shadow); border-top:6px solid var(--gold)}
+.rev-card h4{font-family:var(--serif); font-size:1.25rem; margin-bottom:12px}
+.rev-card ul{list-style:none}
+.rev-card li{padding:9px 0 9px 26px; border-bottom:1px dashed #e0d0a8; color:var(--ink-soft); font-size:.9rem; position:relative}
+.rev-card li::before{content:'★'; position:absolute; left:2px; color:var(--gold)}
+.ach-card{background:var(--card); border-radius:16px; padding:18px; box-shadow:var(--shadow); text-align:center; border:1px solid #e7d9b8; transition:.3s}
+.ach-card .a-ico{font-size:2rem}
+.ach-card h4{font-family:var(--serif); font-size:.92rem; margin:8px 0 4px; letter-spacing:.06em}
+.ach-card p{font-size:.78rem; color:var(--ink-soft)}
+.ach-card.locked{opacity:.45; filter:grayscale(1)}
+.end-hero{text-align:center; padding:30px 10px}
+.end-hero .trophy{font-size:4rem}
+.end-hero h2{font-family:var(--serif); font-size:clamp(1.5rem,4vw,2.4rem); margin:12px 0}
+.check-list{max-width:560px; margin:18px auto; text-align:left}
+.check-list li{list-style:none; background:var(--card); margin-bottom:8px; padding:12px 16px; border-radius:12px; box-shadow:var(--shadow); display:flex; gap:10px; align-items:center; font-size:.9rem}
+.check-list li .st{margin-left:auto; font-weight:800}
+.check-list li.ok .st{color:var(--green)} .check-list li.no .st{color:var(--red)}
+#confettiBox{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:60}
+#confettiBox i{position:absolute; top:-20px; width:10px; height:14px; background:var(--gold); animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{padding:26px 20px 40px; text-align:center; color:var(--ink-soft); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase}
+/* toasts */
+#toastBox{position:fixed; right:16px; bottom:16px; z-index:150; display:flex; flex-direction:column}
+.toast{background:var(--brown800); color:var(--goldsoft); padding:12px 18px; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,.3); opacity:0; transform:translateY(14px); transition:.3s; margin-top:8px; font-size:.82rem; letter-spacing:.05em; font-weight:700; max-width:320px}
+.toast.in{opacity:1; transform:none}
+/* responsive */
+@media (max-width:980px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  .layout{margin-left:0}
+  .menu-btn{display:block}
+  .hud-lesson strong{font-size:.85rem}
+  .vs{grid-template-columns:1fr}
+  .vs-badge{justify-self:center}
+}
+@media (max-width:560px){
+  main{padding:14px 14px 50px}
+  header{padding:10px 12px; gap:10px}
+  .points-badge{padding:6px 10px; font-size:.7rem}
+  .hero{padding-top:26px}
+  .quiz-box{padding:18px 14px}
+  .modal-img{height:200px}
+  .hud-progress{min-width:90px}
+  .hud-lesson strong{font-size:.78rem}
+  .bc-media img{height:160px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important; scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<div id="overlay"></div>
+<aside id="sidebar" aria-label="Menu principal">
+  <div class="side-head">
+    <div class="logo" aria-hidden="true">EF</div>
+    <div><strong>E.E.E.F.M. ILDA FERREIRA DA FONSECA MARTINS</strong><span class="eyebrow light">Educação Física</span></div>
+  </div>
+  <nav class="side-nav" id="sideNav" aria-label="Navegação das aulas"></nav>
+  <div class="side-stats">
+    <div><strong id="stPoints">0</strong><span>Pontos</span></div>
+    <div><strong id="stLessons">0/8</strong><span>Aulas</span></div>
+    <div><strong id="stAch">0/6</strong><span>Conquistas</span></div>
+  </div>
+  <div class="side-foot">8º Ano • 3º Trimestre</div>
+</aside>
+<div class="layout">
+  <header>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <div class="hud-lesson"><span class="eyebrow" id="hudKicker">INÍCIO</span><strong id="hudTitle">Plataforma do 3º Trimestre</strong></div>
+    <div class="hud-progress" aria-label="Progresso do trimestre"><div class="hud-bar"><i id="hudBar"></i></div><span id="hudPct">0%</span></div>
+    <div class="points-badge" aria-label="Pontos">⭐ <span id="hudPoints">0</span></div>
+  </header>
+  <div class="timeline-wrap"><div class="timeline" id="timeline" aria-label="Cronograma de aulas"></div></div>
+  <main id="main">
+
+    <section class="screen active" data-screen="home">
+      <div class="hero">
+        <span class="eyebrow">E.E.E.F.M. Ilda Ferreira da Fonseca Martins</span>
+        <h1>EDUCAÇÃO FÍSICA • 8º ANO</h1>
+        <p class="sub">3º TRIMESTRE</p>
+        <p class="tag">DANÇA DE SALÃO + LUTAS PELO MUNDO</p>
+        <p class="lead-q">"Neste trimestre vamos conhecer manifestações corporais que envolvem ritmo, expressão, cultura, movimento, disciplina, respeito e estratégia."</p>
+        <button class="btn btn-gold" id="startBtn" type="button">COMEÇAR AULA ➜</button>
+      </div>
+      <div class="home-cards">
+        <button class="home-card reveal" type="button" data-go="a1">
+          <img src="https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/106369ec4-92b4-4ba3-a37e-3fc2a8422bd4.png" alt="Ilustração de um casal dançando dança de salão em um salão clássico">
+          <div class="hc-body"><span class="eyebrow">Módulo 1</span><h3>DANÇA DE SALÃO</h3><p>Movimento • Ritmo • Cultura • Interação</p></div>
+        </button>
+        <button class="home-card reveal" type="button" data-go="a5">
+          <img src="https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f2e1a9ac-cb01-4310-9d33-f3de3e25e1ad.png" alt="Ilustração de praticantes de lutas marciais do mundo: capoeira, judô e boxe">
+          <div class="hc-body"><span class="eyebrow">Módulo 2</span><h3>LUTAS PELO MUNDO</h3><p>Cultura • Disciplina • Respeito • Estratégia</p></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a1">
+      <div class="module-cover" style="background-image:url('https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/106369ec4-92b4-4ba3-a37e-3fc2a8422bd4.png')">
+        <span class="eyebrow light">Módulo 1</span><h2>DANÇA DE SALÃO</h2><p>Movimento • Ritmo • Cultura • Interação</p>
+      </div>
+      <h3 class="sec-title">AULA 1 • O QUE É DANÇA DE SALÃO?</h3>
+      <p class="lead">"A dança de salão é uma dança social realizada em dupla, em que os parceiros dançam juntos. Ela é praticada em festas, bailes, eventos e academias, sendo uma forma divertida de se exercitar, socializar e se conectar com a música."</p>
+      <div class="grid" id="conceptGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="home">⬅ INÍCIO</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="1">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a2">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a2">
+      <span class="eyebrow">Módulo 1 • Dança de Salão</span>
+      <h3 class="sec-title">AULA 2 • PRINCIPAIS RITMOS</h3>
+      <p class="sec-sub">Conheça os cinco grandes ritmos da dança de salão. Clique em EXPLORAR para abrir a imagem, a origem e a representação do movimento de cada ritmo.</p>
+      <div class="grids2" id="rhythmGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a1">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="2">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a3">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a3">
+      <span class="eyebrow">Módulo 1 • Dança de Salão</span>
+      <h3 class="sec-title">AULA 3 • CARACTERÍSTICAS DA DANÇA DE SALÃO</h3>
+      <p class="sec-sub">Clique em cada card para revelar a explicação. Depois, explore a tabela comparativa dos ritmos.</p>
+      <div class="grid" id="charGrid"></div>
+      <h3 class="sec-title">TABELA INTERATIVA DOS RITMOS</h3>
+      <p class="sec-sub">Clique em uma linha para abrir a imagem e os detalhes do ritmo.</p>
+      <div class="table-wrap">
+        <table class="rtable">
+          <thead><tr><th scope="col">Ritmo</th><th scope="col">Características</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a2">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="3">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a4">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a4">
+      <span class="eyebrow">Módulo 1 • Dança de Salão</span>
+      <h3 class="sec-title">AULA 4 • ATIVIDADE INTERATIVA</h3>
+      <p class="sec-sub">DESCUBRA O RITMO: leia a característica e escolha o ritmo correto. Você pode tentar novamente até acertar!</p>
+      <div class="quiz-box" id="danceQuizBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a3">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="4">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a5">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a5">
+      <div class="module-cover" style="background-image:url('https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f2e1a9ac-cb01-4310-9d33-f3de3e25e1ad.png')">
+        <span class="eyebrow light">Módulo 2</span><h2>LUTAS PELO MUNDO</h2><p>Cultura • Disciplina • Respeito • Estratégia</p>
+      </div>
+      <h3 class="sec-title">AULA 5 • INTRODUÇÃO ÀS LUTAS</h3>
+      <p class="lead">"A prática de lutas ensina sobre disciplina, respeito e estratégia, além de desenvolver uma série de benefícios físicos e mentais."</p>
+      <p class="sec-sub">As lutas fazem parte da cultura de diversos povos. Nas próximas aulas, vamos viajar pelo mundo conhecendo suas principais modalidades.</p>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a4">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="5">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a6">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a6">
+      <span class="eyebrow">Módulo 2 • Lutas pelo Mundo</span>
+      <h3 class="sec-title">AULA 6 • PRINCIPAIS MODALIDADES E SUAS ORIGENS</h3>
+      <p class="sec-sub">Clique em CONHECER para abrir a imagem e os detalhes de cada luta.</p>
+      <div class="grids2" id="fightGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a5">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="6">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a7">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a7">
+      <span class="eyebrow">Módulo 2 • Lutas pelo Mundo</span>
+      <h3 class="sec-title">AULA 7 • BENEFÍCIOS FÍSICOS</h3>
+      <p class="sec-sub">Clique nos cards para ver cada benefício.</p>
+      <div class="grid" id="physGrid"></div>
+      <h3 class="sec-title">BENEFÍCIOS MENTAIS</h3>
+      <div class="grid" id="mindGrid"></div>
+      <h3 class="sec-title">COMPARAÇÃO CULTURAL</h3>
+      <div class="vs">
+        <div class="vs-card reveal"><h4>CAPOEIRA</h4><span class="orig">Brasil</span>
+          <ul><li>Mistura dança + luta</li><li>Acompanhada de música</li><li>Expressão cultural brasileira</li><li>Movimentos acrobáticos</li><li>Nasceu entre os escravizados africanos</li></ul>
+        </div>
+        <div class="vs-badge" aria-hidden="true">×</div>
+        <div class="vs-card reveal"><h4>JUDÔ</h4><span class="orig">Japão</span>
+          <ul><li>Força + técnica</li><li>Disciplina</li><li>Respeito</li><li>Equilíbrio entre corpo e mente</li><li>Arte marcial japonesa</li></ul>
+        </div>
+      </div>
+      <div class="essay-card">
+        <span class="eyebrow">Reflexão</span>
+        <h4>Identifique uma diferença cultural entre a capoeira e o judô.</h4>
+        <textarea id="ess-comp" rows="3" placeholder="Escreva sua resposta aqui..."></textarea>
+        <button class="btn btn-small btn-gold" type="button" data-ess="comp">SALVAR RESPOSTA</button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a6">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="7">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="a8">PRÓXIMA AULA ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="a8">
+      <span class="eyebrow">Módulo 2 • Lutas pelo Mundo</span>
+      <h3 class="sec-title">AULA 8 • ATIVIDADE: ADIVINHE A LUTA</h3>
+      <p class="sec-sub">Leia a característica e descubra qual luta está sendo descrita.</p>
+      <div class="quiz-box" id="fightQuizBox"></div>
+      <h3 class="sec-title">QUIZ FINAL DO TRIMESTRE</h3>
+      <p class="sec-sub">10 questões sobre dança de salão e lutas. Boa sorte!</p>
+      <div class="quiz-box" id="finalQuizBox"></div>
+      <h3 class="sec-title">QUESTÕES DISCURSIVAS</h3>
+      <p class="sec-sub">Responda com suas palavras. Não há correção automática — o importante é refletir!</p>
+      <div id="essayBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a7">⬅ AULA ANTERIOR</button>
+        <button class="btn btn-gold js-complete" type="button" data-lesson="8">CONCLUIR AULA ✓</button>
+        <button class="btn btn-gold" type="button" data-go="rev">REVISÃO ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="rev">
+      <h3 class="sec-title">REVISÃO DO TRIMESTRE</h3>
+      <div class="rev-cols">
+        <div class="rev-card reveal"><span class="eyebrow">Módulo 1</span><h4>DANÇA DE SALÃO</h4>
+          <ul>
+            <li>Dança social realizada em dupla, praticada em festas, bailes e academias.</li>
+            <li>Ritmos: Forró, Samba de Gafieira, Tango, Salsa e Zouk.</li>
+            <li>Forró: passos rápidos, giros, sanfona e zabumba (Nordeste do Brasil).</li>
+            <li>Samba de Gafieira: derivado do maxixe, salões do Rio de Janeiro.</li>
+            <li>Tango: Argentina e Uruguai, paixão e abraço fechado.</li>
+            <li>Salsa: Caribe (Cuba e Porto Rico), movimentos rápidos.</li>
+            <li>Zouk: ilhas do Caribe, movimentos suaves e ondulados.</li>
+            <li>Desenvolve coordenação, ritmo, equilíbrio e interação social.</li>
+          </ul>
+        </div>
+        <div class="rev-card reveal"><span class="eyebrow">Módulo 2</span><h4>LUTAS PELO MUNDO</h4>
+          <ul>
+            <li>Judô (Japão): equilíbrio entre força e técnica, disciplina e respeito.</li>
+            <li>Boxe (Grécia e Inglaterra): força, estratégia e resistência.</li>
+            <li>Capoeira (Brasil): mistura de dança e luta, música e acrobacia.</li>
+            <li>Muay Thai (Tailândia): punhos, cotovelos, joelhos e pés.</li>
+            <li>Taekwondo (Coreia): golpes de perna rápidos e poderosos.</li>
+            <li>Wrestling (várias regiões): luta livre, variante greco-romana.</li>
+            <li>Benefícios físicos: força, coordenação, flexibilidade, agilidade e controle do peso.</li>
+            <li>Benefícios mentais: menos estresse, foco, autoconfiança, disciplina e controle emocional.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="a8">⬅ AULA 8</button>
+        <button class="btn btn-gold" type="button" data-go="ach">CONQUISTAS ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="ach">
+      <h3 class="sec-title">CONQUISTAS</h3>
+      <p class="sec-sub">Complete as etapas do trimestre para desbloquear todas as conquistas.</p>
+      <div class="grid" id="achGrid"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="rev">⬅ REVISÃO</button>
+        <button class="btn btn-gold" type="button" data-go="end">CONCLUSÃO ➜</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="end">
+      <div id="endBox"></div>
+      <div class="nav-btns">
+        <button class="btn btn-ghost" type="button" data-go="ach">⬅ CONQUISTAS</button>
+        <button class="btn btn-gold" type="button" data-go="home">VOLTAR AO INÍCIO 🏠</button>
+      </div>
+    </section>
+
+  </main>
+  <footer>E.E.E.F.M. Ilda Ferreira da Fonseca Martins • Educação Física • 8º Ano • 3º Trimestre</footer>
+</div>
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Detalhes">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+<div id="toastBox" aria-live="polite"></div>
+<div id="confettiBox" aria-hidden="true"></div>
+<script>
+'use strict';
+var IMG = {
+  danca:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/106369ec4-92b4-4ba3-a37e-3fc2a8422bd4.png',
+  lutas:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f2e1a9ac-cb01-4310-9d33-f3de3e25e1ad.png',
+  forro:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/127de40da-9dae-496f-9297-f28716a8a8f8.png',
+  gafieira:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/119acc50d-a5f4-47bc-a83c-f7ba4f10dac3.png',
+  tango:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/107f4663d-96fa-4030-9830-adf6757793da.png',
+  salsa:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1e9a9e14f-aafc-48fa-a5d6-4abee7dc6edb.png',
+  zouk:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1a42c57c9-eb24-42b3-b3c5-43cda9485670.png',
+  judo:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/1f14e779e-9aca-4302-8a3d-0cc97d41451b.png',
+  boxe:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/12935fa02-9bfd-4b1a-9d1f-6176098d1c8b.png',
+  capoeira:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/19517a5f3-4850-40ce-aed9-475bf63d91bf.png',
+  muaythai:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/13fe802ae-773d-4dea-89a1-2feb7e6034a4.png',
+  taekwondo:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/158a54c63-6b9a-4e14-9253-81b0824e0470.png',
+  wrestling:'https://image.qwenlm.ai/public_source/f435f22e-40a9-4a4c-96c4-9405edbe3676/11fe2fd79-a69e-4caa-b1bb-3e43d8169b08.png'
+};
+var LESSONS = [
+  {id:'a1', n:1, title:'Introdução à Dança de Salão', short:'Dança: Introdução', mod:1},
+  {id:'a2', n:2, title:'Principais Ritmos', short:'Ritmos', mod:1},
+  {id:'a3', n:3, title:'Características da Dança', short:'Características', mod:1},
+  {id:'a4', n:4, title:'Revisão e Atividade – Dança', short:'Atividade Dança', mod:1},
+  {id:'a5', n:5, title:'Introdução às Lutas', short:'Lutas: Introdução', mod:2},
+  {id:'a6', n:6, title:'Modalidades e Origens', short:'Modalidades', mod:2},
+  {id:'a7', n:7, title:'Benefícios das Lutas', short:'Benefícios', mod:2},
+  {id:'a8', n:8, title:'Revisão e Quiz Final', short:'Quiz Final', mod:2}
+];
+var CONCEPTS = [
+  {i:'🤝', t:'DANÇA SOCIAL', d:'Praticada em festas, bailes, eventos e academias.'},
+  {i:'💃', t:'PRATICADA EM DUPLA', d:'Os parceiros dançam juntos, em conexão.'},
+  {i:'🎶', t:'MÚSICA E MOVIMENTO', d:'O corpo interpreta o ritmo da música.'},
+  {i:'🗣️', t:'SOCIALIZAÇÃO', d:'Uma forma divertida de conhecer e interagir com pessoas.'},
+  {i:'💪', t:'EXERCÍCIO', d:'Movimentar-se dançando é cuidar da saúde.'},
+  {i:'✨', t:'EXPRESSÃO', d:'Cada dança comunica emoções e estilo.'}
+];
+var RHYTHMS = [
+  {id:'forro', nome:'FORRÓ', icon:'🪗', origem:'Brasil — Região Nordeste', desc:'Parte importante da cultura brasileira, especialmente na região Nordeste. Música animada com sanfona e zabumba.', carbs:['Movimentos rápidos dos pés','Movimentos do quadril','Giros','Deslocamentos pelo salão'], table:'Passos rápidos, giros e música animada com sanfona e zabumba'},
+  {id:'gafieira', nome:'SAMBA DE GAFIEIRA', icon:'🎩', origem:'Rio de Janeiro — início do séc. XX', desc:'Estilo derivado do maxixe, que nasceu nos salões do Rio de Janeiro. Dançado em movimento circular, com os parceiros entrando e saindo do espaço pessoal um do outro.', carbs:['Derivado do maxixe','Movimento circular','Muito improviso','Elegância nos salões'], table:'Movimentos complexos com muito improviso, base do samba'},
+  {id:'tango', nome:'TANGO', icon:'🌹', origem:'Argentina e Uruguai', desc:'Estilo intenso e romântico, caracterizado pela paixão e intimidade, com passos firmes e abraço fechado.', carbs:['Paixão e intimidade','Passos firmes','Abraço fechado','Estilo intenso'], table:'Estilo intenso e romântico, com passos firmes e abraço fechado'},
+  {id:'salsa', nome:'SALSA', icon:'🎺', origem:'Caribe — Cuba e Porto Rico', desc:'Música que é uma mistura de ritmos africanos, caribenhos e latinos. Dança rápida, cheia de energia e giros.', carbs:['Mistura de ritmos africanos, caribenhos e latinos','Movimentos rápidos','Energia contagiante','Giros abertos'], table:'Estilo caribenho com movimentos sensuais e rápidos'},
+  {id:'zouk', nome:'ZOUK', icon:'🌊', origem:'Ilhas do Caribe', desc:'Dança sensual de movimentos suaves e ondulados, com o quadril e o corpo todo, com influência da lambada.', carbs:['Movimentos suaves','Ondulações do corpo','Movimento do quadril','Influência da lambada'], table:'Movimentos suaves e ondulados, com influência da lambada'}
+];
+var CHARS = [
+  {i:'👫', t:'PRATICADA EM PARES', d:'O casal dança junto, conduzindo e respondendo em sintonia.'},
+  {i:'🤫', t:'COMUNICAÇÃO NÃO VERBAL', d:'O corpo guia o parceiro: não é preciso falar.'},
+  {i:'🧠', t:'COORDENAÇÃO MOTORA', d:'Combina passos, giros e gestos ao mesmo tempo.'},
+  {i:'🎵', t:'RITMO', d:'O corpo acompanha o tempo da música.'},
+  {i:'⚖️', t:'EQUILÍBRIO', d:'Estabilidade para giros e mudanças de direção.'},
+  {i:'🌐', t:'INTERAÇÃO SOCIAL', d:'Aproxima pessoas em festas, bailes e academias.'},
+  {i:'🎈', t:'LÚDICA', d:'Divertida e prazerosa: dançar é alegria.'},
+  {i:'🎭', t:'EXPRESSIVA', d:'Cada casal transmite emoção com o movimento.'}
+];
+var FIGHTS = [
+  {id:'judo', nome:'JUDÔ', icon:'🥋', pais:'Japão', desc:'Arte marcial que enfatiza o equilíbrio entre força e técnica. Ensina valores como disciplina e respeito.', carbs:['Equilíbrio entre força e técnica','Disciplina','Respeito']},
+  {id:'boxe', nome:'BOXE', icon:'🥊', pais:'Grécia e Inglaterra', desc:'Tem raízes na Grécia Antiga e foi modernizado na Inglaterra. Combina força, estratégia e resistência física.', carbs:['Força','Estratégia','Resistência física']},
+  {id:'capoeira', nome:'CAPOEIRA', icon:'🤸', pais:'Brasil', desc:'Mistura de dança e luta, é uma expressão cultural única do Brasil, nascida entre os escravizados africanos. Acompanhada de música e movimentos acrobáticos.', carbs:['Dança + luta','Música','Expressão cultural','Acrobacias']},
+  {id:'muaythai', nome:'MUAY THAI', icon:'🦵', pais:'Tailândia', desc:'Originada na Tailândia, utiliza punhos, cotovelos, joelhos e pés.', carbs:['Punhos','Cotovelos','Joelhos','Pés']},
+  {id:'taekwondo', nome:'TAEKWONDO', icon:'⚡', pais:'Coreia', desc:'Conhecido por seus golpes de perna rápidos e poderosos.', carbs:['Golpes de perna rápidos','Golpes poderosos']},
+  {id:'wrestling', nome:'WRESTLING', icon:'🤼', pais:'Várias regiões', desc:'Conhecida como luta livre, é praticada em diversas culturas e tem variantes históricas como a luta greco-romana.', carbs:['Luta livre','Diversas culturas','Variante greco-romana']}
+];
+var PHYS = [
+  {i:'💪', t:'FORÇA E RESISTÊNCIA', d:'Socos, chutes e movimentações fortalecem músculos e aumentam a resistência cardiovascular.'},
+  {i:'🤹', t:'COORDENAÇÃO MOTORA', d:'Movimentos rápidos e precisos aprimoram a coordenação e o equilíbrio.'},
+  {i:'🧘', t:'FLEXIBILIDADE', d:'Alongamentos deixam o corpo mais flexível.'},
+  {i:'⚡', t:'AGILIDADE', d:'Reflexos rápidos e movimentação ágil.'},
+  {i:'⚖️', t:'CONTROLE DO PESO', d:'O treino intensivo queima calorias e mantém um peso saudável.'}
+];
+var MIND = [
+  {i:'😌', t:'REDUÇÃO DO ESTRESSE', d:'Libera endorfina, o hormônio da felicidade, promovendo relaxamento e bem-estar.'},
+  {i:'🎯', t:'CONCENTRAÇÃO E FOCO', d:'A atenção nos combates treina a mente para estar presente.'},
+  {i:'🦁', t:'AUTOCONFIANÇA', d:'Aprender a se defender proporciona maior segurança pessoal.'},
+  {i:'🧭', t:'DISCIPLINA', d:'A prática exige concentração e autocontrole.'},
+  {i:'🧘', t:'CONTROLE EMOCIONAL', d:'Ajuda a lidar melhor com emoções e situações de pressão.'}
+];
+var DANCE_QUIZ = [
+  {q:'Passos rápidos, giros e música animada com sanfona e zabumba.', opts:['FORRÓ','TANGO','ZOUK','SALSA'], a:0},
+  {q:'Derivado do maxixe, com movimento circular, nascido nos salões do Rio de Janeiro.', opts:['SALSA','SAMBA DE GAFIEIRA','FORRÓ','ZOUK'], a:1},
+  {q:'Estilo intenso e romântico, com passos firmes e abraço fechado, originário da Argentina e do Uruguai.', opts:['TANGO','SALSA','FORRÓ','SAMBA DE GAFIEIRA'], a:0},
+  {q:'Ritmo caribenho de Cuba e Porto Rico, com movimentos rápidos e mistura de ritmos africanos e latinos.', opts:['ZOUK','TANGO','SALSA','FORRÓ'], a:2},
+  {q:'Movimentos suaves e ondulados, com o corpo todo e influência da lambada.', opts:['FORRÓ','SALSA','TANGO','ZOUK'], a:3}
+];
+var FIGHT_QUIZ = [
+  {q:'É conhecida por seus golpes de perna rápidos e poderosos. Origem: Coreia.', opts:['JUDÔ','CAPOEIRA','TAEKWONDO','BOXE'], a:2},
+  {q:'Mistura dança e luta, nascida entre os escravizados africanos no Brasil.', opts:['WRESTLING','CAPOEIRA','BOXE','TAEKWONDO'], a:1},
+  {q:'Originado no Japão, enfatiza o equilíbrio entre força e técnica.', opts:['JUDÔ','MUAY THAI','BOXE','CAPOEIRA'], a:0},
+  {q:'Utiliza punhos, cotovelos, joelhos e pés. Origem: Tailândia.', opts:['TAEKWONDO','JUDÔ','MUAY THAI','WRESTLING'], a:2},
+  {q:'Raízes na Grécia Antiga, modernizado na Inglaterra.', opts:['BOXE','JUDÔ','CAPOEIRA','TAEKWONDO'], a:0},
+  {q:'Conhecida como luta livre, com variante histórica greco-romana.', opts:['WRESTLING','MUAY THAI','TAEKWONDO','BOXE'], a:0}
+];
+var FINAL_QUIZ = [
+  {q:'Qual das alternativas representa corretamente o que é a dança de salão?', opts:['Uma dança praticada individualmente com foco em acrobacias.','Um estilo de dança em grupo com coreografias.','Um tipo de dança individual.','Uma dança social feita em par, com ritmos variados.'], a:3, x:'A dança de salão é uma dança social realizada em dupla.'},
+  {q:'Qual desses ritmos NÃO é uma dança de salão tradicional no Brasil?', opts:['Forró','Tango','Rock clássico','Samba de Gafieira'], a:2, x:'Forró, tango e samba de gafieira são danças de salão; rock clássico não é um ritmo de dança de salão.'},
+  {q:'A dança zouk é caracterizada por:', opts:['Passos duros e travados','Movimentos suaves e sensuais','Acrobacias no solo','Saltos e giros'], a:1, x:'O zouk tem movimentos suaves, ondulados e sensuais.'},
+  {q:'Qual instrumento musical é tradicional no forró?', opts:['Violino','Guitarra elétrica','Sanfona','Flauta'], a:2, x:'O forró é marcado pela sanfona e pela zabumba.'},
+  {q:'Qual arte marcial, originada na Coreia, é conhecida por seus golpes de perna rápidos e poderosos?', opts:['Judô','Muay Thai','Taekwondo','Capoeira'], a:2, x:'O taekwondo é famoso pelos golpes de perna.'},
+  {q:'Qual modalidade mistura dança e luta, sendo uma expressão cultural única do Brasil?', opts:['Wrestling','Capoeira','Boxe','Taekwondo'], a:1, x:'A capoeira nasceu no Brasil, entre os escravizados africanos.'},
+  {q:'VERDADEIRO OU FALSO: O tango é originário da Argentina e do Uruguai, marcado por paixão e intimidade.', opts:['Verdadeiro','Falso'], a:0, x:'O tango é intenso, romântico e de abraço fechado.'},
+  {q:'VERDADEIRO OU FALSO: O muay thai é originado no Japão e utiliza apenas os punhos.', opts:['Verdadeiro','Falso'], a:1, x:'O muay thai é da Tailândia e usa punhos, cotovelos, joelhos e pés.'},
+  {q:'ASSOCIAÇÃO CORRETA: qual alternativa liga a modalidade ao seu país de origem?', opts:['Boxe — Tailândia','Judô — Japão','Salsa — Japão','Capoeira — Argentina'], a:1, x:'Judô nasceu no Japão; capoeira no Brasil; boxe na Grécia/Inglaterra.'},
+  {q:'VERDADEIRO OU FALSO: O wrestling, conhecido como luta livre, tem variantes históricas como a luta greco-romana.', opts:['Verdadeiro','Falso'], a:0, x:'O wrestling é praticado em diversas culturas.'}
+];
+var ESSAYS = [
+  {id:'emo', q:'Como a luta pode contribuir para o desenvolvimento emocional e psicológico do praticante?'},
+  {id:'cmp', q:'Compare as características culturais da capoeira e do judô.'},
+  {id:'com', q:'Escolha uma modalidade de luta e escreva um breve comentário (mínimo de 3 linhas).'}
+];
+var ACHIEVEMENTS = [
+  {id:'primeiros', icon:'👟', name:'PRIMEIROS PASSOS', desc:'Concluiu a Aula 1.'},
+  {id:'explorador', icon:'🧭', name:'EXPLORADOR DO MOVIMENTO', desc:'Explorou todos os ritmos e todas as lutas.'},
+  {id:'ritmos', icon:'💃', name:'MESTRE DOS RITMOS', desc:'Acertou tudo na atividade Descubra o Ritmo.'},
+  {id:'lutas', icon:'🥋', name:'GUERREIRO MUNDIAL', desc:'Acertou tudo na atividade Adivinhe a Luta.'},
+  {id:'campeao', icon:'🏆', name:'CAMPEÃO DO TRIMESTRE', desc:'Fez 70% ou mais no Quiz Final.'},
+  {id:'dedicado', icon:'📚', name:'ESTUDANTE DEDICADO', desc:'Concluiu as 8 aulas do trimestre.'}
+];
+/* ---------- state ---------- */
+function loadState(){ try{ var d=localStorage.getItem('ef8t3'); return d?JSON.parse(d):null; }catch(e){ return null; } }
+var state = loadState() || {points:0, done:{}, explored:{}, best:{}, essays:{}, ach:{}, screen:'home'};
+function save(){ try{ localStorage.setItem('ef8t3', JSON.stringify(state)); }catch(e){} }
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function doneCount(){ return LESSONS.filter(function(l){ return state.done[l.id]; }).length; }
+/* ---------- toast / points / achievements ---------- */
+function toast(msg, icon){ var t=document.createElement('div'); t.className='toast'; t.innerHTML='<span>'+(icon||'⭐')+'</span> '+msg; $('toastBox').appendChild(t); setTimeout(function(){ t.classList.add('in'); },20); setTimeout(function(){ t.classList.remove('in'); setTimeout(function(){ t.remove(); },350); },2800); }
+function addPoints(n, why){ state.points+=n; toast('+'+n+' pontos — '+why,'⭐'); save(); updateHUD(); }
+function award(id){ if(state.ach[id]) return; state.ach[id]=true; var a=ACHIEVEMENTS.filter(function(x){return x.id===id;})[0]; if(a){ toast('CONQUISTA DESBLOQUEADA: '+a.name, a.icon); } renderAch(); updateHUD(); save(); }
+/* ---------- navigation ---------- */
+var ORDER = ['home','a1','a2','a3','a4','a5','a6','a7','a8','rev','ach','end'];
+function metaFor(id){
+  if(id==='home') return ['INÍCIO','Plataforma do 3º Trimestre'];
+  if(id==='rev') return ['REVISÃO','Revisão do Trimestre'];
+  if(id==='ach') return ['CONQUISTAS','Suas conquistas'];
+  if(id==='end') return ['CONCLUSÃO','Fim do trimestre'];
+  var l=LESSONS.filter(function(x){return x.id===id;})[0];
+  return l?['AULA '+l.n+' • MÓDULO '+l.mod, l.title]:['',''];
+}
+function go(id){
+  var scr=document.querySelector('.screen[data-screen="'+id+'"]');
+  if(!scr) return;
+  state.screen=id;
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  scr.classList.add('active');
+  document.querySelectorAll('[data-go]').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')===id); });
+  var m=metaFor(id); $('hudKicker').textContent=m[0]; $('hudTitle').textContent=m[1];
+  if(id==='end') renderEnd();
+  if(id==='ach') renderAch();
+  updateHUD(); reveal(scr); save(); closeSide();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+/* ---------- sidebar / timeline (divididos em módulos) ---------- */
+function buildSide(){
+  var h='<button type="button" data-go="home"><span class="num">🏠</span>INÍCIO</button>';
+  h+='<p class="side-label">Módulo 1 • Dança de Salão</p>';
+  LESSONS.filter(function(l){return l.mod===1;}).forEach(function(l){ h+='<button type="button" data-go="'+l.id+'"><span class="num">'+l.n+'</span>AULA '+l.n+' — '+l.title+'</button>'; });
+  h+='<p class="side-label">Módulo 2 • Lutas pelo Mundo</p>';
+  LESSONS.filter(function(l){return l.mod===2;}).forEach(function(l){ h+='<button type="button" data-go="'+l.id+'"><span class="num">'+l.n+'</span>AULA '+l.n+' — '+l.title+'</button>'; });
+  h+='<p class="side-label">Geral</p>';
+  h+='<button type="button" data-go="rev"><span class="num">📚</span>REVISÃO FINAL</button>';
+  h+='<button type="button" data-go="ach"><span class="num">🏆</span>CONQUISTAS</button>';
+  h+='<button type="button" data-go="end"><span class="num">🎓</span>CONCLUSÃO</button>';
+  $('sideNav').innerHTML=h;
+}
+function buildTimeline(){
+  var h='<span class="tl-div">Mód. 1</span>';
+  LESSONS.forEach(function(l){
+    if(l.n===5) h+='<span class="tl-div">Mód. 2</span>';
+    h+='<button type="button" class="tl-item" id="tl-'+l.id+'" data-go="'+l.id+'" aria-label="Ir para a aula '+l.n+'"><span class="tl-dot">'+l.n+'</span><span class="tl-label">'+l.short+'</span></button>';
+  });
+  $('timeline').innerHTML=h;
+}
+function updateHUD(){
+  $('hudPoints').textContent=state.points;
+  $('stPoints').textContent=state.points;
+  $('stLessons').textContent=doneCount()+'/8';
+  $('stAch').textContent=Object.keys(state.ach).length+'/'+ACHIEVEMENTS.length;
+  var pct=Math.round(doneCount()/LESSONS.length*100);
+  $('hudBar').style.width=pct+'%'; $('hudPct').textContent=pct+'%';
+  LESSONS.forEach(function(l){
+    var tl=$('tl-'+l.id); if(!tl) return;
+    tl.classList.toggle('done', !!state.done[l.id]);
+    tl.classList.toggle('current', state.screen===l.id);
+    tl.querySelector('.tl-dot').textContent = state.done[l.id] ? '✓' : l.n;
+  });
+  document.querySelectorAll('.side-nav [data-go]').forEach(function(b){
+    var id=b.getAttribute('data-go');
+    b.classList.toggle('active', state.screen===id);
+    var l=LESSONS.filter(function(x){return x.id===id;})[0];
+    if(l) b.classList.toggle('done', !!state.done[id]);
+  });
+  document.querySelectorAll('.js-complete').forEach(function(b){
+    if(state.done['a'+b.getAttribute('data-lesson')]){ b.classList.add('is-done'); b.textContent='CONCLUÍDA ✓'; }
+  });
+}
+/* ---------- reveal on scroll ---------- */
+var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.1}) : null;
+function reveal(scr){ scr.querySelectorAll('.reveal:not(.in)').forEach(function(el){ if(io) io.observe(el); else el.classList.add('in'); }); }
+/* ---------- modal ---------- */
+var lastFocus=null;
+function openModal(html){ lastFocus=document.activeElement; $('modalCard').innerHTML='<button type="button" class="modal-close" aria-label="Fechar" onclick="closeModal()">✕</button>'+html; $('modalOverlay').classList.add('show'); document.body.style.overflow='hidden'; var c=$('modalCard').querySelector('.modal-close'); if(c) c.focus(); }
+function closeModal(){ $('modalOverlay').classList.remove('show'); document.body.style.overflow=''; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+$('modalOverlay').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+/* ---------- renders ---------- */
+function renderConcepts(){ $('conceptGrid').innerHTML = CONCEPTS.map(function(c,idx){ return '<button type="button" class="card reveal" data-concept="'+idx+'"><span class="ico">'+c.i+'</span><h4>'+c.t+'</h4><p>'+c.d+'</p><span class="hint">Toque para destacar</span></button>'; }).join(''); }
+function renderChars(){ $('charGrid').innerHTML = CHARS.map(function(c,idx){ return '<button type="button" class="card reveal" data-char="'+idx+'"><span class="ico">'+c.i+'</span><h4>'+c.t+'</h4><div class="more"><p>'+c.d+'</p></div><span class="hint">Clique para ver</span></button>'; }).join(''); }
+function renderTable(){ $('tableBody').innerHTML = RHYTHMS.map(function(r){ return '<tr data-rhythm="'+r.id+'" tabindex="0"><td>'+r.icon+' '+r.nome+'</td><td>'+r.table+'</td></tr>'; }).join(''); }
+function renderRhythms(){ $('rhythmGrid').innerHTML = RHYTHMS.map(function(r){ return '<div class="big-card reveal"><div class="bc-top"><span class="ico">'+r.icon+'</span><div><h4>'+r.nome+'</h4><span class="orig">'+r.origem+'</span></div></div><div class="bc-body"><p>'+r.desc+'</p></div><div class="bc-media"><img src="'+IMG[r.id]+'" alt="Ilustração do ritmo '+r.nome+'"><div class="chips">'+r.carbs.map(function(c){ return '<span class="chip">'+c+'</span>'; }).join('')+'</div><div class="viz viz-'+r.id+'" aria-hidden="true"><span class="p p1"></span><span class="p p2"></span></div><span class="viz-cap">Representação do movimento</span></div><button type="button" class="btn btn-gold btn-small" data-explore-r="'+r.id+'" aria-expanded="false">EXPLORAR 🔍</button></div>'; }).join(''); }
+function renderFights(){ $('fightGrid').innerHTML = FIGHTS.map(function(f){ return '<div class="big-card reveal"><div class="bc-top"><span class="ico">'+f.icon+'</span><div><h4>'+f.nome+'</h4><span class="orig">'+f.pais+'</span></div></div><div class="bc-body"><p>'+f.desc+'</p></div><div class="bc-media"><img src="'+IMG[f.id]+'" alt="Ilustração da luta '+f.nome+'"><div class="chips">'+f.carbs.map(function(c){ return '<span class="chip">'+c+'</span>'; }).join('')+'</div></div><button type="button" class="btn btn-gold btn-small" data-explore-f="'+f.id+'" aria-expanded="false">CONHECER 🔍</button></div>'; }).join(''); }
+function renderBenefits(){ $('physGrid').innerHTML = PHYS.map(function(c,idx){ return '<button type="button" class="card reveal" data-ben="p'+idx+'"><span class="ico">'+c.i+'</span><h4>'+c.t+'</h4><div class="more"><p>'+c.d+'</p></div><span class="hint">Clique para ver</span></button>'; }).join(''); $('mindGrid').innerHTML = MIND.map(function(c,idx){ return '<button type="button" class="card reveal" data-ben="m'+idx+'"><span class="ico">'+c.i+'</span><h4>'+c.t+'</h4><div class="more"><p>'+c.d+'</p></div><span class="hint">Clique para ver</span></button>'; }).join(''); }
+function renderEssays(){ $('essayBox').innerHTML = ESSAYS.map(function(e){ return '<div class="essay-card reveal"><span class="eyebrow">Reflexão</span><h4>'+e.q+'</h4><textarea id="ess-'+e.id+'" rows="4" placeholder="Escreva sua resposta aqui...">'+esc(state.essays[e.id]||'')+'</textarea><button type="button" class="btn btn-small btn-gold" data-ess="'+e.id+'">SALVAR RESPOSTA</button></div>'; }).join(''); }
+function renderAch(){ $('achGrid').innerHTML = ACHIEVEMENTS.map(function(a){ var ok=!!state.ach[a.id]; return '<div class="ach-card reveal '+(ok?'':'locked')+'"><div class="a-ico">'+a.icon+'</div><h4>'+a.name+'</h4><p>'+a.desc+'</p><p class="hint">'+(ok?'✔ DESBLOQUEADA':'🔒 BLOQUEADA')+'</p></div>'; }).join(''); reveal(document.querySelector('.screen[data-screen="ach"]')); }
+/* ---------- modal content (tabela) ---------- */
+function rhythmModal(r){
+  return '<img class="modal-img" src="'+IMG[r.id]+'" alt="Ilustração do ritmo '+r.nome+'"><div class="modal-body"><span class="orig">'+r.origem+'</span><h3>'+r.nome+'</h3><p>'+r.desc+'</p><div class="chips">'+r.carbs.map(function(c){ return '<span class="chip">'+c+'</span>'; }).join('')+'</div><div class="viz viz-'+r.id+'" aria-hidden="true"><span class="p p1"></span><span class="p p2"></span></div><span class="viz-cap">Representação do movimento</span></div>';
+}
+/* ---------- explorar: imagem abre dentro do card ---------- */
+function markExplored(key, label){ var first=!state.explored[key]; state.explored[key]=true; if(first){ addPoints(10,label); checkExplorer(); } save(); }
+function checkExplorer(){ var allR=RHYTHMS.every(function(r){ return state.explored['r_'+r.id]; }); var allF=FIGHTS.every(function(f){ return state.explored['f_'+f.id]; }); if(allR&&allF) award('explorador'); }
+function toggleRhythm(btn){
+  var id=btn.getAttribute('data-explore-r');
+  var r=RHYTHMS.filter(function(x){return x.id===id;})[0]; if(!r) return;
+  var card=btn.closest('.big-card');
+  var open=card.classList.toggle('open');
+  btn.textContent = open ? 'FECHAR ✕' : 'EXPLORAR 🔍';
+  btn.setAttribute('aria-expanded', open?'true':'false');
+  if(open) markExplored('r_'+id,'explorou '+r.nome);
+}
+function toggleFight(btn){
+  var id=btn.getAttribute('data-explore-f');
+  var f=FIGHTS.filter(function(x){return x.id===id;})[0]; if(!f) return;
+  var card=btn.closest('.big-card');
+  var open=card.classList.toggle('open');
+  btn.textContent = open ? 'FECHAR ✕' : 'CONHECER 🔍';
+  btn.setAttribute('aria-expanded', open?'true':'false');
+  if(open) markExplored('f_'+id,'conheceu '+f.nome);
+}
+function openRhythmById(id){
+  var r=RHYTHMS.filter(function(x){return x.id===id;})[0]; if(!r) return;
+  markExplored('r_'+id,'explorou '+r.nome);
+  openModal(rhythmModal(r));
+}
+/* ---------- quiz engine ---------- */
+function buildQuiz(boxId, qs, opts){
+  var box=$(boxId); var i=0, score=0, perfect=true;
+  function renderQ(){
+    var q=qs[i];
+    box.innerHTML='<div class="quiz-top"><span class="eyebrow">'+opts.title+'</span><span class="quiz-count">QUESTÃO '+(i+1)+' DE '+qs.length+'</span></div><h4 class="quiz-q">'+q.q+'</h4><div class="quiz-opts">'+q.opts.map(function(o,idx){ return '<button type="button" class="quiz-opt" data-idx="'+idx+'">'+o+'</button>'; }).join('')+'</div><div class="quiz-feedback" hidden></div><div class="quiz-actions" hidden><button type="button" class="btn btn-gold quiz-next">'+(i===qs.length-1?'VER RESULTADO 🏁':'PRÓXIMA ➜')+'</button></div>';
+    var fb=box.querySelector('.quiz-feedback'), acts=box.querySelector('.quiz-actions'), solved=false, firstTry=true;
+    box.querySelectorAll('.quiz-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx=parseInt(btn.getAttribute('data-idx'),10);
+        if(idx===q.a){
+          if(solved) return;
+          solved=true; btn.classList.add('correct');
+          if(firstTry){ score++; addPoints(10,'resposta certa'); } else { perfect=false; }
+          fb.hidden=false; fb.className='quiz-feedback ok'; fb.innerHTML='✅ CORRETO!'+(q.x?'<p>'+q.x+'</p>':'');
+          acts.hidden=false;
+          box.querySelectorAll('.quiz-opt').forEach(function(b){ b.disabled=true; });
+        } else {
+          btn.classList.add('wrong'); btn.disabled=true; firstTry=false; perfect=false;
+          fb.hidden=false; fb.className='quiz-feedback err';
+          if(opts.mode==='retry'){ fb.textContent='❌ TENTE NOVAMENTE'; }
+          else { solved=true; fb.innerHTML='❌ INCORRETO.'+(q.x?'<p>'+q.x+'</p>':''); acts.hidden=false; box.querySelectorAll('.quiz-opt').forEach(function(b){ b.disabled=true; }); }
+        }
+      });
+    });
+    box.querySelector('.quiz-next').addEventListener('click', function(){ i++; if(i<qs.length) renderQ(); else finish(); });
+  }
+  function finish(){
+    var pct=Math.round(score/qs.length*100);
+    var msg = pct>=90?'🏆 EXCELENTE! Você domina este conteúdo!' : pct>=70?'🎉 MUITO BEM! Você está indo ótimo!' : pct>=50?'👍 BOM TRABALHO! Revise os pontos que errou.' : '📚 CONTINUE ESTUDANDO! Reveja as aulas e tente novamente.';
+    box.innerHTML='<div class="quiz-result"><span class="eyebrow">Resultado</span><h4 class="quiz-q">'+opts.title+'</h4><p class="score-big">'+score+'/'+qs.length+'</p><p class="score-pct">'+pct+'%</p><p>'+msg+'</p><div class="quiz-actions" style="justify-content:center"><button type="button" class="btn btn-ghost quiz-retake">↺ REFAZER</button>'+(opts.next?'<button type="button" class="btn btn-gold" data-go="'+opts.next+'">'+(opts.nextLabel||'CONTINUAR ➜')+'</button>':'')+'</div></div>';
+    box.querySelector('.quiz-retake').addEventListener('click', function(){ buildQuiz(boxId, qs, opts); });
+    state.best[opts.key]=Math.max(state.best[opts.key]||0, pct); save(); updateHUD();
+    if(opts.onDone) opts.onDone(score, qs.length, perfect, pct);
+  }
+  renderQ();
+}
+/* ---------- lessons ---------- */
+function completeLesson(n){
+  var id='a'+n;
+  if(state.done[id]){ toast('Esta aula já foi concluída!','✅'); return; }
+  state.done[id]=true; addPoints(20,'aula '+n+' concluída');
+  if(n==='1'||n===1) award('primeiros');
+  if(doneCount()===LESSONS.length) award('dedicado');
+  updateHUD(); save();
+}
+function allComplete(){ return doneCount()===LESSONS.length && state.best.dance!=null && state.best.fight!=null && state.best.final!=null; }
+/* ---------- end screen ---------- */
+function renderEnd(){
+  var items=[
+    {t:'Concluir as 8 aulas', ok:doneCount()===LESSONS.length},
+    {t:'Atividade Descubra o Ritmo', ok:state.best.dance!=null},
+    {t:'Atividade Adivinhe a Luta', ok:state.best.fight!=null},
+    {t:'Quiz Final do Trimestre', ok:state.best.final!=null}
+  ];
+  var done=allComplete();
+  var html='<div class="end-hero">'+(done?'<div class="trophy">🏆</div><h2>PARABÉNS! VOCÊ CONCLUIU O 3º TRIMESTRE.</h2><p class="sec-sub">Você completou todas as etapas de Educação Física do 8º ano — Dança de Salão e Lutas pelo Mundo. Total de pontos: <strong>'+state.points+'</strong> ⭐</p>':'<div class="trophy">🎓</div><h2>CONCLUSÃO DO TRIMESTRE</h2><p class="sec-sub">Complete todas as etapas para desbloquear a mensagem final.</p>')+'<ul class="check-list">'+items.map(function(it){ return '<li class="'+(it.ok?'ok':'no')+'">'+(it.ok?'✅':'⏳')+' '+it.t+'<span class="st">'+(it.ok?'FEITO':'PENDENTE')+'</span></li>'; }).join('')+'</ul><div class="quiz-actions" style="justify-content:center"><button type="button" class="btn btn-gold" data-go="ach">VER CONQUISTAS 🏆</button></div></div>';
+  $('endBox').innerHTML=html;
+  if(done) confetti();
+}
+function confetti(){
+  var box=$('confettiBox'); box.innerHTML='';
+  var colors=['#c1922f','#e6c877','#3a2a1a','#a87c1f','#fffdf6'];
+  for(var i=0;i<70;i++){ var s=document.createElement('i'); s.style.left=(Math.random()*100)+'%'; s.style.background=colors[i%colors.length]; s.style.animationDuration=(2.4+Math.random()*2.4)+'s'; s.style.animationDelay=(Math.random()*1.4)+'s'; s.style.transform='rotate('+Math.random()*360+'deg)'; box.appendChild(s); }
+  setTimeout(function(){ box.innerHTML=''; }, 6500);
+}
+/* ---------- global click delegation ---------- */
+document.addEventListener('click', function(e){
+  var g=e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+  var c=e.target.closest('.js-complete'); if(c){ completeLesson(c.getAttribute('data-lesson')); return; }
+  var er=e.target.closest('[data-explore-r]'); if(er){ toggleRhythm(er); return; }
+  var ef=e.target.closest('[data-explore-f]'); if(ef){ toggleFight(ef); return; }
+  var ch=e.target.closest('[data-char],[data-ben]'); if(ch){ ch.classList.toggle('open'); return; }
+  var cc=e.target.closest('[data-concept]'); if(cc){ cc.classList.toggle('open'); cc.style.borderColor = cc.classList.contains('open') ? 'var(--gold)' : ''; return; }
+  var tr=e.target.closest('[data-rhythm]'); if(tr){ openRhythmById(tr.getAttribute('data-rhythm')); return; }
+  var es=e.target.closest('[data-ess]'); if(es){ var id=es.getAttribute('data-ess'); var ta=$('ess-'+id); if(ta){ state.essays[id]=ta.value; save(); toast('Resposta salva com sucesso!','📝'); } return; }
+});
+document.addEventListener('keydown', function(e){
+  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('tr[data-rhythm]')){ e.preventDefault(); openRhythmById(e.target.getAttribute('data-rhythm')); return; }
+  var tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='textarea'||tag==='input') return;
+  if($('modalOverlay').classList.contains('show')) return;
+  if(e.key==='ArrowRight'){ var ix=ORDER.indexOf(state.screen); if(ix>-1&&ix<ORDER.length-1) go(ORDER[ix+1]); }
+  if(e.key==='ArrowLeft'){ var ix2=ORDER.indexOf(state.screen); if(ix2>0) go(ORDER[ix2-1]); }
+});
+/* ---------- sidebar mobile ---------- */
+function openSide(){ $('sidebar').classList.add('open'); $('overlay').classList.add('show'); }
+function closeSide(){ $('sidebar').classList.remove('open'); $('overlay').classList.remove('show'); }
+$('menuBtn').addEventListener('click', openSide);
+$('overlay').addEventListener('click', closeSide);
+/* ---------- init ---------- */
+$('startBtn').addEventListener('click', function(){
+  var first=LESSONS.filter(function(l){ return !state.done[l.id]; })[0];
+  go(first?first.id:'a1');
+});
+buildSide(); buildTimeline();
+renderConcepts(); renderChars(); renderTable(); renderRhythms(); renderFights(); renderBenefits(); renderEssays(); renderAch();
+buildQuiz('danceQuizBox', DANCE_QUIZ, {title:'DESCUBRA O RITMO', mode:'retry', key:'dance', next:'a5', nextLabel:'IR PARA LUTAS ➜', onDone:function(s,t,p){ if(s===t&&p) award('ritmos'); }});
+buildQuiz('fightQuizBox', FIGHT_QUIZ, {title:'ADIVINHE A LUTA', mode:'retry', key:'fight', onDone:function(s,t,p){ if(s===t&&p) award('lutas'); }});
+buildQuiz('finalQuizBox', FINAL_QUIZ, {title:'QUIZ FINAL', mode:'once', key:'final', next:'rev', nextLabel:'VER REVISÃO ➜', onDone:function(s,t,p,pct){ if(pct>=70) award('campeao'); if(allComplete()) setTimeout(function(){ go('end'); },1400); }});
+updateHUD();
+if(state.screen && state.screen!=='home'){ go(state.screen); } else { go('home'); }
+reveal(document.querySelector('.screen.active'));
+</script>
+</body>
+</html>
