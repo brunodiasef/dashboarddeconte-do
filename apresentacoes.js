@@ -19,11 +19,11 @@ window.APRESENTACOES = [
     id: "aula-8t3n3-1788175593417",
     ano: "8",
     trimestre: 3,
-    aula: 8,
+    aula: 3,
     titulo: "Dança de salão e Lutas pelo mundo",
     descricao: "Dança de salão e Lutas pelo mundo",
-    tipo: "arquivo",
-    link: "aula/3ºtri/8ºano/index.html"
+    tipo: "link",
+    link: "https://brunodiasef.github.io/8ano/"
   },
   {
     id: "aula-7t3n1-1788175761978",
@@ -284,6 +284,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
+  },
+  {
+    id: "aula-7t3n8-1788876713645",
+    ano: "7",
+    trimestre: 3,
+    aula: 8,
+    titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/7ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
