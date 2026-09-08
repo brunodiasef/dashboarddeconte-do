@@ -146,16 +146,6 @@ window.APRESENTACOES = [
     link: "aula/2ºtri/8ºano/apostila.docx"
   },
   {
-    id: "aula-7t2n2-1788258999882",
-    ano: "7",
-    trimestre: 2,
-    aula: 2,
-    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
-    descricao: "",
-    tipo: "arquivo",
-    link: "aula/2ºtri/7ºano/APOSTILA.docx"
-  },
-  {
     id: "aula-6t1n8-1788316744080",
     ano: "6",
     trimestre: 1,
@@ -250,7 +240,7 @@ window.APRESENTACOES = [
     ano: "6",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "MATERIAL DE APOIO ",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/6ºano/APOSTILA.pdf"
