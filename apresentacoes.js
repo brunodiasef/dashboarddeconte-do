@@ -22,8 +22,8 @@ window.APRESENTACOES = [
     aula: 3,
     titulo: "Dança de salão e Lutas pelo mundo",
     descricao: "Dança de salão e Lutas pelo mundo",
-    tipo: "link",
-    link: "https://brunodiasef.github.io/8ano/"
+    tipo: "arquivo",
+    link: "aula/3ºtri/8ºano/index.html"
   },
   {
     id: "aula-7t3n1-1788175761978",
