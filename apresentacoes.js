@@ -256,14 +256,24 @@ window.APRESENTACOES = [
     link: "aula/2ºtri/6ºano/APOSTILA.pdf"
   },
   {
-    id: "aula-6t1n10-1788874034945",
-    ano: "6",
+    id: "aula-8t1n2-1788873688587",
+    ano: "8",
     trimestre: 1,
-    aula: 10,
-    titulo: "Lutas pelo Mundo Esportes de Rede e Parede",
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/1ºtri/9ºano/index.html"
+    link: "aula/1ºtri/8ºano/caderno_ed_fisica_8ano_1trimestre_completo.pdf"
+  },
+  {
+    id: "aula-8t2n2-1788874130984",
+    ano: "8",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/8ºano/caderno_ed_fisica_8ano_2trimestre_completo.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
