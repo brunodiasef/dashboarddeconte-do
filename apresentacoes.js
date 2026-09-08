@@ -294,6 +294,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/7ºano/apostila.pdf"
+  },
+  {
+    id: "aula-7t2n2-1788877368646",
+    ano: "7",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/7ºano/caderno_ed_fisica_7ano_2trimestre_completo.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
