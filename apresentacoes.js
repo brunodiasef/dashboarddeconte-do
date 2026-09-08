@@ -224,6 +224,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano.pdf"
+  },
+  {
+    id: "aula-9t2n2-1788828494182",
+    ano: "9",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO- Manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/9ºano/caderno_educacao_fisica_9ano_2tri.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
