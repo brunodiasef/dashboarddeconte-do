@@ -359,11 +359,21 @@ window.APRESENTACOES = [
     id: "aula-7t1n1-1788978016288",
     ano: "7",
     trimestre: 1,
-    aula: 1,
+    aula: 2,
     titulo: "MATERIAL DE APOIO - MANUSCRITO",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/7ºano/caderno-7ano-1trimestre.pdf"
+  },
+  {
+    id: "aula-6t1n1-1788978197091",
+    ano: "6",
+    trimestre: 2,
+    aula: 1,
+    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/6ºano/caderno_ed_fisica_6ano_1trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
