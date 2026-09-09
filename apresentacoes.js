@@ -333,7 +333,7 @@ window.APRESENTACOES = [
     titulo: "MAPA MENTAL",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/3ºtri/9ºano/jogo_mapa_mental_1tri.html"
+    link: "aula/1ºtri/9ºano/jogo_mapa_mental_1tri.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
