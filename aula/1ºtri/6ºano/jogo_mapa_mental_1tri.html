@@ -1,200 +1,389 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Complete o mapa mental · Educação Física · 6º ano · 1º trimestre</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --papel:#fdfbf5; --pauta:#c4d8ec; --margem:#e6a0a4;
-    --tinta:#1a2c70; --tinta-forte:#121e4e; --caneta-vermelha:#b02234;
-    --acerto:#1c6b46; --marca:#fdf0a0;
+/* ============================================================
+   apresentacoes.js — atualizado pelo painel
+   Substitua TODO o conteúdo do arquivo apresentacoes.js no
+   repositório por este código e faça o commit.
+   ============================================================ */
+
+window.APRESENTACOES = [
+  {
+    id: "aula-9t3n3-1788174439224",
+    ano: "9",
+    trimestre: 3,
+    aula: 10,
+    titulo: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
+    descricao: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/9ano/"
+  },
+  {
+    id: "aula-8t3n3-1788175593417",
+    ano: "8",
+    trimestre: 3,
+    aula: 3,
+    titulo: "Dança de salão e Lutas pelo mundo",
+    descricao: "Dança de salão e Lutas pelo mundo",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/8ano/"
+  },
+  {
+    id: "aula-9t3n2-1788180316503",
+    ano: "9",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
+  },
+  {
+    id: "aula-8t3n2-1788184891015",
+    ano: "8",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/3ºtri/8ºano/conteúdo 8º ano - 3º trimestre.pdf"
+  },
+  {
+    id: "aula-6t3n8-1788191505836",
+    ano: "6",
+    trimestre: 3,
+    aula: 8,
+    titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    descricao: "",
+    tipo: "link",
+    link: "aula/3ºtri/6ºano/index.html"
+  },
+  {
+    id: "aula-6t3n2-1788191590738",
+    ano: "6",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 3ºTRIMESTRE",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/3ºtri/6ºano/Conteúdo 6º ano - 3º trimestre.pdf"
+  },
+  {
+    id: "aula-7t3n2-1788191851575",
+    ano: "7",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/3ºtri/7ºano/Conteúdo 7º ano - 3º trimestre.pdf"
+  },
+  {
+    id: "aula-9t2n10-1788230926989",
+    ano: "9",
+    trimestre: 2,
+    aula: 10,
+    titulo: "Dança de Salão-Ginástica de Conscientização Corporal-Ginástica de Condicionamento Físico",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/9ºano/2tri.html"
+  },
+  {
+    id: "aula-8t2n8-1788230800708",
+    ano: "8",
+    trimestre: 2,
+    aula: 8,
+    titulo: "Ginástica de condicionamento físico e consciêntização corporal",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/8ºano/2tri.html"
+  },
+  {
+    id: "aula-9t2n2-1788231643772",
+    ano: "9",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
+    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
+    tipo: "arquivo",
+    link: "aula/2ºtri/9ºano/apostila.docx"
+  },
+  {
+    id: "aula-7t2n8-1788236108462",
+    ano: "7",
+    trimestre: 2,
+    aula: 8,
+    titulo: "Esportes Técnico-Combinatórios+Lutas do Brasil",
+    descricao: "",
+    tipo: "link",
+    link: "https://brunodiasef.github.io/7-ano_2-tri/"
+  },
+  {
+    id: "aula-6t2n8-1788258612838",
+    ano: "6",
+    trimestre: 2,
+    aula: 8,
+    titulo: "Esportes de Precisão + Lutas do Brasil",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/6ºano/2tri.html"
+  },
+  {
+    id: "aula-8t2n2-1788258863836",
+    ano: "8",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/8ºano/apostila.docx"
+  },
+  {
+    id: "aula-7t2n2-1788258999882",
+    ano: "7",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/7ºano/APOSTILA.docx"
+  },
+  {
+    id: "aula-6t1n8-1788316744080",
+    ano: "6",
+    trimestre: 1,
+    aula: 8,
+    titulo: "Ginástica + Esportes de Marca",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/6ºano/index.html"
+  },
+  {
+    id: "aula-6t1n8-1788452197978",
+    ano: "6",
+    trimestre: 1,
+    aula: 8,
+    titulo: "MATERIAL DE APOIO -",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/6ºano/APOSTILA.docx"
+  },
+  {
+    id: "aula-6t1n1-1788457633112",
+    ano: "8",
+    trimestre: 1,
+    aula: 8,
+    titulo: "ESPORTES DE INVASÃO + LUTAS PELO MUNDO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano/index.html"
+  },
+  {
+    id: "aula-7t1n8-1788463628326",
+    ano: "7",
+    trimestre: 1,
+    aula: 8,
+    titulo: "Tipos de Ginástica + Atividade Física × Exercício Físico",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/1tri.html"
+  },
+  {
+    id: "aula-9t1n2-1788480293642",
+    ano: "9",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/apostila.pdf"
+  },
+  {
+    id: "aula-8t1n2-1788480485627",
+    ano: "8",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO -",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano/apostila.pdf"
+  },
+  {
+    id: "aula-9t3n2-1788827119468",
+    ano: "9",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano_3tri.pdf"
+  },
+  {
+    id: "aula-9t2n2-1788828494182",
+    ano: "9",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO- Manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/9ºano/caderno_educacao_fisica_9ano_2tri.pdf"
+  },
+  {
+    id: "aula-9t1n2-1788829677561",
+    ano: "9",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO- Manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/caderno_educacao_fisica_9ano_1tri.pdf"
+  },
+  {
+    id: "aula-6t2n2-1788869326069",
+    ano: "6",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/6ºano/APOSTILA.pdf"
+  },
+  {
+    id: "aula-8t1n2-1788873688587",
+    ano: "8",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano/caderno_ed_fisica_8ano_1trimestre_completo.pdf"
+  },
+  {
+    id: "aula-8t2n2-1788874130984",
+    ano: "8",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/8ºano/caderno_ed_fisica_8ano_2trimestre_completo.pdf"
+  },
+  {
+    id: "aula-8t3n2-1788876061258",
+    ano: "8",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
+  },
+  {
+    id: "aula-7t3n8-1788876713645",
+    ano: "7",
+    trimestre: 3,
+    aula: 8,
+    titulo: "Jogos Eletrônicos + Danças Urbanas + Práticas de Aventura",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/7ºano/index.html"
+  },
+  {
+    id: "aula-7t1n2-1788877134799",
+    ano: "7",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/apostila.pdf"
+  },
+  {
+    id: "aula-7t2n2-1788877368646",
+    ano: "7",
+    trimestre: 2,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/2ºtri/7ºano/caderno_ed_fisica_7ano_2trimestre_completo.pdf"
+  },
+  {
+    id: "aula-9t1n10-1788912829641",
+    ano: "9",
+    trimestre: 1,
+    aula: 10,
+    titulo: "Lutas pelo Mundo Esportes de Rede e Parede",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/index.html"
+  },
+  {
+    id: "aula-9t3n1-1788954571502",
+    ano: "9",
+    trimestre: 3,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/9ºano/jogo_mapa_mental_3tri.html"
+  },
+  {
+    id: "aula-9t1n1-1788971002245",
+    ano: "9",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/jogo_mapa_mental_1tri.html"
+  },
+  {
+    id: "aula-8t1n1-1788971329185",
+    ano: "8",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/8ºano/jogo_mapa_mental_1trimestre.html"
+  },
+  {
+    id: "aula-7t1n1-1788971776514",
+    ano: "7",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/jogo-mapa-mental-1-trimestre.html"
+  },
+  {
+    id: "aula-7t1n1-1788978016288",
+    ano: "7",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/caderno-7ano-1trimestre.pdf"
+  },
+  {
+    id: "aula-6t1n1-1788978197091",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/6ºano/caderno_ed_fisica_6ano_1trimestre.pdf"
+  },
+  {
+    id: "aula-6t1n1-1788979225814",
+    ano: "6",
+    trimestre: 1,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/6ºano/jogo_mapa_mental_1tri.html"
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0; padding:0 0 3rem;
-    font-family:'Kalam',ui-rounded,'Segoe UI',sans-serif;
-    color:var(--tinta); background:var(--papel);
-    background-image:repeating-linear-gradient(to bottom,transparent 0 33px,var(--pauta) 33px 34px);
-    background-position:0 96px;
-  }
-  .folha{max-width:820px;margin:0 auto;padding:0 1.1rem 0 1.6rem;position:relative}
-  .folha::before{content:"";position:fixed;top:0;bottom:0;left:calc(50% - 410px + 0.7rem);
-    width:2px;background:var(--margem);opacity:.75}
-  @media (max-width:860px){.folha::before{left:.75rem}}
-  header{padding-top:1.6rem}
-  h1{font-family:'Caveat',cursive;font-size:2.6rem;line-height:1;margin:.2rem 0 .1rem;color:var(--tinta-forte)}
-  .sub{font-size:1rem;color:var(--caneta-vermelha);margin:0 0 .2rem}
-  .placar{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:1rem;margin:.6rem 0 0;padding-bottom:.4rem}
-  .placar span b{color:var(--caneta-vermelha)}
-  .centro{margin:1.6rem auto 1rem;max-width:420px;text-align:center;padding:1rem 1.4rem;
-    border:3px solid var(--tinta-forte);border-radius:48%/38%;
-    font-family:'Caveat',cursive;font-size:1.9rem;line-height:1.1;color:var(--tinta-forte);
-    background:rgba(255,255,255,.65)}
-  .ramos{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-  @media (max-width:620px){.ramos{grid-template-columns:1fr}}
-  .ramo{border:2.5px solid var(--tinta);border-radius:14px;padding:.55rem .7rem;background:rgba(255,255,255,.6);
-    min-height:92px;display:flex;flex-direction:column;gap:.25rem;cursor:pointer;
-    transition:transform .12s ease, border-color .12s ease}
-  .ramo:nth-child(even){border-color:var(--caneta-vermelha)}
-  .ramo .pista{font-size:.95rem;opacity:.85}
-  .ramo:nth-child(even) .pista{color:var(--caneta-vermelha)}
-  .ramo .vaga{font-size:1.1rem;color:#8a93ad;border-bottom:2px dashed #9aa5c0;padding-bottom:2px}
-  .ramo.alvo{transform:scale(1.02);box-shadow:0 0 0 3px var(--marca)}
-  .ramo.errou{animation:treme .32s}
-  .ramo.pronto{border-color:var(--acerto);cursor:default;background:rgba(230,246,238,.7)}
-  .ramo.pronto .vaga{color:var(--acerto);border-bottom:none;font-weight:700}
-  .ramo.pronto .vaga::before{content:"✓ ";}
-  @keyframes treme{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
-  h2{font-family:'Caveat',cursive;font-size:1.7rem;margin:1.6rem 0 .4rem;color:var(--caneta-vermelha)}
-  .banco{display:flex;flex-wrap:wrap;gap:.5rem}
-  .peca{font-family:'Kalam',cursive;font-size:1.02rem;color:var(--tinta);background:var(--marca);
-    border:2px solid var(--tinta);border-radius:10px;padding:.4rem .7rem;cursor:pointer}
-  .peca.sel{background:var(--tinta);color:#fdfbf5}
-  .peca.usada{display:none}
-  .aviso{min-height:1.6rem;margin:.8rem 0 0;font-size:1.05rem}
-  .aviso.ok{color:var(--acerto)} .aviso.nao{color:var(--caneta-vermelha)}
-  .barra{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.1rem}
-  button.acao{font-family:'Kalam',cursive;font-size:1.05rem;padding:.5rem 1.1rem;cursor:pointer;
-    background:var(--papel);color:var(--tinta-forte);border:2.5px solid var(--tinta-forte);border-radius:12px}
-  button.acao:disabled{opacity:.4;cursor:not-allowed}
-  button.acao:focus-visible,.peca:focus-visible,.ramo:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}
-  .fim{text-align:center;padding:2rem 1rem}
-  .fim p{font-size:1.2rem}
-  .fim .nota{font-family:'Caveat',cursive;font-size:3.4rem;color:var(--caneta-vermelha);margin:.2rem 0}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
-</head>
-<body>
-<div class="folha">
-  <header>
-    <p class="sub">Educação Física · 6º ano · 1º trimestre</p>
-    <h1>Complete o mapa mental</h1>
-    <div class="placar">
-      <span>Mapa <b id="pMapa">1</b> de <b id="pTotal">1</b></span>
-      <span>Acertos de primeira: <b id="pAcertos">0</b></span>
-      <span>Tentativas erradas: <b id="pErros">0</b></span>
-    </div>
-  </header>
-  <main id="jogo">
-    <div class="centro" id="centro"></div>
-    <div class="ramos" id="ramos"></div>
-    <h2>Banco de palavras</h2>
-    <div class="banco" id="banco"></div>
-    <p class="aviso" id="aviso">Toque em uma palavra e depois no ramo em que ela se encaixa.</p>
-    <div class="barra">
-      <button class="acao" id="btProx" disabled>Próximo mapa</button>
-      <button class="acao" id="btReiniciar">Recomeçar</button>
-    </div>
-  </main>
-</div>
-<script>
-const MAPAS = [{"centro": "Esportes de marca", "itens": [["Objetivo", "Superar uma marca individual"], ["Critérios de vitória", "Tempo, distância e altura"], ["Instrumentos", "Cronômetros, réguas e sensores"], ["Medidos pelo tempo", "Natação, ciclismo e remo"], ["Medido pelo peso levantado", "Halterofilismo"], ["Medido pela altura alcançada", "Saltos com vara"]]}, {"centro": "Atividade física e exercício físico", "itens": [["O que é atividade física", "Qualquer movimento do dia a dia"], ["O que é exercício físico", "Planejado, estruturado e repetitivo"], ["Estrutura da atividade física", "Não planejada"], ["Estrutura do exercício físico", "Planejada e organizada"], ["Benefício da atividade física", "Reduz o sedentarismo"], ["Benefício do exercício físico", "Previne doenças crônicas"]]}];
-let iMapa = 0, acertos = 0, erros = 0, selecionada = null, faltam = 0;
-
-const $ = id => document.getElementById(id);
-const embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(v => v[1]);
-
-function montar() {
-  const mapa = MAPAS[iMapa];
-  $('pMapa').textContent = iMapa + 1;
-  $('pTotal').textContent = MAPAS.length;
-  $('centro').textContent = mapa.centro;
-  $('ramos').innerHTML = '';
-  $('banco').innerHTML = '';
-  selecionada = null;
-  faltam = mapa.itens.length;
-  $('btProx').disabled = true;
-
-  mapa.itens.forEach((item, i) => {
-    const ramo = document.createElement('div');
-    ramo.className = 'ramo';
-    ramo.tabIndex = 0;
-    ramo.dataset.resposta = item[1];
-    ramo.innerHTML = '<span class="pista">' + item[0] + '</span><span class="vaga">completar…</span>';
-    const agir = () => encaixar(ramo);
-    ramo.addEventListener('click', agir);
-    ramo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); agir(); } });
-    $('ramos').appendChild(ramo);
-  });
-
-  embaralhar(mapa.itens.map(x => x[1])).forEach(txt => {
-    const peca = document.createElement('button');
-    peca.className = 'peca';
-    peca.type = 'button';
-    peca.textContent = txt;
-    peca.addEventListener('click', () => escolher(peca));
-    $('banco').appendChild(peca);
-  });
-  dizer('Toque em uma palavra e depois no ramo em que ela se encaixa.', '');
-}
-
-function escolher(peca) {
-  document.querySelectorAll('.peca.sel').forEach(p => p.classList.remove('sel'));
-  if (selecionada === peca) { selecionada = null; marcarAlvos(false); return; }
-  selecionada = peca;
-  peca.classList.add('sel');
-  marcarAlvos(true);
-  dizer('Agora escolha o ramo certo para "' + peca.textContent + '".', '');
-}
-
-function marcarAlvos(ligar) {
-  document.querySelectorAll('.ramo:not(.pronto)').forEach(r => r.classList.toggle('alvo', ligar));
-}
-
-function encaixar(ramo) {
-  if (ramo.classList.contains('pronto')) return;
-  if (!selecionada) { dizer('Escolha primeiro uma palavra do banco.', 'nao'); return; }
-  if (ramo.dataset.resposta === selecionada.textContent) {
-    ramo.querySelector('.vaga').textContent = selecionada.textContent;
-    ramo.classList.add('pronto');
-    ramo.classList.remove('alvo');
-    selecionada.classList.add('usada');
-    selecionada = null;
-    acertos++; faltam--;
-    $('pAcertos').textContent = acertos;
-    marcarAlvos(false);
-    if (faltam === 0) fecharMapa(); else dizer('Encaixou.', 'ok');
-  } else {
-    erros++;
-    $('pErros').textContent = erros;
-    ramo.classList.add('errou');
-    setTimeout(() => ramo.classList.remove('errou'), 340);
-    dizer('Esse não é o ramo dessa palavra. Leia a pista e tente outro.', 'nao');
-  }
-}
-
-function fecharMapa() {
-  marcarAlvos(false);
-  if (iMapa + 1 < MAPAS.length) {
-    dizer('Mapa completo. Siga para o próximo.', 'ok');
-    $('btProx').disabled = false;
-  } else {
-    resumo();
-  }
-}
-
-function resumo() {
-  const total = MAPAS.reduce((s, m) => s + m.itens.length, 0);
-  $('jogo').innerHTML = '<div class="fim"><p>Todos os mapas do trimestre foram completados.</p>' +
-    '<p class="nota">' + acertos + ' de ' + total + '</p>' +
-    '<p>Tentativas erradas pelo caminho: ' + erros + '</p>' +
-    '<div class="barra" style="justify-content:center"><button class="acao" id="btNovo">Jogar de novo</button></div></div>';
-  $('btNovo').addEventListener('click', () => location.reload());
-}
-
-function dizer(txt, tipo) {
-  const a = $('aviso');
-  a.textContent = txt;
-  a.className = 'aviso ' + tipo;
-}
-
-$('btProx').addEventListener('click', () => { iMapa++; montar(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-$('btReiniciar').addEventListener('click', () => location.reload());
-montar();
-</script>
-</body>
-</html>
+  /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
+];
