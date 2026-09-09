@@ -11,6 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cache-busting: reduz a chance de navegador reutilizar versões antigas. -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/lora">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/karla">
@@ -516,7 +520,7 @@
     </div>
 
     <div class="aviso">
-      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>.
+      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. O painel carrega esse arquivo com <b>cache-busting automático</b> para buscar a versão mais recente.
       <span class="so-professor">Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis dela e substitua o arquivo no GitHub pelo código gerado.</span>
     </div>
   </main>
@@ -656,8 +660,6 @@
 
 <div class="toast" id="toast">Concluído</div>
 
-<script src="apresentacoes.js"></script>
-
 <script>
 /* ===== CONFIGURAÇÃO ===== */
 const SENHA_PROFESSOR = "798287"; /* troque a senha aqui, se precisar */
@@ -673,7 +675,9 @@ const ICONES = {
   link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/></svg>'
 };
 
-const apresentacoes = Array.isArray(window.APRESENTACOES) ? window.APRESENTACOES : [];
+let apresentacoes = [];
+let carregamentoApresentacoesEmAndamento = null;
+let ultimaVersaoApresentacoes = "";
 
 let modoAnexo = "arquivo";
 let idEmEdicao = null;
@@ -1109,9 +1113,103 @@ function mostrarToast(mensagem, tipo){
   temporizadorToast = setTimeout(function(){ elToast.classList.remove("visivel"); }, 2800);
 }
 
-/* inicialização */
-atualizarContadores();
-renderizar();
+/* ============================================================
+   CARREGAMENTO DINÂMICO — CACHE BUSTING
+   ------------------------------------------------------------
+   Cada carregamento usa uma URL única (?v=timestamp), impedindo
+   o navegador/CDN de reutilizar a resposta anterior do script.
+   O painel só renderiza depois que apresentacoes.js termina de
+   carregar. Ao voltar para a aba, o script é recarregado uma vez.
+   ============================================================ */
+
+function carregarApresentacoes(opcoes){
+  opcoes = opcoes || {};
+  const silencioso = opcoes.silencioso === true;
+
+  // Evita dois carregamentos simultâneos.
+  if (carregamentoApresentacoesEmAndamento) {
+    return carregamentoApresentacoesEmAndamento;
+  }
+
+  carregamentoApresentacoesEmAndamento = new Promise(function(resolve, reject){
+    const anterior = document.getElementById("scriptApresentacoesDinamico");
+    if (anterior) anterior.remove();
+
+    const script = document.createElement("script");
+    script.id = "scriptApresentacoesDinamico";
+
+    // Timestamp + aleatoriedade: URL diferente a cada solicitação.
+    const versao = Date.now().toString() + "-" + Math.random().toString(36).slice(2);
+    script.src = "apresentacoes.js?v=" + encodeURIComponent(versao);
+    script.async = false;
+
+    script.onload = function(){
+      apresentacoes = Array.isArray(window.APRESENTACOES)
+        ? window.APRESENTACOES
+        : [];
+
+      ultimaVersaoApresentacoes = versao;
+
+      atualizarContadores();
+      if (perfil) renderizar();
+
+      if (!silencioso) {
+        atualizarProgresso();
+      }
+
+      carregamentoApresentacoesEmAndamento = null;
+      resolve(apresentacoes);
+    };
+
+    script.onerror = function(){
+      carregamentoApresentacoesEmAndamento = null;
+
+      // Mantém os dados anteriores na tela se já existirem.
+      if (!apresentacoes.length && perfil) {
+        elGradeAnos.innerHTML = "";
+        elGradeAnos.style.display = "none";
+        elVazio.style.display = "block";
+        elMensagemVazio.textContent =
+          "Não foi possível carregar as apresentações. Verifique sua conexão e tente novamente.";
+      }
+
+      if (!silencioso) {
+        mostrarToast("Não foi possível atualizar as apresentações.", "erro");
+      }
+
+      reject(new Error("Falha ao carregar apresentacoes.js"));
+    };
+
+    document.head.appendChild(script);
+  });
+
+  return carregamentoApresentacoesEmAndamento;
+}
+
+/* Primeira carga: os dados são obtidos antes da renderização. */
+carregarApresentacoes().catch(function(){});
+
+/* Atualização automática ao retornar à aba/janela. */
+let paginaEstavaOculta = document.hidden;
+
+document.addEventListener("visibilitychange", function(){
+  if (document.hidden) {
+    paginaEstavaOculta = true;
+    return;
+  }
+
+  if (paginaEstavaOculta) {
+    paginaEstavaOculta = false;
+    carregarApresentacoes({ silencioso: true }).catch(function(){});
+  }
+});
+
+/* Atualização adicional quando a janela recupera o foco. */
+window.addEventListener("focus", function(){
+  if (!document.hidden) {
+    carregarApresentacoes({ silencioso: true }).catch(function(){});
+  }
+});
 </script>
 </body>
 </html>
