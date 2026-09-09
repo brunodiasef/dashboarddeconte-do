@@ -304,6 +304,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/7ºano/caderno_ed_fisica_7ano_2trimestre_completo.pdf"
+  },
+  {
+    id: "aula-9t1n10-1788912829641",
+    ano: "9",
+    trimestre: 1,
+    aula: 10,
+    titulo: "Lutas pelo Mundo Esportes de Rede e Parede",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/9ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
