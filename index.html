@@ -193,6 +193,8 @@
 
   /* ===== CONTEÚDO ===== */
   .conteudo{padding:36px 34px 60px;max-width:1160px;width:100%;margin:0 auto}
+  /* evita que o cabeçalho fixo cubra o alvo dos links do menu lateral */
+  #inicio,#conteudos{scroll-margin-top:104px}
   .migalha{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:10px}
   .migalha::after{content:"";height:1px;width:60px;background:var(--dourado)}
   .conteudo h1{font-size:clamp(30px,4vw,44px);font-weight:700;color:var(--tinta);margin:10px 0 4px;letter-spacing:.3px}
@@ -349,6 +351,8 @@
 
   .overlay{position:fixed;inset:0;background:rgba(30,26,20,.5);z-index:55;display:none}
   .overlay.visivel{display:block}
+  /* trava de segurança: no desktop o overlay do menu nunca é exibido */
+  @media(min-width:961px){ .overlay{display:none !important} }
 
   @media(max-width:960px){
     .sidebar{transform:translateX(-100%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
@@ -533,7 +537,7 @@
 
 <!-- ===== MODAL NOVA AULA / EDITAR AULA ===== -->
 <div class="modal-fundo" id="modalNovaFundo">
-  <div class="modal" role="dialog" aria-modal="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModal">
     <div class="modal-topo">
       <h2 class="serif" id="tituloModal">Nova aula — gerar cadastro</h2>
       <button class="fechar" data-fechar="modalNovaFundo" aria-label="Fechar">
@@ -544,13 +548,13 @@
       <div class="erro-form" id="erroForm"></div>
 
       <div class="campo">
-        <label>Título da aula <span class="obrig">*</span></label>
+        <label for="campoTitulo">Título da aula <span class="obrig">*</span></label>
         <input type="text" id="campoTitulo" placeholder="Ex.: Fundamentos do handebol" maxlength="90">
       </div>
 
       <div class="campo-duplo">
         <div class="campo">
-          <label>Ano <span class="obrig">*</span></label>
+          <label for="campoAno">Ano <span class="obrig">*</span></label>
           <select id="campoAno">
             <option value="6">6º ano</option>
             <option value="7">7º ano</option>
@@ -559,7 +563,7 @@
           </select>
         </div>
         <div class="campo">
-          <label>Trimestre <span class="obrig">*</span></label>
+          <label for="campoTrimestre">Trimestre <span class="obrig">*</span></label>
           <select id="campoTrimestre">
             <option value="1">1º trimestre</option>
             <option value="2">2º trimestre</option>
@@ -567,13 +571,13 @@
           </select>
         </div>
         <div class="campo">
-          <label>Nº da aula <span class="obrig">*</span></label>
+          <label for="campoNumero">Nº da aula <span class="obrig">*</span></label>
           <select id="campoNumero"></select>
         </div>
       </div>
 
       <div class="campo">
-        <label>Descrição (opcional)</label>
+        <label for="campoDescricao">Descrição (opcional)</label>
         <textarea id="campoDescricao" placeholder="Breve descrição do conteúdo da aula..." maxlength="220"></textarea>
       </div>
 
@@ -676,6 +680,8 @@ const ICONES = {
 };
 
 let apresentacoes = [];
+let apresentacoesCarregadas = false; /* true após a 1ª resposta do apresentacoes.js */
+let falhaAoCarregar = false;         /* última tentativa de carga não respondeu */
 let carregamentoApresentacoesEmAndamento = null;
 let ultimaVersaoApresentacoes = "";
 
@@ -740,7 +746,10 @@ document.getElementById("btnAreaProfessor").addEventListener("click", function()
 document.getElementById("btnVoltarPerfil").addEventListener("click", mostrarSelecaoPerfil);
 
 function tentarEntrarProfessor(){
-  if (elCampoSenha.value === SENHA_PROFESSOR) {
+  /* trim: evita falha quando a senha é colada com espaços */
+  if (elCampoSenha.value.trim() === SENHA_PROFESSOR) {
+    elCampoSenha.value = "";           /* não deixa a senha no DOM */
+    elErroSenha.classList.remove("visivel");
     entrar("professor");
   } else {
     elErroSenha.classList.add("visivel");
@@ -751,6 +760,9 @@ function tentarEntrarProfessor(){
 document.getElementById("btnConfirmarSenha").addEventListener("click", tentarEntrarProfessor);
 elCampoSenha.addEventListener("keydown", function(ev){
   if (ev.key === "Enter") tentarEntrarProfessor();
+});
+elCampoSenha.addEventListener("input", function(){
+  elErroSenha.classList.remove("visivel");
 });
 
 document.getElementById("btnTrocarArea").addEventListener("click", function(){
@@ -816,18 +828,44 @@ function escaparHtml(texto){
   return div.innerHTML;
 }
 
+/* Escape para VALOR DE ATRIBUTO: escaparHtml não trata aspas, o que
+   quebraria data-abrir="..." quando o id/link contém " ou '. */
+function escaparAtributo(texto){
+  return String(texto == null ? "" : texto)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/* Número seguro: impede NaN/undefined em contadores e no arquivo gerado. */
+function numeroSeguro(valor, alternativo){
+  const n = parseInt(valor, 10);
+  return Number.isFinite(n) ? n : alternativo;
+}
+
 /* ===== RENDERIZAÇÃO: CARDS POR ANO + SUBCARDS POR TRIMESTRE ===== */
 function renderizar(){
   const lista = filtrarAulas();
   elContVisivel.textContent = lista.length;
+  atualizarProgresso(); /* o progresso não depende dos filtros e deve ficar sempre correto */
 
   if (lista.length === 0) {
     elGradeAnos.innerHTML = "";
     elGradeAnos.style.display = "none";
     elVazio.style.display = "block";
-    elMensagemVazio.textContent = apresentacoes.length === 0
-      ? "Nenhuma aula cadastrada ainda."
-      : "Não há aulas para os filtros selecionados. Ajuste o ano ou o trimestre.";
+    if (apresentacoes.length === 0) {
+      if (falhaAoCarregar) {
+        elMensagemVazio.textContent = "Não foi possível carregar as apresentações. Verifique sua conexão e tente novamente.";
+      } else {
+        elMensagemVazio.textContent = apresentacoesCarregadas
+          ? "Nenhuma aula cadastrada ainda."
+          : "Carregando as apresentações do repositório...";
+      }
+    } else {
+      elMensagemVazio.textContent = "Não há aulas para os filtros selecionados. Ajuste o ano ou o trimestre.";
+    }
     return;
   }
   elVazio.style.display = "none";
@@ -838,8 +876,10 @@ function renderizar(){
   const ehProfessor = perfil === "professor";
 
   let html = "";
+  let totalExibido = 0;
   anosExibidos.forEach(function(ano, indiceAno){
     const aulasDoAno = lista.filter(function(i){ return String(i.ano) === String(ano); });
+    let exibidasNoAno = 0;
 
     let subcards = "";
     trisExibidos.forEach(function(tri){
@@ -851,9 +891,10 @@ function renderizar(){
       if (aulasDoTri.length === 0) {
         itens = '<div class="sem-aulas">Nenhuma aula neste trimestre.</div>';
       } else {
+        exibidasNoAno += aulasDoTri.length;
         itens = aulasDoTri.map(function(item){
-          const chave = escaparHtml(item.id || item.link);
-          const numeroFormatado = String(item.aula).padStart(2, "0");
+          const chave = escaparAtributo(item.id || item.link);
+          const numeroFormatado = String(numeroSeguro(item.aula, 0)).padStart(2, "0");
           const botaoEditar = ehProfessor
             ? '<button class="btn-editar-mini" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>'
             : "";
@@ -876,24 +917,27 @@ function renderizar(){
       '</div>';
     });
 
+    totalExibido += exibidasNoAno;
     html += '<section class="cartao-ano" style="animation-delay:' + (indiceAno * 0.08) + 's">' +
       '<div class="ano-cab">' +
         '<span class="ano-selo selo-' + ano + '"></span>' +
         '<h2>' + ano + 'º ano</h2>' +
-        '<span class="ano-qtd">' + aulasDoAno.length + ' aula(s)</span>' +
+        '<span class="ano-qtd">' + exibidasNoAno + ' aula(s)</span>' +
       '</div>' +
       '<div class="tri-grade">' + subcards + '</div>' +
     '</section>';
   });
 
   elGradeAnos.innerHTML = html;
-  atualizarProgresso();
+  /* Se algum registro tiver ano/trimestre fora das faixas previstas ele não
+     entra em nenhum subcard; a contagem exibida acompanha o que está na tela. */
+  elContVisivel.textContent = totalExibido;
 }
 
 function abrirApresentacao(id){
   const item = apresentacoes.find(function(a){ return String(a.id || a.link) === String(id); });
   if (!item) return;
-  if (item.link && item.link !== "#") window.open(item.link, "_blank");
+  if (item.link && item.link !== "#") window.open(item.link, "_blank", "noopener");
   else mostrarToast("Esta aula ainda não possui arquivo ou link.", "erro");
 }
 
@@ -910,6 +954,14 @@ document.getElementById("botaoMenu").addEventListener("click", function(){
 });
 elOverlay.addEventListener("click", function(){
   elSidebar.classList.remove("aberta"); elOverlay.classList.remove("visivel");
+});
+/* Se o menu ficou aberto no celular e a tela vira para desktop (rotação ou
+   redimensionamento), o overlay não pode continuar cobrindo a página. */
+window.addEventListener("resize", function(){
+  if (window.innerWidth > 960) {
+    elSidebar.classList.remove("aberta");
+    elOverlay.classList.remove("visivel");
+  }
 });
 document.getElementById("menuLateral").addEventListener("click", function(ev){
   const link = ev.target.closest("a");
@@ -945,6 +997,8 @@ document.getElementById("abaArquivo").addEventListener("click", function(){ setA
 document.getElementById("abaLink").addEventListener("click", function(){ setAba("link"); });
 
 function limparFormulario(){
+  limparOpcoesExtras();
+  document.getElementById("botaoGerarCodigo").style.display = "";
   document.getElementById("campoTitulo").value = "";
   document.getElementById("campoDescricao").value = "";
   document.getElementById("campoLink").value = "";
@@ -964,6 +1018,30 @@ function abrirModalNova(){
   abrirModal(elModalNova);
 }
 
+/* Garante que um valor vindo do arquivo exista no select; sem isso o
+   navegador zera o campo e o código gerado sai com NaN, corrompendo a aula. */
+function garantirOpcao(select, valor, prefixoRotulo){
+  const texto = String(valor == null ? "" : valor);
+  if (texto === "") return;
+  const jaExiste = Array.prototype.some.call(select.options, function(o){ return o.value === texto; });
+  if (jaExiste) { select.value = texto; return; }
+  const opcao = document.createElement("option");
+  opcao.value = texto;
+  opcao.textContent = prefixoRotulo + texto + " (valor atual do arquivo)";
+  opcao.setAttribute("data-extra", "1");
+  select.appendChild(opcao);
+  select.value = texto;
+}
+
+function limparOpcoesExtras(){
+  [document.getElementById("campoAno"), document.getElementById("campoTrimestre"), elCampoNumero]
+    .forEach(function(select){
+      Array.prototype.slice.call(select.querySelectorAll("option[data-extra]"))
+        .forEach(function(o){ o.remove(); });
+      if (select.selectedIndex < 0 && select.options.length) select.selectedIndex = 0;
+    });
+}
+
 function abrirModalEditar(id){
   if (perfil !== "professor") return;
   const item = apresentacoes.find(function(a){ return String(a.id || a.link) === String(id); });
@@ -972,9 +1050,9 @@ function abrirModalEditar(id){
   idEmEdicao = String(item.id || item.link);
   document.getElementById("campoTitulo").value = item.titulo || "";
   document.getElementById("campoDescricao").value = item.descricao || "";
-  document.getElementById("campoAno").value = String(item.ano);
-  document.getElementById("campoTrimestre").value = String(item.trimestre);
-  elCampoNumero.value = String(item.aula);
+  garantirOpcao(document.getElementById("campoAno"), item.ano, "Ano ");
+  garantirOpcao(document.getElementById("campoTrimestre"), item.trimestre, "Trimestre ");
+  garantirOpcao(elCampoNumero, item.aula, "Aula ");
   if (item.tipo === "link") {
     setAba("link");
     document.getElementById("campoLink").value = item.link || "";
@@ -1001,11 +1079,16 @@ function escaparParaCodigo(texto){
 }
 
 function serializarEntrada(item){
+  const trimestre = numeroSeguro(item.trimestre, 1);
+  const aula = numeroSeguro(item.aula, 0);
+  /* Registros antigos sem id ganham um identificador estável, evitando
+     entradas com id: "" no arquivo publicado. */
+  const id = item.id ? String(item.id) : ("aula-" + item.ano + "t" + trimestre + "n" + aula);
   return '  {\n' +
-    '    id: "' + escaparParaCodigo(item.id) + '",\n' +
+    '    id: "' + escaparParaCodigo(id) + '",\n' +
     '    ano: "' + escaparParaCodigo(item.ano) + '",\n' +
-    '    trimestre: ' + item.trimestre + ',\n' +
-    '    aula: ' + item.aula + ',\n' +
+    '    trimestre: ' + trimestre + ',\n' +
+    '    aula: ' + aula + ',\n' +
     '    titulo: "' + escaparParaCodigo(item.titulo) + '",\n' +
     '    descricao: "' + escaparParaCodigo(item.descricao || "") + '",\n' +
     '    tipo: "' + (item.tipo === "link" ? "link" : "arquivo") + '",\n' +
@@ -1036,13 +1119,18 @@ function lerFormulario(){
   function erro(msg){ elErroForm.textContent = msg; elErroForm.classList.add("visivel"); return null; }
 
   if (!titulo) return erro("Preencha o título da aula.");
+  if (!Number.isFinite(trimestre) || !Number.isFinite(numero)) {
+    return erro("Selecione o ano, o trimestre e o número da aula.");
+  }
   let linkFinal;
   if (modoAnexo === "arquivo") {
     if (!nomeArquivo) return erro("Informe o caminho do arquivo no repositório.");
     linkFinal = nomeArquivo.replace(/^\/+/, "");
   } else {
     if (!linkExterno) return erro("Informe o link externo da apresentação.");
-    linkFinal = linkExterno;
+    /* Sem protocolo, o navegador trataria o endereço como caminho interno
+       e a aula abriria quebrada. */
+    linkFinal = /^[a-z][a-z0-9+.-]*:/i.test(linkExterno) ? linkExterno : ("https://" + linkExterno);
   }
   return {
     id: idEmEdicao || ("aula-" + ano + "t" + trimestre + "n" + numero + "-" + Date.now()),
@@ -1076,6 +1164,17 @@ document.getElementById("botaoGerarCodigo").addEventListener("click", function()
     listaNova = apresentacoes.concat([entrada]);
   }
   mostrarResultado(gerarConteudoArquivo(listaNova));
+
+  /* Aviso (não bloqueia): duas aulas com o mesmo ano/trimestre/número
+     ficam empilhadas no mesmo subcard e confundem os alunos. */
+  const duplicadas = listaNova.filter(function(a){
+    return String(a.ano) === String(entrada.ano)
+      && numeroSeguro(a.trimestre, -1) === entrada.trimestre
+      && numeroSeguro(a.aula, -1) === entrada.aula;
+  });
+  if (duplicadas.length > 1) {
+    mostrarToast("Atenção: já existe outra Aula " + entrada.aula + " no " + entrada.trimestre + "º tri do " + entrada.ano + "º ano.", "erro");
+  }
 });
 
 elBotaoRemover.addEventListener("click", function(){
@@ -1084,6 +1183,9 @@ elBotaoRemover.addEventListener("click", function(){
   if (!confirm('Remover a aula "' + (item ? item.titulo : "") + '" do painel?')) return;
   const listaNova = apresentacoes.filter(function(a){ return String(a.id || a.link) !== idEmEdicao; });
   mostrarResultado(gerarConteudoArquivo(listaNova));
+  /* Evita que um clique seguinte em "Gerar código" recoloque a aula removida. */
+  document.getElementById("botaoGerarCodigo").style.display = "none";
+  elBotaoRemover.style.display = "none";
   mostrarToast("Código sem esta aula gerado. Copie e substitua no GitHub.", "sucesso");
 });
 
@@ -1147,15 +1249,14 @@ function carregarApresentacoes(opcoes){
       apresentacoes = Array.isArray(window.APRESENTACOES)
         ? window.APRESENTACOES
         : [];
+      falhaAoCarregar = false;
 
       ultimaVersaoApresentacoes = versao;
+      apresentacoesCarregadas = true;
 
       atualizarContadores();
+      atualizarProgresso(); /* também nas recargas silenciosas: os dados podem ter mudado */
       if (perfil) renderizar();
-
-      if (!silencioso) {
-        atualizarProgresso();
-      }
 
       carregamentoApresentacoesEmAndamento = null;
       resolve(apresentacoes);
@@ -1163,6 +1264,9 @@ function carregarApresentacoes(opcoes){
 
     script.onerror = function(){
       carregamentoApresentacoesEmAndamento = null;
+      apresentacoesCarregadas = true;
+      falhaAoCarregar = true;
+      atualizarProgresso();
 
       // Mantém os dados anteriores na tela se já existirem.
       if (!apresentacoes.length && perfil) {
@@ -1200,15 +1304,26 @@ document.addEventListener("visibilitychange", function(){
 
   if (paginaEstavaOculta) {
     paginaEstavaOculta = false;
+    ultimaRecargaSilenciosa = Date.now();
     carregarApresentacoes({ silencioso: true }).catch(function(){});
   }
 });
 
-/* Atualização adicional quando a janela recupera o foco. */
+/* Atualização adicional quando a janela recupera o foco.
+   Com intervalo mínimo: sem isso, cada alt-tab (ou o retorno após abrir uma
+   aula em nova aba) dispara um download novo do apresentacoes.js. */
+const INTERVALO_MINIMO_RECARGA = 15000;
+let ultimaRecargaSilenciosa = Date.now();
+
+function recarregarSeNecessario(){
+  const agora = Date.now();
+  if (agora - ultimaRecargaSilenciosa < INTERVALO_MINIMO_RECARGA) return;
+  ultimaRecargaSilenciosa = agora;
+  carregarApresentacoes({ silencioso: true }).catch(function(){});
+}
+
 window.addEventListener("focus", function(){
-  if (!document.hidden) {
-    carregarApresentacoes({ silencioso: true }).catch(function(){});
-  }
+  if (!document.hidden) recarregarSeNecessario();
 });
 </script>
 </body>
