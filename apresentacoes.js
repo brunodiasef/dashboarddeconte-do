@@ -6,16 +6,6 @@
 
 window.APRESENTACOES = [
   {
-    id: "aula-9t3n3-1788174439224",
-    ano: "9",
-    trimestre: 3,
-    aula: 10,
-    titulo: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
-    descricao: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
-    tipo: "link",
-    link: "https://brunodiasef.github.io/9ano/"
-  },
-  {
     id: "aula-9t3n2-1788180316503",
     ano: "9",
     trimestre: 3,
