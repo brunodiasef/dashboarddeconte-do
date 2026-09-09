@@ -368,7 +368,7 @@ window.APRESENTACOES = [
   {
     id: "aula-6t1n1-1788978197091",
     ano: "6",
-    trimestre: 2,
+    trimestre: 1,
     aula: 1,
     titulo: "MATERIAL DE APOIO - MANUSCRITO",
     descricao: "",
