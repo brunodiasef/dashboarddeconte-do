@@ -344,6 +344,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/8ºano/jogo_mapa_mental_1trimestre.html"
+  },
+  {
+    id: "aula-7t1n2-1788971716183",
+    ano: "7",
+    trimestre: 1,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/1ºtri/7ºano/caderno-7ano-1trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
