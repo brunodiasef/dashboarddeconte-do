@@ -12,8 +12,8 @@ window.APRESENTACOES = [
     aula: 10,
     titulo: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
     descricao: "Esportes de Campo e Taco - Práticas de Aventura na Natureza",
-    tipo: "arquivo",
-    link: "aula/3ºtri/9ºano/index.html"
+    tipo: "link",
+    link: "https://brunodiasef.github.io/9ano/"
   },
   {
     id: "aula-8t3n3-1788175593417",
@@ -213,7 +213,7 @@ window.APRESENTACOES = [
     titulo: "MATERIAL DE APOIO - manuscrito",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano.pdf"
+    link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano_3tri.pdf"
   },
   {
     id: "aula-9t2n2-1788828494182",
