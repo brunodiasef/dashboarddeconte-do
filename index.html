@@ -1,11 +1,9 @@
 <!-- ============================================================
-     index.html — versão com CARDS POR ANO e SUBCARDS POR TRIMESTRE
-     Parte inicial do painel agora mostra:
-       [9º ano] [8º ano] [7º ano] [6º ano]  (nesta ordem)
-     e dentro de cada card de ano, 3 subcards:
-       [1º TRI] [2º TRI] [3º TRI]
-     com a lista de aulas de cada período (Abrir + editar).
-     Os menus suspensos continuam funcionando como filtro.
+     index.html — ÁREA DO PROFESSOR agora exige SENHA: 798287
+     A senha fica na constante SENHA_PROFESSOR (início do script);
+     para trocá-la depois, edite apenas essa linha.
+     Observação: a validação é feita no navegador (simples proteção
+     de uso em sala); o conteúdo do repositório continua público.
      Substitua TODO o conteúdo do index.html no repositório.
      ============================================================ -->
 <!DOCTYPE html>
@@ -42,6 +40,64 @@
   h1,h2,h3,h4,.serif{font-family:var(--serif)}
   button{font-family:var(--sans)}
   svg{display:block}
+
+  /* ===== TELA INICIAL DE LOGIN ===== */
+  .tela-login{
+    position:fixed;inset:0;z-index:300;background:var(--fundo);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    transition:opacity .35s,visibility .35s;
+  }
+  .tela-login::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(44,36,22,.025) 3px 4px);
+  }
+  .tela-login.oculta{opacity:0;visibility:hidden;pointer-events:none}
+  .caixa-login{
+    background:var(--creme);border:1px solid var(--borda);border-radius:18px;
+    box-shadow:var(--sombra-forte);padding:38px 34px;max-width:480px;width:100%;
+    text-align:center;position:relative;animation:subir .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .caixa-login .emblema{margin:0 auto 14px;width:64px;height:64px;font-size:22px}
+  .caixa-login h1{font-size:30px;margin-bottom:4px}
+  .login-sub{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--marrom);font-weight:800;margin-bottom:14px}
+  .login-texto{font-size:13.5px;color:var(--suave);line-height:1.6;margin-bottom:24px}
+  .login-botoes{display:flex;flex-direction:column;gap:12px}
+  .btn-login{
+    border:none;cursor:pointer;border-radius:14px;padding:15px 18px;
+    display:flex;align-items:center;gap:14px;text-align:left;transition:.2s;
+  }
+  .btn-login svg{width:26px;height:26px;flex:none}
+  .btn-login strong{display:block;font-size:14px;letter-spacing:.8px}
+  .btn-login span{display:block;font-size:11.5px;font-weight:600;opacity:.85;margin-top:2px}
+  .btn-login.aluno{background:var(--azul);color:#F5F0E8;box-shadow:0 6px 16px rgba(30,58,95,.3)}
+  .btn-login.aluno:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(30,58,95,.38)}
+  .btn-login.professor{background:var(--dourado);color:var(--sidebar);box-shadow:0 6px 16px rgba(201,168,76,.35)}
+  .btn-login.professor:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(201,168,76,.42)}
+  .login-rodape{margin-top:20px;font-size:11px;color:var(--suave);line-height:1.6}
+
+  /* etapa de senha do professor */
+  .login-senha{display:flex;flex-direction:column;gap:12px;text-align:left}
+  .login-senha-rotulo{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--marrom)}
+  .senha-input{
+    width:100%;border:1.5px solid var(--borda-escura);border-radius:12px;
+    padding:13px 16px;font:inherit;font-size:15px;font-weight:700;
+    background:#FBF8F1;outline:none;text-align:center;letter-spacing:4px;color:var(--tinta);
+    transition:.2s;
+  }
+  .senha-input:focus{border-color:var(--dourado);box-shadow:0 0 0 4px rgba(201,168,76,.18)}
+  .login-erro{
+    display:none;background:rgba(163,59,46,.08);border:1px solid rgba(163,59,46,.4);
+    color:#A33B2E;border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;text-align:center;
+  }
+  .login-erro.visivel{display:block}
+  .btn-voltar{
+    background:transparent;border:1.5px solid var(--marrom);color:var(--marrom);
+    padding:11px;border-radius:14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.2s;
+  }
+  .btn-voltar:hover{background:var(--marrom);color:#F5F0E8}
+
+  /* modo aluno: esconde ações de professor */
+  .modo-aluno .so-professor{display:none !important}
 
   /* ===== SIDEBAR FIXA ===== */
   .sidebar{
@@ -98,13 +154,24 @@
     position:sticky;top:0;z-index:40;
     background:rgba(232,223,208,.94);backdrop-filter:blur(6px);
     border-bottom:1px solid var(--borda-escura);
-    padding:14px 34px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+    padding:14px 34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
   }
   .botao-menu{display:none;background:none;border:1.5px solid var(--marrom);color:var(--marrom);width:40px;height:40px;border-radius:10px;cursor:pointer;place-items:center}
   .cabecalho-titulo{min-width:200px}
   .cabecalho-titulo .rotulo{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--marrom);font-weight:700}
   .cabecalho-titulo h2{font-size:19px;font-weight:700;color:var(--tinta)}
   .cabecalho-titulo h2 b{color:var(--verde)}
+  .perfil-acoes{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .selo-perfil{
+    font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    padding:6px 13px;border-radius:999px;background:var(--verde);color:#F5F0E8;
+  }
+  .selo-perfil.aluno{background:var(--azul)}
+  .btn-trocar{
+    background:transparent;border:1.5px solid var(--marrom);color:var(--marrom);
+    padding:7px 14px;border-radius:999px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;
+  }
+  .btn-trocar:hover{background:var(--marrom);color:#F5F0E8}
   .progresso{margin-left:auto;flex:1;max-width:520px;min-width:260px}
   .progresso-topo{display:flex;justify-content:space-between;font-size:11px;margin-bottom:7px;letter-spacing:.6px}
   .progresso-topo .rot{font-weight:700;text-transform:uppercase;color:var(--marrom)}
@@ -294,6 +361,49 @@
 </head>
 <body>
 
+<!-- ===== TELA INICIAL: ESCOLHA DE PERFIL + SENHA DO PROFESSOR ===== -->
+<div class="tela-login" id="telaLogin">
+  <div class="caixa-login">
+    <div class="emblema">EF</div>
+    <h1 class="serif">Educação Física</h1>
+    <div class="login-sub">E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
+    <p class="login-texto">Selecione o seu perfil para acessar o painel de apresentações interativas do 6º ao 9º ano.</p>
+
+    <div class="login-botoes" id="selecaoPerfil">
+      <button class="btn-login aluno" id="btnAreaAluno">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/><path d="M22 9v5"/></svg>
+        <span style="opacity:1">
+          <strong>ÁREA DO ALUNO</strong>
+          <span>Consultar e abrir as aulas publicadas</span>
+        </span>
+      </button>
+      <button class="btn-login professor" id="btnAreaProfessor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <span style="opacity:1">
+          <strong>ÁREA DO PROFESSOR</strong>
+          <span>Criar, editar e remover aulas (exige senha)</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="login-senha" id="formSenhaProfessor" style="display:none">
+      <label class="login-senha-rotulo" for="campoSenhaProfessor">Senha do professor</label>
+      <input type="password" class="senha-input" id="campoSenhaProfessor" placeholder="••••••" autocomplete="current-password" inputmode="numeric">
+      <div class="login-erro" id="erroSenha">Senha incorreta. Tente novamente.</div>
+      <button class="btn-login professor" id="btnConfirmarSenha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+        <span style="opacity:1">
+          <strong>ENTRAR COMO PROFESSOR</strong>
+          <span>Libera criação, edição e remoção de aulas</span>
+        </span>
+      </button>
+      <button class="btn-voltar" id="btnVoltarPerfil">Voltar à seleção de perfil</button>
+    </div>
+
+    <p class="login-rodape">O painel é o mesmo para todos os dispositivos.<br>Somente a área do professor, com senha, permite alterações no conteúdo.</p>
+  </div>
+</div>
+
 <div class="overlay" id="overlaySidebar"></div>
 
 <!-- ===== SIDEBAR ===== -->
@@ -317,11 +427,11 @@
     </a>
   </nav>
   <div class="acoes-lateral">
-    <button class="btn btn-ouro" id="botaoNovaAulaLateral">
+    <button class="btn btn-ouro so-professor" id="botaoNovaAulaLateral">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
       Nova aula
     </button>
-    <button class="btn btn-marrom" id="botaoComoCadastrar">Como cadastrar</button>
+    <button class="btn btn-marrom so-professor" id="botaoComoCadastrar">Como cadastrar</button>
   </div>
   <div class="pe-lateral">
     E.E.E.F.M. Ilda Ferreira<br>da Fonseca Martins<br>Ensino Fundamental II
@@ -337,6 +447,10 @@
     <div class="cabecalho-titulo">
       <div class="rotulo">Painel escolar</div>
       <h2><b id="contadorGeral">0</b> <span id="contadorPalavra">apresentações cadastradas</span></h2>
+    </div>
+    <div class="perfil-acoes">
+      <span class="selo-perfil" id="seloPerfil">—</span>
+      <button class="btn-trocar" id="btnTrocarArea">Trocar de área</button>
     </div>
     <div class="progresso">
       <div class="progresso-topo">
@@ -355,7 +469,7 @@
     <div class="migalha">Educação Física • E.E.E.F.M. Ilda Ferreira da Fonseca Martins</div>
     <h1>Educação Física</h1>
     <div class="sub-titulo">Central de apresentações interativas do 6º ao 9º ano</div>
-    <p class="descricao">Conteúdos organizados em cards por ano — 9º, 8º, 7º e 6º — com subcards por trimestre. Abra a aula desejada ou use o botão de lápis para editar e remover aulas lançadas. Os menus suspensos filtram o que é exibido.</p>
+    <p class="descricao">Conteúdos organizados em cards por ano — 9º, 8º, 7º e 6º — com subcards por trimestre. Abra a aula desejada ou, na área do professor, use o botão de lápis para editar e remover aulas lançadas. Os menus suspensos filtram o que é exibido.</p>
 
     <!-- FILTROS SUSPENSOS -->
     <div class="filtros">
@@ -382,7 +496,7 @@
 
     <div class="linha-contagem" id="conteudos">
       <p>Exibindo <b id="contadorVisivel">0</b> apresentação(ões) nos cards abaixo.</p>
-      <button class="btn btn-ouro" id="botaoNovaAulaConteudo">
+      <button class="btn btn-ouro so-professor" id="botaoNovaAulaConteudo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
         Nova aula
       </button>
@@ -395,14 +509,15 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <h3>Nenhuma apresentação aqui</h3>
       <p id="mensagemVazio">Não há aulas para os filtros selecionados. Ajuste o ano ou o trimestre.</p>
-      <button class="btn btn-ouro" id="botaoVazioAnexar">
+      <button class="btn btn-ouro so-professor" id="botaoVazioAnexar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
         Nova aula
       </button>
     </div>
 
     <div class="aviso">
-      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>. Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis dela e substitua o arquivo no GitHub pelo código gerado.
+      Os dados ficam no arquivo <code>apresentacoes.js</code> do repositório, por isso as aulas aparecem em <b>todos os dispositivos</b>.
+      <span class="so-professor">Para <b>editar ou remover</b> uma aula lançada, clique no botão de lápis dela e substitua o arquivo no GitHub pelo código gerado.</span>
     </div>
   </main>
 
@@ -517,15 +632,15 @@
     <div class="modal-corpo">
       <div class="instrucao">
         <div class="instrucao-n">1</div>
-        <div><h4>Cadastrar aula nova</h4><p>Clique em <b>Nova aula</b>, preencha os dados, escolha arquivo no repositório ou link externo e clique em <b>Gerar código atualizado</b>.</p></div>
+        <div><h4>Entrar como professor</h4><p>Na tela inicial, escolha <b>ÁREA DO PROFESSOR</b> e digite a senha da área. Somente esse perfil vê os botões de criar, editar e remover.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">2</div>
-        <div><h4>Editar aula lançada</h4><p>No subcard do trimestre, clique no botão de <b>lápis</b> da aula. O formulário abre preenchido: ajuste o que quiser e gere o código novamente.</p></div>
+        <div><h4>Cadastrar aula nova</h4><p>Clique em <b>Nova aula</b>, preencha os dados, escolha arquivo no repositório ou link externo e clique em <b>Gerar código atualizado</b>.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">3</div>
-        <div><h4>Remover aula</h4><p>No mesmo formulário de edição, clique em <b>Remover esta aula</b>. O painel gera o arquivo sem aquele registro.</p></div>
+        <div><h4>Editar aula lançada</h4><p>No subcard do trimestre, clique no botão de <b>lápis</b> da aula. O formulário abre preenchido: ajuste o que quiser e gere o código novamente.</p></div>
       </div>
       <div class="instrucao">
         <div class="instrucao-n">4</div>
@@ -533,7 +648,7 @@
       </div>
       <div class="instrucao">
         <div class="instrucao-n">5</div>
-        <div><h4>Organização da tela</h4><p>O painel mostra um card por ano (9º, 8º, 7º e 6º) com subcards de <b>1º, 2º e 3º trimestre</b>; cada aula aparece dentro do seu período.</p></div>
+        <div><h4>Área do aluno</h4><p>O aluno entra pela <b>ÁREA DO ALUNO</b>, sem senha: consulta os cards por ano e trimestre e abre as aulas, sem opções de alteração.</p></div>
       </div>
     </div>
   </div>
@@ -545,6 +660,7 @@
 
 <script>
 /* ===== CONFIGURAÇÃO ===== */
+const SENHA_PROFESSOR = "798287"; /* troque a senha aqui, se precisar */
 const TRIMESTRE_ATUAL = 3;
 const META_AULAS_POR_TRIMESTRE = 12;
 const ORDEM_ANOS = [9, 8, 7, 6];
@@ -561,8 +677,15 @@ const apresentacoes = Array.isArray(window.APRESENTACOES) ? window.APRESENTACOES
 
 let modoAnexo = "arquivo";
 let idEmEdicao = null;
+let perfil = null; /* "aluno" ou "professor" */
 const estado = { ano: "todos", tri: "todos" };
 
+const elTelaLogin   = document.getElementById("telaLogin");
+const elSeloPerfil  = document.getElementById("seloPerfil");
+const elSelecaoPerfil = document.getElementById("selecaoPerfil");
+const elFormSenha   = document.getElementById("formSenhaProfessor");
+const elCampoSenha  = document.getElementById("campoSenhaProfessor");
+const elErroSenha   = document.getElementById("erroSenha");
 const elGradeAnos   = document.getElementById("gradeAnos");
 const elVazio       = document.getElementById("estadoVazio");
 const elMensagemVazio = document.getElementById("mensagemVazio");
@@ -582,6 +705,60 @@ const elTituloModal = document.getElementById("tituloModal");
 const elResultado   = document.getElementById("resultadoGerado");
 const elCodigoGerado= document.getElementById("codigoGerado");
 const elBotaoRemover= document.getElementById("botaoRemoverAula");
+
+/* ===== TELA INICIAL / PERFIS / SENHA ===== */
+function entrar(novoPerfil){
+  perfil = novoPerfil;
+  elTelaLogin.classList.add("oculta");
+  document.body.classList.toggle("modo-aluno", perfil === "aluno");
+  elSeloPerfil.textContent = perfil === "aluno" ? "ÁREA DO ALUNO" : "ÁREA DO PROFESSOR";
+  elSeloPerfil.classList.toggle("aluno", perfil === "aluno");
+  renderizar();
+}
+
+function mostrarSelecaoPerfil(){
+  elFormSenha.style.display = "none";
+  elSelecaoPerfil.style.display = "flex";
+  elErroSenha.classList.remove("visivel");
+  elCampoSenha.value = "";
+}
+
+document.getElementById("btnAreaAluno").addEventListener("click", function(){ entrar("aluno"); });
+
+document.getElementById("btnAreaProfessor").addEventListener("click", function(){
+  elSelecaoPerfil.style.display = "none";
+  elFormSenha.style.display = "flex";
+  elErroSenha.classList.remove("visivel");
+  elCampoSenha.value = "";
+  setTimeout(function(){ elCampoSenha.focus(); }, 80);
+});
+
+document.getElementById("btnVoltarPerfil").addEventListener("click", mostrarSelecaoPerfil);
+
+function tentarEntrarProfessor(){
+  if (elCampoSenha.value === SENHA_PROFESSOR) {
+    entrar("professor");
+  } else {
+    elErroSenha.classList.add("visivel");
+    elCampoSenha.value = "";
+    elCampoSenha.focus();
+  }
+}
+document.getElementById("btnConfirmarSenha").addEventListener("click", tentarEntrarProfessor);
+elCampoSenha.addEventListener("keydown", function(ev){
+  if (ev.key === "Enter") tentarEntrarProfessor();
+});
+
+document.getElementById("btnTrocarArea").addEventListener("click", function(){
+  perfil = null;
+  fecharModal(elModalNova);
+  fecharModal(elModalComo);
+  document.body.classList.remove("modo-aluno");
+  elSeloPerfil.textContent = "—";
+  elSeloPerfil.classList.remove("aluno");
+  mostrarSelecaoPerfil();
+  elTelaLogin.classList.remove("oculta");
+});
 
 /* opções de número da aula no formulário (1 a 12) */
 (function montarSelectNumero(){
@@ -645,7 +822,7 @@ function renderizar(){
     elGradeAnos.style.display = "none";
     elVazio.style.display = "block";
     elMensagemVazio.textContent = apresentacoes.length === 0
-      ? "Nenhuma aula cadastrada ainda. Clique em Nova aula para gerar o primeiro cadastro."
+      ? "Nenhuma aula cadastrada ainda."
       : "Não há aulas para os filtros selecionados. Ajuste o ano ou o trimestre.";
     return;
   }
@@ -654,6 +831,7 @@ function renderizar(){
 
   const anosExibidos = estado.ano === "todos" ? ORDEM_ANOS : [parseInt(estado.ano, 10)];
   const trisExibidos = estado.tri === "todos" ? ORDEM_TRIS : [parseInt(estado.tri, 10)];
+  const ehProfessor = perfil === "professor";
 
   let html = "";
   anosExibidos.forEach(function(ano, indiceAno){
@@ -672,13 +850,16 @@ function renderizar(){
         itens = aulasDoTri.map(function(item){
           const chave = escaparHtml(item.id || item.link);
           const numeroFormatado = String(item.aula).padStart(2, "0");
+          const botaoEditar = ehProfessor
+            ? '<button class="btn-editar-mini" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>'
+            : "";
           return '<div class="item-aula">' +
             '<div class="item-info">' +
               '<span class="item-num">Aula ' + numeroFormatado + '</span>' +
               '<strong>' + escaparHtml(item.titulo) + '</strong>' +
             '</div>' +
             '<span class="item-acoes">' +
-              '<button class="btn-editar-mini" data-editar="' + chave + '" title="Editar ou remover esta aula">' + ICONES.lapis + '</button>' +
+              botaoEditar +
               '<a class="btn btn-ouro btn-mini" href="#" data-abrir="' + chave + '">Abrir ' + ICONES.seta + '</a>' +
             '</span>' +
           '</div>';
@@ -748,7 +929,7 @@ document.addEventListener("keydown", function(ev){
   if (ev.key === "Escape") { fecharModal(elModalNova); fecharModal(elModalComo); }
 });
 
-/* ===== formulário nova / editar ===== */
+/* ===== formulário nova / editar (somente professor) ===== */
 function setAba(modo){
   modoAnexo = modo;
   document.getElementById("abaArquivo").classList.toggle("ativa", modo === "arquivo");
@@ -770,6 +951,7 @@ function limparFormulario(){
 }
 
 function abrirModalNova(){
+  if (perfil !== "professor") return;
   idEmEdicao = null;
   limparFormulario();
   setAba("arquivo");
@@ -779,6 +961,7 @@ function abrirModalNova(){
 }
 
 function abrirModalEditar(id){
+  if (perfil !== "professor") return;
   const item = apresentacoes.find(function(a){ return String(a.id || a.link) === String(id); });
   if (!item) return;
   limparFormulario();
@@ -892,7 +1075,7 @@ document.getElementById("botaoGerarCodigo").addEventListener("click", function()
 });
 
 elBotaoRemover.addEventListener("click", function(){
-  if (!idEmEdicao) return;
+  if (perfil !== "professor" || !idEmEdicao) return;
   const item = apresentacoes.find(function(a){ return String(a.id || a.link) === idEmEdicao; });
   if (!confirm('Remover a aula "' + (item ? item.titulo : "") + '" do painel?')) return;
   const listaNova = apresentacoes.filter(function(a){ return String(a.id || a.link) !== idEmEdicao; });
