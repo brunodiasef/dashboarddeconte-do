@@ -16,16 +16,6 @@ window.APRESENTACOES = [
     link: "https://brunodiasef.github.io/9ano/"
   },
   {
-    id: "aula-8t3n3-1788175593417",
-    ano: "8",
-    trimestre: 3,
-    aula: 3,
-    titulo: "Dança de salão e Lutas pelo mundo",
-    descricao: "Dança de salão e Lutas pelo mundo",
-    tipo: "link",
-    link: "https://brunodiasef.github.io/8ano/"
-  },
-  {
     id: "aula-9t3n2-1788180316503",
     ano: "9",
     trimestre: 3,
