@@ -6,16 +6,6 @@
 
 window.APRESENTACOES = [
   {
-    id: "aula-9t3n2-1788180316503",
-    ano: "9",
-    trimestre: 3,
-    aula: 2,
-    titulo: "MATERIAL DE APOIO - 3º TRIMESTRE",
-    descricao: "Material com conteÚdo e lista de exercÍcios, para passar na sala de aula",
-    tipo: "arquivo",
-    link: "aula/1ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
-  },
-  {
     id: "aula-8t3n2-1788184891015",
     ano: "8",
     trimestre: 3,
