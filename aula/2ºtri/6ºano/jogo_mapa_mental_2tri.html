@@ -1,199 +1,255 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Complete o mapa mental · Educação Física · 6º ano · 2º trimestre</title>
+<title>Complete o mapa mental – Educação Física · 6º ano · 2º trimestre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
   :root{
-    --papel:#fdfbf5; --pauta:#c4d8ec; --margem:#e6a0a4;
-    --tinta:#1a2c70; --tinta-forte:#121e4e; --caneta-vermelha:#b02234;
-    --acerto:#1c6b46; --marca:#fdf0a0;
+    --papel:#faf8f0;
+    --pauta:#b0c8e2;
+    --margem:#d68a8a;
+    --tinta:#1a2a70;
+    --tinta2:#26388a;
+    --caneta-vermelha:#a82430;
+    --marca:rgba(255,226,96,.55);
+    --certo:#12704f;
+    --errado:#b3261e;
   }
   *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
   body{
-    margin:0; padding:0 0 3rem;
-    font-family:'Kalam',ui-rounded,'Segoe UI',sans-serif;
-    color:var(--tinta); background:var(--papel);
-    background-image:repeating-linear-gradient(to bottom,transparent 0 33px,var(--pauta) 33px 34px);
-    background-position:0 96px;
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 47px, var(--pauta) 47px 48px),
+      var(--papel);
+    font-family:"Patrick Hand", "Comic Sans MS", cursive;
+    color:var(--tinta);
+    font-size:19px;
+    line-height:48px;
+    padding:24px 18px 60px 26px;
   }
-  .folha{max-width:820px;margin:0 auto;padding:0 1.1rem 0 1.6rem;position:relative}
-  .folha::before{content:"";position:fixed;top:0;bottom:0;left:calc(50% - 410px + 0.7rem);
-    width:2px;background:var(--margem);opacity:.75}
-  @media (max-width:860px){.folha::before{left:.75rem}}
-  header{padding-top:1.6rem}
-  h1{font-family:'Caveat',cursive;font-size:2.6rem;line-height:1;margin:.2rem 0 .1rem;color:var(--tinta-forte)}
-  .sub{font-size:1rem;color:var(--caneta-vermelha);margin:0 0 .2rem}
-  .placar{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:1rem;margin:.6rem 0 0;padding-bottom:.4rem}
-  .placar span b{color:var(--caneta-vermelha)}
-  .centro{margin:1.6rem auto 1rem;max-width:420px;text-align:center;padding:1rem 1.4rem;
-    border:3px solid var(--tinta-forte);border-radius:48%/38%;
-    font-family:'Caveat',cursive;font-size:1.9rem;line-height:1.1;color:var(--tinta-forte);
-    background:rgba(255,255,255,.65)}
-  .ramos{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-  @media (max-width:620px){.ramos{grid-template-columns:1fr}}
-  .ramo{border:2.5px solid var(--tinta);border-radius:14px;padding:.55rem .7rem;background:rgba(255,255,255,.6);
-    min-height:92px;display:flex;flex-direction:column;gap:.25rem;cursor:pointer;
-    transition:transform .12s ease, border-color .12s ease}
-  .ramo:nth-child(even){border-color:var(--caneta-vermelha)}
-  .ramo .pista{font-size:.95rem;opacity:.85}
-  .ramo:nth-child(even) .pista{color:var(--caneta-vermelha)}
-  .ramo .vaga{font-size:1.1rem;color:#8a93ad;border-bottom:2px dashed #9aa5c0;padding-bottom:2px}
-  .ramo.alvo{transform:scale(1.02);box-shadow:0 0 0 3px var(--marca)}
-  .ramo.errou{animation:treme .32s}
-  .ramo.pronto{border-color:var(--acerto);cursor:default;background:rgba(230,246,238,.7)}
-  .ramo.pronto .vaga{color:var(--acerto);border-bottom:none;font-weight:700}
-  .ramo.pronto .vaga::before{content:"✓ ";}
-  @keyframes treme{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
-  h2{font-family:'Caveat',cursive;font-size:1.7rem;margin:1.6rem 0 .4rem;color:var(--caneta-vermelha)}
-  .banco{display:flex;flex-wrap:wrap;gap:.5rem}
-  .peca{font-family:'Kalam',cursive;font-size:1.02rem;color:var(--tinta);background:var(--marca);
-    border:2px solid var(--tinta);border-radius:10px;padding:.4rem .7rem;cursor:pointer}
-  .peca.sel{background:var(--tinta);color:#fdfbf5}
-  .peca.usada{display:none}
-  .aviso{min-height:1.6rem;margin:.8rem 0 0;font-size:1.05rem}
-  .aviso.ok{color:var(--acerto)} .aviso.nao{color:var(--caneta-vermelha)}
-  .barra{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.1rem}
-  button.acao{font-family:'Kalam',cursive;font-size:1.05rem;padding:.5rem 1.1rem;cursor:pointer;
-    background:var(--papel);color:var(--tinta-forte);border:2.5px solid var(--tinta-forte);border-radius:12px}
-  button.acao:disabled{opacity:.4;cursor:not-allowed}
-  button.acao:focus-visible,.peca:focus-visible,.ramo:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}
-  .fim{text-align:center;padding:2rem 1rem}
-  .fim p{font-size:1.2rem}
-  .fim .nota{font-family:'Caveat',cursive;font-size:3.4rem;color:var(--caneta-vermelha);margin:.2rem 0}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  body::before{
+    content:"";position:fixed;top:0;bottom:0;left:52px;width:2px;background:var(--margem);opacity:.85;
+  }
+  .folha{max-width:1000px;margin:0 auto}
+  h1{
+    font-family:"Caveat", cursive;font-weight:700;font-size:44px;line-height:1.1;
+    margin:8px 0 2px;letter-spacing:.5px;
+    background:linear-gradient(transparent 62%, var(--marca) 62%);display:inline;
+  }
+  .sub{font-size:19px;color:var(--tinta2);margin:6px 0 0}
+  .como{margin:0 0 10px;color:var(--tinta2)}
+  .abas{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 18px}
+  .aba{
+    font-family:"Caveat",cursive;font-size:26px;font-weight:600;
+    background:transparent;border:2px solid var(--tinta2);border-radius:14px;
+    padding:2px 16px;color:var(--tinta2);cursor:pointer;line-height:1.5;
+  }
+  .aba[aria-selected="true"]{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2}
+  .mapa{display:grid;grid-template-columns:1fr 250px 1fr;gap:0 34px;align-items:center;margin-bottom:8px;position:relative}
+  .fios{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+  .fios path{fill:none;stroke:var(--tinta2);stroke-width:2.5;stroke-linecap:round}
+  .coluna{display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .centro{
+    text-align:center;align-self:center;position:relative;z-index:1;background-clip:padding-box;
+    border:3px solid var(--caneta-vermelha);border-radius:22px;
+    background:#fde6de;padding:14px 10px;
+    font-family:"Caveat",cursive;font-weight:700;font-size:28px;line-height:1.15;color:var(--caneta-vermelha);
+  }
+  .ramo{border:2px solid var(--tinta2);border-radius:20px;padding:10px 14px 14px;background:#fdf7dd;position:relative;z-index:1}
+  .ramo h2{font-family:"Caveat",cursive;font-size:26px;font-weight:700;margin:0 0 6px;line-height:1.2}
+  .ramo{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+  .vaga{
+    display:block;width:100%;text-align:left;min-height:38px;line-height:1.3;
+    border:2px dashed var(--tinta2);border-radius:12px;background:rgba(255,255,255,.5);
+    margin:6px 0;padding:6px 10px;font:inherit;font-size:18px;color:var(--tinta);cursor:pointer;
+  }
+  .vaga.vazia{color:#8792b8}
+  .vaga.alvo{border-style:solid;background:rgba(255,226,96,.5)}
+  .vaga.certo{border-color:var(--certo);border-style:solid;color:var(--certo);background:rgba(18,112,79,.1)}
+  .vaga.errado{border-color:var(--errado);border-style:solid;color:var(--errado);background:rgba(179,38,30,.08)}
+  .banco{border-top:2px solid var(--pauta);margin-top:18px;padding-top:10px}
+  .banco h2{font-family:"Caveat",cursive;font-size:28px;margin:0 0 6px}
+  .fichas{display:flex;flex-wrap:wrap;gap:10px}
+  .ficha{
+    font:inherit;font-size:18px;line-height:1.3;color:var(--tinta);
+    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;
+    padding:6px 12px;cursor:pointer;
+  }
+  .ficha.escolhida{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2;transform:rotate(-1.2deg)}
+  .ficha:focus-visible,.vaga:focus-visible,.aba:focus-visible,.acao:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}
+  .acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  .acao{
+    font-family:"Caveat",cursive;font-size:26px;font-weight:600;line-height:1.4;
+    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;color:var(--tinta);
+    padding:2px 18px;cursor:pointer;
+  }
+  .acao.principal{background:var(--tinta);color:var(--papel)}
+  .placar{font-family:"Caveat",cursive;font-size:26px;color:var(--caneta-vermelha);line-height:1.4}
+  @media (max-width:760px){
+    body{padding-left:22px}
+    body::before{left:14px}
+    .mapa{grid-template-columns:1fr;gap:16px 0}
+    .centro{order:-1}
+    .coluna{gap:16px}
+    .fios{display:none}
+  }
 </style>
 </head>
 <body>
 <div class="folha">
-  <header>
-    <p class="sub">Educação Física · 6º ano · 2º trimestre</p>
-    <h1>Complete o mapa mental</h1>
-    <div class="placar">
-      <span>Mapa <b id="pMapa">1</b> de <b id="pTotal">1</b></span>
-      <span>Acertos de primeira: <b id="pAcertos">0</b></span>
-      <span>Tentativas erradas: <b id="pErros">0</b></span>
-    </div>
-  </header>
-  <main id="jogo">
-    <div class="centro" id="centro"></div>
-    <div class="ramos" id="ramos"></div>
-    <h2>Banco de palavras</h2>
-    <div class="banco" id="banco"></div>
-    <p class="aviso" id="aviso">Toque em uma palavra e depois no ramo em que ela se encaixa.</p>
-    <div class="barra">
-      <button class="acao" id="btProx" disabled>Próximo mapa</button>
-      <button class="acao" id="btReiniciar">Recomeçar</button>
-    </div>
-  </main>
-</div>
-<script>
-const MAPAS = [{"centro": "Esportes de precisão", "itens": [["Objetivo", "Acertar um alvo com exatidão"], ["Habilidades motoras", "Coordenação fina, equilíbrio e concentração"], ["Fundamentos técnicos", "Postura, empunhadura, mira e respiração"], ["Alvo com anéis de 1 a 10 pontos", "Arco e flecha"], ["Derrubar os dez pinos", "Boliche"], ["Reduzir de 501 pontos a zero", "Dardos"]]}, {"centro": "Lutas do Brasil", "itens": [["Conceito", "Combate com regras pré-estabelecidas"], ["Como são usadas", "Esporte, defesa pessoal e tradição"], ["Influências", "Indígena, africana e europeia"], ["Dança, acrobacia e música", "Capoeira"], ["Técnicas de chão", "Jiu-jitsu"], ["Projeções e imobilizações", "Judô"]]}];
-let iMapa = 0, acertos = 0, erros = 0, selecionada = null, faltam = 0;
+  <h1>Complete o mapa mental</h1>
+  <p class="sub">Educação Física · 6º ano · 2º trimestre</p>
+  <p class="como">Escolha uma palavra da caixa e toque no espaço em branco do ramo onde ela se encaixa. Para tirar, toque na palavra já colocada.</p>
 
-const $ = id => document.getElementById(id);
-const embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(v => v[1]);
+  <div class="abas" role="tablist" id="abas"></div>
+  <div id="mapa"></div>
+
+  <div class="banco">
+    <h2>Caixa de palavras</h2>
+    <div class="fichas" id="banco"></div>
+  </div>
+
+  <div class="acoes">
+    <button class="acao principal" id="conferir">Conferir</button>
+    <button class="acao" id="limpar">Recomeçar</button>
+    <span class="placar" id="placar"></span>
+  </div>
+</div>
+
+<script>
+const MAPAS = [{"centro": "ESPORTES DE PRECISÃO", "ramos": [{"nome": "Objetivo", "itens": ["Acertar um alvo com exatidão"]}, {"nome": "Habilidades motoras", "itens": ["Coordenação fina, equilíbrio e concentração"]}, {"nome": "Fundamentos técnicos", "itens": ["Postura, empunhadura, mira e respiração"]}, {"nome": "Alvo com anéis de 1 a 10 pontos", "itens": ["Arco e flecha"]}, {"nome": "Derrubar os dez pinos", "itens": ["Boliche"]}, {"nome": "Reduzir de 501 pontos a zero", "itens": ["Dardos"]}]}, {"centro": "LUTAS DO BRASIL", "ramos": [{"nome": "Conceito", "itens": ["Combate com regras pré-estabelecidas"]}, {"nome": "Como são usadas", "itens": ["Esporte, defesa pessoal e tradição"]}, {"nome": "Influências", "itens": ["Indígena, africana e europeia"]}, {"nome": "Dança, acrobacia e música", "itens": ["Capoeira"]}, {"nome": "Técnicas de chão", "itens": ["Jiu-jitsu"]}, {"nome": "Projeções e imobilizações", "itens": ["Judô"]}]}];
+let atual = 0, escolhida = null;
+
+const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt !== undefined) e.textContent = txt; return e; };
+const embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(p => p[1]);
+
+function montarAbas() {
+  const box = document.getElementById('abas');
+  box.innerHTML = '';
+  MAPAS.forEach((m, i) => {
+    const b = el('button', 'aba', 'Mapa ' + (i + 1) + ': ' + m.centro.toLowerCase());
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', i === atual);
+    b.onclick = () => { atual = i; montar(); };
+    box.appendChild(b);
+  });
+}
 
 function montar() {
-  const mapa = MAPAS[iMapa];
-  $('pMapa').textContent = iMapa + 1;
-  $('pTotal').textContent = MAPAS.length;
-  $('centro').textContent = mapa.centro;
-  $('ramos').innerHTML = '';
-  $('banco').innerHTML = '';
-  selecionada = null;
-  faltam = mapa.itens.length;
-  $('btProx').disabled = true;
-
-  mapa.itens.forEach((item, i) => {
-    const ramo = document.createElement('div');
-    ramo.className = 'ramo';
-    ramo.tabIndex = 0;
-    ramo.dataset.resposta = item[1];
-    ramo.innerHTML = '<span class="pista">' + item[0] + '</span><span class="vaga">completar…</span>';
-    const agir = () => encaixar(ramo);
-    ramo.addEventListener('click', agir);
-    ramo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); agir(); } });
-    $('ramos').appendChild(ramo);
+  escolhida = null;
+  document.getElementById('placar').textContent = '';
+  montarAbas();
+  const mapa = MAPAS[atual];
+  const área = document.getElementById('mapa');
+  área.innerHTML = '';
+  const grade = el('div', 'mapa');
+  const esq = el('div', 'coluna'), dir = el('div', 'coluna');
+  mapa.ramos.forEach((r, ri) => {
+    const naEsquerda = ri % 2 === 0;              // ramos alternam: 1 esq, 2 dir, 3 esq...
+    const card = el('div', 'ramo ' + (naEsquerda ? 'esq' : 'dir'));
+    card.appendChild(el('h2', null, r.nome));
+    r.itens.forEach((_, si) => {
+      const v = el('button', 'vaga vazia', '. . . . . . . . . .');
+      v.dataset.ramo = ri; v.dataset.vaga = si; v.dataset.valor = '';
+      v.onclick = () => tocarVaga(v);
+      card.appendChild(v);
+    });
+    (naEsquerda ? esq : dir).appendChild(card);
   });
+  grade.appendChild(esq);
+  const noCentral = el('div', 'centro', mapa.centro);
+  grade.appendChild(noCentral);
+  grade.appendChild(dir);
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'fios');
+  grade.appendChild(svg);
+  área.appendChild(grade);
+  requestAnimationFrame(desenharFios);
 
-  embaralhar(mapa.itens.map(x => x[1])).forEach(txt => {
-    const peca = document.createElement('button');
-    peca.className = 'peca';
-    peca.type = 'button';
-    peca.textContent = txt;
-    peca.addEventListener('click', () => escolher(peca));
-    $('banco').appendChild(peca);
+  const banco = document.getElementById('banco');
+  banco.innerHTML = '';
+  embaralhar(mapa.ramos.flatMap(r => r.itens)).forEach(txt => banco.appendChild(criarFicha(txt)));
+}
+
+function criarFicha(txt) {
+  const f = el('button', 'ficha', txt);
+  f.onclick = () => {
+    if (escolhida === f) { f.classList.remove('escolhida'); escolhida = null; return; }
+    document.querySelectorAll('.ficha.escolhida').forEach(x => x.classList.remove('escolhida'));
+    f.classList.add('escolhida');
+    escolhida = f;
+  };
+  return f;
+}
+
+function tocarVaga(v) {
+  document.getElementById('placar').textContent = '';
+  v.classList.remove('certo', 'errado');
+  if (v.dataset.valor) {
+    document.getElementById('banco').appendChild(criarFicha(v.dataset.valor));
+    v.dataset.valor = '';
+    v.textContent = '. . . . . . . . . .';
+    v.classList.add('vazia');
+    requestAnimationFrame(desenharFios);
+    return;
+  }
+  if (!escolhida) return;
+  v.dataset.valor = escolhida.textContent;
+  v.textContent = escolhida.textContent;
+  v.classList.remove('vazia');
+  escolhida.remove();
+  escolhida = null;
+  requestAnimationFrame(desenharFios);
+}
+
+document.getElementById('conferir').onclick = () => {
+  const mapa = MAPAS[atual];
+  let certos = 0, total = 0, vazias = 0;
+  document.querySelectorAll('.vaga').forEach(v => {
+    total++;
+    v.classList.remove('certo', 'errado');
+    if (!v.dataset.valor) { vazias++; return; }
+    const ok = mapa.ramos[+v.dataset.ramo].itens.includes(v.dataset.valor);
+    v.classList.add(ok ? 'certo' : 'errado');
+    if (ok) certos++;
   });
-  dizer('Toque em uma palavra e depois no ramo em que ela se encaixa.', '');
+  const p = document.getElementById('placar');
+  if (vazias) { p.textContent = 'Acertos: ' + certos + ' de ' + total + ' — ainda faltam ' + vazias + '.'; }
+  else if (certos === total) { p.textContent = 'Mapa completo! ' + certos + ' de ' + total + '. 🎉'; }
+  else { p.textContent = 'Acertos: ' + certos + ' de ' + total + '. Tire as palavras em vermelho e tente de novo.'; }
+};
+
+function desenharFios() {
+  const grade = document.querySelector('.mapa');
+  const svg = grade && grade.querySelector('.fios');
+  const centro = grade && grade.querySelector('.centro');
+  if (!svg || !centro) return;
+  const base = grade.getBoundingClientRect();
+  svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+  svg.innerHTML = '';
+  if (window.innerWidth <= 760) return;
+  const c = centro.getBoundingClientRect();
+  const cy = c.top + c.height / 2 - base.top;
+  grade.querySelectorAll('.ramo').forEach(card => {
+    const r = card.getBoundingClientRect();
+    const esquerda = card.classList.contains('esq');
+    const x1 = (esquerda ? r.right : r.left) - base.left;
+    const y1 = r.top + r.height / 2 - base.top;
+    const x2 = (esquerda ? c.left : c.right) - base.left;
+    const mx = (x1 + x2) / 2;
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ', ' + mx + ' ' + cy + ', ' + x2 + ' ' + cy);
+    svg.appendChild(p);
+  });
 }
 
-function escolher(peca) {
-  document.querySelectorAll('.peca.sel').forEach(p => p.classList.remove('sel'));
-  if (selecionada === peca) { selecionada = null; marcarAlvos(false); return; }
-  selecionada = peca;
-  peca.classList.add('sel');
-  marcarAlvos(true);
-  dizer('Agora escolha o ramo certo para "' + peca.textContent + '".', '');
-}
-
-function marcarAlvos(ligar) {
-  document.querySelectorAll('.ramo:not(.pronto)').forEach(r => r.classList.toggle('alvo', ligar));
-}
-
-function encaixar(ramo) {
-  if (ramo.classList.contains('pronto')) return;
-  if (!selecionada) { dizer('Escolha primeiro uma palavra do banco.', 'nao'); return; }
-  if (ramo.dataset.resposta === selecionada.textContent) {
-    ramo.querySelector('.vaga').textContent = selecionada.textContent;
-    ramo.classList.add('pronto');
-    ramo.classList.remove('alvo');
-    selecionada.classList.add('usada');
-    selecionada = null;
-    acertos++; faltam--;
-    $('pAcertos').textContent = acertos;
-    marcarAlvos(false);
-    if (faltam === 0) fecharMapa(); else dizer('Encaixou.', 'ok');
-  } else {
-    erros++;
-    $('pErros').textContent = erros;
-    ramo.classList.add('errou');
-    setTimeout(() => ramo.classList.remove('errou'), 340);
-    dizer('Esse não é o ramo dessa palavra. Leia a pista e tente outro.', 'nao');
-  }
-}
-
-function fecharMapa() {
-  marcarAlvos(false);
-  if (iMapa + 1 < MAPAS.length) {
-    dizer('Mapa completo. Siga para o próximo.', 'ok');
-    $('btProx').disabled = false;
-  } else {
-    resumo();
-  }
-}
-
-function resumo() {
-  const total = MAPAS.reduce((s, m) => s + m.itens.length, 0);
-  $('jogo').innerHTML = '<div class="fim"><p>Todos os mapas do trimestre foram completados.</p>' +
-    '<p class="nota">' + acertos + ' de ' + total + '</p>' +
-    '<p>Tentativas erradas pelo caminho: ' + erros + '</p>' +
-    '<div class="barra" style="justify-content:center"><button class="acao" id="btNovo">Jogar de novo</button></div></div>';
-  $('btNovo').addEventListener('click', () => location.reload());
-}
-
-function dizer(txt, tipo) {
-  const a = $('aviso');
-  a.textContent = txt;
-  a.className = 'aviso ' + tipo;
-}
-
-$('btProx').addEventListener('click', () => { iMapa++; montar(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-$('btReiniciar').addEventListener('click', () => location.reload());
+window.addEventListener('resize', desenharFios);
+document.fonts && document.fonts.ready.then(desenharFios);
+document.getElementById('limpar').onclick = montar;
 montar();
 </script>
 </body>
