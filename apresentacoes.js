@@ -474,6 +474,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
+  },
+  {
+    id: "aula-9t3n10-1789054131222",
+    ano: "9",
+    trimestre: 3,
+    aula: 10,
+    titulo: "Esportes de Campo e Taco Práticas de Aventura na Natureza",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/9ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
