@@ -236,16 +236,6 @@ window.APRESENTACOES = [
     link: "aula/2ºtri/8ºano/caderno_ed_fisica_8ano_2trimestre_completo.pdf"
   },
   {
-    id: "aula-8t3n2-1788876061258",
-    ano: "8",
-    trimestre: 3,
-    aula: 2,
-    titulo: "APOSTILA-3ºTRI",
-    descricao: "",
-    tipo: "arquivo",
-    link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
-  },
-  {
     id: "aula-7t3n8-1788876713645",
     ano: "7",
     trimestre: 3,
