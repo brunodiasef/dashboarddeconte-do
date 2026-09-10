@@ -424,6 +424,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/6ºano/caderno_ed_fisica_6ano_3trimestre.pdf"
+  },
+  {
+    id: "aula-6t3n1-1789040690298",
+    ano: "6",
+    trimestre: 3,
+    aula: 1,
+    titulo: "MAPA MENTAL",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/6ºano/jogo_mapa_mental_3tri.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
