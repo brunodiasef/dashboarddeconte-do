@@ -464,6 +464,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_3trimestre_completo.pdf"
+  },
+  {
+    id: "aula-8t3n8-1789042558566",
+    ano: "8",
+    trimestre: 3,
+    aula: 8,
+    titulo: "DANÇA DE SALÃO + LUTAS PELO MUNDO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/8ºano/index.html"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
