@@ -273,7 +273,7 @@ window.APRESENTACOES = [
     titulo: "MATERIAL DE APOIO - manuscrito",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/2ºtri/7ºano/caderno_ed_fisica_7ano_2trimestre_completo.pdf"
+    link: "aula/2ºtri/7ºano/caderno-7ano-2trimestre.pdf"
   },
   {
     id: "aula-9t1n10-1788912829641",
