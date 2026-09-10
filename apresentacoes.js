@@ -463,7 +463,7 @@ window.APRESENTACOES = [
     titulo: "APOSTILA-3ºTRI",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
+    link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_3trimestre_completo.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
