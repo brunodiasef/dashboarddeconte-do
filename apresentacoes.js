@@ -464,6 +464,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/index.html"
+  },
+  {
+    id: "aula-9t3n2-1789053960207",
+    ano: "9",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/9ºano/CONTEÚDO 9º ANO - 3º TRIMESTRE.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
