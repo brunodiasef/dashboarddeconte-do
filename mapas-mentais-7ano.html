@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapas mentais – Educação Física · 7º ano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#faf8f0;
+    --pauta:#b0c8e2;
+    --margem:#d68a8a;
+    --tinta:#1a2a70;
+    --tinta2:#26388a;
+    --caneta-vermelha:#a82430;
+    --marca:rgba(255,226,96,.55);
+    --certo:#12704f;
+    --errado:#b3261e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 47px, var(--pauta) 47px 48px),
+      var(--papel);
+    font-family:"Patrick Hand", "Comic Sans MS", cursive;
+    color:var(--tinta);
+    font-size:19px;
+    line-height:48px;
+    padding:24px 18px 60px 26px;
+  }
+  body::before{
+    content:"";position:fixed;top:0;bottom:0;left:52px;width:2px;background:var(--margem);opacity:.85;
+  }
+  .folha{max-width:1000px;margin:0 auto}
+  h1{
+    font-family:"Caveat", cursive;font-weight:700;font-size:44px;line-height:1.1;
+    margin:8px 0 2px;letter-spacing:.5px;
+    background:linear-gradient(transparent 62%, var(--marca) 62%);display:inline;
+  }
+  .sub{font-size:19px;color:var(--tinta2);margin:6px 0 0}
+  .como{margin:0 0 10px;color:var(--tinta2)}
+  .mapa{display:grid;grid-template-columns:1fr 250px 1fr;gap:0 34px;align-items:center;margin:14px 0 8px;position:relative}
+  .fios{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+  .fios path{fill:none;stroke:var(--tinta2);stroke-width:2.5;stroke-linecap:round}
+  .coluna{display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .centro{
+    text-align:center;align-self:center;position:relative;z-index:1;background-clip:padding-box;
+    border:3px solid var(--caneta-vermelha);border-radius:22px;
+    background:#fde6de;padding:14px 10px;
+    font-family:"Caveat",cursive;font-weight:700;font-size:28px;line-height:1.15;color:var(--caneta-vermelha);
+  }
+  .ramo{border:2px solid var(--tinta2);border-radius:20px;padding:10px 14px 14px;background:#fdf7dd;position:relative;z-index:1}
+  .ramo h2{font-family:"Caveat",cursive;font-size:26px;font-weight:700;margin:0 0 6px;line-height:1.2}
+  .ramo{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+  .vaga{
+    display:flex;align-items:center;width:100%;text-align:left;min-height:64px;
+    border:2px dashed var(--tinta2);border-radius:12px;background:rgba(255,255,255,.5);
+    margin:6px 0;padding:6px 10px;font:inherit;font-size:18px;line-height:1.3;color:var(--tinta);cursor:pointer;
+  }
+  .vaga.certo{border-color:var(--certo);border-style:solid;color:var(--certo);background:rgba(18,112,79,.1)}
+  .vaga:hover{border-style:solid;background:rgba(255,226,96,.5)}
+  .vaga.certo:hover{background:rgba(18,112,79,.16)}
+  .resumo{font-size:17px;line-height:1.3;color:var(--tinta2);margin:0 0 4px}
+  .rodape{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .feitos{font-family:"Caveat",cursive;font-size:24px;color:var(--caneta-vermelha);line-height:1.4}
+  .feitos.tudo{color:var(--certo)}
+  .vaga:focus-visible,.acao:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}
+  .acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;border-top:2px solid var(--pauta);padding-top:10px}
+  .acao{
+    font-family:"Caveat",cursive;font-size:26px;font-weight:600;line-height:1.4;
+    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;color:var(--tinta);
+    padding:2px 18px;cursor:pointer;
+  }
+  .acao.principal{background:var(--tinta);color:var(--papel)}
+  .placar{font-family:"Caveat",cursive;font-size:26px;color:var(--caneta-vermelha);line-height:1.4}
+
+  /* tela do jogo */
+  #tela-jogo{display:none}
+  body.jogando{padding:0}
+  body.jogando::before{display:none}
+  body.jogando .folha{display:none}
+  body.jogando #tela-jogo{display:block}
+  .barra{
+    position:sticky;top:0;z-index:5;display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+    background:var(--papel);border-bottom:2px solid var(--pauta);padding:8px 18px 8px 26px;line-height:1.4;
+  }
+  .barra .qual{font-family:"Caveat",cursive;font-size:28px;font-weight:700;color:var(--caneta-vermelha)}
+  .quadro-jogo{display:none;width:100%;border:0;min-height:80vh;background:var(--papel)}
+  .quadro-jogo.ativo{display:block}
+
+  @media (max-width:760px){
+    body{padding-left:22px}
+    body::before{left:14px}
+    .mapa{grid-template-columns:1fr;gap:16px 0}
+    .centro{order:-1}
+    .coluna{display:contents}
+    .fios{display:none}
+    .barra{padding-left:16px}
+  }
+</style>
+</head>
+<body>
+<div class="folha">
+  <h1>Mapas mentais do 7º ano</h1>
+  <p class="sub">Educação Física · 7º ano</p>
+  <p class="como">Escolha o trimestre e toque no mapa que quer completar. Os mapas que você completar ficam marcados em verde.</p>
+
+  <div id="painel"></div>
+
+  <div class="acoes">
+    <span class="placar" id="placar"></span>
+  </div>
+</div>
+
+<div id="tela-jogo">
+  <div class="barra">
+    <button class="acao" id="voltar">← Voltar ao painel</button>
+    <span class="qual" id="qual"></span>
+  </div>
+  <div id="quadros"></div>
+</div>
+
+<script>
+const ANO = 7;
+const TRIMESTRES = [{"tri": 1, "mapas": [{"centro": "ESPORTES DE INVASÃO", "espacos": 16}, {"centro": "ALTERAÇÕES FISIOLÓGICAS", "espacos": 10}]}, {"tri": 2, "mapas": [{"centro": "ESPORTES TÉCNICO-COMBINATÓRIOS", "espacos": 26}, {"centro": "LUTAS DO BRASIL", "espacos": 22}]}, {"tri": 3, "mapas": [{"centro": "JOGOS ELETRÔNICOS", "espacos": 18}, {"centro": "DANÇAS URBANAS", "espacos": 17}, {"centro": "PRÁTICAS CORPORAIS DE AVENTURA URBANAS", "espacos": 19}]}];
+const JOGOS = ["<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Complete o mapa mental – Educação Física · 7º ano · 1º trimestre<\/title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap\" rel=\"stylesheet\">\n<style>\n  :root{\n    --papel:#faf8f0;\n    --pauta:#b0c8e2;\n    --margem:#d68a8a;\n    --tinta:#1a2a70;\n    --tinta2:#26388a;\n    --caneta-vermelha:#a82430;\n    --marca:rgba(255,226,96,.55);\n    --certo:#12704f;\n    --errado:#b3261e;\n  }\n  *{box-sizing:border-box}\n  html,body{margin:0;padding:0}\n  body{\n    background:\n      repeating-linear-gradient(to bottom, transparent 0 47px, var(--pauta) 47px 48px),\n      var(--papel);\n    font-family:\"Patrick Hand\", \"Comic Sans MS\", cursive;\n    color:var(--tinta);\n    font-size:19px;\n    line-height:48px;\n    padding:24px 18px 60px 26px;\n  }\n  body::before{\n    content:\"\";position:fixed;top:0;bottom:0;left:52px;width:2px;background:var(--margem);opacity:.85;\n  }\n  .folha{max-width:1000px;margin:0 auto}\n  h1{\n    font-family:\"Caveat\", cursive;font-weight:700;font-size:44px;line-height:1.1;\n    margin:8px 0 2px;letter-spacing:.5px;\n    background:linear-gradient(transparent 62%, var(--marca) 62%);display:inline;\n  }\n  .sub{font-size:19px;color:var(--tinta2);margin:6px 0 0}\n  .como{margin:0 0 10px;color:var(--tinta2)}\n  .abas{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 18px}\n  .aba{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;\n    background:transparent;border:2px solid var(--tinta2);border-radius:14px;\n    padding:2px 16px;color:var(--tinta2);cursor:pointer;line-height:1.5;\n  }\n  .aba[aria-selected=\"true\"]{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2}\n  .mapa{display:grid;grid-template-columns:1fr 250px 1fr;gap:0 34px;align-items:center;margin-bottom:8px;position:relative}\n  .fios{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}\n  .fios path{fill:none;stroke:var(--tinta2);stroke-width:2.5;stroke-linecap:round}\n  .coluna{display:flex;flex-direction:column;gap:18px;justify-content:center}\n  .centro{\n    text-align:center;align-self:center;position:relative;z-index:1;background-clip:padding-box;\n    border:3px solid var(--caneta-vermelha);border-radius:22px;\n    background:#fde6de;padding:14px 10px;\n    font-family:\"Caveat\",cursive;font-weight:700;font-size:28px;line-height:1.15;color:var(--caneta-vermelha);\n  }\n  .ramo{border:2px solid var(--tinta2);border-radius:20px;padding:10px 14px 14px;background:#fdf7dd;position:relative;z-index:1}\n  .ramo h2{font-family:\"Caveat\",cursive;font-size:26px;font-weight:700;margin:0 0 6px;line-height:1.2}\n  .ramo{flex:1;display:flex;flex-direction:column;justify-content:flex-start}\n  .vaga{\n    display:block;width:100%;text-align:left;min-height:38px;line-height:1.3;\n    border:2px dashed var(--tinta2);border-radius:12px;background:rgba(255,255,255,.5);\n    margin:6px 0;padding:6px 10px;font:inherit;font-size:18px;color:var(--tinta);cursor:pointer;\n  }\n  .vaga.vazia{color:#8792b8}\n  .vaga.alvo{border-style:solid;background:rgba(255,226,96,.5)}\n  .vaga.certo{border-color:var(--certo);border-style:solid;color:var(--certo);background:rgba(18,112,79,.1)}\n  .vaga.errado{border-color:var(--errado);border-style:solid;color:var(--errado);background:rgba(179,38,30,.08)}\n  .banco{border-top:2px solid var(--pauta);margin-top:18px;padding-top:10px}\n  .banco h2{font-family:\"Caveat\",cursive;font-size:28px;margin:0 0 6px}\n  .fichas{display:flex;flex-wrap:wrap;gap:10px}\n  .ficha{\n    font:inherit;font-size:18px;line-height:1.3;color:var(--tinta);\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;\n    padding:6px 12px;cursor:pointer;\n  }\n  .ficha.escolhida{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2;transform:rotate(-1.2deg)}\n  .ficha:focus-visible,.vaga:focus-visible,.aba:focus-visible,.acao:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}\n  .acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}\n  .acao{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;line-height:1.4;\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;color:var(--tinta);\n    padding:2px 18px;cursor:pointer;\n  }\n  .acao.principal{background:var(--tinta);color:var(--papel)}\n  .placar{font-family:\"Caveat\",cursive;font-size:26px;color:var(--caneta-vermelha);line-height:1.4}\n  @media (max-width:760px){\n    body{padding-left:22px}\n    body::before{left:14px}\n    .mapa{grid-template-columns:1fr;gap:16px 0}\n    .centro{order:-1}\n    .coluna{gap:16px}\n    .fios{display:none}\n  }\n<\/style>\n<\/head>\n<body>\n<div class=\"folha\">\n  <h1>Complete o mapa mental<\/h1>\n  <p class=\"sub\">Educação Física · 7º ano · 1º trimestre<\/p>\n  <p class=\"como\">Escolha uma palavra da caixa e toque no espaço em branco do ramo onde ela se encaixa. Para tirar, toque na palavra já colocada.<\/p>\n\n  <div class=\"abas\" role=\"tablist\" id=\"abas\"><\/div>\n  <div id=\"mapa\"><\/div>\n\n  <div class=\"banco\">\n    <h2>Caixa de palavras<\/h2>\n    <div class=\"fichas\" id=\"banco\"><\/div>\n  <\/div>\n\n  <div class=\"acoes\">\n    <button class=\"acao principal\" id=\"conferir\">Conferir<\/button>\n    <button class=\"acao\" id=\"limpar\">Recomeçar<\/button>\n    <span class=\"placar\" id=\"placar\"><\/span>\n  <\/div>\n<\/div>\n\n<script>\nconst MAPAS = [{\"centro\": \"ESPORTES DE INVASÃO\", \"ramos\": [{\"nome\": \"Características gerais\", \"itens\": [\"Dois times\", \"Marcar pontos no campo do adversário\", \"Cooperação entre os jogadores\", \"Regras específicas de cada modalidade\"]}, {\"nome\": \"Princípios táticos\", \"itens\": [\"Ataque: posse da bola e finalizar\", \"Defesa: proteger o território\", \"Transição: ataque ↔ defesa\"]}, {\"nome\": \"Benefícios\", \"itens\": [\"Desenvolvimento motor\", \"Socialização e resolução de conflitos\", \"Regras e disciplina\"]}, {\"nome\": \"Exemplos\", \"itens\": [\"Futsal\", \"Basquete\", \"Rúgbi\", \"Futebol Americano\", \"Handebol\", \"Hóquei no gelo\"]}]}, {\"centro\": \"ALTERAÇÕES FISIOLÓGICAS\", \"ramos\": [{\"nome\": \"Frequência cardíaca (FC)\", \"itens\": [\"Coração bate mais rápido\", \"Mais oxigênio aos músculos\"]}, {\"nome\": \"Fluxo sanguíneo\", \"itens\": [\"Redistribuição para os músculos ativos\"]}, {\"nome\": \"Frequência respiratória (FR)\", \"itens\": [\"Captar oxigênio\", \"Eliminar dióxido de carbono\"]}, {\"nome\": \"Temperatura muscular\", \"itens\": [\"A energia gerada produz calor\"]}, {\"nome\": \"Sudorese (suor)\", \"itens\": [\"Dissipa calor\", \"Mantém a temperatura estável\"]}, {\"nome\": \"Vasodilatação cutânea\", \"itens\": [\"Mais sangue na pele\", \"Facilita a perda de calor\"]}]}];\nlet atual = 0, escolhida = null;\n\nconst el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt !== undefined) e.textContent = txt; return e; };\nconst embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(p => p[1]);\n\nfunction montarAbas() {\n  const box = document.getElementById('abas');\n  box.innerHTML = '';\n  MAPAS.forEach((m, i) => {\n    const b = el('button', 'aba', 'Mapa ' + (i + 1) + ': ' + m.centro.toLowerCase());\n    b.setAttribute('role', 'tab');\n    b.setAttribute('aria-selected', i === atual);\n    b.onclick = () => { atual = i; montar(); };\n    box.appendChild(b);\n  });\n}\n\nfunction montar() {\n  escolhida = null;\n  document.getElementById('placar').textContent = '';\n  montarAbas();\n  const mapa = MAPAS[atual];\n  const área = document.getElementById('mapa');\n  área.innerHTML = '';\n  const grade = el('div', 'mapa');\n  const esq = el('div', 'coluna'), dir = el('div', 'coluna');\n  mapa.ramos.forEach((r, ri) => {\n    const naEsquerda = ri % 2 === 0;              // ramos alternam: 1 esq, 2 dir, 3 esq...\n    const card = el('div', 'ramo ' + (naEsquerda ? 'esq' : 'dir'));\n    card.appendChild(el('h2', null, r.nome));\n    r.itens.forEach((_, si) => {\n      const v = el('button', 'vaga vazia', '. . . . . . . . . .');\n      v.dataset.ramo = ri; v.dataset.vaga = si; v.dataset.valor = '';\n      v.onclick = () => tocarVaga(v);\n      card.appendChild(v);\n    });\n    (naEsquerda ? esq : dir).appendChild(card);\n  });\n  grade.appendChild(esq);\n  const noCentral = el('div', 'centro', mapa.centro);\n  grade.appendChild(noCentral);\n  grade.appendChild(dir);\n  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n  svg.setAttribute('class', 'fios');\n  grade.appendChild(svg);\n  área.appendChild(grade);\n  requestAnimationFrame(desenharFios);\n\n  const banco = document.getElementById('banco');\n  banco.innerHTML = '';\n  embaralhar(mapa.ramos.flatMap(r => r.itens)).forEach(txt => banco.appendChild(criarFicha(txt)));\n}\n\nfunction criarFicha(txt) {\n  const f = el('button', 'ficha', txt);\n  f.onclick = () => {\n    if (escolhida === f) { f.classList.remove('escolhida'); escolhida = null; return; }\n    document.querySelectorAll('.ficha.escolhida').forEach(x => x.classList.remove('escolhida'));\n    f.classList.add('escolhida');\n    escolhida = f;\n  };\n  return f;\n}\n\nfunction tocarVaga(v) {\n  document.getElementById('placar').textContent = '';\n  v.classList.remove('certo', 'errado');\n  if (v.dataset.valor) {\n    document.getElementById('banco').appendChild(criarFicha(v.dataset.valor));\n    v.dataset.valor = '';\n    v.textContent = '. . . . . . . . . .';\n    v.classList.add('vazia');\n    requestAnimationFrame(desenharFios);\n    return;\n  }\n  if (!escolhida) return;\n  v.dataset.valor = escolhida.textContent;\n  v.textContent = escolhida.textContent;\n  v.classList.remove('vazia');\n  escolhida.remove();\n  escolhida = null;\n  requestAnimationFrame(desenharFios);\n}\n\ndocument.getElementById('conferir').onclick = () => {\n  const mapa = MAPAS[atual];\n  let certos = 0, total = 0, vazias = 0;\n  document.querySelectorAll('.vaga').forEach(v => {\n    total++;\n    v.classList.remove('certo', 'errado');\n    if (!v.dataset.valor) { vazias++; return; }\n    const ok = mapa.ramos[+v.dataset.ramo].itens.includes(v.dataset.valor);\n    v.classList.add(ok ? 'certo' : 'errado');\n    if (ok) certos++;\n  });\n  const p = document.getElementById('placar');\n  if (vazias) { p.textContent = 'Acertos: ' + certos + ' de ' + total + ' — ainda faltam ' + vazias + '.'; }\n  else if (certos === total) { p.textContent = 'Mapa completo! ' + certos + ' de ' + total + '. 🎉'; }\n  else { p.textContent = 'Acertos: ' + certos + ' de ' + total + '. Tire as palavras em vermelho e tente de novo.'; }\n};\n\nfunction desenharFios() {\n  const grade = document.querySelector('.mapa');\n  const svg = grade && grade.querySelector('.fios');\n  const centro = grade && grade.querySelector('.centro');\n  if (!svg || !centro) return;\n  const base = grade.getBoundingClientRect();\n  svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);\n  svg.innerHTML = '';\n  if (window.innerWidth <= 760) return;\n  const c = centro.getBoundingClientRect();\n  const cy = c.top + c.height / 2 - base.top;\n  grade.querySelectorAll('.ramo').forEach(card => {\n    const r = card.getBoundingClientRect();\n    const esquerda = card.classList.contains('esq');\n    const x1 = (esquerda ? r.right : r.left) - base.left;\n    const y1 = r.top + r.height / 2 - base.top;\n    const x2 = (esquerda ? c.left : c.right) - base.left;\n    const mx = (x1 + x2) / 2;\n    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');\n    p.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ', ' + mx + ' ' + cy + ', ' + x2 + ' ' + cy);\n    svg.appendChild(p);\n  });\n}\n\nwindow.addEventListener('resize', desenharFios);\ndocument.fonts && document.fonts.ready.then(desenharFios);\ndocument.getElementById('limpar').onclick = montar;\nmontar();\n<\/script>\n<\/body>\n<\/html>\n", "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Complete o mapa mental – Educação Física · 7º ano · 2º trimestre<\/title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap\" rel=\"stylesheet\">\n<style>\n  :root{\n    --papel:#faf8f0;\n    --pauta:#b0c8e2;\n    --margem:#d68a8a;\n    --tinta:#1a2a70;\n    --tinta2:#26388a;\n    --caneta-vermelha:#a82430;\n    --marca:rgba(255,226,96,.55);\n    --certo:#12704f;\n    --errado:#b3261e;\n  }\n  *{box-sizing:border-box}\n  html,body{margin:0;padding:0}\n  body{\n    background:\n      repeating-linear-gradient(to bottom, transparent 0 47px, var(--pauta) 47px 48px),\n      var(--papel);\n    font-family:\"Patrick Hand\", \"Comic Sans MS\", cursive;\n    color:var(--tinta);\n    font-size:19px;\n    line-height:48px;\n    padding:24px 18px 60px 26px;\n  }\n  body::before{\n    content:\"\";position:fixed;top:0;bottom:0;left:52px;width:2px;background:var(--margem);opacity:.85;\n  }\n  .folha{max-width:1000px;margin:0 auto}\n  h1{\n    font-family:\"Caveat\", cursive;font-weight:700;font-size:44px;line-height:1.1;\n    margin:8px 0 2px;letter-spacing:.5px;\n    background:linear-gradient(transparent 62%, var(--marca) 62%);display:inline;\n  }\n  .sub{font-size:19px;color:var(--tinta2);margin:6px 0 0}\n  .como{margin:0 0 10px;color:var(--tinta2)}\n  .abas{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 18px}\n  .aba{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;\n    background:transparent;border:2px solid var(--tinta2);border-radius:14px;\n    padding:2px 16px;color:var(--tinta2);cursor:pointer;line-height:1.5;\n  }\n  .aba[aria-selected=\"true\"]{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2}\n  .mapa{display:grid;grid-template-columns:1fr 250px 1fr;gap:0 34px;align-items:center;margin-bottom:8px;position:relative}\n  .fios{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}\n  .fios path{fill:none;stroke:var(--tinta2);stroke-width:2.5;stroke-linecap:round}\n  .coluna{display:flex;flex-direction:column;gap:18px;justify-content:center}\n  .centro{\n    text-align:center;align-self:center;position:relative;z-index:1;background-clip:padding-box;\n    border:3px solid var(--caneta-vermelha);border-radius:22px;\n    background:#fde6de;padding:14px 10px;\n    font-family:\"Caveat\",cursive;font-weight:700;font-size:28px;line-height:1.15;color:var(--caneta-vermelha);\n  }\n  .ramo{border:2px solid var(--tinta2);border-radius:20px;padding:10px 14px 14px;background:#fdf7dd;position:relative;z-index:1}\n  .ramo h2{font-family:\"Caveat\",cursive;font-size:26px;font-weight:700;margin:0 0 6px;line-height:1.2}\n  .ramo{flex:1;display:flex;flex-direction:column;justify-content:flex-start}\n  .vaga{\n    display:block;width:100%;text-align:left;min-height:38px;line-height:1.3;\n    border:2px dashed var(--tinta2);border-radius:12px;background:rgba(255,255,255,.5);\n    margin:6px 0;padding:6px 10px;font:inherit;font-size:18px;color:var(--tinta);cursor:pointer;\n  }\n  .vaga.vazia{color:#8792b8}\n  .vaga.alvo{border-style:solid;background:rgba(255,226,96,.5)}\n  .vaga.certo{border-color:var(--certo);border-style:solid;color:var(--certo);background:rgba(18,112,79,.1)}\n  .vaga.errado{border-color:var(--errado);border-style:solid;color:var(--errado);background:rgba(179,38,30,.08)}\n  .banco{border-top:2px solid var(--pauta);margin-top:18px;padding-top:10px}\n  .banco h2{font-family:\"Caveat\",cursive;font-size:28px;margin:0 0 6px}\n  .fichas{display:flex;flex-wrap:wrap;gap:10px}\n  .ficha{\n    font:inherit;font-size:18px;line-height:1.3;color:var(--tinta);\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;\n    padding:6px 12px;cursor:pointer;\n  }\n  .ficha.escolhida{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2;transform:rotate(-1.2deg)}\n  .ficha:focus-visible,.vaga:focus-visible,.aba:focus-visible,.acao:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}\n  .acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}\n  .acao{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;line-height:1.4;\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;color:var(--tinta);\n    padding:2px 18px;cursor:pointer;\n  }\n  .acao.principal{background:var(--tinta);color:var(--papel)}\n  .placar{font-family:\"Caveat\",cursive;font-size:26px;color:var(--caneta-vermelha);line-height:1.4}\n  @media (max-width:760px){\n    body{padding-left:22px}\n    body::before{left:14px}\n    .mapa{grid-template-columns:1fr;gap:16px 0}\n    .centro{order:-1}\n    .coluna{gap:16px}\n    .fios{display:none}\n  }\n<\/style>\n<\/head>\n<body>\n<div class=\"folha\">\n  <h1>Complete o mapa mental<\/h1>\n  <p class=\"sub\">Educação Física · 7º ano · 2º trimestre<\/p>\n  <p class=\"como\">Escolha uma palavra da caixa e toque no espaço em branco do ramo onde ela se encaixa. Para tirar, toque na palavra já colocada.<\/p>\n\n  <div class=\"abas\" role=\"tablist\" id=\"abas\"><\/div>\n  <div id=\"mapa\"><\/div>\n\n  <div class=\"banco\">\n    <h2>Caixa de palavras<\/h2>\n    <div class=\"fichas\" id=\"banco\"><\/div>\n  <\/div>\n\n  <div class=\"acoes\">\n    <button class=\"acao principal\" id=\"conferir\">Conferir<\/button>\n    <button class=\"acao\" id=\"limpar\">Recomeçar<\/button>\n    <span class=\"placar\" id=\"placar\"><\/span>\n  <\/div>\n<\/div>\n\n<script>\nconst MAPAS = [{\"centro\": \"ESPORTES TÉCNICO-COMBINATÓRIOS\", \"ramos\": [{\"nome\": \"Conceito\", \"itens\": [\"Elementos técnicos e estéticos\", \"Fluidez, precisão, controle e ritmo\", \"Avaliados por juízes\"]}, {\"nome\": \"Exemplos\", \"itens\": [\"Ginástica (Artística, Rítmica)\", \"Patinação Artística\", \"Esqui\", \"Nado Artístico\", \"Skate\"]}, {\"nome\": \"Habilidades motoras\", \"itens\": [\"Coordenação\", \"Equilíbrio\", \"Força\", \"Flexibilidade\", \"Agilidade\", \"Ritmo e percepção espacial\", \"Expressão corporal\"]}, {\"nome\": \"Fundamentos técnicos\", \"itens\": [\"Ginástica artística: Apoios, Giros, Saltos.\", \"Ginástica rítmica: Manipulação dos aparelhos\", \"Nado artístico: Postura na água, Sincronização dos movimentos com a música.\"]}, {\"nome\": \"Regras básicas\", \"itens\": [\"Avaliação feita por juízes\", \"Penalidades por quedas e erros\", \"Tempo limite de apresentação\", \"Elementos técnicos obrigatórios\"]}, {\"nome\": \"Benefícios\", \"itens\": [\"Disciplina e concentração\", \"Força, resistência e equilíbrio\", \"Expressão corporal e criatividade\", \"Trabalho em equipe\"]}]}, {\"centro\": \"LUTAS DO BRASIL\", \"ramos\": [{\"nome\": \"Conceito\", \"itens\": [\"Combate entre duas pessoas\", \"Regras pré-estabelecidas\", \"Cultura de muitos povos\"]}, {\"nome\": \"Como são usadas\", \"itens\": [\"Esporte\", \"Defesa pessoal\", \"Tradição cultural\"]}, {\"nome\": \"Influências\", \"itens\": [\"Tradições indígenas\", \"Artes marciais africanas\", \"Artes marciais europeias\"]}, {\"nome\": \"O que proporciona\", \"itens\": [\"Respeito ao próximo\", \"Disciplina\", \"Controle emocional\", \"Condicionamento físico\", \"Superação\", \"Trabalho em equipe\"]}, {\"nome\": \"Regras e segurança\", \"itens\": [\"Equipamentos de proteção\", \"Supervisão de profissionais\", \"Respeito às regras\", \"Nunca praticar com violência\"]}, {\"nome\": \"Principais lutas\", \"itens\": [\"Capoeira\", \"Jiu-Jitsu\", \"Judô\"]}]}];\nlet atual = 0, escolhida = null;\n\nconst el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt !== undefined) e.textContent = txt; return e; };\nconst embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(p => p[1]);\n\nfunction montarAbas() {\n  const box = document.getElementById('abas');\n  box.innerHTML = '';\n  MAPAS.forEach((m, i) => {\n    const b = el('button', 'aba', 'Mapa ' + (i + 1) + ': ' + m.centro.toLowerCase());\n    b.setAttribute('role', 'tab');\n    b.setAttribute('aria-selected', i === atual);\n    b.onclick = () => { atual = i; montar(); };\n    box.appendChild(b);\n  });\n}\n\nfunction montar() {\n  escolhida = null;\n  document.getElementById('placar').textContent = '';\n  montarAbas();\n  const mapa = MAPAS[atual];\n  const área = document.getElementById('mapa');\n  área.innerHTML = '';\n  const grade = el('div', 'mapa');\n  const esq = el('div', 'coluna'), dir = el('div', 'coluna');\n  mapa.ramos.forEach((r, ri) => {\n    const naEsquerda = ri % 2 === 0;              // ramos alternam: 1 esq, 2 dir, 3 esq...\n    const card = el('div', 'ramo ' + (naEsquerda ? 'esq' : 'dir'));\n    card.appendChild(el('h2', null, r.nome));\n    r.itens.forEach((_, si) => {\n      const v = el('button', 'vaga vazia', '. . . . . . . . . .');\n      v.dataset.ramo = ri; v.dataset.vaga = si; v.dataset.valor = '';\n      v.onclick = () => tocarVaga(v);\n      card.appendChild(v);\n    });\n    (naEsquerda ? esq : dir).appendChild(card);\n  });\n  grade.appendChild(esq);\n  const noCentral = el('div', 'centro', mapa.centro);\n  grade.appendChild(noCentral);\n  grade.appendChild(dir);\n  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n  svg.setAttribute('class', 'fios');\n  grade.appendChild(svg);\n  área.appendChild(grade);\n  requestAnimationFrame(desenharFios);\n\n  const banco = document.getElementById('banco');\n  banco.innerHTML = '';\n  embaralhar(mapa.ramos.flatMap(r => r.itens)).forEach(txt => banco.appendChild(criarFicha(txt)));\n}\n\nfunction criarFicha(txt) {\n  const f = el('button', 'ficha', txt);\n  f.onclick = () => {\n    if (escolhida === f) { f.classList.remove('escolhida'); escolhida = null; return; }\n    document.querySelectorAll('.ficha.escolhida').forEach(x => x.classList.remove('escolhida'));\n    f.classList.add('escolhida');\n    escolhida = f;\n  };\n  return f;\n}\n\nfunction tocarVaga(v) {\n  document.getElementById('placar').textContent = '';\n  v.classList.remove('certo', 'errado');\n  if (v.dataset.valor) {\n    document.getElementById('banco').appendChild(criarFicha(v.dataset.valor));\n    v.dataset.valor = '';\n    v.textContent = '. . . . . . . . . .';\n    v.classList.add('vazia');\n    requestAnimationFrame(desenharFios);\n    return;\n  }\n  if (!escolhida) return;\n  v.dataset.valor = escolhida.textContent;\n  v.textContent = escolhida.textContent;\n  v.classList.remove('vazia');\n  escolhida.remove();\n  escolhida = null;\n  requestAnimationFrame(desenharFios);\n}\n\ndocument.getElementById('conferir').onclick = () => {\n  const mapa = MAPAS[atual];\n  let certos = 0, total = 0, vazias = 0;\n  document.querySelectorAll('.vaga').forEach(v => {\n    total++;\n    v.classList.remove('certo', 'errado');\n    if (!v.dataset.valor) { vazias++; return; }\n    const ok = mapa.ramos[+v.dataset.ramo].itens.includes(v.dataset.valor);\n    v.classList.add(ok ? 'certo' : 'errado');\n    if (ok) certos++;\n  });\n  const p = document.getElementById('placar');\n  if (vazias) { p.textContent = 'Acertos: ' + certos + ' de ' + total + ' — ainda faltam ' + vazias + '.'; }\n  else if (certos === total) { p.textContent = 'Mapa completo! ' + certos + ' de ' + total + '. 🎉'; }\n  else { p.textContent = 'Acertos: ' + certos + ' de ' + total + '. Tire as palavras em vermelho e tente de novo.'; }\n};\n\nfunction desenharFios() {\n  const grade = document.querySelector('.mapa');\n  const svg = grade && grade.querySelector('.fios');\n  const centro = grade && grade.querySelector('.centro');\n  if (!svg || !centro) return;\n  const base = grade.getBoundingClientRect();\n  svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);\n  svg.innerHTML = '';\n  if (window.innerWidth <= 760) return;\n  const c = centro.getBoundingClientRect();\n  const cy = c.top + c.height / 2 - base.top;\n  grade.querySelectorAll('.ramo').forEach(card => {\n    const r = card.getBoundingClientRect();\n    const esquerda = card.classList.contains('esq');\n    const x1 = (esquerda ? r.right : r.left) - base.left;\n    const y1 = r.top + r.height / 2 - base.top;\n    const x2 = (esquerda ? c.left : c.right) - base.left;\n    const mx = (x1 + x2) / 2;\n    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');\n    p.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ', ' + mx + ' ' + cy + ', ' + x2 + ' ' + cy);\n    svg.appendChild(p);\n  });\n}\n\nwindow.addEventListener('resize', desenharFios);\ndocument.fonts && document.fonts.ready.then(desenharFios);\ndocument.getElementById('limpar').onclick = montar;\nmontar();\n<\/script>\n<\/body>\n<\/html>\n", "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Complete o mapa mental – Educação Física · 7º ano · 3º trimestre<\/title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap\" rel=\"stylesheet\">\n<style>\n  :root{\n    --papel:#faf8f0;\n    --pauta:#b0c8e2;\n    --margem:#d68a8a;\n    --tinta:#1a2a70;\n    --tinta2:#26388a;\n    --caneta-vermelha:#a82430;\n    --marca:rgba(255,226,96,.55);\n    --certo:#12704f;\n    --errado:#b3261e;\n  }\n  *{box-sizing:border-box}\n  html,body{margin:0;padding:0}\n  body{\n    background:\n      repeating-linear-gradient(to bottom, transparent 0 47px, var(--pauta) 47px 48px),\n      var(--papel);\n    font-family:\"Patrick Hand\", \"Comic Sans MS\", cursive;\n    color:var(--tinta);\n    font-size:19px;\n    line-height:48px;\n    padding:24px 18px 60px 26px;\n  }\n  body::before{\n    content:\"\";position:fixed;top:0;bottom:0;left:52px;width:2px;background:var(--margem);opacity:.85;\n  }\n  .folha{max-width:1000px;margin:0 auto}\n  h1{\n    font-family:\"Caveat\", cursive;font-weight:700;font-size:44px;line-height:1.1;\n    margin:8px 0 2px;letter-spacing:.5px;\n    background:linear-gradient(transparent 62%, var(--marca) 62%);display:inline;\n  }\n  .sub{font-size:19px;color:var(--tinta2);margin:6px 0 0}\n  .como{margin:0 0 10px;color:var(--tinta2)}\n  .abas{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 18px}\n  .aba{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;\n    background:transparent;border:2px solid var(--tinta2);border-radius:14px;\n    padding:2px 16px;color:var(--tinta2);cursor:pointer;line-height:1.5;\n  }\n  .aba[aria-selected=\"true\"]{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2}\n  .mapa{display:grid;grid-template-columns:1fr 250px 1fr;gap:0 34px;align-items:center;margin-bottom:8px;position:relative}\n  .fios{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}\n  .fios path{fill:none;stroke:var(--tinta2);stroke-width:2.5;stroke-linecap:round}\n  .coluna{display:flex;flex-direction:column;gap:18px;justify-content:center}\n  .centro{\n    text-align:center;align-self:center;position:relative;z-index:1;background-clip:padding-box;\n    border:3px solid var(--caneta-vermelha);border-radius:22px;\n    background:#fde6de;padding:14px 10px;\n    font-family:\"Caveat\",cursive;font-weight:700;font-size:28px;line-height:1.15;color:var(--caneta-vermelha);\n  }\n  .ramo{border:2px solid var(--tinta2);border-radius:20px;padding:10px 14px 14px;background:#fdf7dd;position:relative;z-index:1}\n  .ramo h2{font-family:\"Caveat\",cursive;font-size:26px;font-weight:700;margin:0 0 6px;line-height:1.2}\n  .ramo{flex:1;display:flex;flex-direction:column;justify-content:flex-start}\n  .vaga{\n    display:block;width:100%;text-align:left;min-height:38px;line-height:1.3;\n    border:2px dashed var(--tinta2);border-radius:12px;background:rgba(255,255,255,.5);\n    margin:6px 0;padding:6px 10px;font:inherit;font-size:18px;color:var(--tinta);cursor:pointer;\n  }\n  .vaga.vazia{color:#8792b8}\n  .vaga.alvo{border-style:solid;background:rgba(255,226,96,.5)}\n  .vaga.certo{border-color:var(--certo);border-style:solid;color:var(--certo);background:rgba(18,112,79,.1)}\n  .vaga.errado{border-color:var(--errado);border-style:solid;color:var(--errado);background:rgba(179,38,30,.08)}\n  .banco{border-top:2px solid var(--pauta);margin-top:18px;padding-top:10px}\n  .banco h2{font-family:\"Caveat\",cursive;font-size:28px;margin:0 0 6px}\n  .fichas{display:flex;flex-wrap:wrap;gap:10px}\n  .ficha{\n    font:inherit;font-size:18px;line-height:1.3;color:var(--tinta);\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;\n    padding:6px 12px;cursor:pointer;\n  }\n  .ficha.escolhida{background:var(--caneta-vermelha);border-color:var(--caneta-vermelha);color:#fff8f2;transform:rotate(-1.2deg)}\n  .ficha:focus-visible,.vaga:focus-visible,.aba:focus-visible,.acao:focus-visible{outline:3px solid var(--caneta-vermelha);outline-offset:2px}\n  .acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}\n  .acao{\n    font-family:\"Caveat\",cursive;font-size:26px;font-weight:600;line-height:1.4;\n    border:2px solid var(--tinta);border-radius:14px;background:#fffdf5;color:var(--tinta);\n    padding:2px 18px;cursor:pointer;\n  }\n  .acao.principal{background:var(--tinta);color:var(--papel)}\n  .placar{font-family:\"Caveat\",cursive;font-size:26px;color:var(--caneta-vermelha);line-height:1.4}\n  @media (max-width:760px){\n    body{padding-left:22px}\n    body::before{left:14px}\n    .mapa{grid-template-columns:1fr;gap:16px 0}\n    .centro{order:-1}\n    .coluna{gap:16px}\n    .fios{display:none}\n  }\n<\/style>\n<\/head>\n<body>\n<div class=\"folha\">\n  <h1>Complete o mapa mental<\/h1>\n  <p class=\"sub\">Educação Física · 7º ano · 3º trimestre<\/p>\n  <p class=\"como\">Escolha uma palavra da caixa e toque no espaço em branco do ramo onde ela se encaixa. Para tirar, toque na palavra já colocada.<\/p>\n\n  <div class=\"abas\" role=\"tablist\" id=\"abas\"><\/div>\n  <div id=\"mapa\"><\/div>\n\n  <div class=\"banco\">\n    <h2>Caixa de palavras<\/h2>\n    <div class=\"fichas\" id=\"banco\"><\/div>\n  <\/div>\n\n  <div class=\"acoes\">\n    <button class=\"acao principal\" id=\"conferir\">Conferir<\/button>\n    <button class=\"acao\" id=\"limpar\">Recomeçar<\/button>\n    <span class=\"placar\" id=\"placar\"><\/span>\n  <\/div>\n<\/div>\n\n<script>\nconst MAPAS = [{\"centro\": \"JOGOS ELETRÔNICOS\", \"ramos\": [{\"nome\": \"Evolução\", \"itens\": [\"1950/60: primeiros experimentos\", \"1970: fliperamas e Pong\", \"1980: consoles, Super Mario\", \"1990: gráficos em 3D\", \"2000: jogos online\", \"2010: celulares, VR, e-sports\"]}, {\"nome\": \"Tipos\", \"itens\": [\"Aventura e Ação\", \"Esportes e Corrida\", \"Estratégia\", \"RPG\", \"Simulação\"]}, {\"nome\": \"Sedentarismo\", \"itens\": [\"Jogos ativos: incentivam o movimento\", \"Jogos passivos: obesidade e má postura\", \"Jogar com equilíbrio\"]}, {\"nome\": \"Dependência tecnológica\", \"itens\": [\"Troca de sono ou estudos por jogos\", \"Isolamento e ansiedade\", \"Queda no rendimento escolar\", \"Limitar o tempo de jogo\"]}]}, {\"centro\": \"DANÇAS URBANAS\", \"ramos\": [{\"nome\": \"História\", \"itens\": [\"Estados Unidos, década de 1970\", \"Movimento Hip Hop\", \"Periferias urbanas: identidade e resistência\", \"No Brasil: funk carioca\"]}, {\"nome\": \"Elementos\", \"itens\": [\"Movimento corporal\", \"Musicalidade\", \"Improvisação\", \"Expressão e estilo pessoal\"]}, {\"nome\": \"Características\", \"itens\": [\"Grupo ou batalhas de rua\", \"Grafite, rap e DJ\", \"Força, agilidade e criatividade\", \"Democrática: sem regras rígidas\"]}, {\"nome\": \"Exemplos\", \"itens\": [\"Breakdance\", \"Popping e Locking\", \"Hip Hop Dance\", \"Krumping\", \"Funk\"]}]}, {\"centro\": \"PRÁTICAS CORPORAIS DE AVENTURA URBANAS\", \"ramos\": [{\"nome\": \"Cuidados\", \"itens\": [\"Conhecer o espaço antes\", \"Respeitar as regras do local\", \"Evitar locais de risco\", \"Atenção ao corpo e ao ambiente\"]}, {\"nome\": \"Limites corporais\", \"itens\": [\"Respeitar os limites físicos\", \"Superar o medo com treino\", \"Desenvolver a autoconfiança\"]}, {\"nome\": \"Equipamentos\", \"itens\": [\"Skate: capacete e joelheiras\", \"Parkour: tênis adequados\", \"Escalada: cordas e mosquetões\", \"Ciclismo: capacete e luvas\"]}, {\"nome\": \"Riscos\", \"itens\": [\"Quedas e escoriações\", \"Batidas contra obstáculos\", \"Entorses, fraturas e luxações\", \"Tráfego de carros e pedestres\"]}, {\"nome\": \"Preparação física e mental\", \"itens\": [\"Aquecimento\", \"Alongamento\", \"Técnicas de respiração\", \"Força, equilíbrio e resistência\"]}]}];\nlet atual = 0, escolhida = null;\n\nconst el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt !== undefined) e.textContent = txt; return e; };\nconst embaralhar = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(p => p[1]);\n\nfunction montarAbas() {\n  const box = document.getElementById('abas');\n  box.innerHTML = '';\n  MAPAS.forEach((m, i) => {\n    const b = el('button', 'aba', 'Mapa ' + (i + 1) + ': ' + m.centro.toLowerCase());\n    b.setAttribute('role', 'tab');\n    b.setAttribute('aria-selected', i === atual);\n    b.onclick = () => { atual = i; montar(); };\n    box.appendChild(b);\n  });\n}\n\nfunction montar() {\n  escolhida = null;\n  document.getElementById('placar').textContent = '';\n  montarAbas();\n  const mapa = MAPAS[atual];\n  const área = document.getElementById('mapa');\n  área.innerHTML = '';\n  const grade = el('div', 'mapa');\n  const esq = el('div', 'coluna'), dir = el('div', 'coluna');\n  mapa.ramos.forEach((r, ri) => {\n    const naEsquerda = ri % 2 === 0;              // ramos alternam: 1 esq, 2 dir, 3 esq...\n    const card = el('div', 'ramo ' + (naEsquerda ? 'esq' : 'dir'));\n    card.appendChild(el('h2', null, r.nome));\n    r.itens.forEach((_, si) => {\n      const v = el('button', 'vaga vazia', '. . . . . . . . . .');\n      v.dataset.ramo = ri; v.dataset.vaga = si; v.dataset.valor = '';\n      v.onclick = () => tocarVaga(v);\n      card.appendChild(v);\n    });\n    (naEsquerda ? esq : dir).appendChild(card);\n  });\n  grade.appendChild(esq);\n  const noCentral = el('div', 'centro', mapa.centro);\n  grade.appendChild(noCentral);\n  grade.appendChild(dir);\n  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n  svg.setAttribute('class', 'fios');\n  grade.appendChild(svg);\n  área.appendChild(grade);\n  requestAnimationFrame(desenharFios);\n\n  const banco = document.getElementById('banco');\n  banco.innerHTML = '';\n  embaralhar(mapa.ramos.flatMap(r => r.itens)).forEach(txt => banco.appendChild(criarFicha(txt)));\n}\n\nfunction criarFicha(txt) {\n  const f = el('button', 'ficha', txt);\n  f.onclick = () => {\n    if (escolhida === f) { f.classList.remove('escolhida'); escolhida = null; return; }\n    document.querySelectorAll('.ficha.escolhida').forEach(x => x.classList.remove('escolhida'));\n    f.classList.add('escolhida');\n    escolhida = f;\n  };\n  return f;\n}\n\nfunction tocarVaga(v) {\n  document.getElementById('placar').textContent = '';\n  v.classList.remove('certo', 'errado');\n  if (v.dataset.valor) {\n    document.getElementById('banco').appendChild(criarFicha(v.dataset.valor));\n    v.dataset.valor = '';\n    v.textContent = '. . . . . . . . . .';\n    v.classList.add('vazia');\n    requestAnimationFrame(desenharFios);\n    return;\n  }\n  if (!escolhida) return;\n  v.dataset.valor = escolhida.textContent;\n  v.textContent = escolhida.textContent;\n  v.classList.remove('vazia');\n  escolhida.remove();\n  escolhida = null;\n  requestAnimationFrame(desenharFios);\n}\n\ndocument.getElementById('conferir').onclick = () => {\n  const mapa = MAPAS[atual];\n  let certos = 0, total = 0, vazias = 0;\n  document.querySelectorAll('.vaga').forEach(v => {\n    total++;\n    v.classList.remove('certo', 'errado');\n    if (!v.dataset.valor) { vazias++; return; }\n    const ok = mapa.ramos[+v.dataset.ramo].itens.includes(v.dataset.valor);\n    v.classList.add(ok ? 'certo' : 'errado');\n    if (ok) certos++;\n  });\n  const p = document.getElementById('placar');\n  if (vazias) { p.textContent = 'Acertos: ' + certos + ' de ' + total + ' — ainda faltam ' + vazias + '.'; }\n  else if (certos === total) { p.textContent = 'Mapa completo! ' + certos + ' de ' + total + '. 🎉'; }\n  else { p.textContent = 'Acertos: ' + certos + ' de ' + total + '. Tire as palavras em vermelho e tente de novo.'; }\n};\n\nfunction desenharFios() {\n  const grade = document.querySelector('.mapa');\n  const svg = grade && grade.querySelector('.fios');\n  const centro = grade && grade.querySelector('.centro');\n  if (!svg || !centro) return;\n  const base = grade.getBoundingClientRect();\n  svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);\n  svg.innerHTML = '';\n  if (window.innerWidth <= 760) return;\n  const c = centro.getBoundingClientRect();\n  const cy = c.top + c.height / 2 - base.top;\n  grade.querySelectorAll('.ramo').forEach(card => {\n    const r = card.getBoundingClientRect();\n    const esquerda = card.classList.contains('esq');\n    const x1 = (esquerda ? r.right : r.left) - base.left;\n    const y1 = r.top + r.height / 2 - base.top;\n    const x2 = (esquerda ? c.left : c.right) - base.left;\n    const mx = (x1 + x2) / 2;\n    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');\n    p.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ', ' + mx + ' ' + cy + ', ' + x2 + ' ' + cy);\n    svg.appendChild(p);\n  });\n}\n\nwindow.addEventListener('resize', desenharFios);\ndocument.fonts && document.fonts.ready.then(desenharFios);\ndocument.getElementById('limpar').onclick = montar;\nmontar();\n<\/script>\n<\/body>\n<\/html>\n"];
+const feitos = TRIMESTRES.map(t => t.mapas.map(() => false));
+const quadros = [];
+let aberto = null;
+
+const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt !== undefined) e.textContent = txt; return e; };
+
+function montarPainel() {
+  const area = document.getElementById('painel');
+  area.innerHTML = '';
+  const grade = el('div', 'mapa');
+  const esq = el('div', 'coluna'), dir = el('div', 'coluna');
+  TRIMESTRES.forEach((t, ti) => {
+    const naEsquerda = ti % 2 === 0;
+    const card = el('div', 'ramo ' + (naEsquerda ? 'esq' : 'dir'));
+    card.id = 'tri-' + ti;
+    card.style.order = ti;             // no celular os trimestres ficam em ordem
+    card.appendChild(el('h2', null, t.tri + 'º trimestre'));
+    const espacos = t.mapas.reduce((s, m) => s + m.espacos, 0);
+    card.appendChild(el('p', 'resumo', t.mapas.length + ' mapas · ' + espacos + ' espaços para completar'));
+    t.mapas.forEach((m, mi) => {
+      const b = el('button', 'vaga' + (feitos[ti][mi] ? ' certo' : ''),
+        (feitos[ti][mi] ? '✓ ' : '') + 'Mapa ' + (mi + 1) + ': ' + m.centro);
+      b.onclick = () => abrir(ti, mi);
+      card.appendChild(b);
+    });
+    const rod = el('div', 'rodape');
+    const jogar = el('button', 'acao principal', 'Jogar');
+    jogar.onclick = () => abrir(ti, null);
+    const n = feitos[ti].filter(Boolean).length;
+    const f = el('span', 'feitos' + (n === t.mapas.length ? ' tudo' : ''),
+      n === t.mapas.length ? 'Trimestre completo!' : n + ' de ' + t.mapas.length + ' completos');
+    rod.append(jogar, f);
+    card.appendChild(rod);
+    (naEsquerda ? esq : dir).appendChild(card);
+  });
+  grade.appendChild(esq);
+  grade.appendChild(el('div', 'centro', ANO + 'º ANO'));
+  grade.appendChild(dir);
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'fios');
+  grade.appendChild(svg);
+  area.appendChild(grade);
+  requestAnimationFrame(desenharFios);
+
+  const total = feitos.flat().length, ok = feitos.flat().filter(Boolean).length;
+  document.getElementById('placar').textContent = 'Mapas completos: ' + ok + ' de ' + total + (ok === total ? ' 🎉' : '');
+}
+
+function desenharFios() {
+  const grade = document.querySelector('#painel .mapa');
+  const svg = grade && grade.querySelector('.fios');
+  const centro = grade && grade.querySelector('.centro');
+  if (!svg || !centro) return;
+  const base = grade.getBoundingClientRect();
+  svg.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+  svg.innerHTML = '';
+  if (window.innerWidth <= 760 || document.body.classList.contains('jogando')) return;
+  const c = centro.getBoundingClientRect();
+  const cy = c.top + c.height / 2 - base.top;
+  grade.querySelectorAll('.ramo').forEach(card => {
+    const r = card.getBoundingClientRect();
+    const esquerda = card.classList.contains('esq');
+    const x1 = (esquerda ? r.right : r.left) - base.left;
+    const y1 = r.top + r.height / 2 - base.top;
+    const x2 = (esquerda ? c.left : c.right) - base.left;
+    const mx = (x1 + x2) / 2;
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', 'M ' + x1 + ' ' + y1 + ' C ' + mx + ' ' + y1 + ', ' + mx + ' ' + cy + ', ' + x2 + ' ' + cy);
+    svg.appendChild(p);
+  });
+}
+
+function ajustarAltura(ti) {
+  const q = quadros[ti];
+  if (!q || !q.contentDocument || !q.contentDocument.body) return;
+  q.style.height = Math.ceil(q.contentDocument.body.getBoundingClientRect().height) + 'px';
+}
+
+function escolherMapa(ti, mi) {
+  if (mi === null) return;
+  const abas = quadros[ti].contentDocument.querySelectorAll('.aba');
+  if (abas[mi] && abas[mi].getAttribute('aria-selected') !== 'true') abas[mi].click();
+}
+
+function vigiar(ti) {
+  const doc = quadros[ti].contentDocument;
+  const placar = doc.getElementById('placar');
+  new MutationObserver(() => {
+    if (!placar.textContent.startsWith('Mapa completo!')) return;
+    const mi = [...doc.querySelectorAll('.aba')].findIndex(a => a.getAttribute('aria-selected') === 'true');
+    if (mi >= 0) feitos[ti][mi] = true;
+  }).observe(placar, { childList: true, characterData: true, subtree: true });
+  new ResizeObserver(() => ajustarAltura(ti)).observe(doc.body);
+}
+
+function abrir(ti, mi) {
+  aberto = ti;
+  document.body.classList.add('jogando');
+  document.getElementById('qual').textContent = ANO + 'º ano · ' + TRIMESTRES[ti].tri + 'º trimestre';
+  quadros.forEach(q => q && q.classList.remove('ativo'));
+  window.scrollTo(0, 0);
+  if (!quadros[ti]) {
+    const q = document.createElement('iframe');
+    q.className = 'quadro-jogo ativo';
+    q.title = 'Jogo do ' + TRIMESTRES[ti].tri + 'º trimestre';
+    q.onload = () => { vigiar(ti); escolherMapa(ti, mi); ajustarAltura(ti); };
+    q.srcdoc = JOGOS[ti];
+    quadros[ti] = q;
+    document.getElementById('quadros').appendChild(q);
+  } else {
+    quadros[ti].classList.add('ativo');
+    escolherMapa(ti, mi);
+    quadros[ti].contentWindow.dispatchEvent(new Event('resize'));
+    ajustarAltura(ti);
+  }
+}
+
+document.getElementById('voltar').onclick = () => {
+  document.body.classList.remove('jogando');
+  montarPainel();
+  const card = document.getElementById('tri-' + aberto);
+  if (card) card.scrollIntoView({ block: 'center' });
+};
+
+window.addEventListener('resize', desenharFios);
+document.fonts && document.fonts.ready.then(desenharFios);
+montarPainel();
+</script>
+</body>
+</html>
