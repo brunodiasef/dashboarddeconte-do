@@ -464,6 +464,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/jogo_mapa_mental_3trimestre.html"
+  },
+  {
+    id: "aula-8t3n2-1789041799612",
+    ano: "8",
+    trimestre: 3,
+    aula: 2,
+    titulo: "APOSTILA-3ºTRI",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
