@@ -190,7 +190,7 @@ window.APRESENTACOES = [
     ano: "9",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-3ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/9ºano/caderno_educacao_fisica_9ano_3tri.pdf"
@@ -200,7 +200,7 @@ window.APRESENTACOES = [
     ano: "9",
     trimestre: 1,
     aula: 2,
-    titulo: "MATERIAL DE APOIO- Manuscrito",
+    titulo: "APOSTILA-1ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/9ºano/caderno_educacao_fisica_9ano_1tri.pdf"
@@ -220,7 +220,7 @@ window.APRESENTACOES = [
     ano: "8",
     trimestre: 1,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-1ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/8ºano/caderno_ed_fisica_8ano_1trimestre_completo.pdf"
@@ -230,7 +230,7 @@ window.APRESENTACOES = [
     ano: "8",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-2ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/8ºano/caderno_ed_fisica_8ano_2trimestre_completo.pdf"
@@ -240,7 +240,7 @@ window.APRESENTACOES = [
     ano: "8",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-3ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/8ºano/caderno_ed_fisica_8ano_completo.pdf"
@@ -270,7 +270,7 @@ window.APRESENTACOES = [
     ano: "7",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-2ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/7ºano/caderno-7ano-2trimestre.pdf"
@@ -330,7 +330,7 @@ window.APRESENTACOES = [
     ano: "7",
     trimestre: 1,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    titulo: "APOSTILA-1ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/7ºano/caderno-7ano-1trimestre.pdf"
@@ -340,7 +340,7 @@ window.APRESENTACOES = [
     ano: "6",
     trimestre: 1,
     aula: 1,
-    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    titulo: "APOSTILA-1ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/1ºtri/6ºano/caderno_ed_fisica_6ano_1trimestre.pdf"
@@ -360,7 +360,7 @@ window.APRESENTACOES = [
     ano: "9",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    titulo: "APOSTILA-2ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/9ºano/caderno_educacao_fisica_9ano_2tri.pdf"
@@ -410,7 +410,7 @@ window.APRESENTACOES = [
     ano: "6",
     trimestre: 2,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - MANUSCRITO",
+    titulo: "APOSTILA-2ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/6ºano/caderno_ed_fisica_6ano_2trimestre.pdf"
@@ -420,7 +420,7 @@ window.APRESENTACOES = [
     ano: "6",
     trimestre: 3,
     aula: 2,
-    titulo: "MATERIAL DE APOIO - manuscrito",
+    titulo: "APOSTILA-3ºTRI",
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/6ºano/caderno_ed_fisica_6ano_3trimestre.pdf"
