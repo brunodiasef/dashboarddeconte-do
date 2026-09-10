@@ -414,6 +414,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/2ºtri/6ºano/caderno_ed_fisica_6ano_2trimestre.pdf"
+  },
+  {
+    id: "aula-6t3n2-1789039926652",
+    ano: "6",
+    trimestre: 3,
+    aula: 2,
+    titulo: "MATERIAL DE APOIO - manuscrito",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/6ºano/caderno_ed_fisica_6ano_3trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
