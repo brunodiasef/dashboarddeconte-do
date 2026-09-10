@@ -103,7 +103,7 @@ window.APRESENTACOES = [
     titulo: "MATERIAL DE APOIO - 2º TRIMESTRE",
     descricao: "",
     tipo: "arquivo",
-    link: "aula/2ºtri/8ºano/apostila.docx"
+    link: "aula/2ºtri/8ºano/apostila.pdf"
   },
   {
     id: "aula-7t2n2-1788258999882",
