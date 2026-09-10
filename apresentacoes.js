@@ -444,6 +444,16 @@ window.APRESENTACOES = [
     descricao: "",
     tipo: "arquivo",
     link: "aula/3ºtri/7ºano/jogo-mapa-mental-3-trimestre.html"
+  },
+  {
+    id: "aula-7t3n2-1789041086548",
+    ano: "7",
+    trimestre: 3,
+    aula: 2,
+    titulo: "APOSTILA-3ºTRI",
+    descricao: "",
+    tipo: "arquivo",
+    link: "aula/3ºtri/7ºano/caderno-7ano-3trimestre.pdf"
   }
   /* ADICIONE NOVAS AULAS ACIMA DESTA LINHA, separando por vírgula */
 ];
