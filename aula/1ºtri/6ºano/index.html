@@ -71,7 +71,7 @@ img{display:block;max-width:100%}
 .module-card .ph{width:100%;aspect-ratio:1/1}
 .module-cover .ph{width:100%;height:100%;min-height:220px}
 .big-card .ph{width:100%;height:100%;min-height:230px}
-.modal-content .ph{width:100%;height:260px;border-radius:15px 15px 0 0}
+.modal-content .ph{width:100%;aspect-ratio:1/1;border-radius:15px 15px 0 0}
 .module-cover{background:linear-gradient(135deg,var(--brown-dark),var(--brown-medium));color:var(--white);border-radius:15px;margin-bottom:2.5rem;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:280px}
 .cover-text{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
 .cover-num{font-size:.85rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
@@ -147,7 +147,7 @@ img{display:block;max-width:100%}
 @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 .modal-close{position:absolute;top:.8rem;right:.8rem;background:var(--white);border:none;font-size:1.2rem;cursor:pointer;color:var(--text-light);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 2px 8px var(--shadow);z-index:2}
 .modal-close:hover{background:var(--bg-cream);color:var(--brown-dark)}
-.modal-img{width:100%;height:260px;object-fit:cover;border-radius:15px 15px 0 0;background:var(--bg-light)}
+.modal-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:15px 15px 0 0;background:var(--bg-light)}
 .modal-body{padding:1.7rem}
 .modal-title{font-size:1.6rem;color:var(--brown-dark);margin-bottom:.7rem}
 .nav-buttons{display:flex;justify-content:space-between;gap:1rem;margin-top:2.2rem;padding-top:1.5rem;border-top:2px solid var(--bg-cream);flex-wrap:wrap}
@@ -225,23 +225,23 @@ textarea:focus{outline:none;border-color:var(--gold)}
         <div class="welcome">
           <span class="badge">1º Trimestre</span>
           <h1>Educação Física • 6º Ano</h1>
-          <h2>Ginástica + Esportes de Marca</h2>
-          <p class="welcome-intro">Neste trimestre vamos conhecer os tipos de ginástica, as alterações do corpo durante a atividade física e os esportes de marca — aqueles em que o objetivo é superar tempos, distâncias, alturas e pesos.</p>
+          <h2>Tipos de Ginástica + Esportes de Marca</h2>
+          <p class="welcome-intro">Neste trimestre vamos conhecer os tipos de ginástica, suas modalidades olímpicas e não competitivas, e os esportes de marca — aqueles em que o objetivo é superar tempos, distâncias, alturas e pesos.</p>
           <div class="modules-grid">
             <button class="module-card" onclick="goToLesson(1)">
               <video muted loop autoplay playsinline preload="metadata"
-                src="modulo1.mp4" data-srcs="modulo1.mp4|IMG:artistica" data-idx="0"
+                src="modulo1.mp4" data-srcs="modulo1.mp4|IMG:inicio_ginastica" data-idx="0"
                 data-label="Tipos de Ginástica" onerror="stepMedia(this)"
                 aria-label="Módulo 1 - Tipos de Ginástica"></video>
               <div class="module-content">
                 <div class="module-number">Módulo 1</div>
                 <h3 class="module-title">Tipos de Ginástica</h3>
-                <p class="module-desc">Ginástica competitiva e não competitiva, modalidades olímpicas e o corpo em movimento.</p>
+                <p class="module-desc">Ginástica competitiva e não competitiva, modalidades olímpicas e suas exigências.</p>
               </div>
             </button>
-            <button class="module-card" onclick="goToLesson(5)">
+            <button class="module-card" onclick="goToLesson(4)">
               <video muted loop autoplay playsinline preload="metadata"
-                src="modulo2.mp4" data-srcs="modulo2.mp4|IMG:atletismo" data-idx="0"
+                src="modulo2.mp4" data-srcs="modulo2.mp4|IMG:inicio_marca" data-idx="0"
                 data-label="Esportes de Marca" onerror="stepMedia(this)"
                 aria-label="Módulo 2 - Esportes de Marca"></video>
               <div class="module-content">
@@ -263,7 +263,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
             <h2 class="cover-title">Tipos de Ginástica</h2>
             <div class="cover-sub">Coordenação • Força • Flexibilidade • Equilíbrio</div>
           </div>
-          <img id="pic-c1" class="cover-img" alt="Ginasta artística na trave de equilíbrio" data-label="Tipos de Ginástica">
+          <img id="pic-c1" class="cover-img" alt="Ginasta na trave de equilíbrio" data-label="Tipos de Ginástica">
         </div>
         <div class="section-header">
           <span class="badge">Aula 1</span>
@@ -271,8 +271,8 @@ textarea:focus{outline:none;border-color:var(--gold)}
           <p class="section-subtitle">A ginástica é uma prática corporal que envolve coordenação motora, força, flexibilidade e equilíbrio. Ela pode ser realizada como esporte competitivo, atividade recreativa ou forma de condicionamento físico.</p>
         </div>
         <div class="cards-grid">
-          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 1</div><h3 class="card-title">Ginástica Competitiva</h3><p class="card-text">Modalidades esportivas com alto nível de treinamento.</p><div class="card-expansion"><p class="card-text">São regulamentadas por FEDERAÇÕES e fazem parte de grandes eventos esportivos, como os JOGOS OLÍMPICOS.</p></div></div>
-          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 2</div><h3 class="card-title">Ginástica Não Competitiva</h3><p class="card-text">Praticada para saúde, bem-estar e condicionamento.</p><div class="card-expansion"><p class="card-text">Inclui ginástica natural, laboral, funcional, calistênica e postural — sem objetivo de competição.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 1</div><h3 class="card-title">Ginástica Competitiva</h3><p class="card-text">Modalidades esportivas com alto nível de treinamento.</p><div class="card-expansion"><p class="card-text">Regulamentadas por FEDERAÇÕES e presentes em grandes eventos, como os JOGOS OLÍMPICOS.</p></div></div>
+          <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Tipo 2</div><h3 class="card-title">Ginástica Não Competitiva</h3><p class="card-text">Praticada para saúde, bem-estar e condicionamento.</p><div class="card-expansion"><p class="card-text">Natural, laboral, funcional, calistênica e postural — sem objetivo de competição.</p></div></div>
           <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 1</div><h3 class="card-title">Coordenação motora</h3><p class="card-text">Controle preciso dos movimentos do corpo.</p><div class="card-expansion"><p class="card-text">Essencial em todas as modalidades de ginástica.</p></div></div>
           <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 2</div><h3 class="card-title">Força</h3><p class="card-text">Capacidade de vencer resistências.</p><div class="card-expansion"><p class="card-text">Necessária nas argolas, no solo e nos saltos.</p></div></div>
           <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Capacidade 3</div><h3 class="card-title">Flexibilidade</h3><p class="card-text">Amplitude dos movimentos articulares.</p><div class="card-expansion"><p class="card-text">Marca registrada da ginástica rítmica e artística.</p></div></div>
@@ -295,11 +295,11 @@ textarea:focus{outline:none;border-color:var(--gold)}
         <div id="gymGrid"></div>
         <h3 class="h-center" style="margin-top:1.5rem">Ginástica não competitiva</h3>
         <div id="gymNcGrid"></div>
-        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: foco principal</h3>
+        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: foco e exigência</h3>
         <div class="c-table" id="gymTable"></div>
         <div class="nav-buttons">
           <button class="nav-btn" onclick="goToLesson(1)">← Anterior</button>
-          <button class="nav-btn" onclick="goToLesson(3)">Próxima: O Corpo em Movimento →</button>
+          <button class="nav-btn" onclick="goToLesson(3)">Próxima: Atividade →</button>
         </div>
       </section>
 
@@ -307,22 +307,6 @@ textarea:focus{outline:none;border-color:var(--gold)}
       <section class="lesson" id="lesson-3">
         <div class="section-header">
           <span class="badge">Aula 3</span>
-          <h2 class="section-title">Alterações Fisiológicas na Atividade Física</h2>
-          <p class="section-subtitle">Durante o exercício, o corpo passa por diversas alterações para realizar a atividade com mais eficiência. Clique nos cards para ampliar.</p>
-        </div>
-        <div class="big-card" id="fisioCard"></div>
-        <div class="cards-grid" id="fisioGrid"></div>
-        <p style="text-align:center;color:var(--text-light);max-width:720px;margin:0 auto">Essas alterações são essenciais para <strong>melhorar o desempenho físico</strong> e <strong>proteger o corpo</strong> durante o exercício.</p>
-        <div class="nav-buttons">
-          <button class="nav-btn" onclick="goToLesson(2)">← Anterior</button>
-          <button class="nav-btn" onclick="goToLesson(4)">Próxima: Atividade →</button>
-        </div>
-      </section>
-
-      <!-- AULA 4 -->
-      <section class="lesson" id="lesson-4">
-        <div class="section-header">
-          <span class="badge">Aula 4</span>
           <h2 class="section-title">Revisão e Atividade — Ginástica</h2>
           <p class="section-subtitle">Complete o foco de cada modalidade e responda às reflexões.</p>
         </div>
@@ -337,33 +321,33 @@ textarea:focus{outline:none;border-color:var(--gold)}
         </div>
         <div class="activity-box">
           <h3 class="h-center">QUESTÕES DE REFLEXÃO</h3>
-          <label class="ta-label" for="ta1">1. Cite dois exemplos de ginástica competitiva.</label>
+          <label class="ta-label" for="ta1">1. Quais são os dois tipos de ginástica?</label>
           <textarea id="ta1" placeholder="Escreva aqui sua resposta..."></textarea>
-          <label class="ta-label" for="ta2">2. Cite dois exemplos de ginástica não competitiva.</label>
+          <label class="ta-label" for="ta2">2. Cite dois exemplos de ginástica competitiva.</label>
           <textarea id="ta2" placeholder="Escreva aqui sua resposta..."></textarea>
-          <label class="ta-label" for="ta3">3. Quais são as principais alterações fisiológicas que ocorrem no corpo durante a atividade física?</label>
+          <label class="ta-label" for="ta3">3. Cite dois exemplos de ginástica não competitiva.</label>
           <textarea id="ta3" placeholder="Escreva aqui sua resposta..."></textarea>
-          <label class="ta-label" for="ta4">4. Qual é a função da sudorese (suor) durante o exercício físico?</label>
+          <label class="ta-label" for="ta4">4. As ginásticas competitivas são regulamentadas por qual entidade?</label>
           <textarea id="ta4" placeholder="Escreva aqui sua resposta..."></textarea>
         </div>
         <div class="nav-buttons">
-          <button class="nav-btn" onclick="goToLesson(3)">← Anterior</button>
-          <button class="nav-btn" onclick="goToLesson(5)">Próximo Módulo: Esportes de Marca →</button>
+          <button class="nav-btn" onclick="goToLesson(2)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(4)">Próximo Módulo: Esportes de Marca →</button>
         </div>
       </section>
 
-      <!-- AULA 5 -->
-      <section class="lesson" id="lesson-5">
+      <!-- AULA 4 -->
+      <section class="lesson" id="lesson-4">
         <div class="module-cover">
           <div class="cover-text">
             <div class="cover-num">Módulo 2</div>
             <h2 class="cover-title">Esportes de Marca</h2>
             <div class="cover-sub">Tempo • Distância • Altura • Peso</div>
           </div>
-          <img id="pic-c2" class="cover-img" alt="Velocista largando no bloco de partida" data-label="Esportes de Marca">
+          <img id="pic-c2" class="cover-img" alt="Pista de atletismo com corredores" data-label="Esportes de Marca">
         </div>
         <div class="section-header">
-          <span class="badge">Aula 5</span>
+          <span class="badge">Aula 4</span>
           <h2 class="section-title">O que são Esportes de Marca?</h2>
           <p class="section-subtitle">São os esportes onde o principal objetivo é superar uma marca individual, como tempo, distância ou altura.</p>
         </div>
@@ -373,8 +357,24 @@ textarea:focus{outline:none;border-color:var(--gold)}
           <div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Característica 3</div><h3 class="card-title">Instrumentos</h3><p class="card-text">Cronômetros, réguas e sensores.</p><div class="card-expansion"><p class="card-text">Equipamentos de medição tornam os resultados precisos e comparáveis.</p></div></div>
         </div>
         <div class="nav-buttons">
+          <button class="nav-btn" onclick="goToLesson(3)">← Anterior</button>
+          <button class="nav-btn" onclick="goToLesson(5)">Próxima: Exemplos →</button>
+        </div>
+      </section>
+
+      <!-- AULA 5 -->
+      <section class="lesson" id="lesson-5">
+        <div class="section-header">
+          <span class="badge">Aula 5</span>
+          <h2 class="section-title">Exemplos de Esportes de Marca</h2>
+          <p class="section-subtitle">Clique em EXPLORAR para ver como cada marca é medida.</p>
+        </div>
+        <div id="marcaGrid"></div>
+        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: marca medida</h3>
+        <div class="c-table" id="marcaTable"></div>
+        <div class="nav-buttons">
           <button class="nav-btn" onclick="goToLesson(4)">← Anterior</button>
-          <button class="nav-btn" onclick="goToLesson(6)">Próxima: Exemplos →</button>
+          <button class="nav-btn" onclick="goToLesson(6)">Próxima: O Corpo em Movimento →</button>
         </div>
       </section>
 
@@ -382,12 +382,12 @@ textarea:focus{outline:none;border-color:var(--gold)}
       <section class="lesson" id="lesson-6">
         <div class="section-header">
           <span class="badge">Aula 6</span>
-          <h2 class="section-title">Exemplos de Esportes de Marca</h2>
-          <p class="section-subtitle">Clique em EXPLORAR para ver como cada marca é medida.</p>
+          <h2 class="section-title">Alterações Fisiológicas na Atividade Física</h2>
+          <p class="section-subtitle">Durante a atividade física, o corpo passa por alterações para realizar a atividade com mais eficiência. Clique nos cards para ampliar.</p>
         </div>
-        <div id="marcaGrid"></div>
-        <h3 class="h-center" style="margin-top:1.5rem">Tabela interativa: marca medida</h3>
-        <div class="c-table" id="marcaTable"></div>
+        <div class="big-card" id="fisioCard"></div>
+        <div class="cards-grid" id="fisioGrid"></div>
+        <p style="text-align:center;color:var(--text-light);max-width:720px;margin:0 auto">Essas alterações são essenciais para <strong>melhorar o desempenho físico</strong> e <strong>proteger o corpo</strong> durante o exercício.</p>
         <div class="nav-buttons">
           <button class="nav-btn" onclick="goToLesson(5)">← Anterior</button>
           <button class="nav-btn" onclick="goToLesson(7)">Próxima: Atividade →</button>
@@ -430,7 +430,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
         <div class="section-header">
           <span class="badge">Aula 8</span>
           <h2 class="section-title">Quiz Final do Trimestre</h2>
-          <p class="section-subtitle">10 questões sobre ginástica, alterações fisiológicas e esportes de marca. Boa sorte!</p>
+          <p class="section-subtitle">10 questões sobre ginástica, esportes de marca e alterações fisiológicas. Boa sorte!</p>
         </div>
         <div class="quiz-box">
           <div id="quizContent">
@@ -471,7 +471,6 @@ textarea:focus{outline:none;border-color:var(--gold)}
               <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Competitiva: artística, rítmica, trampolim, aeróbica e acrobática</p></div>
               <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Não competitiva: natural, laboral, funcional, calistênica e postural</p></div>
               <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Competitivas são regulamentadas por federações e estão nos Jogos Olímpicos</p></div>
-              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:1rem"><p style="color:var(--bg-cream);font-size:.88rem">◆ Alterações fisiológicas: FC, fluxo sanguíneo, FR, temperatura, suor e vasodilatação</p></div>
             </div>
           </div>
         </div>
@@ -511,27 +510,40 @@ textarea:focus{outline:none;border-color:var(--gold)}
 
 <script>
 /* =====================================================================
-   SISTEMA DE MÍDIA À PROVA DE FALHAS (1º TRIMESTRE)
-   Ordem: VÍDEO local → IMAGEM da pasta → ILUSTRAÇÃO online → bloco c/ título
-   Vídeos: modulo1.mp4, modulo2.mp4
-   Imagens: artistica, ritmica, trampolim, acrobatica, aerobica, laboral,
-   fisiologia, atletismo, natacao, ciclismo, halterofilismo, salto, maratona, remo
+   SISTEMA DE MÍDIA — CADA NOME LOCAL APARECE 1 ÚNICA VEZ NO CÓDIGO
+   Ordem: vídeo local → imagem da pasta → ilustração online → bloco c/ nome
    ===================================================================== */
 var ONLINE = {
-  artistica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10368c875-160a-4855-814f-0111151ea1b4.png",
-  ritmica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1822d644b-113e-41c7-9c8b-2d3839d1a111.png",
-  trampolim:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10d6a383c-7725-4cc7-9c2b-716c7869b7a6.png",
-  acrobatica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/10844801f-7bf8-4b37-a417-b2e2e894cb8d.png",
-  aerobica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/19d1a3cf2-a3e2-4278-92b0-9d84171e4a75.png",
-  laboral:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/13d544b43-5757-4b62-b1ff-571986d8329f.png",
-  fisiologia:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18d4b4181-b050-459a-a57f-b2ea87126a32.png",
-  atletismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1576768ee-28bd-4673-a203-487265a90682.png",
-  natacao:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/192748f3d-e4f4-4281-88e8-cf35eb2c2715.png",
+  inicio_ginastica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1ff0883aa-9826-4b2b-bf5a-727e2f741bf8.png",
+  inicio_marca:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b7b05c86-6cd1-4bc2-b49d-61534611aa93.png",
+  capa_ginastica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1f33e1968-39ad-4c84-8704-804695013108.png",
+  capa_marca:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/183b3adbd-6c91-456d-825e-dc7040dde5f3.png",
+  artistica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1be2287f9-2878-4cca-afb3-614d2618c87d.png",
+  artistica_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1f33e1968-39ad-4c84-8704-804695013108.png",
+  ritmica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1e4e0d79c-3119-4eeb-8dc8-9b80a3a25d92.png",
+  ritmica_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/185b23af0-23f7-45be-8e1b-bdabf78a658d.png",
+  trampolim:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1f1e4f634-ad3c-43ab-98b2-ed2fbff6129b.png",
+  trampolim_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/165ec3709-2707-4d5d-9983-ddf9da106bfa.png",
+  acrobatica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1d9223b9b-fb5c-44fd-a9f3-3e2f9aa172fa.png",
+  acrobatica_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1ff0883aa-9826-4b2b-bf5a-727e2f741bf8.png",
+  aerobica:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/12f680372-e0df-4b36-80d8-ac9033739fab.png",
+  aerobica_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/12f680372-e0df-4b36-80d8-ac9033739fab.png",
+  laboral:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/112d6a268-94c0-47da-a567-a601b510d879.png",
+  atletismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b7b05c86-6cd1-4bc2-b49d-61534611aa93.png",
+  atletismo_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1b7b05c86-6cd1-4bc2-b49d-61534611aa93.png",
+  natacao:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/183b3adbd-6c91-456d-825e-dc7040dde5f3.png",
+  natacao_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/183b3adbd-6c91-456d-825e-dc7040dde5f3.png",
   ciclismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/158e9e4d7-0ef2-4b95-a3d2-937bd67d2ebe.png",
-  halterofilismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/16944b705-6107-45ef-a289-4475864a1463.png",
-  salto:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18285e32b-13bd-46e7-8287-421012e49c88.png",
-  maratona:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/18a08ee9d-a7fc-40a4-82b8-2778f706c265.png",
-  remo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/138c6d91d-3a4b-45c3-9d1e-7f4a44a496ed.png"
+  ciclismo_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/158e9e4d7-0ef2-4b95-a3d2-937bd67d2ebe.png",
+  halterofilismo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/158d9c0fd-751e-4980-8bf4-cde1a911869a.png",
+  halterofilismo_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/158d9c0fd-751e-4980-8bf4-cde1a911869a.png",
+  salto:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/165ec3709-2707-4d5d-9983-ddf9da106bfa.png",
+  salto_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/165ec3709-2707-4d5d-9983-ddf9da106bfa.png",
+  maratona:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1cef9b89e-0866-4efb-b64f-fff925ee52d7.png",
+  maratona_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/1cef9b89e-0866-4efb-b64f-fff925ee52d7.png",
+  remo:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/183b3adbd-6c91-456d-825e-dc7040dde5f3.png",
+  remo_detalhe:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/183b3adbd-6c91-456d-825e-dc7040dde5f3.png",
+  fisiologia:"https://image.qwenlm.ai/public_source/511a8e8f-c318-42b2-a2fc-c3de52011f5c/16afd2aa3-ba0d-4844-bb9b-9f7294f61fd8.png"
 };
 var EXT=["png","jpg","jpeg","webp"];
 function srcList(key){
@@ -586,18 +598,27 @@ function armVideo(v){
 
 /* ================= DADOS ================= */
 var GYMS=[
-  {key:"artistica",nome:"Ginástica Artística",foco:"Força e técnica",exig:"Flexibilidade, potência",desc:"Aparelhos como solo, trave, barras e salto."},
-  {key:"ritmica",nome:"Ginástica Rítmica",foco:"Beleza e harmonia",exig:"Ritmo, coordenação",desc:"Utiliza fita, arco, bola, corda e maças."},
-  {key:"trampolim",nome:"Ginástica de Trampolim",foco:"Altura e precisão",exig:"Controle aéreo",desc:"Saltos e acrobacias executadas no trampolim."},
-  {key:"acrobatica",nome:"Ginástica Acrobática",foco:"Trabalho em equipe",exig:"Equilíbrio, coordenação",desc:"Pirâmides e equilíbrios em duplas ou grupos."},
-  {key:"aerobica",nome:"Ginástica Aeróbica",foco:"Resistência e coreografia",exig:"Condicionamento físico",desc:"Sequências intensas e contínuas de movimentos."}
+  {key:"artistica",keyd:"artistica_detalhe",nome:"Ginástica Artística",foco:"Força e técnica",exig:"Flexibilidade, potência",desc:"Aparelhos como solo, trave, barras e salto."},
+  {key:"ritmica",keyd:"ritmica_detalhe",nome:"Ginástica Rítmica",foco:"Beleza e harmonia",exig:"Ritmo, coordenação",desc:"Utiliza fita, arco, bola, corda e maças."},
+  {key:"trampolim",keyd:"trampolim_detalhe",nome:"Ginástica de Trampolim",foco:"Altura e precisão",exig:"Controle aéreo",desc:"Saltos e acrobacias executadas no trampolim."},
+  {key:"acrobatica",keyd:"acrobatica_detalhe",nome:"Ginástica Acrobática",foco:"Trabalho em equipe",exig:"Equilíbrio, coordenação",desc:"Pirâmides e equilíbrios em duplas ou grupos."},
+  {key:"aerobica",keyd:"aerobica_detalhe",nome:"Ginástica Aeróbica",foco:"Resistência e coreografia",exig:"Condicionamento físico",desc:"Sequências intensas e contínuas de movimentos."}
 ];
 var GYMS_NC=[
   {t:"Ginástica Natural",d:"Movimentos naturais do corpo, como correr, saltar e rolar."},
-  {t:"Ginástica Laboral",d:"Praticada no ambiente de trabalho para prevenir lesões e melhorar a saúde."},
+  {t:"Ginástica Laboral",d:"Praticada no ambiente de trabalho para prevenir lesões."},
   {t:"Ginástica Funcional",d:"Exercícios que melhoram as capacidades usadas no dia a dia."},
   {t:"Ginástica Calistênica",d:"Exercícios com o peso do próprio corpo."},
   {t:"Ginástica Postural",d:"Focada em corrigir e melhorar a postura."}
+];
+var MARCAS=[
+  {key:"atletismo",keyd:"atletismo_detalhe",nome:"Atletismo",marca:"Tempo (corridas), distância (saltos e arremessos)"},
+  {key:"natacao",keyd:"natacao_detalhe",nome:"Natação",marca:"Tempo"},
+  {key:"ciclismo",keyd:"ciclismo_detalhe",nome:"Ciclismo",marca:"Tempo"},
+  {key:"halterofilismo",keyd:"halterofilismo_detalhe",nome:"Halterofilismo",marca:"Peso levantado"},
+  {key:"salto",keyd:"salto_detalhe",nome:"Saltos (altura/vara)",marca:"Altura alcançada"},
+  {key:"maratona",keyd:"maratona_detalhe",nome:"Maratona",marca:"Tempo"},
+  {key:"remo",keyd:"remo_detalhe",nome:"Remo",marca:"Tempo"}
 ];
 var FISIO=[
   {t:"Aumento da frequência cardíaca (FC)",d:"O coração bate mais rápido para bombear sangue e fornecer mais oxigênio e nutrientes aos músculos."},
@@ -606,15 +627,6 @@ var FISIO=[
   {t:"Aumento da temperatura muscular",d:"A produção de energia gera calor, aumentando a temperatura nos músculos."},
   {t:"Aumento da sudorese (suor)",d:"Ativado para dissipar calor e manter a temperatura corporal estável."},
   {t:"Vasodilatação cutânea (pele)",d:"Aumento do fluxo sanguíneo na pele para facilitar a perda de calor."}
-];
-var MARCAS=[
-  {key:"atletismo",nome:"Atletismo",marca:"Tempo (corridas), distância (saltos e arremessos)"},
-  {key:"natacao",nome:"Natação",marca:"Tempo"},
-  {key:"ciclismo",nome:"Ciclismo",marca:"Tempo"},
-  {key:"halterofilismo",nome:"Halterofilismo",marca:"Peso levantado"},
-  {key:"salto",nome:"Saltos (altura/vara)",marca:"Altura alcançada"},
-  {key:"maratona",nome:"Maratona",marca:"Tempo"},
-  {key:"remo",nome:"Remo",marca:"Tempo"}
 ];
 var ATIVIDADE1=[
   {txt:"Ginástica Artística — qual é o foco principal?",resp:"forca",opts:[["forca","Força e técnica"],["beleza","Beleza e harmonia"],["altura","Altura e precisão"],["equipe","Trabalho em equipe"]]},
@@ -631,25 +643,25 @@ var ATIVIDADE2=[
   {txt:"Prova longa de corrida nas ruas, medida por tempo.",resp:"maratona",opts:[["maratona","Maratona"],["salto","Saltos"],["remo","Remo"],["halterofilismo","Halterofilismo"]]}
 ];
 var QUIZ=[
-  {q:"Quais são os dois tipos de ginástica apresentados?",o:["Competitiva e não competitiva","Olímpica e escolar","Individual e em equipe","Aeróbica e aquática"],c:0,e:"A ginástica se divide em competitiva e não competitiva."},
+  {q:"Quais são os dois tipos de ginástica?",o:["Competitiva e não competitiva","Olímpica e escolar","Individual e em equipe","Aeróbica e aquática"],c:0,e:"A ginástica se divide em competitiva e não competitiva."},
   {q:"Qual das opções é uma ginástica COMPETITIVA?",o:["Laboral","Postural","Rítmica","Funcional"],c:2,e:"A ginástica rítmica é competitiva e faz parte dos Jogos Olímpicos."},
-  {q:"Qual das opções é uma ginástica NÃO COMPETITIVA?",o:["Artística","Laboral","Trampolim","Aeróbica"],c:1,e:"A ginástica laboral é não competitiva, praticada no ambiente de trabalho."},
   {q:"As ginásticas competitivas são regulamentadas por:",o:["Instituições","Federações","Clubes","Associações"],c:1,e:"Elas são regulamentadas por federações e fazem parte dos Jogos Olímpicos."},
-  {q:"O foco principal da ginástica rítmica é:",o:["Força e técnica","Beleza e harmonia","Altura e precisão","Trabalho em equipe"],c:1,e:"A rítmica tem como foco a beleza e a harmonia, com ritmo e coordenação."},
-  {q:"A ginástica acrobática tem como foco principal:",o:["Trabalho em equipe","Tempo de corrida","Peso levantado","Velocidade"],c:0,e:"A acrobática exige trabalho em equipe, equilíbrio e coordenação."},
+  {q:"O foco principal da ginástica acrobática é:",o:["Trabalho em equipe","Tempo de corrida","Peso levantado","Velocidade"],c:0,e:"A acrobática exige trabalho em equipe, equilíbrio e coordenação."},
   {q:"Qual é o objetivo dos esportes de marca?",o:["Acertar um alvo com exatidão","Superar marcas de tempo, distância ou altura","Derrubar o adversário","Realizar coreografias"],c:1,e:"Nos esportes de marca, o objetivo é superar uma marca individual: tempo, distância ou altura."},
   {q:"Quais instrumentos são usados para medir as marcas nesses esportes?",o:["Bolas e redes","Cronômetros, réguas e sensores","Raquetes e tacos","Apitos e cartões"],c:1,e:"Cronômetros, réguas e sensores tornam as medidas precisas."},
   {q:"No halterofilismo, a marca medida é:",o:["Tempo","Altura","Peso levantado","Distância"],c:2,e:"No halterofilismo, vence quem levanta mais peso."},
-  {q:"Durante o exercício, o aumento da sudorese (suor) serve para:",o:["Dissipar calor e manter a temperatura corporal","Aumentar o cansaço","Reduzir o oxigênio","Diminuir a frequência cardíaca"],c:0,e:"O suor é ativado para dissipar calor e manter a temperatura corporal estável."}
+  {q:"Na natação, a marca medida é:",o:["Tempo","Peso","Altura","Pontuação dos juízes"],c:0,e:"Na natação, vence o menor tempo."},
+  {q:"Durante o exercício, o sangue é direcionado principalmente para:",o:["O trato digestivo","Os músculos ativos","A pele apenas","Os ossos"],c:1,e:"O sangue vai prioritariamente para os músculos ativos."},
+  {q:"A função da sudorese (suor) durante o exercício é:",o:["Dissipar calor e manter a temperatura corporal","Aumentar o cansaço","Reduzir o oxigênio","Diminuir a frequência cardíaca"],c:0,e:"O suor dissipa calor e mantém a temperatura corporal estável."}
 ];
 var LESSONS=[
   {id:0,t:"Bem-vindo"},
   {id:1,t:"Introdução à Ginástica"},
   {id:2,t:"Tipos de Ginástica"},
-  {id:3,t:"Alterações Fisiológicas"},
-  {id:4,t:"Revisão e Atividade"},
-  {id:5,t:"Esportes de Marca: Conceito"},
-  {id:6,t:"Exemplos de Esportes de Marca"},
+  {id:3,t:"Revisão e Atividade"},
+  {id:4,t:"Esportes de Marca: Conceito"},
+  {id:5,t:"Exemplos de Esportes de Marca"},
+  {id:6,t:"Alterações Fisiológicas"},
   {id:7,t:"Atividade e Reflexão"},
   {id:8,t:"Quiz Final"},
   {id:9,t:"Revisão do Trimestre"}
@@ -671,14 +683,14 @@ function goToLesson(id){
   renderTimeline();updateProgress();
   document.getElementById("sidebar").classList.remove("open");
   window.scrollTo(0,0);
-  if(id===4){initActivity();}
+  if(id===3){initActivity();}
   if(id===7){initActivity2();}
   if(id===8){initQuiz();}
 }
 function renderTimeline(){
   var html='<div class="t-group">Módulo 1 — Tipos de Ginástica</div>';
   for(var i=1;i<=8;i++){
-    if(i===5){html+='<div class="t-group">Módulo 2 — Esportes de Marca</div>';}
+    if(i===4){html+='<div class="t-group">Módulo 2 — Esportes de Marca</div>';}
     var cls="t-item"+(currentLesson===i?" active":"")+(done[i]?" done":"");
     html+='<div class="'+cls+'" role="button" tabindex="0" onclick="goToLesson('+i+')" onkeydown="if(event.key===\'Enter\')goToLesson('+i+')">'
       +'<div class="t-num">'+(done[i]?"✓":i)+'</div>'
@@ -707,7 +719,7 @@ function renderGyms(){
       +'<button class="btn-explore" onclick="openGym('+i+')">Explorar</button></div></div>';
   }
   document.getElementById("gymGrid").innerHTML=h;
-  var n='<div class="big-card">'+picTag("laboral","Pessoas alongando-se ao ar livre","",true)
+  var n='<div class="big-card">'+picTag("laboral","Pessoas fazendo ginástica laboral","",true)
     +'<div class="big-body"><h3 class="big-name">Ginástica Não Competitiva</h3><div class="big-origin">Saúde e bem-estar</div><ul class="feat-list">';
   for(var j=0;j<GYMS_NC.length;j++){n+="<li><strong>"+GYMS_NC[j].t+":</strong> "+GYMS_NC[j].d+"</li>";}
   n+='</ul></div></div>';
@@ -715,21 +727,10 @@ function renderGyms(){
   var t='<div class="t-row head"><div class="t-cell">Modalidade</div><div class="t-cell">Foco principal • Exigência física</div></div>';
   for(var k=0;k<GYMS.length;k++){
     (function(g){
-      t+='<div class="t-row" onclick="openGymByKey(\''+g.key+'\')"><div class="t-cell">'+g.nome+'</div><div class="t-cell">'+g.foco+' • '+g.exig+'</div></div>';
+      t+='<div class="t-row" onclick="openGymByKey(\''+g.keyd+'\')"><div class="t-cell">'+g.nome+'</div><div class="t-cell">'+g.foco+' • '+g.exig+'</div></div>';
     })(GYMS[k]);
   }
   document.getElementById("gymTable").innerHTML=t;
-}
-function renderFisio(){
-  document.getElementById("fisioCard").innerHTML=picTag("fisiologia","Corredor em movimento, corpo em atividade","",false)
-    +'<div class="big-body"><h3 class="big-name">O Corpo em Movimento</h3><div class="big-origin">Alterações fisiológicas</div>'
-    +'<p class="card-text">Durante a atividade física, o corpo humano passa por diversas alterações para realizar a atividade com mais eficiência.</p>'
-    +'<ul class="feat-list"><li>Mais oxigênio para os músculos</li><li>Mais calor produzido e dissipado</li><li>Proteção e melhor desempenho</li></ul></div>';
-  var h="";
-  for(var i=0;i<FISIO.length;i++){
-    h+='<div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Alteração '+(i+1)+'</div><h3 class="card-title">'+FISIO[i].t+'</h3><p class="card-text">'+FISIO[i].d+'</p><div class="card-expansion"><p class="card-text">Essa alteração melhora o desempenho e protege o corpo durante o exercício.</p></div></div>';
-  }
-  document.getElementById("fisioGrid").innerHTML=h;
 }
 function renderMarcas(){
   var h="";
@@ -744,10 +745,21 @@ function renderMarcas(){
   var t='<div class="t-row head"><div class="t-cell">Esporte</div><div class="t-cell">Marca medida</div></div>';
   for(var k=0;k<MARCAS.length;k++){
     (function(m){
-      t+='<div class="t-row" onclick="openMarcaByKey(\''+m.key+'\')"><div class="t-cell">'+m.nome+'</div><div class="t-cell">'+m.marca+'</div></div>';
+      t+='<div class="t-row" onclick="openMarcaByKey(\''+m.keyd+'\')"><div class="t-cell">'+m.nome+'</div><div class="t-cell">'+m.marca+'</div></div>';
     })(MARCAS[k]);
   }
   document.getElementById("marcaTable").innerHTML=t;
+}
+function renderFisio(){
+  document.getElementById("fisioCard").innerHTML=picTag("fisiologia","Corredor em movimento ao pôr do sol","",false)
+    +'<div class="big-body"><h3 class="big-name">O Corpo em Movimento</h3><div class="big-origin">Alterações fisiológicas</div>'
+    +'<p class="card-text">Durante a atividade física, o corpo humano passa por diversas alterações fisiológicas para realizar a atividade com mais eficiência.</p>'
+    +'<ul class="feat-list"><li>Mais oxigênio para os músculos</li><li>Mais calor produzido e dissipado</li><li>Proteção e melhor desempenho</li></ul></div>';
+  var h="";
+  for(var i=0;i<FISIO.length;i++){
+    h+='<div class="info-card" onclick="toggleCard(this)"><div class="card-kicker">Alteração '+(i+1)+'</div><h3 class="card-title">'+FISIO[i].t+'</h3><p class="card-text">'+FISIO[i].d+'</p><div class="card-expansion"><p class="card-text">Essa alteração melhora o desempenho e protege o corpo durante o exercício.</p></div></div>';
+  }
+  document.getElementById("fisioGrid").innerHTML=h;
 }
 
 /* ================= MODAL ================= */
@@ -765,18 +777,18 @@ function closeModal(){
 function openGym(i){
   var g=GYMS[i];
   var b='<h2 class="modal-title">'+g.nome+'</h2><div class="big-origin">Ginástica competitiva</div><ul class="feat-list"><li><strong>Foco principal:</strong> '+g.foco+'</li><li><strong>Exigência física:</strong> '+g.exig+'</li><li>'+g.desc+'</li><li>Regulamentada por federações e presente nos Jogos Olímpicos.</li></ul>';
-  openModal(picTag(g.key,g.nome,"modal-img",false),b);
+  openModal(picTag(g.keyd,g.nome,"modal-img",false),b);
 }
-function openGymByKey(key){
-  for(var i=0;i<GYMS.length;i++){if(GYMS[i].key===key){openGym(i);return;}}
+function openGymByKey(keyd){
+  for(var i=0;i<GYMS.length;i++){if(GYMS[i].keyd===keyd){openGym(i);return;}}
 }
 function openMarca(i){
   var m=MARCAS[i];
   var b='<h2 class="modal-title">'+m.nome+'</h2><div class="big-origin">Esporte de marca</div><ul class="feat-list"><li><strong>Marca medida:</strong> '+m.marca+'</li><li>Vitória: melhores tempos, maiores distâncias ou alturas superadas.</li><li>Medido com cronômetros, réguas e sensores.</li></ul>';
-  openModal(picTag(m.key,m.nome,"modal-img",false),b);
+  openModal(picTag(m.keyd,m.nome,"modal-img",false),b);
 }
-function openMarcaByKey(key){
-  for(var i=0;i<MARCAS.length;i++){if(MARCAS[i].key===key){openMarca(i);return;}}
+function openMarcaByKey(keyd){
+  for(var i=0;i<MARCAS.length;i++){if(MARCAS[i].keyd===keyd){openMarca(i);return;}}
 }
 document.getElementById("modalOverlay").addEventListener("click",function(e){
   if(e.target===this){closeModal();}
@@ -926,13 +938,13 @@ document.addEventListener("keydown",function(e){
 });
 
 /* ================= INICIALIZAÇÃO ================= */
-applyPic(document.getElementById("pic-c1"),"artistica");
-applyPic(document.getElementById("pic-c2"),"atletismo");
+applyPic(document.getElementById("pic-c1"),"capa_ginastica");
+applyPic(document.getElementById("pic-c2"),"capa_marca");
 var vids=document.querySelectorAll("video[data-srcs]");
 for(var vi=0;vi<vids.length;vi++){armVideo(vids[vi]);}
 renderGyms();
-renderFisio();
 renderMarcas();
+renderFisio();
 renderTimeline();
 updateProgress();
 </script>
