@@ -382,7 +382,6 @@
   #intro{
     position:fixed;inset:0;z-index:10000;overflow:hidden;cursor:pointer;
         background:radial-gradient(circle at 50% 42%,#2C2416 0%,#1E1A14 75%);
-    animation:introSai .4s ease 4.6s forwards;
   }
   #intro.saindo{animation:introSai .35s ease forwards}
   @keyframes introSai{to{opacity:0;visibility:hidden}}
@@ -419,6 +418,9 @@
   .intro-j4{animation:introJ4 3.6s linear both}
   @keyframes introBola{0%{opacity:0;transform:translate(62px,47px)}52.50%{opacity:0;transform:translate(62px,47px)}52.78%{opacity:1;transform:translate(62px,47px)}60.95%{opacity:1;transform:translate(100px,24px)}68.71%{opacity:1;transform:translate(104px,66px)}74.46%{opacity:1;transform:translate(128px,46px)}77.78%{opacity:1;transform:translate(146px,45px)}79.44%{opacity:0;transform:translate(146px,45px)}100%{opacity:0;transform:translate(146px,45px)}}
   .intro-bola{animation:introBola 3.6s linear both}
+  /* transição para o login: a quadra vira o cartão e o selo vira o emblema */
+  .intro-cartao{position:fixed;border:1px solid #7A5432;background:#7A5432;pointer-events:none}
+  .intro-emblema{position:fixed;z-index:3;margin:0;font-size:22px;pointer-events:none}
   .intro-pular{
     position:absolute;top:16px;right:16px;z-index:2;background:rgba(0,0,0,.15);cursor:pointer;
     border:1px solid rgba(245,240,232,.4);color:var(--creme);
@@ -476,19 +478,69 @@
   try{ sessionStorage.setItem('introVista','1'); }catch(e){}
 
   document.documentElement.style.overflow = 'hidden';
-  var fechado = false;
-  function fechar(rapido){
+  var fechado = false, transformando = false;
+  function fechar(){
     if(fechado) return;
     fechado = true;
-    if(rapido) intro.classList.add('saindo');
-    setTimeout(function(){ intro.remove(); document.documentElement.style.overflow = ''; }, rapido ? 350 : 0);
+    intro.classList.add('saindo');
+    setTimeout(function(){ intro.remove(); document.documentElement.style.overflow = ''; }, 350);
   }
+
+  // A quadra vira o cartão do login e o selo "EF" voa até o emblema; depois tudo some em fade.
+  function transformar(){
+    if(fechado || transformando) return;
+    transformando = true;
+    var tela = document.getElementById('telaLogin');
+    var caixa = tela && tela.querySelector('.caixa-login');
+    var emblema = caixa && caixa.querySelector('.emblema');
+    var quadra = intro.querySelector('.intro-quadra');
+    var seloSvg = intro.querySelector('.intro-selo circle');
+    if(!caixa || !emblema || tela.classList.contains('oculta') || !intro.animate){ fechar(); return; }
+    var rQ = quadra.getBoundingClientRect(), rS = seloSvg.getBoundingClientRect();
+    var rC = caixa.getBoundingClientRect(), rE = emblema.getBoundingClientRect();
+    if(!rC.width || !rE.width){ fechar(); return; }
+
+    var cartao = document.createElement('div');
+    cartao.className = 'intro-cartao';
+    intro.insertBefore(cartao, intro.firstChild);
+    var selo = document.createElement('div');
+    selo.className = 'emblema intro-emblema';
+    selo.textContent = 'EF';
+    selo.style.left = rE.left + 'px'; selo.style.top = rE.top + 'px';
+    selo.style.width = rE.width + 'px'; selo.style.height = rE.height + 'px';
+    intro.appendChild(selo);
+
+    intro.querySelector('.intro-selo').style.opacity = '0';
+    var D = 750, curva = 'cubic-bezier(.65,0,.35,1)';
+    var px = function(n){ return n + 'px'; };
+    var s = rS.width / rE.width;
+    var dx = (rS.left + rS.width / 2) - (rE.left + rE.width / 2);
+    var dy = (rS.top + rS.height / 2) - (rE.top + rE.height / 2);
+    var some = function(el, ms){ if(el) el.animate([{opacity:1},{opacity:0}], {duration:ms, fill:'forwards'}); };
+    some(quadra, 280); some(intro.querySelector('.intro-titulo'), 200); some(intro.querySelector('.intro-pular'), 200);
+
+    cartao.animate([
+      { left:px(rQ.left), top:px(rQ.top), width:px(rQ.width), height:px(rQ.height),
+        borderRadius:px(Math.min(rQ.width, rQ.height) * 2 / 90), backgroundColor:'#7A5432', borderColor:'#7A5432',
+        boxShadow:'0 16px 40px rgba(44,36,22,0)' },
+      { left:px(rC.left), top:px(rC.top), width:px(rC.width), height:px(rC.height),
+        borderRadius:'18px', backgroundColor:'#F5F0E8', borderColor:'#D8CBB6',
+        boxShadow:'0 16px 40px rgba(44,36,22,.18)' }
+    ], { duration:D, easing:curva, fill:'forwards' });
+
+    selo.animate([
+      { transform:'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')' },
+      { transform:'none' }
+    ], { duration:D, easing:curva, fill:'forwards' }).onfinish = fechar;
+  }
+
   intro.addEventListener('animationend', function(e){
-    if(e.target === intro && e.animationName === 'introSai') fechar(false);
+    if(e.animationName === 'introSelo') setTimeout(transformar, 150);
   });
-  setTimeout(function(){ fechar(false); }, 5100);
-  intro.addEventListener('click', function(){ fechar(true); });
-  document.addEventListener('keydown', function(){ fechar(true); }, {once:true});
+  setTimeout(transformar, 4500);   // reserva, caso o evento não chegue
+  setTimeout(fechar, 7000);        // garantia final
+  intro.addEventListener('click', fechar);
+  document.addEventListener('keydown', fechar, {once:true});
 })();
 </script>
 
