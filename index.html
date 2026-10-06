@@ -395,6 +395,20 @@
   .intro-titulo small{display:block;font:700 clamp(9px,1.5vw,12px)/1.3 var(--sans);letter-spacing:2.4px;text-transform:uppercase;color:var(--dourado)}
   .intro-titulo b{display:block;font:700 clamp(26px,4.6vw,44px)/1.1 var(--serif);margin-top:6px}
   @keyframes introSobe{to{opacity:1;transform:none}}
+  /* jogadores e bola em CSS (SMIL atrasava no celular) */
+  .intro-j{opacity:0}
+  @keyframes introJ0{0%{opacity:0;transform:translate(24px,45px)}15.28%{opacity:1;transform:translate(24px,45px)}20.83%{opacity:1;transform:translate(24px,45px)}24.03%{opacity:1;transform:translate(25.1px,45.8px)}27.22%{opacity:1;transform:translate(28px,47.6px)}30.42%{opacity:1;transform:translate(32.2px,49.8px)}33.61%{opacity:1;transform:translate(37.4px,51.6px)}36.81%{opacity:1;transform:translate(43px,52.5px)}40.00%{opacity:1;transform:translate(48.6px,52.2px)}43.19%{opacity:1;transform:translate(53.8px,51px)}46.39%{opacity:1;transform:translate(58px,49.2px)}49.58%{opacity:1;transform:translate(60.9px,47.7px)}52.78%{opacity:1;transform:translate(62px,47px)}80.56%{opacity:1;transform:translate(62px,47px)}83.33%{opacity:1;transform:translate(63.3px,46.9px)}86.11%{opacity:1;transform:translate(66.7px,46.5px)}88.89%{opacity:1;transform:translate(71px,46px)}91.67%{opacity:1;transform:translate(75.3px,45.5px)}94.44%{opacity:0;transform:translate(78.7px,45.1px)}97.22%{opacity:0;transform:translate(80px,45px)}100%{opacity:0;transform:translate(80px,45px)}}
+  .intro-j0{animation:introJ0 3.6s linear both}
+  @keyframes introJ1{0%{opacity:0;transform:translate(36px,22px)}15.28%{opacity:1;transform:translate(36px,22px)}20.83%{opacity:1;transform:translate(36px,22px)}24.03%{opacity:1;transform:translate(37.8px,21.2px)}27.22%{opacity:1;transform:translate(42.7px,19.4px)}30.42%{opacity:1;transform:translate(49.8px,17.4px)}33.61%{opacity:1;transform:translate(58.5px,15.9px)}36.81%{opacity:1;transform:translate(68px,15.5px)}40.00%{opacity:1;transform:translate(77.5px,16.5px)}43.19%{opacity:1;transform:translate(86.2px,18.5px)}46.39%{opacity:1;transform:translate(93.3px,21px)}49.58%{opacity:1;transform:translate(98.2px,23.1px)}52.78%{opacity:1;transform:translate(100px,24px)}80.56%{opacity:1;transform:translate(100px,24px)}83.33%{opacity:1;transform:translate(98.5px,25.6px)}86.11%{opacity:1;transform:translate(94.8px,29.4px)}88.89%{opacity:1;transform:translate(90px,34.5px)}91.67%{opacity:1;transform:translate(85.2px,39.6px)}94.44%{opacity:0;transform:translate(81.5px,43.4px)}97.22%{opacity:0;transform:translate(80px,45px)}100%{opacity:0;transform:translate(80px,45px)}}
+  .intro-j1{animation:introJ1 3.6s linear both}
+  @keyframes introJ2{0%{opacity:0;transform:translate(36px,68px)}15.28%{opacity:1;transform:translate(36px,68px)}20.83%{opacity:1;transform:translate(36px,68px)}24.03%{opacity:1;transform:translate(37.9px,68.8px)}27.22%{opacity:1;transform:translate(43.1px,70.6px)}30.42%{opacity:1;transform:translate(50.7px,72.6px)}33.61%{opacity:1;transform:translate(59.9px,74.1px)}36.81%{opacity:1;transform:translate(70px,74.5px)}40.00%{opacity:1;transform:translate(80.1px,73.5px)}43.19%{opacity:1;transform:translate(89.3px,71.5px)}46.39%{opacity:1;transform:translate(96.9px,69px)}49.58%{opacity:1;transform:translate(102.1px,66.9px)}52.78%{opacity:1;transform:translate(104px,66px)}80.56%{opacity:1;transform:translate(104px,66px)}83.33%{opacity:1;transform:translate(102.2px,64.4px)}86.11%{opacity:1;transform:translate(97.8px,60.6px)}88.89%{opacity:1;transform:translate(92px,55.5px)}91.67%{opacity:1;transform:translate(86.2px,50.4px)}94.44%{opacity:0;transform:translate(81.8px,46.6px)}97.22%{opacity:0;transform:translate(80px,45px)}100%{opacity:0;transform:translate(80px,45px)}}
+  .intro-j2{animation:introJ2 3.6s linear both}
+  @keyframes introJ3{0%{opacity:0;transform:translate(14px,30px)}15.28%{opacity:1;transform:translate(14px,30px)}20.83%{opacity:1;transform:translate(14px,30px)}24.03%{opacity:1;transform:translate(15.7px,29.2px)}27.22%{opacity:1;transform:translate(20.4px,27.4px)}30.42%{opacity:1;transform:translate(27.4px,25.3px)}33.61%{opacity:1;transform:translate(35.8px,23.6px)}36.81%{opacity:1;transform:translate(45px,23px)}40.00%{opacity:1;transform:translate(54.2px,23.6px)}43.19%{opacity:1;transform:translate(62.6px,25.3px)}46.39%{opacity:1;transform:translate(69.6px,27.4px)}49.58%{opacity:1;transform:translate(74.3px,29.2px)}52.78%{opacity:1;transform:translate(76px,30px)}80.56%{opacity:1;transform:translate(76px,30px)}83.33%{opacity:1;transform:translate(76.3px,31.1px)}86.11%{opacity:1;transform:translate(77px,33.9px)}88.89%{opacity:1;transform:translate(78px,37.5px)}91.67%{opacity:1;transform:translate(79px,41.1px)}94.44%{opacity:0;transform:translate(79.7px,43.9px)}97.22%{opacity:0;transform:translate(80px,45px)}100%{opacity:0;transform:translate(80px,45px)}}
+  .intro-j3{animation:introJ3 3.6s linear both}
+  @keyframes introJ4{0%{opacity:0;transform:translate(14px,60px)}15.28%{opacity:1;transform:translate(14px,60px)}20.83%{opacity:1;transform:translate(14px,60px)}24.03%{opacity:1;transform:translate(17.2px,60.8px)}27.22%{opacity:1;transform:translate(25.9px,62.5px)}30.42%{opacity:1;transform:translate(38.6px,64.1px)}33.61%{opacity:1;transform:translate(54.1px,64.7px)}36.81%{opacity:1;transform:translate(71px,63.5px)}40.00%{opacity:1;transform:translate(87.9px,60.5px)}43.19%{opacity:1;transform:translate(103.4px,56.1px)}46.39%{opacity:1;transform:translate(116.1px,51.4px)}49.58%{opacity:1;transform:translate(124.8px,47.5px)}52.78%{opacity:1;transform:translate(128px,46px)}80.56%{opacity:1;transform:translate(128px,46px)}83.33%{opacity:1;transform:translate(124.4px,45.9px)}86.11%{opacity:1;transform:translate(115.6px,45.7px)}88.89%{opacity:1;transform:translate(104px,45.5px)}91.67%{opacity:1;transform:translate(92.4px,45.3px)}94.44%{opacity:0;transform:translate(83.6px,45.1px)}97.22%{opacity:0;transform:translate(80px,45px)}100%{opacity:0;transform:translate(80px,45px)}}
+  .intro-j4{animation:introJ4 3.6s linear both}
+  @keyframes introBola{0%{opacity:0;transform:translate(62px,47px)}52.50%{opacity:0;transform:translate(62px,47px)}52.78%{opacity:1;transform:translate(62px,47px)}60.95%{opacity:1;transform:translate(100px,24px)}68.71%{opacity:1;transform:translate(104px,66px)}74.46%{opacity:1;transform:translate(128px,46px)}77.78%{opacity:1;transform:translate(146px,45px)}79.44%{opacity:0;transform:translate(146px,45px)}100%{opacity:0;transform:translate(146px,45px)}}
+  .intro-bola{animation:introBola 3.6s linear both}
   .intro-pular{
     position:absolute;top:16px;right:16px;z-index:2;background:rgba(0,0,0,.15);cursor:pointer;
     border:1px solid rgba(245,240,232,.4);color:var(--creme);
@@ -422,46 +436,12 @@
       <path class="intro-q" pathLength="1" style="--k:3" d="M8 33 H30 V57 H8"/><path class="intro-q" pathLength="1" style="--k:4" d="M152 33 H130 V57 H152"/><path class="intro-q" pathLength="1" style="--k:5" d="M8 14 H20 A31 31 0 0 1 20 76 H8"/><path class="intro-q" pathLength="1" style="--k:6" d="M152 14 H140 A31 31 0 0 0 140 76 H152"/>
       <path class="intro-q" pathLength="1" style="--k:7" d="M30 38 a7 7 0 0 1 0 14"/><path class="intro-q" pathLength="1" style="--k:8" d="M130 38 a7 7 0 0 0 0 14"/>
       <path class="intro-q" pathLength="1" style="--k:9" d="M152 41 V49"/><path class="intro-q" pathLength="1" style="--k:10" d="M8 41 V49"/>
-      <circle r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8" opacity="0">
-        <set attributeName="opacity" to="1" begin="0.55s"/>
-        <animateMotion path="M24,45 L24,45" dur="0.01s" fill="freeze"/>
-        <animateMotion path="M24,45 Q43 59 62,47" begin="0.75s" dur="1.15s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .4 1"/>
-        <animateMotion path="M62,47 L80 45" begin="2.9s" dur="0.6s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".6 0 .4 1"/>
-        <animate attributeName="opacity" from="1" to="0" begin="3.4s" dur="0.15s" fill="freeze"/>
-      </circle>
-      <circle r="3.2" fill="#C9A84C" stroke="#2C2416" stroke-width=".8" opacity="0">
-        <set attributeName="opacity" to="1" begin="0.55s"/>
-        <animateMotion path="M36,22 L36,22" dur="0.01s" fill="freeze"/>
-        <animateMotion path="M36,22 Q68 8 100,24" begin="0.75s" dur="1.15s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .4 1"/>
-        <animateMotion path="M100,24 L80 45" begin="2.9s" dur="0.6s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".6 0 .4 1"/>
-        <animate attributeName="opacity" from="1" to="0" begin="3.4s" dur="0.15s" fill="freeze"/>
-      </circle>
-      <circle r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8" opacity="0">
-        <set attributeName="opacity" to="1" begin="0.55s"/>
-        <animateMotion path="M36,68 L36,68" dur="0.01s" fill="freeze"/>
-        <animateMotion path="M36,68 Q70 82 104,66" begin="0.75s" dur="1.15s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .4 1"/>
-        <animateMotion path="M104,66 L80 45" begin="2.9s" dur="0.6s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".6 0 .4 1"/>
-        <animate attributeName="opacity" from="1" to="0" begin="3.4s" dur="0.15s" fill="freeze"/>
-      </circle>
-      <circle r="3.2" fill="#C9A84C" stroke="#2C2416" stroke-width=".8" opacity="0">
-        <set attributeName="opacity" to="1" begin="0.55s"/>
-        <animateMotion path="M14,30 L14,30" dur="0.01s" fill="freeze"/>
-        <animateMotion path="M14,30 Q45 16 76,30" begin="0.75s" dur="1.15s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .4 1"/>
-        <animateMotion path="M76,30 L80 45" begin="2.9s" dur="0.6s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".6 0 .4 1"/>
-        <animate attributeName="opacity" from="1" to="0" begin="3.4s" dur="0.15s" fill="freeze"/>
-      </circle>
-      <circle r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8" opacity="0">
-        <set attributeName="opacity" to="1" begin="0.55s"/>
-        <animateMotion path="M14,60 L14,60" dur="0.01s" fill="freeze"/>
-        <animateMotion path="M14,60 Q71 74 128,46" begin="0.75s" dur="1.15s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .4 1"/>
-        <animateMotion path="M128,46 L80 45" begin="2.9s" dur="0.6s" fill="freeze" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".6 0 .4 1"/>
-        <animate attributeName="opacity" from="1" to="0" begin="3.4s" dur="0.15s" fill="freeze"/>
-      </circle>
-      <circle r="1.9" fill="#E8781E" stroke="#2C2416" stroke-width=".5" opacity="0">
-        <set attributeName="opacity" to="1" begin="1.9s"/>
-        <animateMotion path="M62 47 L100 24 L104 66 L128 46 L146 45" begin="1.9s" dur="0.9s" fill="freeze"/>
-        <set attributeName="opacity" to="0" begin="2.85s"/>
-      </circle>
+      <circle class="intro-j intro-j0" r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8"/>
+      <circle class="intro-j intro-j1" r="3.2" fill="#C9A84C" stroke="#2C2416" stroke-width=".8"/>
+      <circle class="intro-j intro-j2" r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8"/>
+      <circle class="intro-j intro-j3" r="3.2" fill="#C9A84C" stroke="#2C2416" stroke-width=".8"/>
+      <circle class="intro-j intro-j4" r="3.2" fill="#F5F0E8" stroke="#2C2416" stroke-width=".8"/>
+      <circle class="intro-j intro-bola" r="1.9" fill="#E8781E" stroke="#2C2416" stroke-width=".5"/>
       <g class="intro-selo">
         <circle cx="80" cy="45" r="15" fill="#C9A84C" stroke="#2C2416" stroke-width="1.4"/>
         <circle cx="80" cy="45" r="12.4" fill="none" stroke="#2C2416" stroke-width=".5" opacity=".6"/>
